@@ -21,7 +21,7 @@ func _pressed():
 	Global.go_to_letter_detail(letter)
 
 func _update_completed_state():
-	if letter in Global.visited_letters:
+	if ProgressManager.is_letter_completed(letter):
 		modulate = Color(0.75, 0.75, 0.75, 1.0)
 		add_theme_color_override("font_color", ThemeManager.get_text())
 	else:

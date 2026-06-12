@@ -11,7 +11,7 @@ var letter_name: String = ""
 @onready var back_button := $BackButton
 
 func _ready():
-	var data := AlphabetData.get(letter)
+	var data := AlphabetData.get_letter_data(letter)
 	letter_label.text = letter
 	word_label.text = data.get("word", "")
 	placeholder_label.text = data.get("word_lower", "")

@@ -79,7 +79,7 @@ func _create_option_button(data: Dictionary) -> Button:
 	btn.custom_minimum_size = Vector2(240, 180)
 	btn.size_flags_horizontal = 4
 	btn.size_flags_vertical = 4
-	btn.theme_override_font_sizes/font_size = 28
+	btn.add_theme_font_size_override("font_size", 28)
 
 	var style = StyleBoxFlat.new()
 	style.bg_color = _color_for_letter(data.letter)

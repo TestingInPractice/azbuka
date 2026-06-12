@@ -106,7 +106,7 @@ func populate_grid():
 func _add_game_button():
 	var btn = Button.new()
 	btn.text = "🎮 Угадай по картинке"
-	btn.theme_override_font_sizes/font_size = 24
+	btn.add_theme_font_size_override("font_size", 24)
 	btn.size_flags_horizontal = 2
 	btn.custom_minimum_size = Vector2(300, 50)
 	btn.pressed.connect(_on_game_pressed)

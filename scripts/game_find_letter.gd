@@ -62,7 +62,7 @@ func _start_round():
 	_answers = [_current_correct_letter] + distractors
 	_answers.shuffle()
 
-	var entry = AlphabetData.get(_current_correct_letter)
+	var entry = AlphabetData.get_letter_data(_current_correct_letter)
 	word_label.text = entry.get("word", "")
 	round_label.text = "Найди букву:"
 

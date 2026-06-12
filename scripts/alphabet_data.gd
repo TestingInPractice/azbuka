@@ -1,6 +1,6 @@
 extends Node
 
-const DATA := [
+var DATA := [
 	{ "letter": "А", "word": "Арбуз", "word_lower": "арбуз", "image_path": "res://assets/images/arbuz.png", "sound_letter_path": "", "sound_word_path": "" },
 	{ "letter": "Б", "word": "Банан", "word_lower": "банан", "image_path": "res://assets/images/banan.png", "sound_letter_path": "", "sound_word_path": "" },
 	{ "letter": "В", "word": "Волк", "word_lower": "волк", "image_path": "res://assets/images/volk.png", "sound_letter_path": "", "sound_word_path": "" },
@@ -36,7 +36,7 @@ const DATA := [
 	{ "letter": "Я", "word": "Яблоко", "word_lower": "яблоко", "image_path": "res://assets/images/yabloko.png", "sound_letter_path": "", "sound_word_path": "" },
 ]
 
-static func get(letter: String) -> Dictionary:
+func get_letter_data(letter: String) -> Dictionary:
 	for entry in DATA:
 		if entry.letter == letter:
 			return entry.duplicate()

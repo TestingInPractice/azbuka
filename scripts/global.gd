@@ -40,7 +40,7 @@ var letter_names := {
 
 func go_to_letter_detail(letter: String):
 	ProgressManager.mark_letter_completed(letter)
-	current_letter_data = AlphabetData.get(letter)
+	current_letter_data = AlphabetData.get_letter_data(letter)
 	var detail = preload("res://scenes/letter_detail.tscn").instantiate()
 	detail.letter = letter
 	detail.letter_name = letter_names.get(letter, letter)
