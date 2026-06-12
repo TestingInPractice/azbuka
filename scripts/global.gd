@@ -1,6 +1,8 @@
 extends Node
 
 var is_dark_mode := false
+var visited_letters: Array[String] = []
+var current_letter_data: Dictionary = {}
 
 var letter_names := {
 	"А": "А",
@@ -42,6 +44,9 @@ func _ready():
 	apply_light_theme()
 
 func go_to_letter_detail(letter: String):
+	if not letter in visited_letters:
+		visited_letters.append(letter)
+	current_letter_data = AlphabetData.get(letter)
 	var detail = preload("res://scenes/letter_detail.tscn").instantiate()
 	detail.letter = letter
 	detail.letter_name = letter_names.get(letter, letter)
