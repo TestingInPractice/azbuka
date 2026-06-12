@@ -11,6 +11,7 @@ run/main_scene="res://scenes/alphabet_screen.tscn"
 
 [autoload]
 Global="*res://scripts/global.gd"
+AudioManager="*res://scripts/audio_manager.gd"
 
 [display]
 window/size/viewport_width=1080

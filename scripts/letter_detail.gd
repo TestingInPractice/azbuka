@@ -25,6 +25,7 @@ func _ready():
 	back_button.pressed.connect(_on_back_pressed)
 
 	_play_appear_animation()
+	AudioManager.play_letter(letter)
 
 func _play_appear_animation():
 	var tween := create_tween()
@@ -34,7 +35,11 @@ func _play_appear_animation():
 	tween.tween_property(letter_label, "scale", Vector2.ONE, 0.5)
 
 func _on_sound_pressed():
-	print("🔊 Sound requested for letter: ", letter)
+	AudioManager.play_word(letter)
 
 func _on_back_pressed():
+	AudioManager.stop_all()
 	Global.go_to_alphabet_screen()
+
+func _exit_tree():
+	AudioManager.stop_all()
