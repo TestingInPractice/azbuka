@@ -1,7 +1,5 @@
 extends Node
 
-var is_dark_mode := false
-var visited_letters: Array[String] = []
 var current_letter_data: Dictionary = {}
 
 var letter_names := {
@@ -40,12 +38,8 @@ var letter_names := {
 	"Я": "Я",
 }
 
-func _ready():
-	apply_light_theme()
-
 func go_to_letter_detail(letter: String):
-	if not letter in visited_letters:
-		visited_letters.append(letter)
+	ProgressManager.mark_letter_completed(letter)
 	current_letter_data = AlphabetData.get(letter)
 	var detail = preload("res://scenes/letter_detail.tscn").instantiate()
 	detail.letter = letter
@@ -55,27 +49,21 @@ func go_to_letter_detail(letter: String):
 func go_to_alphabet_screen():
 	switch_scene(preload("res://scenes/alphabet_screen.tscn").instantiate())
 
+func go_to_game_find_letter():
+	switch_scene(preload("res://scenes/game_find_letter.tscn").instantiate())
+
+func go_to_collect_word():
+	switch_scene(preload("res://scenes/game_collect_word.tscn").instantiate())
+
+func go_to_game_guess_picture():
+	switch_scene(preload("res://scenes/game_guess_picture.tscn").instantiate())
+
+func go_to_settings():
+	switch_scene(preload("res://scenes/settings_screen.tscn").instantiate())
+
 func switch_scene(new_scene: Node):
 	var current = get_tree().current_scene
 	get_tree().root.add_child(new_scene)
 	get_tree().current_scene = new_scene
 	if current:
 		current.queue_free()
-
-func apply_light_theme():
-	is_dark_mode = false
-	var bg = StyleBoxFlat.new()
-	bg.bg_color = Color("#F0F0F5")
-	get_tree().root.add_theme_stylebox_override("panel", bg)
-
-func apply_dark_theme():
-	is_dark_mode = true
-	var bg = StyleBoxFlat.new()
-	bg.bg_color = Color("#1A1A2E")
-	get_tree().root.add_theme_stylebox_override("panel", bg)
-
-func toggle_theme():
-	if is_dark_mode:
-		apply_light_theme()
-	else:
-		apply_dark_theme()

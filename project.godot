@@ -12,6 +12,8 @@ run/main_scene="res://scenes/alphabet_screen.tscn"
 [autoload]
 Global="*res://scripts/global.gd"
 AudioManager="*res://scripts/audio_manager.gd"
+ThemeManager="*res://scripts/theme_manager.gd"
+ProgressManager="*res://scripts/progress_manager.gd"
 
 [display]
 window/size/viewport_width=1080

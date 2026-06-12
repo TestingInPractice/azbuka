@@ -24,8 +24,39 @@ func _ready():
 	sound_button.pressed.connect(_on_sound_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 
+	apply_theme()
+	ThemeManager.theme_changed.connect(_on_theme_changed)
+
 	_play_appear_animation()
 	AudioManager.play_letter(letter)
+
+func _on_theme_changed(_theme_name: String):
+	apply_theme()
+
+func apply_theme():
+	var text = ThemeManager.get_text()
+	var bg = ThemeManager.get_bg()
+
+	var style := StyleBoxFlat.new()
+	style.bg_color = bg
+	add_theme_stylebox_override("panel", style)
+
+	letter_label.add_theme_color_override("font_color", text)
+	word_label.add_theme_color_override("font_color", text)
+	sound_button.add_theme_color_override("font_color", text)
+	back_button.add_theme_color_override("font_color", text)
+
+	placeholder_label.add_theme_color_override("font_color", ThemeManager.get_text())
+
+	if ThemeManager.current_theme == "dark":
+		placeholder_rect.color = Color.from_hsv(
+			float(letter.unicode_at(0) % 10) / 10.0,
+			0.25, 0.25
+		)
+	else:
+		var hue = float(letter.unicode_at(0) % 10) / 10.0
+		placeholder_rect.color = Color.from_hsv(hue, 0.35, 0.92)
+		placeholder_rect.color.s = 0.35
 
 func _play_appear_animation():
 	var tween := create_tween()

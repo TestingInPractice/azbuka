@@ -11,6 +11,10 @@ var letter: String = "":
 func _ready():
 	text = letter
 	_update_completed_state()
+	ThemeManager.theme_changed.connect(_on_theme_changed)
+
+func _on_theme_changed(_theme_name: String):
+	_update_completed_state()
 
 func _pressed():
 	letter_clicked.emit(letter)
@@ -19,4 +23,7 @@ func _pressed():
 func _update_completed_state():
 	if letter in Global.visited_letters:
 		modulate = Color(0.75, 0.75, 0.75, 1.0)
-		add_theme_color_override("font_color", Color(0.35, 0.35, 0.35, 1.0))
+		add_theme_color_override("font_color", ThemeManager.get_text())
+	else:
+		modulate = Color.WHITE
+		add_theme_color_override("font_color", ThemeManager.get_text())

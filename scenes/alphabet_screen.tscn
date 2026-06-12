@@ -23,6 +23,12 @@ horizontal_alignment = 1
 theme_override_font_sizes/font_size = 64
 modulate = Color(0.2, 0.2, 0.3, 1)
 
+[node name="GameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "🎮 Собери слово"
+theme_override_font_sizes/font_size = 28
+size_flags_horizontal = 4
+
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -31,3 +37,12 @@ horizontal_scroll_mode = 0
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
 layout_mode = 2
 columns = 6
+
+[node name="SettingsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 980.0
+offset_top = 20.0
+offset_right = 1060.0
+offset_bottom = 80.0
+text = "⚙️"
+theme_override_font_sizes/font_size = 40
