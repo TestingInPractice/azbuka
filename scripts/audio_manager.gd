@@ -2,6 +2,8 @@ extends Node
 
 var _player: AudioStreamPlayer2D
 var _freq_map: Dictionary = {}
+var _is_playing: bool = false
+var _play_pending: bool = false
 
 const SAMPLE_RATE := 44100
 const LETTERS := "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
@@ -9,19 +11,27 @@ const LETTERS := "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭ
 func _ready():
 	_player = AudioStreamPlayer2D.new()
 	add_child(_player)
+	_player.finished.connect(_on_player_finished)
 	_build_freq_map()
+
+func _on_player_finished():
+	_is_playing = false
+	_play_pending = false
+
+func is_playing() -> bool:
+	return _is_playing
 
 func _build_freq_map():
 	var count = LETTERS.length()
 	for i in count:
-		var freq = 200.0 + (float(i) / (count - 1)) * 600.0
+		var freq = 200.0 + (float(i) / max(count - 1, 1)) * 600.0
 		_freq_map[LETTERS[i]] = freq
 
 func _get_frequency(letter_id: String) -> float:
 	return _freq_map.get(letter_id, 440.0)
 
 func _generate_wav(frequency: float, duration: float, sweep: float = 1.0) -> AudioStreamWAV:
-	var num_samples = int(SAMPLE_RATE * duration)
+	var num_samples = max(int(SAMPLE_RATE * duration), 1)
 	var data := PackedByteArray()
 	data.resize(num_samples * 2)
 
@@ -44,17 +54,24 @@ func _generate_wav(frequency: float, duration: float, sweep: float = 1.0) -> Aud
 
 func play_letter(letter_id: String):
 	stop_all()
+	_play_pending = true
 	var wav = _generate_wav(_get_frequency(letter_id), 0.5)
 	_player.stream = wav
 	_player.play()
+	_is_playing = true
 
 func play_word(letter_id: String):
 	stop_all()
+	_play_pending = true
 	var wav = _generate_wav(_get_frequency(letter_id), 1.0, 1.5)
 	_player.stream = wav
 	_player.play()
+	_is_playing = true
 
 func stop_all():
-	if _player.playing:
+	_play_pending = false
+	if _player and _player.playing:
 		_player.stop()
-	_player.stream = null
+	if _player:
+		_player.stream = null
+	_is_playing = false

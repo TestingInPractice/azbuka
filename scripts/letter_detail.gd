@@ -35,6 +35,8 @@ func _play_appear_animation():
 	tween.tween_property(letter_label, "scale", Vector2.ONE, 0.5)
 
 func _on_sound_pressed():
+	if AudioManager.is_playing():
+		AudioManager.stop_all()
 	AudioManager.play_word(letter)
 
 func _on_back_pressed():
