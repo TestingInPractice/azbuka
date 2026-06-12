@@ -1,0 +1,23 @@
+; Engine configuration file.
+; It's managed by Godot, so don't modify it.
+; For more info, check the Godot documentation.
+
+config_version=5
+
+[application]
+config/name="Азбука"
+config/description="Russian alphabet learning game"
+run/main_scene="res://scenes/alphabet_screen.tscn"
+
+[autoload]
+Global="*res://scripts/global.gd"
+
+[display]
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/dpi/allow_hidpi=true
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
