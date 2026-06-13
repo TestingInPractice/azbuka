@@ -20,11 +20,36 @@ var _letter_buttons: Array[Button] = []
 @onready var letters_container: HBoxContainer = $CenterContainer/VBoxContainer/LettersCenterer/LettersContainer
 @onready var back_button: Button = $BackButton
 
+var _image_texture_rect: TextureRect = null
+
 
 func _ready():
 	_pick_round_words()
 	_start_round()
 	back_button.pressed.connect(_on_back_pressed)
+	ThemeManager.style_button(back_button, Color("#E8A87C"), Color("#2D2D2D"))
+
+
+func _load_word_image(data: Dictionary):
+	if _image_texture_rect:
+		_image_texture_rect.queue_free()
+		_image_texture_rect = null
+	var path: String = data.get("image_path", "")
+	if path.is_empty():
+		return
+	var img := Image.new()
+	if img.load(path) != OK:
+		return
+	var tex := ImageTexture.create_from_image(img)
+	_image_texture_rect = TextureRect.new()
+	_image_texture_rect.texture = tex
+	_image_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_image_texture_rect.custom_minimum_size = placeholder_rect.custom_minimum_size
+	_image_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_image_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_image_texture_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	placeholder_rect.hide()
+	image_container.add_child(_image_texture_rect)
 
 
 func _pick_round_words():
@@ -51,8 +76,7 @@ func _start_round():
 
 	rounds_label.text = "Раунд %d/%d" % [_current_round + 1, TOTAL_ROUNDS]
 
-	var hue = float(_word_lower.unicode_at(0) % 10) / 10.0
-	placeholder_rect.color = Color.from_hsv(hue, 0.35, 0.92)
+	_load_word_image(_current_word)
 	placeholder_label.text = _current_word.word
 
 	for child in word_builder.get_children():
@@ -69,18 +93,48 @@ func _start_round():
 	for i in _shuffled_letters.size():
 		var btn := Button.new()
 		btn.text = _shuffled_letters[i]
-		btn.theme_override_font_sizes["font_size"] = 36
-		btn.custom_minimum_size = Vector2(64, 64)
+		btn.add_theme_font_size_override("font_size", 36)
+		btn.custom_minimum_size = Vector2(72, 72)
 
-		var style := StyleBoxFlat.new()
-		style.bg_color = Color("#4ECDC4")
-		style.set_corner_radius_all(10)
-		btn.add_theme_stylebox_override("normal", style)
+		var base_color = Color("#4ECDC4")
 
-		var hover_style := StyleBoxFlat.new()
-		hover_style.bg_color = Color("#4ECDC4").lightened(0.2)
-		hover_style.set_corner_radius_all(10)
-		btn.add_theme_stylebox_override("hover", hover_style)
+		var normal := StyleBoxFlat.new()
+		normal.bg_color = base_color
+		normal.set_corner_radius_all(18)
+		normal.shadow_size = 4
+		normal.shadow_color = Color(0, 0, 0, 0.2)
+		normal.content_margin_left = 12
+		normal.content_margin_right = 12
+		normal.content_margin_top = 8
+		normal.content_margin_bottom = 8
+		btn.add_theme_stylebox_override("normal", normal)
+
+		var hover := StyleBoxFlat.new()
+		hover.bg_color = base_color.lightened(0.15)
+		hover.set_corner_radius_all(18)
+		hover.shadow_size = 6
+		hover.shadow_color = Color(0, 0, 0, 0.3)
+		hover.content_margin_left = 12
+		hover.content_margin_right = 12
+		hover.content_margin_top = 8
+		hover.content_margin_bottom = 8
+		btn.add_theme_stylebox_override("hover", hover)
+
+		var pressed := StyleBoxFlat.new()
+		pressed.bg_color = base_color.darkened(0.15)
+		pressed.set_corner_radius_all(18)
+		pressed.shadow_size = 2
+		pressed.shadow_color = Color(0, 0, 0, 0.15)
+		pressed.content_margin_left = 12
+		pressed.content_margin_right = 12
+		pressed.content_margin_top = 8
+		pressed.content_margin_bottom = 8
+		btn.add_theme_stylebox_override("pressed", pressed)
+
+		btn.add_theme_color_override("font_color", Color.WHITE)
+		btn.add_theme_color_override("font_hover_color", Color.WHITE)
+		btn.add_theme_color_override("font_pressed_color", Color.WHITE)
+		btn.add_theme_color_override("font_focus_color", Color.WHITE)
 
 		btn.pressed.connect(_on_letter_pressed.bind(btn))
 		letters_container.add_child(btn)
@@ -131,7 +185,7 @@ func _on_letter_pressed(btn: Button):
 
 		var letter_label := Label.new()
 		letter_label.text = btn.text
-		letter_label.theme_override_font_sizes["font_size"] = 44
+		letter_label.add_theme_font_size_override("font_size", 44)
 		word_builder.add_child(letter_label)
 
 		AudioManager.play_letter(btn.text)
@@ -173,9 +227,11 @@ func _play_wrong_animation():
 
 
 func _on_word_complete():
+	ProgressManager.mark_game_played()
 	_is_animating = true
 	feedback_label.text = "Молодец!"
 	feedback_label.modulate = Color(1, 1, 1, 1)
+	Global.sparkle_at(feedback_label.global_position + Vector2(100, 0), get_parent())
 
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_BACK)
@@ -205,13 +261,20 @@ func _on_game_complete():
 	feedback_label.scale = Vector2.ZERO
 	tween.tween_property(feedback_label, "scale", Vector2.ONE, 0.5)
 
-	await get_tree().create_timer(2.0).timeout
-	Global.go_to_alphabet_screen()
+	for i in 4:
+		Global.sparkle_at(
+			Vector2(randf_range(60, 380), randf_range(100, 500)),
+			get_parent()
+		)
+		await get_tree().create_timer(0.3).timeout
+
+	await get_tree().create_timer(1.2).timeout
+	Global.go_to_main_menu()
 
 
 func _on_back_pressed():
 	AudioManager.stop_all()
-	Global.go_to_alphabet_screen()
+	Global.go_to_main_menu()
 
 
 func _exit_tree():

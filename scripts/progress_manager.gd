@@ -17,7 +17,12 @@ func load_progress():
 	if file:
 		var data = JSON.parse_string(file.get_as_text())
 		if data is Dictionary:
-			completed_letters = data.get("completed_letters", [])
+			var raw = data.get("completed_letters", [])
+			if raw is Array:
+				completed_letters.clear()
+				for c in raw:
+					if c is String:
+						completed_letters.append(c)
 			games_played = data.get("games_played", 0)
 			last_played = data.get("last_played", "")
 		file.close()
@@ -39,6 +44,11 @@ func mark_letter_completed(letter_id: String):
 		games_played += 1
 		last_played = Time.get_date_string_from_system()
 		save_progress()
+
+func mark_game_played():
+	games_played += 1
+	last_played = Time.get_date_string_from_system()
+	save_progress()
 
 func is_letter_completed(letter_id: String) -> bool:
 	return letter_id in completed_letters

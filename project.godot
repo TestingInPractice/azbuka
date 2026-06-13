@@ -1,15 +1,22 @@
 ; Engine configuration file.
-; It's managed by Godot, so don't modify it.
-; For more info, check the Godot documentation.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
 
 config_version=5
 
 [application]
+
 config/name="Азбука"
 config/description="Russian alphabet learning game"
-run/main_scene="res://scenes/alphabet_screen.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
+config/features=PackedStringArray("4.6")
 
 [autoload]
+
 Global="*res://scripts/global.gd"
 AudioManager="*res://scripts/audio_manager.gd"
 ThemeManager="*res://scripts/theme_manager.gd"
@@ -17,11 +24,14 @@ ProgressManager="*res://scripts/progress_manager.gd"
 AlphabetData="*res://scripts/alphabet_data.gd"
 
 [display]
+
 window/size/viewport_width=1080
 window/size/viewport_height=1920
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/dpi/allow_hidpi=true
+window/size/initial_width=540
+window/size/initial_height=960
 
 [rendering]
+
 renderer/rendering_method="gl_compatibility"

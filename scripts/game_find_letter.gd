@@ -11,16 +11,18 @@ var _input_blocked := false
 
 @onready var score_label: Label = $VBoxContainer/ScoreLabel
 @onready var card_container: CenterContainer = $VBoxContainer/CardContainer
-@onready var word_label: Label = $VBoxContainer/CardContainer/WordLabel
+@onready var word_label: Label = $VBoxContainer/WordLabel
 @onready var placeholder_rect: ColorRect = $VBoxContainer/CardContainer/PlaceholderRect
 @onready var round_label: Label = $VBoxContainer/RoundLabel
 @onready var answers_container: GridContainer = $VBoxContainer/AnswersContainer
 @onready var results_container: VBoxContainer = $VBoxContainer/ResultsContainer
 @onready var results_label: Label = $VBoxContainer/ResultsContainer/ResultsLabel
 @onready var play_again_button: Button = $VBoxContainer/ResultsContainer/PlayAgainButton
-@onready var back_button: Button = $VBoxContainer/ResultsContainer/BackButton
+@onready var back_button: Button = $BackButton
 
 @onready var answer_buttons: Array[Button] = []
+
+var _image_texture_rect: TextureRect = null
 
 func _ready():
 	for child in answers_container.get_children():
@@ -30,6 +32,13 @@ func _ready():
 		answer_buttons[i].pressed.connect(_on_answer_pressed.bind(i))
 	play_again_button.pressed.connect(_on_play_again_pressed)
 	back_button.pressed.connect(_on_back_pressed)
+
+	for btn in answer_buttons:
+		ThemeManager.style_button(btn, Color("#96CEB4"), Color("#2D2D2D"))
+	ThemeManager.style_button(play_again_button, Color("#4ECDC4"))
+	ThemeManager.style_button(back_button, Color("#E8A87C"), Color("#2D2D2D"))
+	ThemeManager.style_button($BackButton, Color("#E8A87C"), Color("#2D2D2D"))
+
 	_start_game()
 
 func _start_game():
@@ -64,8 +73,9 @@ func _start_round():
 
 	var entry = AlphabetData.get_letter_data(_current_correct_letter)
 	word_label.text = entry.get("word", "")
-	round_label.text = "Найди букву:"
+	round_label.text = "Найди букву: " + _current_correct_letter
 
+	_load_word_image(entry)
 	var hue = float(_current_correct_letter.unicode_at(0) % 10) / 10.0
 	placeholder_rect.color = Color.from_hsv(hue, 0.35, 0.92)
 
@@ -75,13 +85,35 @@ func _start_round():
 
 	_play_round_start_anim()
 
+func _load_word_image(data: Dictionary):
+	if _image_texture_rect:
+		_image_texture_rect.queue_free()
+		_image_texture_rect = null
+	placeholder_rect.show()
+	var path: String = data.get("image_path", "")
+	if path.is_empty():
+		return
+	var img := Image.new()
+	if img.load(path) != OK:
+		return
+	var tex := ImageTexture.create_from_image(img)
+	_image_texture_rect = TextureRect.new()
+	_image_texture_rect.texture = tex
+	_image_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_image_texture_rect.custom_minimum_size = placeholder_rect.custom_minimum_size
+	_image_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_image_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_image_texture_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	placeholder_rect.hide()
+	card_container.add_child(_image_texture_rect)
+
+
 func _play_round_start_anim():
 	card_container.modulate.a = 0.0
 	card_container.scale = Vector2(0.3, 0.3)
 	for btn in answer_buttons:
-		btn.modulate.a = 0.0
+		btn.modulate = Color(1, 1, 1, 0)
 		btn.scale = Vector2(0.5, 0.5)
-		btn.modulate = Color.WHITE
 		btn.rotation_degrees = 0.0
 		btn.disabled = false
 
@@ -123,11 +155,42 @@ func _on_answer_pressed(index: int):
 			_start_round()
 	else:
 		btn.disabled = true
-		AudioManager.play_word(_current_correct_letter)
+		_play_error_beep()
 		_play_wrong_anim(btn)
+
+func _play_error_beep():
+	var duration := 0.12
+	var sample_rate := 22050
+	var freq := 300.0
+	var num_samples := int(sample_rate * duration)
+	var data := PackedByteArray()
+	data.resize(num_samples * 2)
+	for i in num_samples:
+		var t := float(i) / sample_rate
+		var envelope := 1.0
+		if t < 0.005:
+			envelope = t / 0.005
+		elif t > duration - 0.01:
+			envelope = (duration - t) / 0.01
+		var sample := sin(2.0 * PI * freq * t) * envelope * 0.3
+		var val := int(sample * 16384)
+		data[i * 2] = val & 0xFF
+		data[i * 2 + 1] = (val >> 8) & 0xFF
+	var wav := AudioStreamWAV.new()
+	wav.data = data
+	wav.format = AudioStreamWAV.FORMAT_16_BITS
+	wav.mix_rate = sample_rate
+	wav.stereo = false
+	var player := AudioStreamPlayer2D.new()
+	add_child(player)
+	player.stream = wav
+	player.play()
+	player.finished.connect(player.queue_free)
+
 
 func _play_correct_anim(btn: Button):
 	btn.modulate = Color.GREEN
+	Global.sparkle_at(btn.global_position + btn.size * 0.5, get_parent())
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.set_ease(Tween.EASE_OUT)
@@ -146,6 +209,7 @@ func _play_wrong_anim(btn: Button):
 	tween.tween_property(btn, "rotation_degrees", orig, 0.04)
 
 func _show_results():
+	ProgressManager.mark_game_played()
 	answers_container.hide()
 	card_container.hide()
 	round_label.hide()
@@ -163,4 +227,4 @@ func _on_play_again_pressed():
 
 func _on_back_pressed():
 	AudioManager.stop_all()
-	Global.go_to_alphabet_screen()
+	Global.go_to_main_menu()

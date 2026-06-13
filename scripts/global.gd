@@ -46,6 +46,9 @@ func go_to_letter_detail(letter: String):
 	detail.letter_name = letter_names.get(letter, letter)
 	switch_scene(detail)
 
+func go_to_main_menu():
+	switch_scene(preload("res://scenes/main_menu.tscn").instantiate())
+
 func go_to_alphabet_screen():
 	switch_scene(preload("res://scenes/alphabet_screen.tscn").instantiate())
 
@@ -60,6 +63,33 @@ func go_to_game_guess_picture():
 
 func go_to_settings():
 	switch_scene(preload("res://scenes/settings_screen.tscn").instantiate())
+
+func sparkle_at(pos: Vector2, parent: Node):
+	var symbols := ["✦", "★", "●", "♥", "♦"]
+	var colors := [
+		Color(1, 0.8, 0, 1), Color(1, 0.4, 0.4, 1),
+		Color(0.4, 0.8, 1, 1), Color(0.4, 1, 0.6, 1),
+		Color(1, 0.6, 0.9, 1),
+	]
+	for i in 6:
+		var label := Label.new()
+		label.text = symbols[i % symbols.size()]
+		label.modulate = colors[i % colors.size()]
+		label.add_theme_font_size_override("font_size", 24 + (i % 3) * 12)
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var spread := Vector2(
+			randf_range(-80, 80),
+			randf_range(-100, -20)
+		)
+		label.position = pos + spread * 0.3
+		parent.add_child(label)
+		var tw := create_tween()
+		tw.set_parallel(true)
+		tw.tween_property(label, "position", pos + spread, 0.6).set_trans(Tween.TRANS_BACK)
+		tw.tween_property(label, "scale", Vector2(2.0, 2.0), 0.3)
+		tw.tween_property(label, "modulate:a", 0, 0.6)
+		tw.tween_callback(label.queue_free).set_delay(0.7)
+
 
 func switch_scene(new_scene: Node):
 	var current = get_tree().current_scene

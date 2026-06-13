@@ -22,6 +22,10 @@ var _is_waiting := false
 func _ready():
 	back_button.pressed.connect(_on_back_pressed)
 	play_again_button.pressed.connect(_on_play_again_pressed)
+
+	ThemeManager.style_button(back_button, Color("#E8A87C"), Color("#2D2D2D"))
+	ThemeManager.style_button(play_again_button, Color("#4ECDC4"))
+
 	_start_game()
 
 
@@ -81,12 +85,45 @@ func _create_option_button(data: Dictionary) -> Button:
 	btn.size_flags_vertical = 4
 	btn.add_theme_font_size_override("font_size", 28)
 
-	var style = StyleBoxFlat.new()
-	style.bg_color = _color_for_letter(data.letter)
-	style.set_corner_radius_all(16)
-	style.shadow_size = 4
-	style.shadow_color = Color(0, 0, 0, 0.15)
-	btn.add_theme_stylebox_override("normal", style)
+	var base_color = _color_for_letter(data.letter)
+
+	var normal = StyleBoxFlat.new()
+	normal.bg_color = base_color
+	normal.set_corner_radius_all(20)
+	normal.shadow_size = 6
+	normal.shadow_color = Color(0, 0, 0, 0.2)
+	normal.content_margin_left = 16
+	normal.content_margin_right = 16
+	normal.content_margin_top = 12
+	normal.content_margin_bottom = 12
+	btn.add_theme_stylebox_override("normal", normal)
+
+	var hover = StyleBoxFlat.new()
+	hover.bg_color = base_color.lightened(0.15)
+	hover.set_corner_radius_all(20)
+	hover.shadow_size = 8
+	hover.shadow_color = Color(0, 0, 0, 0.3)
+	hover.content_margin_left = 16
+	hover.content_margin_right = 16
+	hover.content_margin_top = 12
+	hover.content_margin_bottom = 12
+	btn.add_theme_stylebox_override("hover", hover)
+
+	var pressed = StyleBoxFlat.new()
+	pressed.bg_color = base_color.darkened(0.15)
+	pressed.set_corner_radius_all(20)
+	pressed.shadow_size = 3
+	pressed.shadow_color = Color(0, 0, 0, 0.15)
+	pressed.content_margin_left = 16
+	pressed.content_margin_right = 16
+	pressed.content_margin_top = 12
+	pressed.content_margin_bottom = 12
+	btn.add_theme_stylebox_override("pressed", pressed)
+
+	btn.add_theme_color_override("font_color", Color("#2D2D2D"))
+	btn.add_theme_color_override("font_hover_color", Color("#2D2D2D"))
+	btn.add_theme_color_override("font_pressed_color", Color("#2D2D2D"))
+	btn.add_theme_color_override("font_focus_color", Color("#2D2D2D"))
 
 	btn.pressed.connect(_on_option_pressed.bind(btn, data.word))
 	return btn
@@ -100,27 +137,30 @@ func _color_for_letter(letter: String) -> Color:
 func _on_option_pressed(btn: Button, word: String):
 	if _is_waiting:
 		return
-	_is_waiting = true
 
-	var style = (btn.get_theme_stylebox("normal") as StyleBoxFlat).duplicate()
 	if word == _correct_word:
+		_is_waiting = true
 		_score += 1
 		feedback_label.text = "Молодец!"
+		score_label.text = "Счёт: %d" % _score
+		var style = (btn.get_theme_stylebox("normal") as StyleBoxFlat).duplicate()
 		style.bg_color = Color(0.2, 0.7, 0.2)
+		btn.add_theme_stylebox_override("normal", style)
 		AudioManager.play_letter(_correct_letter)
+		Global.sparkle_at(btn.global_position + btn.size * 0.5, get_parent())
+		await get_tree().create_timer(1.2).timeout
+		_next_round()
 	else:
-		feedback_label.text = "Попробуй ещё!"
+		var style = (btn.get_theme_stylebox("normal") as StyleBoxFlat).duplicate()
 		style.bg_color = Color(0.7, 0.2, 0.2)
+		btn.add_theme_stylebox_override("normal", style)
+		btn.disabled = true
+		feedback_label.text = "Попробуй ещё!"
 		AudioManager.play_letter("Э")
-
-	btn.add_theme_stylebox_override("normal", style)
-	score_label.text = "Счёт: %d" % _score
-
-	await get_tree().create_timer(1.2).timeout
-	_next_round()
 
 
 func _show_results():
+	ProgressManager.mark_game_played()
 	letter_label.text = "Игра окончена!"
 	round_label.text = ""
 	feedback_label.text = ""
@@ -137,7 +177,7 @@ func _on_play_again_pressed():
 
 func _on_back_pressed():
 	AudioManager.stop_all()
-	Global.go_to_alphabet_screen()
+	Global.go_to_main_menu()
 
 
 func _exit_tree():

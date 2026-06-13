@@ -37,13 +37,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 color = Color(0.93, 0.87, 0.8, 1)
 
-[node name="WordLabel" type="Label" parent="VBoxContainer/CardContainer"]
+[node name="WordLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 horizontal_alignment = 1
-vertical_alignment = 1
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 48
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="RoundLabel" type="Label" parent="VBoxContainer"]
@@ -120,3 +118,12 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(280, 70)
 theme_override_font_sizes/font_size = 28
 text = "← На главную"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 150.0
+offset_bottom = 70.0
+text = "← Выход"
+theme_override_font_sizes/font_size = 24

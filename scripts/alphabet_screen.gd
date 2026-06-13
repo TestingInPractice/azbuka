@@ -22,17 +22,19 @@ const CARD_COLORS := [
 @onready var scroll_container := $VBoxContainer/ScrollContainer
 @onready var title_label := $VBoxContainer/TitleLabel
 @onready var settings_button := $SettingsButton
-@onready var game_collect_button := $VBoxContainer/GameButton
+@onready var back_button := $VBoxContainer/BackButton
 
 func _ready():
 	var viewport_width = get_viewport().get_visible_rect().size.x
 	grid_container.columns = 4 if viewport_width < 600 else 6
+	_spawn_floating_decorations()
 	populate_grid()
-	_add_game_button()
-	game_collect_button.pressed.connect(_on_collect_word_pressed)
+	back_button.pressed.connect(_on_back_pressed)
 	apply_theme()
 	ThemeManager.theme_changed.connect(_on_theme_changed)
 	settings_button.pressed.connect(_on_settings_pressed)
+	ThemeManager.style_button(back_button, Color("#E8A87C"), Color("#2D2D2D"))
+	ThemeManager.style_button(settings_button, Color("#DDA0DD"))
 
 func _on_theme_changed(_theme_name: String):
 	apply_theme()
@@ -50,10 +52,9 @@ func apply_theme():
 	title_label.add_theme_color_override("font_color", text)
 
 	var is_dark = ThemeManager.current_theme == "dark"
-	settings_button.icon = null
 	var icon_text = "⚙️"
-	if is_dark:
-		settings_button.add_theme_color_override("font_color", text)
+	if !is_dark:
+		settings_button.add_theme_color_override("font_color", Color("#2D2D2D"))
 	settings_button.text = icon_text
 
 func _update_card_colors():
@@ -102,22 +103,40 @@ func populate_grid():
 
 		card.letter_clicked.connect(_on_letter_clicked)
 		grid_container.add_child(card)
+		_animate_card_entrance(card, i)
 
-func _add_game_button():
-	var btn = Button.new()
-	btn.text = "🎮 Угадай по картинке"
-	btn.add_theme_font_size_override("font_size", 24)
-	btn.size_flags_horizontal = 2
-	btn.custom_minimum_size = Vector2(300, 50)
-	btn.pressed.connect(_on_game_pressed)
-	$VBoxContainer.add_child(btn)
-	$VBoxContainer.move_child(btn, 1)
+func _animate_card_entrance(card: Button, index: int):
+	card.scale = Vector2.ZERO
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_interval(0.03 * index)
+	tween.tween_property(card, "scale", Vector2.ONE, 0.35)
 
-func _on_game_pressed():
-	Global.go_to_game_guess_picture()
 
-func _on_collect_word_pressed():
-	Global.go_to_collect_word()
+func _spawn_floating_decorations():
+	var symbols := ["★", "✦", "●", "♦", "♥", "✦", "★", "●"]
+	for i in 8:
+		var label := Label.new()
+		label.text = symbols[i % symbols.size()]
+		label.modulate = Color(0.6, 0.6, 0.8, 0.12)
+		label.add_theme_font_size_override("font_size", 48 + (i % 4) * 16)
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		label.position = Vector2(
+			30 + (i % 4) * 120 + (i * 17) % 60,
+			-50 - (i * 37) % 80
+		)
+		add_child(label)
+		var tw := create_tween()
+		tw.set_loops()
+		tw.tween_interval(0.5 * i)
+		tw.tween_property(label, "position:y", label.position.y + 600 + (i % 3) * 100, 12.0 + i * 1.5)
+		tw.parallel().tween_property(label, "modulate:a", 0.05, 6.0)
+		tw.tween_property(label, "modulate:a", 0.12, 6.0)
+
+
+func _on_back_pressed():
+	Global.go_to_main_menu()
 
 func _on_letter_clicked(letter: String):
 	Global.go_to_letter_detail(letter)

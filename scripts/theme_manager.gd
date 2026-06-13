@@ -49,3 +49,43 @@ func save_settings():
 	var config := ConfigFile.new()
 	config.set_value("theme", "current", current_theme)
 	config.save("user://settings.json")
+
+
+func style_button(btn: Button, bg_color: Color, font_color: Color = Color.WHITE, corner_radius: float = 20) -> void:
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = bg_color
+	normal.set_corner_radius_all(corner_radius)
+	normal.shadow_size = 6
+	normal.shadow_color = Color(0, 0, 0, 0.2)
+	normal.content_margin_left = 20
+	normal.content_margin_right = 20
+	normal.content_margin_top = 12
+	normal.content_margin_bottom = 12
+	btn.add_theme_stylebox_override("normal", normal)
+
+	var hover := StyleBoxFlat.new()
+	hover.bg_color = bg_color.lightened(0.15)
+	hover.set_corner_radius_all(corner_radius)
+	hover.shadow_size = 8
+	hover.shadow_color = Color(0, 0, 0, 0.3)
+	hover.content_margin_left = 20
+	hover.content_margin_right = 20
+	hover.content_margin_top = 12
+	hover.content_margin_bottom = 12
+	btn.add_theme_stylebox_override("hover", hover)
+
+	var pressed := StyleBoxFlat.new()
+	pressed.bg_color = bg_color.darkened(0.15)
+	pressed.set_corner_radius_all(corner_radius)
+	pressed.shadow_size = 3
+	pressed.shadow_color = Color(0, 0, 0, 0.15)
+	pressed.content_margin_left = 20
+	pressed.content_margin_right = 20
+	pressed.content_margin_top = 12
+	pressed.content_margin_bottom = 12
+	btn.add_theme_stylebox_override("pressed", pressed)
+
+	btn.add_theme_color_override("font_color", font_color)
+	btn.add_theme_color_override("font_hover_color", font_color)
+	btn.add_theme_color_override("font_pressed_color", font_color)
+	btn.add_theme_color_override("font_focus_color", font_color)
