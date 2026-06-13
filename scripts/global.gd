@@ -61,6 +61,9 @@ func go_to_collect_word():
 func go_to_game_guess_picture():
 	switch_scene(preload("res://scenes/game_guess_picture.tscn").instantiate())
 
+func go_to_roadmap():
+	switch_scene(preload("res://scenes/roadmap_screen.tscn").instantiate())
+
 func go_to_settings():
 	switch_scene(preload("res://scenes/settings_screen.tscn").instantiate())
 

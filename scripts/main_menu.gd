@@ -39,6 +39,7 @@ func _connect_buttons():
 	$VBoxContainer/ButtonGrid/FindLetterButton.pressed.connect(_on_find_letter_pressed)
 	$VBoxContainer/ButtonGrid/CollectWordButton.pressed.connect(_on_collect_word_pressed)
 	$VBoxContainer/ButtonGrid/GuessPictureButton.pressed.connect(_on_guess_picture_pressed)
+	$VBoxContainer/RoadmapButton.pressed.connect(_on_roadmap_pressed)
 	$SettingsButton.pressed.connect(_on_settings_pressed)
 
 func _on_alphabet_pressed():
@@ -52,6 +53,9 @@ func _on_collect_word_pressed():
 
 func _on_guess_picture_pressed():
 	Global.go_to_game_guess_picture()
+
+func _on_roadmap_pressed():
+	Global.go_to_roadmap()
 
 func _on_settings_pressed():
 	Global.go_to_settings()
@@ -85,12 +89,14 @@ func _style_buttons():
 	var find_letter = $VBoxContainer/ButtonGrid/FindLetterButton
 	var collect_word = $VBoxContainer/ButtonGrid/CollectWordButton
 	var guess_picture = $VBoxContainer/ButtonGrid/GuessPictureButton
+	var roadmap = $VBoxContainer/RoadmapButton
 	var settings = $SettingsButton
 
 	ThemeManager.style_button(alphabet, Color("#4ECDC4"))
 	ThemeManager.style_button(find_letter, Color("#FF6B6B"))
 	ThemeManager.style_button(collect_word, Color("#45B7D1"))
 	ThemeManager.style_button(guess_picture, Color("#96CEB4"), Color("#2D2D2D"))
+	ThemeManager.style_button(roadmap, Color("#5B8C5A"))
 	ThemeManager.style_button(settings, Color("#DDA0DD"))
 
 
