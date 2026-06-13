@@ -1,0 +1,86 @@
+{
+  "name": "analyst",
+  "label": "Судья-аналитик",
+  "description": "Оценка качества аналитики и декомпозиции (фаза plan-release). Критерии основаны на IEEE 29148:2018.",
+  "rubric": [
+    {
+      "id": "requirements_coverage",
+      "label": "Каждый F-XXX покрыт хотя бы одной задачей",
+      "weight": 5,
+      "scale": 5,
+      "pass": 4,
+      "critical": true,
+      "evidence_required": true,
+      "ieee_29148": "Traceable"
+    },
+    {
+      "id": "acceptance_criteria",
+      "label": "У каждой задачи есть acceptance criteria (Verifiable)",
+      "weight": 5,
+      "scale": 5,
+      "pass": 4,
+      "critical": true,
+      "evidence_required": true,
+      "ieee_29148": "Verifiable"
+    },
+    {
+      "id": "developer_readiness",
+      "label": "Информации достаточно для разработчика (Complete, Unambiguous)",
+      "weight": 5,
+      "scale": 5,
+      "pass": 4,
+      "critical": true,
+      "evidence_required": true,
+      "ieee_29148": "Complete, Unambiguous"
+    },
+    {
+      "id": "implementation_free",
+      "label": "Требования не предписывают способ реализации (Implementation-free)",
+      "weight": 3,
+      "scale": 5,
+      "pass": 3,
+      "critical": false,
+      "evidence_required": true,
+      "ieee_29148": "Implementation-free"
+    },
+    {
+      "id": "atomicity",
+      "label": "Каждое требование можно проверить отдельно (Atomic)",
+      "weight": 3,
+      "scale": 5,
+      "pass": 3,
+      "critical": false,
+      "evidence_required": true,
+      "ieee_29148": "Atomic"
+    },
+    {
+      "id": "contracts_consistent",
+      "label": "API-контракты и data model непротиворечивы",
+      "weight": 3,
+      "scale": 5,
+      "pass": 4,
+      "critical": true,
+      "evidence_required": true
+    },
+    {
+      "id": "adr_recorded",
+      "label": "Архитектурные решения зафиксированы в ADR",
+      "weight": 2,
+      "scale": 5,
+      "pass": 3,
+      "critical": false,
+      "evidence_required": true
+    },
+    {
+      "id": "no_open_questions",
+      "label": "Все open questions закрыты",
+      "weight": 4,
+      "scale": 5,
+      "pass": 4,
+      "critical": true,
+      "evidence_required": false
+    }
+  ],
+  "pass_threshold": 0.8,
+  "allow_passed_with_concerns": true
+}
