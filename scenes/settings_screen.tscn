@@ -45,6 +45,41 @@ theme_override_font_sizes/font_size = 40
 size_flags_horizontal = 4
 custom_minimum_size = Vector2(0, 80)
 
+[node name="GameModesSection" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+
+[node name="ModesLabel" type="Label" parent="VBoxContainer/GameModesSection"]
+layout_mode = 2
+text = "🎮 Режимы игры"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 28
+
+[node name="ModeAlphabet" type="CheckBox" parent="VBoxContainer/GameModesSection"]
+layout_mode = 2
+text = "🔤 Азбука"
+theme_override_font_sizes/font_size = 28
+size_flags_horizontal = 4
+
+[node name="ModeFindLetter" type="CheckBox" parent="VBoxContainer/GameModesSection"]
+layout_mode = 2
+text = "🔍 Найди букву"
+theme_override_font_sizes/font_size = 28
+size_flags_horizontal = 4
+
+[node name="ModeCollectWord" type="CheckBox" parent="VBoxContainer/GameModesSection"]
+layout_mode = 2
+text = "🧩 Собери слово"
+theme_override_font_sizes/font_size = 28
+size_flags_horizontal = 4
+
+[node name="ModeGuessPicture" type="CheckBox" parent="VBoxContainer/GameModesSection"]
+layout_mode = 2
+text = "🖼 Угадай картинку"
+theme_override_font_sizes/font_size = 28
+size_flags_horizontal = 4
+
 [node name="ResetProgressButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "🗑 Сбросить прогресс Азбуки"

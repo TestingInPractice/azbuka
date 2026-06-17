@@ -10,6 +10,20 @@ func _ready():
 	_update_progress()
 	_style_buttons()
 	_animate_title()
+	_update_mode_buttons()
+	ProgressManager.enabled_modes_changed.connect(_update_mode_buttons)
+
+func _update_mode_buttons():
+	var mode_map := {
+		"alphabet": "AlphabetButton",
+		"find_letter": "FindLetterButton",
+		"collect_word": "CollectWordButton",
+		"guess_picture": "GuessPictureButton",
+	}
+	for key in mode_map:
+		var btn := $VBoxContainer/ButtonGrid.get_node(mode_map[key]) as Button
+		if btn:
+			btn.visible = ProgressManager.is_mode_enabled(key)
 
 func _on_theme_changed(_theme_name: String):
 	_update_background()
