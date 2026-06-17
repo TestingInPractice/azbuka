@@ -69,7 +69,7 @@ func _build_path():
 		btn.position = dot_positions[i] - Vector2(_dot_r, _dot_r)
 		btn.pivot_offset = Vector2(_dot_r, _dot_r)
 		btn.add_theme_font_size_override("font_size", 20)
-		btn.theme_override_constants/separation = 0
+		btn.add_theme_constant_override("separation", 0)
 		btn.mouse_entered.connect(_on_dot_mouse_entered.bind(i))
 		btn.mouse_exited.connect(_on_dot_mouse_exited.bind(i))
 		btn.pressed.connect(_on_dot_pressed.bind(i))

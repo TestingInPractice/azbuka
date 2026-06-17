@@ -2,15 +2,15 @@ extends Node
 
 const RECORD_BUS := "VoiceRecord"
 
-var _record_effect: AudioEffectRecord = null
+var _capture_effect: AudioEffectCapture = null
 var _mic_player: AudioStreamPlayer = null
 var _playback_player: AudioStreamPlayer = null
 var _is_recording: bool = false
-var _recording: AudioStreamWAV = null
+var _recorded_data: PackedByteArray = []
 
 
 func _ready():
-	_setup_recording_bus()
+	_setup_capture_bus()
 	_mic_player = AudioStreamPlayer.new()
 	_mic_player.stream = AudioStreamMicrophone.new()
 	_mic_player.bus = RECORD_BUS
@@ -19,23 +19,24 @@ func _ready():
 	add_child(_playback_player)
 
 
-func _setup_recording_bus():
+func _setup_capture_bus():
 	for i in AudioServer.get_bus_count():
 		if AudioServer.get_bus_name(i) == RECORD_BUS:
-			_record_effect = AudioServer.get_bus_effect(i, 0)
+			_capture_effect = AudioServer.get_bus_effect(i, 0)
 			return
 	var idx = AudioServer.get_bus_count()
 	AudioServer.add_bus(idx)
 	AudioServer.set_bus_name(idx, RECORD_BUS)
-	AudioServer.add_bus_effect(idx, AudioEffectRecord.new())
-	_record_effect = AudioServer.get_bus_effect(idx, 0)
+	AudioServer.add_bus_effect(idx, AudioEffectCapture.new())
+	_capture_effect = AudioServer.get_bus_effect(idx, 0)
 
 
 func start_recording() -> bool:
 	if _is_recording:
 		return false
-	_recording = null
-	_record_effect.set_recording_active(true)
+	_recorded_data.clear()
+	_capture_effect.clear_buffer()
+	_capture_effect.set_buffer_length(5.0)
 	_mic_player.play()
 	_is_recording = true
 	return true
@@ -44,16 +45,38 @@ func start_recording() -> bool:
 func stop_recording():
 	if not _is_recording:
 		return
-	_record_effect.set_recording_active(false)
-	_mic_player.stop()
-	_recording = _record_effect.get_recording()
 	_is_recording = false
+	_mic_player.stop()
+
+	var frames := PackedVector2Array()
+	while _capture_effect.get_frames_available() > 0:
+		frames.append_array(_capture_effect.get_buffer(_capture_effect.get_frames_available()))
+	_capture_effect.clear_buffer()
+
+	if frames.is_empty():
+		_recorded_data = PackedByteArray()
+		return
+
+	var mix_rate := AudioServer.get_mix_rate()
+	_recorded_data.resize(frames.size() * 2)
+	for i in frames.size():
+		var sample := (frames[i].x + frames[i].y) * 0.5
+		sample = clampf(sample, -1.0, 1.0)
+		var val := int(sample * 32767)
+		_recorded_data[i * 2] = val & 0xFF
+		_recorded_data[i * 2 + 1] = (val >> 8) & 0xFF
 
 
 func play_recording():
-	if _recording:
-		_playback_player.stream = _recording
-		_playback_player.play()
+	if _recorded_data.is_empty():
+		return
+	var wav := AudioStreamWAV.new()
+	wav.data = _recorded_data
+	wav.format = AudioStreamWAV.FORMAT_16_BITS
+	wav.mix_rate = AudioServer.get_mix_rate()
+	wav.stereo = false
+	_playback_player.stream = wav
+	_playback_player.play()
 
 
 func stop_playback():
@@ -70,14 +93,13 @@ func is_playing() -> bool:
 
 
 func has_recording() -> bool:
-	return _recording != null
+	return not _recorded_data.is_empty()
 
 
 func clear_recording():
-	_recording = null
+	_recorded_data.clear()
 
 
 func _exit_tree():
 	if _is_recording:
-		_record_effect.set_recording_active(false)
 		_mic_player.stop()

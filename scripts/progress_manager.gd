@@ -56,5 +56,11 @@ func is_letter_completed(letter_id: String) -> bool:
 func get_completed_count() -> int:
 	return completed_letters.size()
 
+func reset_progress():
+	completed_letters.clear()
+	games_played = 0
+	last_played = ""
+	save_progress()
+
 func get_total_letters() -> int:
 	return TOTAL_LETTERS

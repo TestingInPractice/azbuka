@@ -12,15 +12,6 @@ script = ExtResource("1")
 
 [node name="ForestBackground" parent="." instance=ExtResource("2")]
 
-[node name="BackButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 50.0
-offset_right = 150.0
-offset_bottom = 100.0
-text = "← Назад"
-theme_override_font_sizes/font_size = 28
-
 [node name="ContentWrapper" type="Control" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,65 +24,25 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 layout_mode = 1
-theme_override_constants/separation = 12
+theme_override_constants/separation = 20
 
 [node name="TopSpacer" type="Control" parent="ContentWrapper/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="MainHBox" type="HBoxContainer" parent="ContentWrapper/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/separation = 10
-
-[node name="LetterButton" type="Button" parent="ContentWrapper/VBoxContainer/MainHBox"]
-layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 150
-mouse_default_cursor_shape = 2
-
-[node name="LetterLabel" type="Label" parent="ContentWrapper/VBoxContainer/MainHBox/LetterButton"]
+[node name="LetterLabel" type="Label" parent="ContentWrapper/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 horizontal_alignment = 1
 vertical_alignment = 1
-theme_override_font_sizes/font_size = 150
 
-[node name="ImageButton" type="Button" parent="ContentWrapper/VBoxContainer/MainHBox"]
+[node name="HintLabel" type="Label" parent="ContentWrapper/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 4
-mouse_default_cursor_shape = 2
-
-[node name="ImageCenter" type="CenterContainer" parent="ContentWrapper/VBoxContainer/MainHBox/ImageButton"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="PlaceholderRect" type="ColorRect" parent="ContentWrapper/VBoxContainer/MainHBox/ImageButton/ImageCenter"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-custom_minimum_size = Vector2(200, 200)
-color = Color(0.93, 0.87, 0.8, 1)
-
-[node name="PlaceholderLabel" type="Label" parent="ContentWrapper/VBoxContainer/MainHBox/ImageButton/ImageCenter"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+text = "Найди и нажми на букву"
 horizontal_alignment = 1
-vertical_alignment = 1
-theme_override_font_sizes/font_size = 32
-theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
-
-[node name="WordLabel" type="Label" parent="ContentWrapper/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
 
 [node name="WordGameContainer" type="HBoxContainer" parent="ContentWrapper/VBoxContainer"]
 layout_mode = 2
@@ -135,6 +86,11 @@ text = "▶️"
 theme_override_font_sizes/font_size = 28
 disabled = true
 
+[node name="NavSpacer" type="Control" parent="ContentWrapper/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 30)
+mouse_filter = 1
+
 [node name="NavButtons" type="HBoxContainer" parent="ContentWrapper/VBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -154,6 +110,15 @@ theme_override_font_sizes/font_size = 26
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 150.0
+offset_bottom = 100.0
+text = "← Назад"
+theme_override_font_sizes/font_size = 28
 
 [node name="VoiceRecorder" type="Node" parent="."]
 script = ExtResource("3")

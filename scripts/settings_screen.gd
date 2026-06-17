@@ -2,11 +2,13 @@ extends Control
 
 @onready var theme_button := $VBoxContainer/ThemeSection/ThemeButton
 @onready var theme_label := $VBoxContainer/ThemeSection/ThemeLabel
+@onready var reset_button := $VBoxContainer/ResetProgressButton
 @onready var back_button := $VBoxContainer/BackButton
 
 func _ready():
 	update_ui()
 	theme_button.pressed.connect(_on_theme_toggled)
+	reset_button.pressed.connect(_on_reset_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	ThemeManager.theme_changed.connect(_on_theme_changed)
 	ThemeManager.style_button(back_button, Color("#E8A87C"), Color("#2D2D2D"))
@@ -24,6 +26,21 @@ func update_ui():
 
 func _on_theme_toggled():
 	ThemeManager.toggle_theme()
+
+func _on_reset_pressed():
+	var dialog := ConfirmationDialog.new()
+	dialog.dialog_text = "Сбросить весь прогресс по азбуке?\nБуквы перестанут быть зелёными."
+	dialog.ok_button_text = "Сбросить"
+	dialog.cancel_button_text = "Отмена"
+	dialog.confirmed.connect(_on_reset_confirmed)
+	dialog.canceled.connect(dialog.queue_free)
+	dialog.close_requested.connect(dialog.queue_free)
+	add_child(dialog)
+	dialog.popup_centered()
+
+func _on_reset_confirmed():
+	ProgressManager.reset_progress()
+	Global.go_to_alphabet_screen()
 
 func _on_back_pressed():
 	Global.go_to_main_menu()

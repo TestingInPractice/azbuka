@@ -8,6 +8,10 @@
 
 config_version=5
 
+[android]
+
+permissions=PackedStringArray("android.permission.RECORD_AUDIO")
+
 [application]
 
 config/name="Азбука"
@@ -31,10 +35,6 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/size/initial_width=540
 window/size/initial_height=960
-
-[android]
-
-permissions=PackedStringArray("android.permission.RECORD_AUDIO")
 
 [ios]
 

@@ -68,11 +68,12 @@ func _start_round():
 	for i in range(min(ANSWER_COUNT - 1, available.size())):
 		distractors.append(data[available[i]].letter)
 
-	_answers = [_current_correct_letter] + distractors
+	_answers = [_current_correct_letter] as Array[String] + distractors
 	_answers.shuffle()
 
 	var entry = AlphabetData.get_letter_data(_current_correct_letter)
-	word_label.text = entry.get("word", "")
+	word_label.text = _current_correct_letter
+	word_label.add_theme_font_size_override("font_size", max(80, get_viewport().get_visible_rect().size.y / 5))
 	round_label.text = "Найди букву: " + _current_correct_letter
 
 	_load_word_image(entry)

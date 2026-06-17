@@ -45,6 +45,14 @@ theme_override_font_sizes/font_size = 40
 size_flags_horizontal = 4
 custom_minimum_size = Vector2(0, 80)
 
+[node name="ResetProgressButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "🗑 Сбросить прогресс Азбуки"
+theme_override_font_sizes/font_size = 32
+modulate = Color(1, 0.6, 0.6, 1)
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(0, 60)
+
 [node name="SpacerBottom" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
