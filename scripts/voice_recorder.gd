@@ -7,6 +7,7 @@ var _mic_player: AudioStreamPlayer = null
 var _playback_player: AudioStreamPlayer = null
 var _is_recording: bool = false
 var _recorded_data: PackedByteArray = []
+var _accumulated_frames: PackedVector2Array = []
 
 
 func _ready():
@@ -17,6 +18,12 @@ func _ready():
 	add_child(_mic_player)
 	_playback_player = AudioStreamPlayer.new()
 	add_child(_playback_player)
+	set_process(false)
+
+
+func _process(_delta):
+	if _is_recording and _capture_effect and _capture_effect.get_frames_available() > 0:
+		_accumulated_frames.append_array(_capture_effect.get_buffer(_capture_effect.get_frames_available()))
 
 
 func _setup_capture_bus():
@@ -34,11 +41,13 @@ func _setup_capture_bus():
 func start_recording() -> bool:
 	if _is_recording:
 		return false
+	_accumulated_frames.clear()
 	_recorded_data.clear()
 	_capture_effect.clear_buffer()
 	_capture_effect.set_buffer_length(5.0)
 	_mic_player.play()
 	_is_recording = true
+	set_process(true)
 	return true
 
 
@@ -47,24 +56,26 @@ func stop_recording():
 		return
 	_is_recording = false
 	_mic_player.stop()
+	set_process(false)
 
-	var frames := PackedVector2Array()
-	while _capture_effect.get_frames_available() > 0:
-		frames.append_array(_capture_effect.get_buffer(_capture_effect.get_frames_available()))
+	# read any remaining frames
+	if _capture_effect and _capture_effect.get_frames_available() > 0:
+		_accumulated_frames.append_array(_capture_effect.get_buffer(_capture_effect.get_frames_available()))
 	_capture_effect.clear_buffer()
 
-	if frames.is_empty():
+	if _accumulated_frames.is_empty():
 		_recorded_data = PackedByteArray()
 		return
 
 	var mix_rate := AudioServer.get_mix_rate()
-	_recorded_data.resize(frames.size() * 2)
-	for i in frames.size():
-		var sample := (frames[i].x + frames[i].y) * 0.5
+	_recorded_data.resize(_accumulated_frames.size() * 2)
+	for i in _accumulated_frames.size():
+		var sample := (_accumulated_frames[i].x + _accumulated_frames[i].y) * 0.5
 		sample = clampf(sample, -1.0, 1.0)
 		var val := int(sample * 32767)
 		_recorded_data[i * 2] = val & 0xFF
 		_recorded_data[i * 2 + 1] = (val >> 8) & 0xFF
+	_accumulated_frames.clear()
 
 
 func play_recording():
@@ -101,5 +112,6 @@ func clear_recording():
 
 
 func _exit_tree():
+	set_process(false)
 	if _is_recording:
 		_mic_player.stop()
