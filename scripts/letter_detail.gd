@@ -18,7 +18,7 @@ var _record_pulse_tween: Tween = null
 @onready var back_button := $BackButton
 @onready var content_wrapper := $ContentWrapper
 @onready var letter_label := $ContentWrapper/LetterLabel
-@onready var word_image := $ContentWrapper/VBoxContainer/WordImage
+@onready var word_image := $ContentWrapper/VBoxContainer/ImageContainer/WordImage
 @onready var word_sound_button := $ContentWrapper/VBoxContainer/AudioButtons/WordSoundButton
 @onready var letter_sound_button := $ContentWrapper/VBoxContainer/AudioButtons/LetterSoundButton
 @onready var prev_button := $ContentWrapper/VBoxContainer/NavButtons/PrevButton
@@ -57,8 +57,8 @@ func _update_content(data: Dictionary):
 		word_image.texture = tex
 		if tex:
 			var viewport_w = get_viewport().size.x
-			var img_w := viewport_w * 0.55
-			var img_h := img_w * tex.get_height() / tex.get_width()
+			var img_w: float = viewport_w * 0.55
+			var img_h: float = img_w * tex.get_height() / tex.get_width()
 			word_image.custom_minimum_size = Vector2(img_w, img_h)
 	else:
 		word_image.texture = null
