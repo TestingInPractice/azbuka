@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3xtjwc75o4nc"
-path="res://.godot/imported/kot.png-6ff3e87188eb737c74962ac5bbe70630.ctex"
+uid="uid://bjmsmrhga6tuf"
+path="res://.godot/imported/Hare.jpg-5ed1bf40d5cc78531dd097948a0ac17a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/kot.png"
-dest_files=["res://.godot/imported/kot.png-6ff3e87188eb737c74962ac5bbe70630.ctex"]
+source_file="res://images/Hare.jpg"
+dest_files=["res://.godot/imported/Hare.jpg-5ed1bf40d5cc78531dd097948a0ac17a.ctex"]
 
 [params]
 

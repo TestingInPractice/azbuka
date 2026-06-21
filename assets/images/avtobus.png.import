@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3xtjwc75o4nc"
-path="res://.godot/imported/kot.png-6ff3e87188eb737c74962ac5bbe70630.ctex"
+uid="uid://bgm6pxdk2r8sc"
+path="res://.godot/imported/avtobus.png-24c402e122ab9ef4e84286c5b4d532d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/kot.png"
-dest_files=["res://.godot/imported/kot.png-6ff3e87188eb737c74962ac5bbe70630.ctex"]
+source_file="res://assets/images/avtobus.png"
+dest_files=["res://.godot/imported/avtobus.png-24c402e122ab9ef4e84286c5b4d532d7.ctex"]
 
 [params]
 

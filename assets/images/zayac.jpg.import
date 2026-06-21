@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3xtjwc75o4nc"
-path="res://.godot/imported/kot.png-6ff3e87188eb737c74962ac5bbe70630.ctex"
+uid="uid://bqnxhwjm2bgox"
+path="res://.godot/imported/zayac.jpg-0cd54707a415c9878b5d0c3fe8a91fc5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/kot.png"
-dest_files=["res://.godot/imported/kot.png-6ff3e87188eb737c74962ac5bbe70630.ctex"]
+source_file="res://assets/images/zayac.jpg"
+dest_files=["res://.godot/imported/zayac.jpg-0cd54707a415c9878b5d0c3fe8a91fc5.ctex"]
 
 [params]
 

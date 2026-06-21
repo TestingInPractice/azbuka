@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkrdljswfqhi3"
-path="res://.godot/imported/yolka.png-9e395d0fa0b2694802ef186e63456083.ctex"
+uid="uid://yqi4hxfybimo"
+path="res://.godot/imported/yolka.jpg-1cfd33599fb2e3e6e652401f45d92583.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/yolka.png"
-dest_files=["res://.godot/imported/yolka.png-9e395d0fa0b2694802ef186e63456083.ctex"]
+source_file="res://assets/images/yolka.jpg"
+dest_files=["res://.godot/imported/yolka.jpg-1cfd33599fb2e3e6e652401f45d92583.ctex"]
 
 [params]
 

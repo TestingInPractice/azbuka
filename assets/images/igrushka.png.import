@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3xtjwc75o4nc"
-path="res://.godot/imported/kot.png-6ff3e87188eb737c74962ac5bbe70630.ctex"
+uid="uid://bo5k8newirp84"
+path="res://.godot/imported/igrushka.png-7345e626daa147ed06f797fa275acdc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/kot.png"
-dest_files=["res://.godot/imported/kot.png-6ff3e87188eb737c74962ac5bbe70630.ctex"]
+source_file="res://assets/images/igrushka.png"
+dest_files=["res://.godot/imported/igrushka.png-7345e626daa147ed06f797fa275acdc7.ctex"]
 
 [params]
 
