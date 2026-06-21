@@ -17,8 +17,8 @@ var _record_pulse_tween: Tween = null
 
 @onready var back_button := $BackButton
 @onready var content_wrapper := $ContentWrapper
-@onready var letter_label := $ContentWrapper/LetterLabel
-@onready var word_image := $ContentWrapper/WordImage
+@onready var letter_label := $ContentWrapper/VBoxContainer/LetterLabel
+@onready var word_image := $ContentWrapper/VBoxContainer/ImageCenter/WordImage
 @onready var word_sound_button := $ContentWrapper/VBoxContainer/AudioButtons/WordSoundButton
 @onready var letter_sound_button := $ContentWrapper/VBoxContainer/AudioButtons/LetterSoundButton
 @onready var prev_button := $ContentWrapper/VBoxContainer/NavButtons/PrevButton
@@ -39,7 +39,7 @@ func _ready():
 	var viewport_h = get_viewport().get_visible_rect().size.y
 	var fs: float = max(80.0, viewport_h / 4.0)
 	letter_label.add_theme_font_size_override("font_size", fs)
-	letter_label.offset_bottom = letter_label.offset_top + fs * 1.4
+	letter_label.custom_minimum_size = Vector2(0, fs * 1.5)
 
 	_update_content(data)
 	_update_nav_buttons()
@@ -59,8 +59,7 @@ func _update_content(data: Dictionary):
 			var vp = get_viewport().size
 			var img_w: float = vp.x * 0.55
 			var img_h: float = img_w * tex.get_height() / tex.get_width()
-			word_image.size = Vector2(img_w, img_h)
-			word_image.position = Vector2(vp.x * 0.225, vp.y * 0.42)
+			word_image.custom_minimum_size = Vector2(img_w, img_h)
 	else:
 		word_image.texture = null
 	_reset_word_game()
