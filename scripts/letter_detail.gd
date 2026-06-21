@@ -17,8 +17,8 @@ var _record_pulse_tween: Tween = null
 
 @onready var back_button := $BackButton
 @onready var content_wrapper := $ContentWrapper
-@onready var letter_label := $ContentWrapper/VBoxContainer/LetterContent/LetterLabel
-@onready var word_image := $ContentWrapper/VBoxContainer/LetterContent/WordImage
+@onready var letter_label := $ContentWrapper/LetterLabel
+@onready var word_image := $ContentWrapper/VBoxContainer/WordImage
 @onready var word_sound_button := $ContentWrapper/VBoxContainer/AudioButtons/WordSoundButton
 @onready var letter_sound_button := $ContentWrapper/VBoxContainer/AudioButtons/LetterSoundButton
 @onready var prev_button := $ContentWrapper/VBoxContainer/NavButtons/PrevButton
@@ -37,14 +37,9 @@ func _ready():
 		_current_index = 0
 
 	var viewport_h = get_viewport().get_visible_rect().size.y
-	var viewport_w = get_viewport().get_visible_rect().size.x
-	var fs := max(80, viewport_h / 4)
+	var fs: float = max(80.0, viewport_h / 4.0)
 	letter_label.add_theme_font_size_override("font_size", fs)
-	letter_label.offset_left = -viewport_w * 0.4
-	letter_label.offset_right = viewport_w * 0.4
-	var label_h := fs * 1.4
-	letter_label.offset_top = -(fs + label_h * 0.5)
-	letter_label.offset_bottom = -(fs - label_h * 0.5)
+	letter_label.offset_bottom = letter_label.offset_top + fs * 1.4
 
 	_update_content(data)
 	_update_nav_buttons()

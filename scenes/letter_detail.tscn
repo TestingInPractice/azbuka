@@ -17,7 +17,19 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-clip_contents = true
+
+[node name="LetterLabel" type="Label" parent="ContentWrapper"]
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_top = 60.0
+offset_bottom = 250.0
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ContentWrapper"]
 anchors_preset = 15
@@ -31,29 +43,12 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="LetterContent" type="Control" parent="ContentWrapper/VBoxContainer"]
+[node name="WordImage" type="TextureRect" parent="ContentWrapper/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-mouse_filter = 1
-
-[node name="WordImage" type="TextureRect" parent="ContentWrapper/VBoxContainer/LetterContent"]
-layout_mode = 1
-anchor_right = 1.0
-anchor_bottom = 1.0
 expand_mode = 1
 stretch_mode = 3
-mouse_filter = 1
-
-[node name="LetterLabel" type="Label" parent="ContentWrapper/VBoxContainer/LetterContent"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-horizontal_alignment = 1
-vertical_alignment = 1
 mouse_filter = 1
 
 [node name="HintLabel" type="Label" parent="ContentWrapper/VBoxContainer"]
