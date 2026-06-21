@@ -43,17 +43,11 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="ImageContainer" type="CenterContainer" parent="ContentWrapper/VBoxContainer"]
-layout_mode = 2
+[node name="WordImage" type="TextureRect" parent="ContentWrapper"]
+layout_mode = 0
 mouse_filter = 1
-
-[node name="WordImage" type="TextureRect" parent="ContentWrapper/VBoxContainer/ImageContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 expand_mode = 1
 stretch_mode = 3
-mouse_filter = 1
 
 [node name="HintLabel" type="Label" parent="ContentWrapper/VBoxContainer"]
 layout_mode = 2

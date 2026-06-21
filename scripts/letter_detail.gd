@@ -18,7 +18,7 @@ var _record_pulse_tween: Tween = null
 @onready var back_button := $BackButton
 @onready var content_wrapper := $ContentWrapper
 @onready var letter_label := $ContentWrapper/LetterLabel
-@onready var word_image := $ContentWrapper/VBoxContainer/ImageContainer/WordImage
+@onready var word_image := $ContentWrapper/WordImage
 @onready var word_sound_button := $ContentWrapper/VBoxContainer/AudioButtons/WordSoundButton
 @onready var letter_sound_button := $ContentWrapper/VBoxContainer/AudioButtons/LetterSoundButton
 @onready var prev_button := $ContentWrapper/VBoxContainer/NavButtons/PrevButton
@@ -56,13 +56,13 @@ func _update_content(data: Dictionary):
 		var tex := load(img_path) as Texture2D
 		word_image.texture = tex
 		if tex:
-			var viewport_w = get_viewport().size.x
-			var img_w: float = viewport_w * 0.55
-			var img_h: float = img_w * tex.get_height() / tex.get_width()
-			word_image.custom_minimum_size = Vector2(img_w, img_h)
+			var vp = get_viewport().size
+			var img_w := vp.x * 0.55
+			var img_h := img_w * tex.get_height() / tex.get_width()
+			word_image.size = Vector2(img_w, img_h)
+			word_image.position = Vector2(vp.x * 0.225, vp.y * 0.42)
 	else:
 		word_image.texture = null
-		word_image.custom_minimum_size = Vector2.ZERO
 	_reset_word_game()
 
 func _connect_signals():
