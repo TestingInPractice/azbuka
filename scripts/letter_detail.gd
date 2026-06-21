@@ -55,8 +55,14 @@ func _update_content(data: Dictionary):
 	if not img_path.is_empty():
 		var tex := load(img_path) as Texture2D
 		word_image.texture = tex
+		if tex:
+			var viewport_w = get_viewport().size.x
+			var img_w := viewport_w * 0.55
+			var img_h := img_w * tex.get_height() / tex.get_width()
+			word_image.custom_minimum_size = Vector2(img_w, img_h)
 	else:
 		word_image.texture = null
+		word_image.custom_minimum_size = Vector2.ZERO
 	_reset_word_game()
 
 func _connect_signals():
