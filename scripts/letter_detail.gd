@@ -57,8 +57,8 @@ func _update_content(data: Dictionary):
 		word_image.texture = tex
 		if tex:
 			var vp = get_viewport().size
-			var img_w := vp.x * 0.55
-			var img_h := img_w * tex.get_height() / tex.get_width()
+			var img_w: float = vp.x * 0.55
+			var img_h: float = img_w * tex.get_height() / tex.get_width()
 			word_image.size = Vector2(img_w, img_h)
 			word_image.position = Vector2(vp.x * 0.225, vp.y * 0.42)
 	else:
