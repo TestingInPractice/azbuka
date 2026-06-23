@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/forest_background.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://d4m4qifiu8csu" path="res://assets/images/fone.jpg" id="2"]
 
 [node name="ForestBackground" type="Control"]
 anchors_preset = 15
@@ -8,3 +9,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource("1")
+
+[node name="BgImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("2")
+stretch_mode = 5
+mouse_filter = 2
