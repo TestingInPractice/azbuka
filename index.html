@@ -221,15 +221,45 @@ const engine = new Engine(GODOT_CONFIG);
 		</script>
 		<script>
 (function() {
-	function resumeAudio() {
-		if (window._godotAudio && window._godotAudio.ctx) {
-			window._godotAudio.ctx.resume();
+	var resumed = false;
+	function doResume() {
+		if (resumed) return;
+		var ctx = null;
+		try {
+			if (window.GodotAudio && window.GodotAudio.ctx) ctx = window.GodotAudio.ctx;
+		} catch(e) {}
+		if (!ctx) {
+			try {
+				var canvases = document.querySelectorAll('canvas');
+				for (var i = 0; i < canvases.length; i++) {
+					var c = canvases[i];
+					if (c.getContext) {
+						var al = c.getContext('webgl') || c.getContext('webgl2');
+					}
+				}
+			} catch(e) {}
 		}
-		document.removeEventListener('click', resumeAudio);
-		document.removeEventListener('touchstart', resumeAudio);
+		if (!ctx) {
+			try {
+				if (typeof AudioContext !== 'undefined') ctx = new AudioContext();
+				else if (typeof webkitAudioContext !== 'undefined') ctx = new webkitAudioContext();
+			} catch(e) {}
+		}
+		if (ctx) {
+			try {
+				if (ctx.state === 'suspended') {
+					ctx.resume().then(function() { resumed = true; });
+				} else {
+					resumed = true;
+				}
+			} catch(e) {}
+		}
 	}
-	document.addEventListener('click', resumeAudio, { once: true });
-	document.addEventListener('touchstart', resumeAudio, { once: true });
+	function handler() { doResume(); }
+	document.addEventListener('pointerdown', handler);
+	document.addEventListener('click', handler);
+	document.addEventListener('touchstart', handler);
+	document.addEventListener('keydown', handler);
 })();
 		</script>
 	</body>
