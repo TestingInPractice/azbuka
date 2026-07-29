@@ -115,7 +115,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":42422852,"index.wasm":37700666},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":39275132,"index.wasm":37700666},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -215,52 +215,20 @@ const engine = new Engine(GODOT_CONFIG);
 			},
 		}).then(() => {
 			setStatusMode('hidden');
+			// Resume Godot's internal AudioContext on first user interaction
+			// (required for iOS Safari where AudioContext starts suspended)
+			var _resumeAudio = function() {
+				if (typeof godot_audio_resume !== 'undefined') {
+					try { godot_audio_resume(); } catch(e) { console.warn('Azbooka: godot_audio_resume failed', e); }
+				}
+			};
+			document.addEventListener('click', _resumeAudio, {once: true});
+			document.addEventListener('touchstart', _resumeAudio, {once: true});
+			document.addEventListener('keydown', _resumeAudio, {once: true});
+			console.log('Azbooka: audio resume handlers installed');
 		}, displayFailureNotice);
 	}
 }());
-		</script>
-		<script>
-(function() {
-	var resumed = false;
-	function doResume() {
-		if (resumed) return;
-		var ctx = null;
-		try {
-			if (window.GodotAudio && window.GodotAudio.ctx) ctx = window.GodotAudio.ctx;
-		} catch(e) {}
-		if (!ctx) {
-			try {
-				var canvases = document.querySelectorAll('canvas');
-				for (var i = 0; i < canvases.length; i++) {
-					var c = canvases[i];
-					if (c.getContext) {
-						var al = c.getContext('webgl') || c.getContext('webgl2');
-					}
-				}
-			} catch(e) {}
-		}
-		if (!ctx) {
-			try {
-				if (typeof AudioContext !== 'undefined') ctx = new AudioContext();
-				else if (typeof webkitAudioContext !== 'undefined') ctx = new webkitAudioContext();
-			} catch(e) {}
-		}
-		if (ctx) {
-			try {
-				if (ctx.state === 'suspended') {
-					ctx.resume().then(function() { resumed = true; });
-				} else {
-					resumed = true;
-				}
-			} catch(e) {}
-		}
-	}
-	function handler() { doResume(); }
-	document.addEventListener('pointerdown', handler);
-	document.addEventListener('click', handler);
-	document.addEventListener('touchstart', handler);
-	document.addEventListener('keydown', handler);
-})();
 		</script>
 	</body>
 </html>
