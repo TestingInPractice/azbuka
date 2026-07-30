@@ -3,9 +3,6 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-		<meta http-equiv="Pragma" content="no-cache">
-		<meta http-equiv="Expires" content="0">
 		<title>Азбука</title>
 		<style>
 html, body, #canvas {
@@ -115,7 +112,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":39275132,"index.wasm":37700666},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":39579172,"index.wasm":37700666},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -202,27 +199,6 @@ const engine = new Engine(GODOT_CONFIG);
 			displayFailureNotice(missingMsg + missing.join('\n'));
 		}
 	} else {
-		// iOS Safari audio unlock: capture user gesture BEFORE engine starts
-		// so Godot's AudioContext is created with gesture permission
-		var _audioUnlocked = false;
-		var _unlockAudio = function() {
-			if (_audioUnlocked) return;
-			_audioUnlocked = true;
-			// 1. Try Godot's internal resume (works after engine init)
-			if (typeof godot_audio_resume === 'function') {
-				try { godot_audio_resume(); } catch(e) { console.warn('Azbooka: godot_audio_resume error', e); }
-			}
-			// 2. Create/resume a temp AudioContext to unlock audio on iOS
-			try {
-				var ctx = new (window.AudioContext || window.webkitAudioContext)();
-				if (ctx.state === 'suspended') { ctx.resume(); }
-			} catch(e) {}
-		};
-		// Listen BEFORE engine start (captures first tap)
-		document.addEventListener('click', _unlockAudio, {once: true, capture: true});
-		document.addEventListener('touchstart', _unlockAudio, {once: true, capture: true});
-		document.addEventListener('keydown', _unlockAudio, {once: true, capture: true});
-
 		setStatusMode('progress');
 		engine.startGame({
 			'onProgress': function (current, total) {
@@ -236,13 +212,6 @@ const engine = new Engine(GODOT_CONFIG);
 			},
 		}).then(() => {
 			setStatusMode('hidden');
-			// Retry unlock after engine init (GodotAudio.ctx is now ready)
-			_unlockAudio();
-			// Add backup listeners for next interaction
-			document.addEventListener('click', _unlockAudio, {once: true});
-			document.addEventListener('touchstart', _unlockAudio, {once: true});
-			document.addEventListener('keydown', _unlockAudio, {once: true});
-			console.log('Azbooka: audio resume ready');
 		}, displayFailureNotice);
 	}
 }());
