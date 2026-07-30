@@ -202,6 +202,27 @@ const engine = new Engine(GODOT_CONFIG);
 			displayFailureNotice(missingMsg + missing.join('\n'));
 		}
 	} else {
+		// iOS Safari audio unlock: capture user gesture BEFORE engine starts
+		// so Godot's AudioContext is created with gesture permission
+		var _audioUnlocked = false;
+		var _unlockAudio = function() {
+			if (_audioUnlocked) return;
+			_audioUnlocked = true;
+			// 1. Try Godot's internal resume (works after engine init)
+			if (typeof godot_audio_resume === 'function') {
+				try { godot_audio_resume(); } catch(e) { console.warn('Azbooka: godot_audio_resume error', e); }
+			}
+			// 2. Create/resume a temp AudioContext to unlock audio on iOS
+			try {
+				var ctx = new (window.AudioContext || window.webkitAudioContext)();
+				if (ctx.state === 'suspended') { ctx.resume(); }
+			} catch(e) {}
+		};
+		// Listen BEFORE engine start (captures first tap)
+		document.addEventListener('click', _unlockAudio, {once: true, capture: true});
+		document.addEventListener('touchstart', _unlockAudio, {once: true, capture: true});
+		document.addEventListener('keydown', _unlockAudio, {once: true, capture: true});
+
 		setStatusMode('progress');
 		engine.startGame({
 			'onProgress': function (current, total) {
@@ -215,17 +236,13 @@ const engine = new Engine(GODOT_CONFIG);
 			},
 		}).then(() => {
 			setStatusMode('hidden');
-			// Resume Godot's internal AudioContext on first user interaction
-			// (required for iOS Safari where AudioContext starts suspended)
-			var _resumeAudio = function() {
-				if (typeof godot_audio_resume !== 'undefined') {
-					try { godot_audio_resume(); } catch(e) { console.warn('Azbooka: godot_audio_resume failed', e); }
-				}
-			};
-			document.addEventListener('click', _resumeAudio, {once: true});
-			document.addEventListener('touchstart', _resumeAudio, {once: true});
-			document.addEventListener('keydown', _resumeAudio, {once: true});
-			console.log('Azbooka: audio resume handlers installed');
+			// Retry unlock after engine init (GodotAudio.ctx is now ready)
+			_unlockAudio();
+			// Add backup listeners for next interaction
+			document.addEventListener('click', _unlockAudio, {once: true});
+			document.addEventListener('touchstart', _unlockAudio, {once: true});
+			document.addEventListener('keydown', _unlockAudio, {once: true});
+			console.log('Azbooka: audio resume ready');
 		}, displayFailureNotice);
 	}
 }());
