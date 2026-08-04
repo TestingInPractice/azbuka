@@ -1,0 +1,174 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://ui/games/azbuka/letter_card.gd" id="1_script"]
+[ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://assets/images/fone4.jpg" id="3_bg"]
+
+[node name="LetterCard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+
+[node name="Background" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("3_bg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BackgroundOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.4)
+visible = false
+
+[node name="ContentWrapper" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 120.0
+offset_bottom = -140.0
+mouse_filter = 2
+
+[node name="LetterLabel" type="Label" parent="ContentWrapper"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 190.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ImageCenter" type="CenterContainer" parent="ContentWrapper"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 190.0
+offset_bottom = 620.0
+mouse_filter = 2
+
+[node name="PlaceholderRect" type="ColorRect" parent="ContentWrapper/ImageCenter"]
+layout_mode = 2
+custom_minimum_size = Vector2(360, 360)
+mouse_filter = 2
+color = Color(0.93, 0.87, 0.8, 1)
+
+[node name="PlaceholderLabel" type="Label" parent="ContentWrapper/ImageCenter"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="WordImage" type="TextureRect" parent="ContentWrapper/ImageCenter"]
+unique_name_in_owner = true
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WordRow" type="HBoxContainer" parent="ContentWrapper"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 660.0
+offset_bottom = 850.0
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="PrevLetterButton" type="Button" parent="ContentWrapper/WordRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(96, 96)
+size_flags_vertical = 4
+text = "<"
+theme_override_font_sizes/font_size = 40
+accessibility_name = "Предыдущая буква"
+
+[node name="WordSquares" type="HBoxContainer" parent="ContentWrapper/WordRow"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="NextLetterButton" type="Button" parent="ContentWrapper/WordRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(96, 96)
+size_flags_vertical = 4
+text = ">"
+theme_override_font_sizes/font_size = 40
+accessibility_name = "Следующая буква"
+
+[node name="HintLabel" type="Label" parent="ContentWrapper"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 880.0
+offset_bottom = 960.0
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 34
+
+[node name="ButtonRow" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -150.0
+offset_bottom = -50.0
+alignment = 1
+theme_override_constants/separation = 16
+
+[node name="ButtonLetter" type="Button" parent="ButtonRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Буква"
+theme_override_font_sizes/font_size = 26
+accessibility_name = "Прослушать букву"
+
+[node name="ButtonWord" type="Button" parent="ButtonRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Слово"
+theme_override_font_sizes/font_size = 26
+accessibility_name = "Прослушать слово"
+
+[node name="MicButton" type="Button" parent="ButtonRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Микрофон"
+theme_override_font_sizes/font_size = 26
+accessibility_name = "Записать голос"
+
+[node name="RecordPlaybackButton" type="Button" parent="ButtonRow"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Слушать"
+theme_override_font_sizes/font_size = 26
+accessibility_name = "Прослушать запись"
+
+[node name="LetterBackButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 190.0
+offset_bottom = 100.0
+text = "← Назад"
+theme_override_font_sizes/font_size = 28
+accessibility_name = "Назад к азбуке"

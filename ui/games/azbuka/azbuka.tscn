@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://ui/games/azbuka/azbuka.gd" id="1_azbuka"]
+[ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+[ext_resource type="Script" path="res://ui/games/azbuka/kisa_cat.gd" id="3_kisa"]
+[ext_resource type="Texture2D" path="res://assets/images/start_screen.png" id="4_bg"]
+
+[node name="AzbukaGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_azbuka")
+
+[node name="Background" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_bg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BackgroundOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.4)
+visible = false
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 40.0
+offset_right = -90.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="TopBar" type="HBoxContainer" parent="MainLayout"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="BackButton" type="Button" parent="MainLayout/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(220, 96)
+theme_override_font_sizes/font_size = 44
+text = "Назад"
+accessibility_name = "Назад"
+
+[node name="TitleLabel" type="Label" parent="MainLayout/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 64
+text = "Азбука"
+horizontal_alignment = 1
+
+[node name="SnakeArea" type="Control" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="SnakePath" type="Line2D" parent="MainLayout/SnakeArea"]
+unique_name_in_owner = true
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="KisaCat" type="Control" parent="MainLayout/SnakeArea"]
+unique_name_in_owner = true
+offset_right = 140.0
+offset_bottom = 160.0
+mouse_filter = 2
+script = ExtResource("3_kisa")
