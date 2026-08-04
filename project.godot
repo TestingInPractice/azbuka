@@ -8,20 +8,35 @@
 
 config_version=5
 
+[android]
+
+permissions=PackedStringArray("android.permission.RECORD_AUDIO")
+
 [application]
 
 config/name="Азбука"
-config/description="Russian alphabet learning game"
-run/main_scene="res://scenes/main_menu.tscn"
+config/description="Детская развивающая игра для изучения русского алфавита"
+run/main_scene="res://ui/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.6")
+config/dev_mode=true
+
+[audio]
+
+driver/enable_input=true
+bus/default_bus_layout="res://assets/audio/default_bus_layout.tres"
 
 [autoload]
 
-Global="*res://scripts/global.gd"
-AudioManager="*res://scripts/audio_manager.gd"
-ThemeManager="*res://scripts/theme_manager.gd"
-ProgressManager="*res://scripts/progress_manager.gd"
-AlphabetData="*res://scripts/alphabet_data.gd"
+
+
+
+
+
+GameLogger="*res://addons/game_logger.gd"
+AlphabetData="*res://systems/alphabet_data.gd"
+ThemeManager="*res://addons/theme_manager.gd"
+ProgressManager="*res://systems/progress_manager.gd"
+AudioManager="*res://addons/audio_manager.gd"
 
 [display]
 
