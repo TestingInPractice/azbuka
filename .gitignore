@@ -4,3 +4,13 @@ node_modules/
 .DS_Store
 *.pyc
 __pycache__/
+
+# Локальные артефакты и мусор
+build/
+archive/
+.omo/
+.graphmem/
+.playwright-mcp/
+/*.png
+/*.png.import
+/*.uid
