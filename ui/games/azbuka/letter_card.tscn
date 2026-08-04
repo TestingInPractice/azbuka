@@ -57,22 +57,9 @@ vertical_alignment = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 190.0
-offset_bottom = 620.0
+offset_top = 650.0
+offset_bottom = 1250.0
 mouse_filter = 2
-
-[node name="PlaceholderRect" type="ColorRect" parent="ContentWrapper/ImageCenter"]
-layout_mode = 2
-custom_minimum_size = Vector2(360, 360)
-mouse_filter = 2
-color = Color(0.93, 0.87, 0.8, 1)
-
-[node name="PlaceholderLabel" type="Label" parent="ContentWrapper/ImageCenter"]
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-theme_override_font_sizes/font_size = 48
-theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
 
 [node name="WordImage" type="TextureRect" parent="ContentWrapper/ImageCenter"]
 unique_name_in_owner = true
@@ -80,87 +67,105 @@ layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="WordRow" type="HBoxContainer" parent="ContentWrapper"]
+[node name="WordSquares" type="HBoxContainer" parent="ContentWrapper"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 660.0
-offset_bottom = 850.0
+offset_top = 1240.0
+offset_bottom = 1460.0
 alignment = 1
 theme_override_constants/separation = 24
-
-[node name="PrevLetterButton" type="Button" parent="ContentWrapper/WordRow"]
-unique_name_in_owner = true
-layout_mode = 2
-custom_minimum_size = Vector2(96, 96)
-size_flags_vertical = 4
-text = "<"
-theme_override_font_sizes/font_size = 40
-accessibility_name = "Предыдущая буква"
-
-[node name="WordSquares" type="HBoxContainer" parent="ContentWrapper/WordRow"]
-unique_name_in_owner = true
-layout_mode = 2
-alignment = 1
-theme_override_constants/separation = 24
-
-[node name="NextLetterButton" type="Button" parent="ContentWrapper/WordRow"]
-unique_name_in_owner = true
-layout_mode = 2
-custom_minimum_size = Vector2(96, 96)
-size_flags_vertical = 4
-text = ">"
-theme_override_font_sizes/font_size = 40
-accessibility_name = "Следующая буква"
 
 [node name="HintLabel" type="Label" parent="ContentWrapper"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 880.0
-offset_bottom = 960.0
+offset_top = 1480.0
+offset_bottom = 1560.0
 horizontal_alignment = 1
 vertical_alignment = 1
 theme_override_font_sizes/font_size = 34
 
-[node name="ButtonRow" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = -150.0
-offset_bottom = -50.0
-alignment = 1
-theme_override_constants/separation = 16
-
-[node name="ButtonLetter" type="Button" parent="ButtonRow"]
+[node name="ButtonLetter" type="Button" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 1590.0
+offset_right = 230.0
+offset_bottom = 1690.0
 text = "Буква"
 theme_override_font_sizes/font_size = 26
 accessibility_name = "Прослушать букву"
 
-[node name="ButtonWord" type="Button" parent="ButtonRow"]
+[node name="ButtonWord" type="Button" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 1750.0
+offset_right = 230.0
+offset_bottom = 1850.0
 text = "Слово"
 theme_override_font_sizes/font_size = 26
 accessibility_name = "Прослушать слово"
 
-[node name="MicButton" type="Button" parent="ButtonRow"]
+[node name="MicButton" type="Button" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 1590.0
+offset_right = -30.0
+offset_bottom = 1690.0
 text = "Микрофон"
 theme_override_font_sizes/font_size = 26
 accessibility_name = "Записать голос"
 
-[node name="RecordPlaybackButton" type="Button" parent="ButtonRow"]
+[node name="RecordPlaybackButton" type="Button" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 1750.0
+offset_right = -30.0
+offset_bottom = 1850.0
 disabled = true
 text = "Слушать"
 theme_override_font_sizes/font_size = 26
 accessibility_name = "Прослушать запись"
+
+[node name="PrevLetterButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 890.0
+offset_right = 170.0
+offset_bottom = 1030.0
+text = "◀"
+theme_override_font_sizes/font_size = 64
+accessibility_name = "Предыдущая буква"
+
+[node name="NextLetterButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 890.0
+offset_right = -30.0
+offset_bottom = 1030.0
+text = "▶"
+theme_override_font_sizes/font_size = 64
+accessibility_name = "Следующая буква"
 
 [node name="LetterBackButton" type="Button" parent="."]
 unique_name_in_owner = true

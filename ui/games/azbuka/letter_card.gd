@@ -128,7 +128,6 @@ func _ready() -> void:
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_update_content()
 	_update_nav_buttons()
-	_play_appear_animation()
 	set_process(true)
 	GameLogger.info("letter_card", "ready", {"letter": letter, "index": _current_index})
 
@@ -720,7 +719,7 @@ func _apply_theme(_mode: int = 0) -> void:
 	ls.outline_size = 4
 	var fs: float = maxf(80.0, get_viewport_rect().size.y / 4.0)
 	ls.font_size = int(fs)
-	_hint_label.add_theme_color_override("font_color", text)
+	_hint_label.add_theme_color_override("font_color", Color.WHITE)
 	ThemeManager.style_button(_button_letter, COLOR_LETTER_BTN)
 	ThemeManager.style_button(_button_word, COLOR_WORD_BTN)
 	ThemeManager.style_button(_mic_button, COLOR_MIC_BTN)
