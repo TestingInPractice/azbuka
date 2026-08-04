@@ -1,0 +1,157 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://ui/games/guess_picture/guess_picture.gd" id="1_guess_picture"]
+[ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+
+[node name="GuessPictureGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_guess_picture")
+
+[node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.960784, 0.941176, 0.909804, 1)
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 40.0
+offset_right = -90.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="RoundLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Раунд 1 / 10"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Счёт: 0"
+horizontal_alignment = 1
+
+[node name="LetterPanel" type="PanelContainer" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 40
+
+[node name="LetterLabel" type="Label" parent="MainLayout/LetterPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 360)
+theme_override_font_sizes/font_size = 260
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 64)
+theme_override_font_sizes/font_size = 44
+horizontal_alignment = 1
+
+[node name="AnswerButton_1" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 130)
+theme_override_font_sizes/font_size = 52
+accessibility_name = "Ответ: "
+
+[node name="AnswerButton_2" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 130)
+theme_override_font_sizes/font_size = 52
+accessibility_name = "Ответ: "
+
+[node name="AnswerButton_3" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 130)
+theme_override_font_sizes/font_size = 52
+accessibility_name = "Ответ: "
+
+[node name="AnswerButton_4" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 130)
+theme_override_font_sizes/font_size = 52
+accessibility_name = "Ответ: "
+
+[node name="FinalePanel" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 40.0
+offset_right = -90.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+theme_override_constants/separation = 40
+
+[node name="FinaleLabel" type="Label" parent="FinalePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Игра окончена!"
+horizontal_alignment = 1
+
+[node name="FinaleScoreLabel" type="Label" parent="FinalePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="FinalePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 120)
+theme_override_font_sizes/font_size = 56
+text = "Играть ещё"
+accessibility_name = "Играть ещё"
+
+[node name="GuessPictureBackButton" type="Button" parent="FinalePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 120)
+theme_override_font_sizes/font_size = 56
+text = "Назад"
+accessibility_name = "Назад"

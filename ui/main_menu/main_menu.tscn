@@ -1,0 +1,130 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.960784, 0.941176, 0.909804, 1)
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 60.0
+offset_right = -90.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+theme_override_constants/separation = 28
+
+[node name="TitleLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+text = "Азбука"
+horizontal_alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "Прогресс: 0 / 33"
+horizontal_alignment = 1
+
+[node name="SnakePreviewWrap" type="CenterContainer" parent="MainLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SnakePreview" type="GridContainer" parent="MainLayout/SnakePreviewWrap"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 17
+
+[node name="GamesButtonAzbuka" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 48
+text = "Азбука"
+accessibility_name = "Азбука"
+
+[node name="GamesButtonFindLetter" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 48
+text = "Найди букву"
+accessibility_name = "Найди букву"
+
+[node name="GamesButtonCollectWord" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 48
+text = "Собери слово"
+accessibility_name = "Собери слово"
+
+[node name="GamesButtonGuessPicture" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 48
+text = "Угадай картинку"
+accessibility_name = "Угадай картинку"
+
+[node name="BottomRow" type="HBoxContainer" parent="MainLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="SettingsButton" type="Button" parent="MainLayout/BottomRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 38
+text = "Настройки"
+accessibility_name = "Настройки"
+
+[node name="DonateButton" type="Button" parent="MainLayout/BottomRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 38
+text = "Донат"
+accessibility_name = "Донат"
+
+[node name="FeedbackButton" type="Button" parent="MainLayout/BottomRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 38
+text = "Отзыв"
+accessibility_name = "Отзыв"

@@ -1,0 +1,152 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://ui/settings/settings.gd" id="1_settings"]
+[ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_settings")
+
+[node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.960784, 0.941176, 0.909804, 1)
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 40.0
+offset_right = -90.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="TitleLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Настройки"
+horizontal_alignment = 1
+
+[node name="WarningLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+theme_override_font_sizes/font_size = 34
+text = "Должен быть включён хотя бы 1 режим игры"
+horizontal_alignment = 1
+
+[node name="ModeCheckboxAzbuka" type="CheckBox" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 44
+text = "Азбука"
+accessibility_name = "Азбука"
+
+[node name="ModeCheckboxFindLetter" type="CheckBox" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 44
+text = "Найди букву"
+accessibility_name = "Найди букву"
+
+[node name="ModeCheckboxCollectWord" type="CheckBox" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 44
+text = "Собери слово"
+accessibility_name = "Собери слово"
+
+[node name="ModeCheckboxGuessPicture" type="CheckBox" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 44
+text = "Угадай картинку"
+accessibility_name = "Угадай картинку"
+
+[node name="SeriesLengthRow" type="HBoxContainer" parent="MainLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="SeriesLengthLabel" type="Label" parent="MainLayout/SeriesLengthRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+text = "Карточек в серии:"
+vertical_alignment = 1
+
+[node name="SeriesLengthSpinBox" type="SpinBox" parent="MainLayout/SeriesLengthRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(220, 80)
+theme_override_font_sizes/font_size = 40
+min_value = 5.0
+max_value = 30.0
+step = 1.0
+value = 10.0
+accessibility_name = "Карточек в серии"
+
+[node name="ResetButton" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 44
+text = "Сбросить прогресс"
+accessibility_name = "Сбросить прогресс"
+
+[node name="ThemeToggleButton" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 44
+text = "Тема: светлая"
+accessibility_name = "Переключить тему"
+
+[node name="BackButton" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 44
+text = "Назад"
+accessibility_name = "Назад"
+
+[node name="WarningTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="ConfirmResetDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Сброс прогресса"
+size = Vector2i(760, 320)
+theme = ExtResource("2_theme")
+ok_button_text = "Сбросить"
+cancel_button_text = "Отмена"
+dialog_text = "Сбросить весь прогресс по азбуке?"

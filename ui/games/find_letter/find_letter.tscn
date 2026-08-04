@@ -1,0 +1,218 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://ui/games/find_letter/find_letter.gd" id="1_find_letter"]
+[ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+
+[node name="FindLetterGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_find_letter")
+
+[node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.960784, 0.941176, 0.909804, 1)
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 40.0
+offset_right = -90.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="TopRow" type="HBoxContainer" parent="MainLayout"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="FindLetterBackButton" type="Button" parent="MainLayout/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(200, 80)
+theme_override_font_sizes/font_size = 36
+text = "Назад"
+accessibility_name = "Назад"
+
+[node name="TopSpacer" type="Control" parent="MainLayout/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TitleLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Найди букву"
+horizontal_alignment = 1
+
+[node name="HintLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+theme_override_font_sizes/font_size = 36
+text = "Нажми на граммофон и выбери букву"
+horizontal_alignment = 1
+
+[node name="ReadyPanel" type="VBoxContainer" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="ReadyTitleLabel" type="Label" parent="MainLayout/ReadyPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Готовы играть?"
+horizontal_alignment = 1
+
+[node name="ReadyStartButton" type="Button" parent="MainLayout/ReadyPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 110)
+theme_override_font_sizes/font_size = 44
+text = "Начать"
+accessibility_name = "Начать игру"
+
+[node name="CardPanel" type="VBoxContainer" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="CardNumberLabel" type="Label" parent="MainLayout/CardPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Карточка 1 из 10"
+horizontal_alignment = 1
+
+[node name="GramophoneButton" type="Button" parent="MainLayout/CardPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 150)
+theme_override_font_sizes/font_size = 40
+text = "Граммофон"
+accessibility_name = "Граммофон"
+
+[node name="LettersRow" type="HBoxContainer" parent="MainLayout/CardPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+
+[node name="SquareLetter_1" type="Button" parent="MainLayout/CardPanel/LettersRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(180, 180)
+theme_override_font_sizes/font_size = 56
+text = "А"
+accessibility_name = "Буква"
+
+[node name="SquareLetter_2" type="Button" parent="MainLayout/CardPanel/LettersRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(180, 180)
+theme_override_font_sizes/font_size = 56
+text = "Б"
+accessibility_name = "Буква"
+
+[node name="SquareLetter_3" type="Button" parent="MainLayout/CardPanel/LettersRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(180, 180)
+theme_override_font_sizes/font_size = 56
+text = "В"
+accessibility_name = "Буква"
+
+[node name="SquareLetter_4" type="Button" parent="MainLayout/CardPanel/LettersRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(180, 180)
+theme_override_font_sizes/font_size = 56
+text = "Г"
+accessibility_name = "Буква"
+
+[node name="CompletionPanel" type="VBoxContainer" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="CompletionTitleLabel" type="Label" parent="MainLayout/CompletionPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Вы прошли все карточки"
+horizontal_alignment = 1
+
+[node name="CompletionQuestionLabel" type="Label" parent="MainLayout/CompletionPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Начать заново?"
+horizontal_alignment = 1
+
+[node name="CompletionButtonsRow" type="HBoxContainer" parent="MainLayout/CompletionPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="CompletionYesButton" type="Button" parent="MainLayout/CompletionPanel/CompletionButtonsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(220, 96)
+theme_override_font_sizes/font_size = 44
+text = "Да"
+accessibility_name = "Да"
+
+[node name="CompletionNoButton" type="Button" parent="MainLayout/CompletionPanel/CompletionButtonsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(220, 96)
+theme_override_font_sizes/font_size = 44
+text = "Нет"
+accessibility_name = "Нет"
+
+[node name="BottomRow" type="HBoxContainer" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+theme_override_constants/separation = 24
+
+[node name="PrevCardButton" type="Button" parent="MainLayout/BottomRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(220, 80)
+theme_override_font_sizes/font_size = 36
+text = "Влево"
+accessibility_name = "Предыдущая карточка"
+
+[node name="BottomSpacer" type="Control" parent="MainLayout/BottomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NextCardButton" type="Button" parent="MainLayout/BottomRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(220, 80)
+theme_override_font_sizes/font_size = 36
+text = "Вправо"
+accessibility_name = "Следующая карточка"
