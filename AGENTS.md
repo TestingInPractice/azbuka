@@ -18,3 +18,4 @@ Build Loop project. Orchestrator only manages state and delegates to sub-agents.
 ## Constraints
 - NEVER implement phases directly. Always delegate via task().
 - Source of truth: docs/specs/
+- **DO NOT FIX ANYTHING UNLESS ASKED.** Do not edit code or apply fixes without an explicit user request. Research, diagnosis, and reading are allowed; file changes only on explicit request.
