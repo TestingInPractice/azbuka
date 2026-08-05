@@ -638,6 +638,9 @@ func _navigate_to(target_idx: int, direction: int) -> void:
 
 	_current_index = target_idx
 	letter = new_letter
+	# Синхронизация статической переменной, чтобы котик на экране «Азбука»
+	# вернулся на последнюю просмотренную букву, а не на букву открытия.
+	LetterCard.from_letter = new_letter
 	_update_content()
 	_apply_theme()
 
