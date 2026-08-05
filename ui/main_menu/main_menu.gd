@@ -55,6 +55,7 @@ var _letter_circles: Array[Button] = []
 
 func _ready() -> void:
 	ProgressManager.progress_changed.connect(_on_progress_changed)
+	ProgressManager.enabled_modes_changed.connect(_update_game_buttons_visibility)
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_games_button_azbuka.pressed.connect(_on_game_button_pressed.bind("azbuka"))
 	_games_button_find_letter.pressed.connect(_on_game_button_pressed.bind("find_letter"))
@@ -66,6 +67,15 @@ func _ready() -> void:
 	_build_snake_preview()
 	_update_progress_label(ProgressManager.get_learned_count())
 	_apply_theme()
+	_update_game_buttons_visibility()
+
+
+## Показывает только включённые в настройках игры, скрывая выключенные.
+func _update_game_buttons_visibility(_modes: Dictionary = {}) -> void:
+	_games_button_azbuka.visible = ProgressManager.is_mode_enabled("azbuka")
+	_games_button_find_letter.visible = ProgressManager.is_mode_enabled("find_letter")
+	_games_button_collect_word.visible = ProgressManager.is_mode_enabled("collect_word")
+	_games_button_guess_picture.visible = ProgressManager.is_mode_enabled("guess_picture")
 
 
 ## Пересобирает полосу-змейку из кружков всех букв алфавита.
