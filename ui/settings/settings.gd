@@ -18,6 +18,11 @@ const MODE_TITLES := {
 	"guess_picture": "Угадай картинку",
 }
 
+## Размер квадратного индикатора чекбокса в пикселях.
+const CHECKBOX_ICON_SIZE := 64
+## Радиус скругления углов индикатора чекбокса.
+const CHECKBOX_ICON_RADIUS := 18
+
 @onready var _background: ColorRect = %Background
 @onready var _title_label: Label = %TitleLabel
 @onready var _warning_label: Label = %WarningLabel
@@ -32,6 +37,12 @@ const MODE_TITLES := {
 @onready var _back_button: Button = %BackButton
 @onready var _confirm_reset_dialog: ConfirmationDialog = %ConfirmResetDialog
 @onready var _warning_timer: Timer = %WarningTimer
+## Карточки-строки, перекрашиваются в _apply_theme.
+@onready var _mode_card_azbuka: PanelContainer = %ModeCardAzbuka
+@onready var _mode_card_find_letter: PanelContainer = %ModeCardFindLetter
+@onready var _mode_card_collect_word: PanelContainer = %ModeCardCollectWord
+@onready var _mode_card_guess_picture: PanelContainer = %ModeCardGuessPicture
+@onready var _series_card: PanelContainer = %SeriesCard
 
 var _checkboxes: Dictionary = {}
 var _updating: bool = false
@@ -154,11 +165,124 @@ func _apply_theme(_mode: int = 0) -> void:
 	var button_bg := colors["button_bg"] as Color
 	var button_text := colors["button_text"] as Color
 	ThemeManager.style_button(_reset_button, button_bg, button_text)
+	# Компактная кнопка «Сбросить» внутри строки «Азбука».
+	for sb_name: String in ["normal", "hover", "pressed"]:
+		var sb := _reset_button.get_theme_stylebox(sb_name) as StyleBoxFlat
+		if sb:
+			sb.content_margin_top = 10
+			sb.content_margin_bottom = 10
 	ThemeManager.style_button(_theme_toggle_button, button_bg, button_text)
 	ThemeManager.style_button(_back_button, button_bg, button_text)
+	_style_card(_mode_card_azbuka)
+	_style_card(_mode_card_find_letter)
+	_style_card(_mode_card_collect_word)
+	_style_card(_mode_card_guess_picture)
+	_style_card(_series_card)
+	_apply_checkbox_icons()
 	_update_theme_button_text()
 
 
 func _on_back_button_pressed() -> void:
 	GameLogger.info("Settings", "back_button_pressed", {})
 	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
+
+
+## Окрашивает карточку PanelContainer цветом фона карточек текущей темы.
+func _style_card(panel: PanelContainer) -> void:
+	var box := StyleBoxFlat.new()
+	box.bg_color = ThemeManager.get_card_bg()
+	box.set_corner_radius_all(24)
+	box.content_margin_left = 20
+	box.content_margin_right = 20
+	box.content_margin_top = 10
+	box.content_margin_bottom = 10
+	panel.add_theme_stylebox_override("panel", box)
+
+
+## Пересоздаёт крупные индикаторы чекбоксов под текущую тему.
+func _apply_checkbox_icons() -> void:
+	var checked_tex := _make_checkbox_icon(true)
+	var unchecked_tex := _make_checkbox_icon(false)
+	for key: String in _checkboxes:
+		var checkbox := _checkboxes[key] as CheckBox
+		checkbox.add_theme_icon_override("checked", checked_tex)
+		checkbox.add_theme_icon_override("unchecked", unchecked_tex)
+
+
+## Создаёт текстуру индикатора чекбокса: закрашенный скруглённый квадрат
+## с галочкой (включено) или контурный квадрат (выключено).
+func _make_checkbox_icon(checked: bool) -> ImageTexture:
+	var icon_size := CHECKBOX_ICON_SIZE
+	var radius := CHECKBOX_ICON_RADIUS
+	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
+	var text_color := colors["text"] as Color
+	var img := Image.create(icon_size, icon_size, false, Image.FORMAT_RGBA8)
+	img.fill(Color(0, 0, 0, 0))
+	if checked:
+		var accent_color := colors["button_bg"] as Color
+		for y in range(icon_size):
+			for x in range(icon_size):
+				if _inside_rounded(x, y, icon_size, icon_size, radius):
+					img.set_pixel(x, y, accent_color)
+		var mark := colors["button_text"] as Color
+		_draw_thick_line(img, Vector2i(17, 34), Vector2i(27, 44), mark, 8)
+		_draw_thick_line(img, Vector2i(27, 44), Vector2i(47, 21), mark, 8)
+	else:
+		var border := text_color
+		border.a = 0.55
+		var fill := text_color
+		fill.a = 0.06
+		for y in range(icon_size):
+			for x in range(icon_size):
+				if _inside_rounded(x, y, icon_size, icon_size, radius) and not _inside_rounded(x, y, icon_size, icon_size, radius - 5):
+					img.set_pixel(x, y, border)
+				elif _inside_rounded(x, y, icon_size, icon_size, radius):
+					img.set_pixel(x, y, fill)
+	return ImageTexture.create_from_image(img)
+
+
+## Проверяет, лежит ли точка внутри скруглённого прямоугольника.
+func _inside_rounded(px: int, py: int, w: int, h: int, r: int) -> bool:
+	if px < 0 or py < 0 or px >= w or py >= h:
+		return false
+	var cx := px
+	var cy := py
+	if px < r:
+		cx = r
+	elif px >= w - r:
+		cx = w - 1 - r
+	if py < r:
+		cy = r
+	elif py >= h - r:
+		cy = h - 1 - r
+	var dx := px - cx
+	var dy := py - cy
+	return dx * dx + dy * dy <= r * r
+
+
+## Рисует толстую линию по алгоритму Брезенхэма.
+func _draw_thick_line(img: Image, from_p: Vector2i, to_p: Vector2i, color: Color, width: int) -> void:
+	var dx := absi(to_p.x - from_p.x)
+	var dy := -absi(to_p.y - from_p.y)
+	var sx := 1 if from_p.x < to_p.x else -1
+	var sy := 1 if from_p.y < to_p.y else -1
+	var err := dx + dy
+	var half := width / 2
+	var x := from_p.x
+	var y := from_p.y
+	while true:
+		for ox in range(-half, half + 1):
+			for oy in range(-half, half + 1):
+				var px := x + ox
+				var py := y + oy
+				if px >= 0 and px < img.get_width() and py >= 0 and py < img.get_height():
+					img.set_pixel(px, py, color)
+		if x == to_p.x and y == to_p.y:
+			break
+		var e2 := 2 * err
+		if e2 >= dy:
+			err += dy
+			x += sx
+		if e2 <= dx:
+			err += dx
+			y += sy

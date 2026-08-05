@@ -53,44 +53,84 @@ theme_override_font_sizes/font_size = 34
 text = "Должен быть включён хотя бы 1 режим игры"
 horizontal_alignment = 1
 
-[node name="ModeCheckboxAzbuka" type="CheckBox" parent="MainLayout"]
+[node name="ModeCardAzbuka" type="PanelContainer" parent="MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="AzbukaRow" type="HBoxContainer" parent="MainLayout/ModeCardAzbuka"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ModeCheckboxAzbuka" type="CheckBox" parent="MainLayout/ModeCardAzbuka/AzbukaRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 88)
 theme_override_font_sizes/font_size = 44
 text = "Азбука"
 accessibility_name = "Азбука"
 
-[node name="ModeCheckboxFindLetter" type="CheckBox" parent="MainLayout"]
+[node name="ResetButton" type="Button" parent="MainLayout/ModeCardAzbuka/AzbukaRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 64)
+theme_override_font_sizes/font_size = 32
+text = "Сбросить"
+accessibility_name = "Сбросить прогресс"
+
+[node name="ModeCardFindLetter" type="PanelContainer" parent="MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="ModeCheckboxFindLetter" type="CheckBox" parent="MainLayout/ModeCardFindLetter"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 88)
 theme_override_font_sizes/font_size = 44
 text = "Найди букву"
 accessibility_name = "Найди букву"
 
-[node name="ModeCheckboxCollectWord" type="CheckBox" parent="MainLayout"]
+[node name="ModeCardCollectWord" type="PanelContainer" parent="MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="ModeCheckboxCollectWord" type="CheckBox" parent="MainLayout/ModeCardCollectWord"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 88)
 theme_override_font_sizes/font_size = 44
 text = "Собери слово"
 accessibility_name = "Собери слово"
 
-[node name="ModeCheckboxGuessPicture" type="CheckBox" parent="MainLayout"]
+[node name="ModeCardGuessPicture" type="PanelContainer" parent="MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="ModeCheckboxGuessPicture" type="CheckBox" parent="MainLayout/ModeCardGuessPicture"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 88)
 theme_override_font_sizes/font_size = 44
 text = "Угадай картинку"
 accessibility_name = "Угадай картинку"
 
-[node name="SeriesLengthRow" type="HBoxContainer" parent="MainLayout"]
+[node name="SeriesCard" type="PanelContainer" parent="MainLayout"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="SeriesLengthRow" type="HBoxContainer" parent="MainLayout/SeriesCard"]
+layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="SeriesLengthLabel" type="Label" parent="MainLayout/SeriesLengthRow"]
+[node name="SeriesLengthLabel" type="Label" parent="MainLayout/SeriesCard/SeriesLengthRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
@@ -98,7 +138,7 @@ theme_override_font_sizes/font_size = 40
 text = "Карточек в серии:"
 vertical_alignment = 1
 
-[node name="SeriesLengthSpinBox" type="SpinBox" parent="MainLayout/SeriesLengthRow"]
+[node name="SeriesLengthSpinBox" type="SpinBox" parent="MainLayout/SeriesCard/SeriesLengthRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -109,15 +149,6 @@ max_value = 30.0
 step = 1.0
 value = 10.0
 accessibility_name = "Карточек в серии"
-
-[node name="ResetButton" type="Button" parent="MainLayout"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 96)
-theme_override_font_sizes/font_size = 44
-text = "Сбросить прогресс"
-accessibility_name = "Сбросить прогресс"
 
 [node name="ThemeToggleButton" type="Button" parent="MainLayout"]
 unique_name_in_owner = true
