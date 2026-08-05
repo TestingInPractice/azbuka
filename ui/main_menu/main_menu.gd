@@ -86,6 +86,18 @@ func _apply_theme(_mode: int = 0) -> void:
 		var button: Button = _game_buttons[game_key]
 		ThemeManager.style_button(button, GAME_BUTTON_COLORS[game_key], GAME_BUTTON_TEXT_COLOR)
 	ThemeManager.style_button(_settings_button, button_bg, button_text)
+	_settings_button.add_theme_color_override("icon_normal_color", button_text)
+	_settings_button.add_theme_color_override("icon_hover_color", button_text)
+	_settings_button.add_theme_color_override("icon_pressed_color", button_text)
+	# Уменьшаем внутренние отступы шестерёнки, чтобы иконка занимала ~80% кнопки.
+	var icon_margin := 8
+	for style_state: StringName in ["normal", "hover", "pressed"]:
+		var box := _settings_button.get_theme_stylebox(style_state) as StyleBoxFlat
+		if box != null:
+			box.content_margin_left = icon_margin
+			box.content_margin_right = icon_margin
+			box.content_margin_top = icon_margin
+			box.content_margin_bottom = icon_margin
 
 
 func _on_game_button_pressed(game_key: String) -> void:
