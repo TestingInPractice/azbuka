@@ -2,12 +2,12 @@ extends Control
 ## Игра «Найди букву»: соотнесение звука буквы с её начертанием.
 ##
 ## Экран «Готовы играть?» запускает серию из N карточек (N настраивается в
-## настройках, 5-30). На карточке граммофон озвучивает правильную букву, а
-## под ним четыре квадрата: одна правильная буква и три случайные. Правильный
-## выбор подсвечивает квадрат зелёным, звучит «Молодец!», игра переходит к
-## следующей карточке. Ошибочный выбор блокирует квадрат, звучит короткий
-## сигнал и подсказка «Попробуй ещё!». После N карточек - экран завершения
-## серии с кнопками «Да» и «Нет».
+## настройках, 5-30). На карточке картинка слова: нажатие на неё озвучивает
+## правильную букву, а под ней четыре квадрата: одна правильная буква и три
+## случайные. Правильный выбор подсвечивает квадрат зелёным, звучит
+## «Молодец!», игра переходит к следующей карточке. Ошибочный выбор
+## блокирует квадрат, звучит короткий сигнал и подсказка «Попробуй ещё!».
+## После N карточек - экран завершения серии с кнопками «Да» и «Нет».
 
 const ANSWER_COUNT := 4
 ## Пауза после правильного ответа перед переходом к следующей карточке.
@@ -41,7 +41,7 @@ const PROMPT_CORRECT_PATH := "res://assets/audio/prompt_correct.wav"
 @onready var _ready_start_button: Button = %ReadyStartButton
 @onready var _card_panel: VBoxContainer = %CardPanel
 @onready var _card_number_label: Label = %CardNumberLabel
-@onready var _gramophone_button: Button = %GramophoneButton
+@onready var _word_image: TextureRect = %WordImage
 @onready var _completion_panel: VBoxContainer = %CompletionPanel
 @onready var _completion_yes_button: Button = %CompletionYesButton
 @onready var _completion_no_button: Button = %CompletionNoButton
@@ -76,7 +76,7 @@ func _ready() -> void:
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_back_button.pressed.connect(_on_back_button_pressed)
 	_ready_start_button.pressed.connect(_on_ready_start_pressed)
-	_gramophone_button.pressed.connect(_on_gramophone_pressed)
+	_word_image.gui_input.connect(_on_word_image_input)
 	for index in _square_buttons.size():
 		_square_buttons[index].pressed.connect(_on_square_pressed.bind(index))
 	_prev_card_button.pressed.connect(_on_prev_card_pressed)
@@ -151,8 +151,9 @@ func _show_card(index: int) -> void:
 	_card_number_label.text = "Карточка %d из %d" % [_card_index + 1, _series.size()]
 	_build_answers()
 	_update_squares()
+	_update_word_image()
 	_hint_label.visible = true
-	_hint_label.text = "Нажми на граммофон и выбери букву"
+	_hint_label.text = "Нажми на картинку и выбери букву"
 	_ready_panel.visible = false
 	_card_panel.visible = true
 	_completion_panel.visible = false
@@ -205,17 +206,50 @@ func _set_square_color(button: Button, bg_color: Color) -> void:
 	button.add_theme_stylebox_override("pressed", style)
 
 
+## Обновляет картинку слова текущей карточки. Если файл не найден, показывает
+## цветной placeholder, цвет которого вычислен из HSV-хэша буквы.
+func _update_word_image() -> void:
+	var img_path := _image_path_for(_correct_letter)
+	var tex: Texture2D = null
+	if not img_path.is_empty():
+		tex = load(img_path) as Texture2D
+	if tex:
+		_word_image.texture = tex
+	else:
+		_word_image.texture = _make_placeholder_texture(_correct_letter)
+		if not img_path.is_empty():
+			GameLogger.warning("FindLetterGame", "word_image_missing", {"letter": _correct_letter, "path": img_path})
+
+
+## Возвращает путь к картинке слова для буквы ("" если буквы нет в словаре).
+func _image_path_for(ltr: String) -> String:
+	var image_name: String = LetterCard.WORD_IMAGE.get(ltr, "")
+	if image_name.is_empty():
+		return ""
+	return "res://assets/images/" + image_name + ".png"
+
+
+## Создаёт цветную текстуру-заглушку по HSV-хэшу буквы.
+func _make_placeholder_texture(ltr: String) -> Texture2D:
+	var hue := fmod(float(abs(ltr.hash())) / 1000.0, 1.0)
+	var color := Color.from_hsv(hue, 0.5, 0.85)
+	var img := Image.create(64, 64, false, Image.FORMAT_RGBA8)
+	img.fill(color)
+	return ImageTexture.create_from_image(img)
+
+
 func _on_ready_start_pressed() -> void:
 	GameLogger.info("FindLetterGame", "ready_start_pressed", {})
 	_start_series()
 
 
-func _on_gramophone_pressed() -> void:
+func _on_word_image_input(event: InputEvent) -> void:
 	if _state != STATE_PLAYING:
 		return
-	var audio_path := AlphabetData.get_letter_audio_path(_correct_letter)
-	AudioManager.play_audio(audio_path)
-	GameLogger.info("FindLetterGame", "gramophone_pressed", {"letter": _correct_letter})
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var audio_path := AlphabetData.get_letter_audio_path(_correct_letter)
+		AudioManager.play_audio(audio_path)
+		GameLogger.info("FindLetterGame", "word_image_pressed", {"letter": _correct_letter})
 
 
 func _on_square_pressed(index: int) -> void:
@@ -303,7 +337,6 @@ func _apply_theme(_mode: int = 0) -> void:
 	var button_text := _get_button_text()
 	ThemeManager.style_button(_back_button, button_bg, button_text)
 	ThemeManager.style_button(_ready_start_button, button_bg, button_text)
-	ThemeManager.style_button(_gramophone_button, button_bg, button_text)
 	ThemeManager.style_button(_prev_card_button, button_bg, button_text)
 	ThemeManager.style_button(_next_card_button, button_bg, button_text)
 	ThemeManager.style_button(_completion_yes_button, button_bg, button_text)

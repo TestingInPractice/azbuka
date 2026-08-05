@@ -38,22 +38,6 @@ grow_vertical = 2
 alignment = 1
 theme_override_constants/separation = 24
 
-[node name="TopRow" type="HBoxContainer" parent="MainLayout"]
-layout_mode = 2
-theme_override_constants/separation = 24
-
-[node name="FindLetterBackButton" type="Button" parent="MainLayout/TopRow"]
-unique_name_in_owner = true
-layout_mode = 2
-custom_minimum_size = Vector2(200, 80)
-theme_override_font_sizes/font_size = 36
-text = "Назад"
-accessibility_name = "Назад"
-
-[node name="TopSpacer" type="Control" parent="MainLayout/TopRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="TitleLabel" type="Label" parent="MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -66,7 +50,7 @@ unique_name_in_owner = true
 layout_mode = 2
 visible = false
 theme_override_font_sizes/font_size = 36
-text = "Нажми на граммофон и выбери букву"
+text = "Нажми на картинку и выбери букву"
 horizontal_alignment = 1
 
 [node name="ReadyPanel" type="VBoxContainer" parent="MainLayout"]
@@ -104,14 +88,16 @@ theme_override_font_sizes/font_size = 36
 text = "Карточка 1 из 10"
 horizontal_alignment = 1
 
-[node name="GramophoneButton" type="Button" parent="MainLayout/CardPanel"]
+[node name="WordImage" type="TextureRect" parent="MainLayout/CardPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 150)
-theme_override_font_sizes/font_size = 40
-text = "Граммофон"
-accessibility_name = "Граммофон"
+custom_minimum_size = Vector2(0, 200)
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+accessibility_name = "Картинка слова"
 
 [node name="LettersRow" type="HBoxContainer" parent="MainLayout/CardPanel"]
 layout_mode = 2
@@ -216,3 +202,14 @@ custom_minimum_size = Vector2(220, 80)
 theme_override_font_sizes/font_size = 36
 text = "Вправо"
 accessibility_name = "Следующая карточка"
+
+[node name="FindLetterBackButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 190.0
+offset_bottom = 100.0
+text = "← Назад"
+theme_override_font_sizes/font_size = 28
+accessibility_name = "Назад"
