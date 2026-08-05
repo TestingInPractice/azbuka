@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://ui/settings/settings.gd" id="1_settings"]
 [ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" path="res://ui/common/back_button.tscn" id="3_back"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -35,7 +36,7 @@ offset_right = -90.0
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+alignment = 0
 theme_override_constants/separation = 24
 
 [node name="TitleLabel" type="Label" parent="MainLayout"]
@@ -159,14 +160,23 @@ theme_override_font_sizes/font_size = 44
 text = "Тема: светлая"
 accessibility_name = "Переключить тему"
 
-[node name="BackButton" type="Button" parent="MainLayout"]
+[node name="DonateButton" type="Button" parent="MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 96)
 theme_override_font_sizes/font_size = 44
-text = "Назад"
-accessibility_name = "Назад"
+text = "Донат"
+accessibility_name = "Донат"
+
+[node name="FeedbackButton" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 96)
+theme_override_font_sizes/font_size = 44
+text = "Отзыв"
+accessibility_name = "Отзыв"
 
 [node name="WarningTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -181,3 +191,6 @@ theme = ExtResource("2_theme")
 ok_button_text = "Сбросить"
 cancel_button_text = "Отмена"
 dialog_text = "Сбросить весь прогресс по азбуке?"
+
+[node name="BackButton" parent="." instance=ExtResource("3_back")]
+unique_name_in_owner = true

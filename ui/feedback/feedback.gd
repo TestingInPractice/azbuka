@@ -1,13 +1,17 @@
 extends Control
+class_name FeedbackScreen
 ## Экран обратной связи.
 ##
 ## Показывает краткое описание и кнопку «Отправить отзыв», которая открывает
-## форму Google Sheets в браузере. Возврат в главное меню через кнопку
-## «Назад».
+## форму Google Sheets в браузере. Возврат через кнопку «Назад» идёт на
+## сцену, указанную в return_scene (по умолчанию — главное меню).
 
 ## Ссылка на форму обратной связи.
 ## TODO: заменить на реальную ссылку формы Google Sheets.
 const FEEDBACK_FORM_URL := "https://forms.gle/placeholder"
+
+## Сцена, в которую возвращаться при закрытии (устанавливается перед переходом).
+static var return_scene: String = "res://ui/main_menu/main_menu.tscn"
 
 @onready var _background: ColorRect = %Background
 @onready var _title_label: Label = %TitleLabel
@@ -43,5 +47,5 @@ func _on_send_feedback_pressed() -> void:
 
 
 func _on_back_button_pressed() -> void:
-	GameLogger.info("Feedback", "back_button_pressed", {})
-	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
+	GameLogger.info("Feedback", "back_button_pressed", {"return_scene": return_scene})
+	get_tree().change_scene_to_file(return_scene)

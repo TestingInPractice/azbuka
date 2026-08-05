@@ -2,8 +2,11 @@ extends Control
 ## Экран настроек.
 ##
 ## Управляет включёнными режимами игр (минимум один включён), сбросом
-## прогресса, темой оформления и возвратом в главное меню.
+## прогресса, темой оформления и возвратом в главное меню. Также открывает
+## экраны доната и обратной связи, указывая им сцену возврата — этот экран.
 
+## Сцена настроек (для возврата из попапов доната и обратной связи).
+const SETTINGS_SCENE := "res://ui/settings/settings.tscn"
 ## Минимальное число включённых режимов игр.
 const MIN_ENABLED_MODES := 1
 ## Цвет текста предупреждения.
@@ -34,6 +37,8 @@ const CHECKBOX_ICON_RADIUS := 18
 @onready var _series_length_label: Label = %SeriesLengthLabel
 @onready var _reset_button: Button = %ResetButton
 @onready var _theme_toggle_button: Button = %ThemeToggleButton
+@onready var _donate_button: Button = %DonateButton
+@onready var _feedback_button: Button = %FeedbackButton
 @onready var _back_button: Button = %BackButton
 @onready var _confirm_reset_dialog: ConfirmationDialog = %ConfirmResetDialog
 @onready var _warning_timer: Timer = %WarningTimer
@@ -61,6 +66,8 @@ func _ready() -> void:
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_reset_button.pressed.connect(_on_reset_button_pressed)
 	_theme_toggle_button.pressed.connect(_on_theme_toggle_button_pressed)
+	_donate_button.pressed.connect(_on_donate_button_pressed)
+	_feedback_button.pressed.connect(_on_feedback_button_pressed)
 	_back_button.pressed.connect(_on_back_button_pressed)
 	_confirm_reset_dialog.confirmed.connect(_on_reset_confirmed)
 	_confirm_reset_dialog.canceled.connect(_on_reset_cancelled)
@@ -172,6 +179,8 @@ func _apply_theme(_mode: int = 0) -> void:
 			sb.content_margin_top = 10
 			sb.content_margin_bottom = 10
 	ThemeManager.style_button(_theme_toggle_button, button_bg, button_text)
+	ThemeManager.style_button(_donate_button, button_bg, button_text)
+	ThemeManager.style_button(_feedback_button, button_bg, button_text)
 	ThemeManager.style_button(_back_button, button_bg, button_text)
 	_style_card(_mode_card_azbuka)
 	_style_card(_mode_card_find_letter)
@@ -185,6 +194,20 @@ func _apply_theme(_mode: int = 0) -> void:
 func _on_back_button_pressed() -> void:
 	GameLogger.info("Settings", "back_button_pressed", {})
 	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
+
+
+## Открывает попап доната, указав ему сцену возврата — этот экран.
+func _on_donate_button_pressed() -> void:
+	GameLogger.info("Settings", "donate_button_pressed", {})
+	DonateOverlay.return_scene = SETTINGS_SCENE
+	get_tree().change_scene_to_file("res://ui/donate/donate_overlay.tscn")
+
+
+## Открывает экран обратной связи, указав ему сцену возврата — этот экран.
+func _on_feedback_button_pressed() -> void:
+	GameLogger.info("Settings", "feedback_button_pressed", {})
+	FeedbackScreen.return_scene = SETTINGS_SCENE
+	get_tree().change_scene_to_file("res://ui/feedback/feedback.tscn")
 
 
 ## Окрашивает карточку PanelContainer цветом фона карточек текущей темы.

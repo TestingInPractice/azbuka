@@ -1,10 +1,15 @@
 extends Control
+class_name DonateOverlay
 ## Попап доната.
 ##
 ## Затемнённый фон и карточка с двумя способами оплаты (СБП и ЮMoney).
 ## СБП показывает панель с QR-кодом и номером телефона: можно открыть
 ## приложение Сбербанка или скопировать номер. ЮMoney открывает платёжную
-## форму. Закрытие возвращает в главное меню.
+## форму. Закрытие возвращает на сцену, указанную в return_scene
+## (по умолчанию — главное меню).
+
+## Сцена, в которую возвращаться при закрытии (устанавливается перед переходом).
+static var return_scene: String = "res://ui/main_menu/main_menu.tscn"
 
 ## Затемнение фона.
 const BACKDROP_COLOR := Color(0.0, 0.0, 0.0, 0.65)
@@ -126,4 +131,4 @@ func _on_close_pressed() -> void:
 
 
 func _close_overlay() -> void:
-	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
+	get_tree().change_scene_to_file(return_scene)
