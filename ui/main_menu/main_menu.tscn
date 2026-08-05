@@ -36,7 +36,7 @@ offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
-theme_override_constants/separation = 28
+theme_override_constants/separation = 48
 
 [node name="TitleLabel" type="Label" parent="MainLayout"]
 unique_name_in_owner = true
@@ -44,22 +44,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 120
 text = "Азбука"
 horizontal_alignment = 1
-
-[node name="ProgressLabel" type="Label" parent="MainLayout"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 44
-text = "Прогресс: 0 / 33"
-horizontal_alignment = 1
-
-[node name="SnakePreviewWrap" type="CenterContainer" parent="MainLayout"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SnakePreview" type="GridContainer" parent="MainLayout/SnakePreviewWrap"]
-unique_name_in_owner = true
-layout_mode = 2
-columns = 17
 
 [node name="GamesButtonAzbuka" type="Button" parent="MainLayout"]
 unique_name_in_owner = true
@@ -97,12 +81,7 @@ theme_override_font_sizes/font_size = 48
 text = "Угадай картинку"
 accessibility_name = "Угадай картинку"
 
-[node name="BottomRow" type="HBoxContainer" parent="MainLayout"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 20
-
-[node name="SettingsButton" type="Button" parent="MainLayout/BottomRow"]
+[node name="SettingsButton" type="Button" parent="MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -110,21 +89,3 @@ custom_minimum_size = Vector2(0, 96)
 theme_override_font_sizes/font_size = 38
 text = "Настройки"
 accessibility_name = "Настройки"
-
-[node name="DonateButton" type="Button" parent="MainLayout/BottomRow"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 96)
-theme_override_font_sizes/font_size = 38
-text = "Донат"
-accessibility_name = "Донат"
-
-[node name="FeedbackButton" type="Button" parent="MainLayout/BottomRow"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 96)
-theme_override_font_sizes/font_size = 38
-text = "Отзыв"
-accessibility_name = "Отзыв"
