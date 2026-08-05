@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://ui/games/find_letter/find_letter.gd" id="1_find_letter"]
 [ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" path="res://ui/common/back_button.tscn" id="3_back"]
 
 [node name="FindLetterGame" type="Control"]
 layout_mode = 3
@@ -203,13 +204,5 @@ theme_override_font_sizes/font_size = 36
 text = "Вправо"
 accessibility_name = "Следующая карточка"
 
-[node name="FindLetterBackButton" type="Button" parent="."]
+[node name="FindLetterBackButton" parent="." instance=ExtResource("3_back")]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 20.0
-offset_top = 40.0
-offset_right = 190.0
-offset_bottom = 100.0
-text = "← Назад"
-theme_override_font_sizes/font_size = 28
-accessibility_name = "Назад"

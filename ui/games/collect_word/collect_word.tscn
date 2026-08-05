@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://ui/games/collect_word/collect_word.gd" id="1_collect_word"]
 [ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" path="res://ui/common/back_button.tscn" id="3_back"]
 
 [node name="CollectWordGame" type="Control"]
 layout_mode = 3
@@ -96,13 +97,5 @@ theme_override_font_sizes/font_size = 44
 text = "Собери слово из букв"
 horizontal_alignment = 1
 
-[node name="CollectWordBackButton" type="Button" parent="."]
+[node name="CollectWordBackButton" parent="." instance=ExtResource("3_back")]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 20.0
-offset_top = 40.0
-offset_right = 190.0
-offset_bottom = 100.0
-text = "← Назад"
-theme_override_font_sizes/font_size = 28
-accessibility_name = "Назад"

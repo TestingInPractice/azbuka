@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://ui/games/azbuka/azbuka.gd" id="1_azbuka"]
 [ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
 [ext_resource type="Script" path="res://ui/games/azbuka/kisa_cat.gd" id="3_kisa"]
 [ext_resource type="Texture2D" path="res://assets/images/start_screen.png" id="4_bg"]
+[ext_resource type="PackedScene" path="res://ui/common/back_button.tscn" id="5_back"]
 
 [node name="AzbukaGame" type="Control"]
 layout_mode = 3
@@ -81,13 +82,5 @@ offset_bottom = 160.0
 mouse_filter = 2
 script = ExtResource("3_kisa")
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" parent="." instance=ExtResource("5_back")]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 20.0
-offset_top = 40.0
-offset_right = 190.0
-offset_bottom = 100.0
-text = "← Назад"
-theme_override_font_sizes/font_size = 28
-accessibility_name = "Назад"

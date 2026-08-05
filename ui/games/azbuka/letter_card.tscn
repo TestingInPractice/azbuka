@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://ui/games/azbuka/letter_card.gd" id="1_script"]
 [ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
 [ext_resource type="Texture2D" path="res://assets/images/fone4.jpg" id="3_bg"]
+[ext_resource type="PackedScene" path="res://ui/common/back_button.tscn" id="4_back"]
 
 [node name="LetterCard" type="Control"]
 layout_mode = 3
@@ -167,13 +168,6 @@ text = "▶"
 theme_override_font_sizes/font_size = 64
 accessibility_name = "Следующая буква"
 
-[node name="LetterBackButton" type="Button" parent="."]
+[node name="LetterBackButton" parent="." instance=ExtResource("4_back")]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 20.0
-offset_top = 40.0
-offset_right = 190.0
-offset_bottom = 100.0
-text = "← Назад"
-theme_override_font_sizes/font_size = 28
 accessibility_name = "Назад к азбуке"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://ui/games/guess_picture/guess_picture.gd" id="1_guess_picture"]
 [ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" path="res://ui/common/back_button.tscn" id="3_back"]
 
 [node name="GuessPictureGame" type="Control"]
 layout_mode = 3
@@ -147,13 +148,5 @@ theme_override_font_sizes/font_size = 56
 text = "Играть ещё"
 accessibility_name = "Играть ещё"
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" parent="." instance=ExtResource("3_back")]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 20.0
-offset_top = 40.0
-offset_right = 190.0
-offset_bottom = 100.0
-text = "← Назад"
-theme_override_font_sizes/font_size = 28
-accessibility_name = "Назад"
