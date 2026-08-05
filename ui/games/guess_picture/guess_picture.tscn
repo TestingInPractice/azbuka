@@ -147,11 +147,13 @@ theme_override_font_sizes/font_size = 56
 text = "Играть ещё"
 accessibility_name = "Играть ещё"
 
-[node name="GuessPictureBackButton" type="Button" parent="FinalePanel"]
+[node name="BackButton" type="Button" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 120)
-theme_override_font_sizes/font_size = 56
-text = "Назад"
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 190.0
+offset_bottom = 100.0
+text = "← Назад"
+theme_override_font_sizes/font_size = 28
 accessibility_name = "Назад"

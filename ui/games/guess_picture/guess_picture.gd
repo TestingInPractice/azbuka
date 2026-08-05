@@ -43,7 +43,7 @@ const DISTRACTOR_COUNT := 3
 @onready var _finale_label: Label = %FinaleLabel
 @onready var _finale_score_label: Label = %FinaleScoreLabel
 @onready var _play_again_button: Button = %PlayAgainButton
-@onready var _back_button: Button = %GuessPictureBackButton
+@onready var _back_button: Button = %BackButton
 
 ## Кнопки ответов в порядке AnswerButton_1..4.
 var _answer_buttons: Array[Button] = []
