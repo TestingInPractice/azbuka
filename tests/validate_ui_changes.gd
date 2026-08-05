@@ -8,6 +8,7 @@ var failures := 0
 
 func _ready() -> void:
 	await get_tree().process_frame
+	_check_project_settings()
 	_check_main_menu()
 	_check_settings()
 	_check_feedback()
@@ -18,6 +19,15 @@ func _ready() -> void:
 	else:
 		print("[ui_validate] PASSED: все проверки успешны")
 		get_tree().quit(0)
+
+
+func _check_project_settings() -> void:
+	var vw: int = ProjectSettings.get_setting("display/window/size/viewport_width")
+	var vh: int = ProjectSettings.get_setting("display/window/size/viewport_height")
+	if vw != 1080 or vh != 2340:
+		_fail("project: viewport должен быть 1080x2340 (19.5:9), сейчас %dx%d" % [vw, vh])
+	if ProjectSettings.get_setting("display/window/stretch/aspect") != "keep":
+		_fail("project: stretch/aspect должен быть keep")
 
 
 func _check_main_menu() -> void:
