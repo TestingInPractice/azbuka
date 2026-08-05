@@ -33,8 +33,15 @@ func _check_main_menu() -> void:
 		_fail("main_menu: DonateButton не должен существовать")
 	if menu.get_node_or_null("%FeedbackButton") != null:
 		_fail("main_menu: FeedbackButton не должен существовать")
-	if menu.get_node_or_null("%SettingsButton") == null:
+	var settings_btn := menu.get_node_or_null("%SettingsButton") as Button
+	if settings_btn == null:
 		_fail("main_menu: SettingsButton отсутствует")
+	else:
+		var layout := menu.get_node_or_null("%MainLayout")
+		if layout != null and settings_btn.get_parent() == layout:
+			_fail("main_menu: SettingsButton должен быть в корне, а не внутри MainLayout")
+		if settings_btn.icon == null:
+			_fail("main_menu: SettingsButton должен иметь иконку (шестерёнку)")
 	var colors: Dictionary = menu.GAME_BUTTON_COLORS
 	if colors.size() != 4:
 		_fail("main_menu: GAME_BUTTON_COLORS должен содержать 4 цвета, найдено %d" % colors.size())
