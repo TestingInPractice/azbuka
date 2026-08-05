@@ -38,18 +38,6 @@ grow_vertical = 2
 alignment = 1
 theme_override_constants/separation = 24
 
-[node name="TopBar" type="HBoxContainer" parent="MainLayout"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CollectWordBackButton" type="Button" parent="MainLayout/TopBar"]
-unique_name_in_owner = true
-layout_mode = 2
-custom_minimum_size = Vector2(0, 96)
-theme_override_font_sizes/font_size = 40
-text = "← Назад"
-accessibility_name = "Назад"
-
 [node name="HeaderLabel" type="Label" parent="MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -107,3 +95,14 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 44
 text = "Собери слово из букв"
 horizontal_alignment = 1
+
+[node name="CollectWordBackButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 190.0
+offset_bottom = 100.0
+text = "← Назад"
+theme_override_font_sizes/font_size = 28
+accessibility_name = "Назад"
