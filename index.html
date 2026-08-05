@@ -93,7 +93,7 @@ body {
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 <link rel="manifest" href="index.manifest.json">
-
+<script>(function(){var _realAC=window.AudioContext||window.webkitAudioContext;if(!_realAC){return}window.__godotAudioCtx=null;window.AudioContext=function(){var ctx=new _realAC(arguments[0]);window.__godotAudioCtx=ctx;return ctx};window.AudioContext.prototype=_realAC.prototype;if(window.webkitAudioContext){window.webkitAudioContext=window.AudioContext}function _resume(){if(window.__godotAudioCtx&&window.__godotAudioCtx.state!=='running'){try{window.__godotAudioCtx.resume()}catch(e){}}}document.addEventListener('pointerdown',_resume,true);document.addEventListener('click',_resume,true);document.addEventListener('touchstart',_resume,true);document.addEventListener('keydown',_resume,true)})();</script>
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -112,7 +112,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":39579172,"index.wasm":37700666},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":38651996,"index.wasm":37700666},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
