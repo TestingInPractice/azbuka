@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://ui/donate/donate_overlay.gd" id="1_donate"]
 [ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://assets/images/QR_sbp.jpg" id="3_qr"]
 
 [node name="DonateOverlay" type="Control"]
 layout_mode = 3
@@ -69,14 +70,6 @@ theme_override_font_sizes/font_size = 44
 text = "ЮMoney"
 accessibility_name = "ЮMoney"
 
-[node name="SoonLabel" type="Label" parent="DonateCard/CardLayout"]
-unique_name_in_owner = true
-layout_mode = 2
-visible = false
-theme_override_font_sizes/font_size = 36
-text = "Скоро"
-horizontal_alignment = 1
-
 [node name="CloseButton" type="Button" parent="DonateCard/CardLayout"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -86,7 +79,78 @@ theme_override_font_sizes/font_size = 40
 text = "Закрыть"
 accessibility_name = "Закрыть"
 
-[node name="SoonTimer" type="Timer" parent="."]
+[node name="SbpPanel" type="PanelContainer" parent="."]
 unique_name_in_owner = true
-wait_time = 3.0
-one_shot = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -360.0
+offset_right = 360.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="SbpLayout" type="VBoxContainer" parent="SbpPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SbpTitleLabel" type="Label" parent="SbpPanel/SbpLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "Перевод по СБП"
+horizontal_alignment = 1
+
+[node name="QrImage" type="TextureRect" parent="SbpPanel/SbpLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_qr")
+expand_mode = 1
+stretch_mode = 5
+custom_minimum_size = Vector2(280, 280)
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="PhoneLabel" type="Label" parent="SbpPanel/SbpLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "+7 904 409-14-70"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="SbpPanel/SbpLayout"]
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="OpenBankButton" type="Button" parent="SbpPanel/SbpLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 72)
+theme_override_font_sizes/font_size = 32
+text = "Открыть Сбербанк"
+accessibility_name = "Открыть Сбербанк"
+
+[node name="CopyButton" type="Button" parent="SbpPanel/SbpLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 72)
+theme_override_font_sizes/font_size = 32
+text = "Копировать номер"
+accessibility_name = "Копировать номер"
+
+[node name="BackButton" type="Button" parent="SbpPanel/SbpLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 56)
+theme_override_font_sizes/font_size = 28
+text = "← Назад"
+accessibility_name = "Назад"
