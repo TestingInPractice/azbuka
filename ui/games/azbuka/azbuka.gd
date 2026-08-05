@@ -15,8 +15,9 @@ const LETTERS := [
 ]
 
 const DOTS_PER_LINE := 4
-const LINE_HEIGHT := 110.0
-const DOT_RADIUS := 33.0
+## Максимальный межстрочный шаг: на очень высоких экранах строки не разъезжаются.
+const LINE_HEIGHT_MAX := 240.0
+const DOT_RADIUS := 65.0
 const LINE_WIDTH := 6.0
 const VBOX_TOP := 60.0
 const RUN_SPEED := 420.0
@@ -55,8 +56,9 @@ func _ready() -> void:
 	_setup_snake()
 
 
-## Перестраивает змейку при изменении размера области, чтобы путь, кружки и
-## Киса оставались отцентрированы при расширении/сжатии окна.
+## Перестраивает змейку при изменении размера области: межстрочный шаг и радиус
+## кружков пересчитываются под новую ширину/высоту, поэтому змейка занимает всю
+## доступную область и остаётся вертикально отцентрирована при расширении/сжатии.
 func _on_snake_area_resized() -> void:
 	if not is_node_ready() or is_animating or _building:
 		return
@@ -79,26 +81,34 @@ func _setup_snake() -> void:
 
 func _build_path() -> void:
 	var area_size: Vector2 = _snake_area.size
-	var spacing: float = (area_size.x - 2.0 * maxf(60.0, area_size.x * 0.08)) / float(DOTS_PER_LINE - 1)
-	spacing *= 0.5
+	var spacing: float = (area_size.x - 2.0 * maxf(60.0, area_size.x * 0.06)) / float(DOTS_PER_LINE - 1)
 	var total_snake_width: float = spacing * float(DOTS_PER_LINE - 1)
 	var margin_x: float = (area_size.x - total_snake_width) / 2.0
-	_dot_r = clampf(spacing * 0.44, 28.0, DOT_RADIUS)
+	_dot_r = clampf(spacing * 0.38, 40.0, DOT_RADIUS)
 	_make_dot_styles()
 
 	var total_lines: int = int(ceil(LETTERS.size() / float(DOTS_PER_LINE)))
-	var snake_content_height: float = float(total_lines - 1) * LINE_HEIGHT + _dot_r * 2.0
-	var scroll_height: float = area_size.y - VBOX_TOP
-	var y_start: float = 20.0
-	if snake_content_height < scroll_height:
-		y_start = (scroll_height - snake_content_height) / 2.0 + _dot_r - 100.0
+	var available_height: float = area_size.y - VBOX_TOP
+	# Межстрочный шаг подбирается так, чтобы все 9 строк (33 буквы / 4 в строке)
+	# влезали в доступную высоту: не больше LINE_HEIGHT_MAX, не меньше _dot_r * 1.8.
+	var line_height: float = clampf(
+		(available_height - _dot_r * 2.0) / float(total_lines - 1),
+		_dot_r * 1.8,
+		LINE_HEIGHT_MAX
+	)
+	var snake_content_height: float = float(total_lines - 1) * line_height + _dot_r * 2.0
+	# y_start — центр первого кружка. Змейка центрируется по вертикали; слагаемое
+	# _dot_r держит верхний край первого ряда внутри области (не обрезается).
+	var y_start: float = (available_height - snake_content_height) / 2.0 + _dot_r
+	if snake_content_height >= available_height:
+		y_start = _dot_r
 
 	for i in LETTERS.size():
 		var line: int = i / DOTS_PER_LINE
 		var pos_in_line: int = i % DOTS_PER_LINE
 		var col: int = pos_in_line if line % 2 == 0 else (DOTS_PER_LINE - 1 - pos_in_line)
 		var x: float = margin_x + float(col) * spacing
-		var y: float = y_start + float(line) * LINE_HEIGHT
+		var y: float = y_start + float(line) * line_height
 		dot_positions.append(Vector2(x, y))
 
 	_snake_path.points = dot_positions
@@ -114,7 +124,7 @@ func _build_path() -> void:
 		btn.size = Vector2(_dot_r * 2.0, _dot_r * 2.0)
 		btn.position = dot_positions[i] - Vector2(_dot_r, _dot_r)
 		btn.pivot_offset = Vector2(_dot_r, _dot_r)
-		btn.add_theme_font_size_override("font_size", maxi(12, int(_dot_r * 0.77)))
+		btn.add_theme_font_size_override("font_size", maxi(16, int(_dot_r * 0.85)))
 		btn.add_theme_constant_override("separation", 0)
 		btn.mouse_entered.connect(_on_dot_mouse_entered.bind(i))
 		btn.mouse_exited.connect(_on_dot_mouse_exited.bind(i))

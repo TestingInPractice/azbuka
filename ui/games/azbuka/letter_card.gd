@@ -496,7 +496,7 @@ func _auto_record_correct() -> void:
 			return
 		var saved: bool = _save_auto_recording()
 		GameLogger.info("letter_card", "auto_record_saved", {"letter": letter, "saved": saved})
-		_hint_label.text = "Молодец! Нажми →"
+		_hint_label.text = "Молодец! Нажми ›"
 		_show_feedback_anim()
 		_play_prompt(PROMPT_FORWARD)
 	else:

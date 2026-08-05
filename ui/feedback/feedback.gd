@@ -7,8 +7,7 @@ class_name FeedbackScreen
 ## сцену, указанную в return_scene (по умолчанию — главное меню).
 
 ## Ссылка на форму обратной связи.
-## TODO: заменить на реальную ссылку формы Google Sheets.
-const FEEDBACK_FORM_URL := "https://forms.gle/placeholder"
+const FEEDBACK_FORM_URL := "https://docs.google.com/forms/d/e/1FAIpQLSckA3GNTdVdXMvcUetG8lSPBrsAFb_6fhnJSgOeGCzOhS0TWg/viewform"
 
 ## Сцена, в которую возвращаться при закрытии (устанавливается перед переходом).
 static var return_scene: String = "res://ui/main_menu/main_menu.tscn"

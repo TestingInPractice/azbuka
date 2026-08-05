@@ -6,6 +6,6 @@ offset_left = 20.0
 offset_top = 40.0
 offset_right = 190.0
 offset_bottom = 100.0
-text = "← Назад"
+text = "‹ Назад"
 theme_override_font_sizes/font_size = 28
 accessibility_name = "Назад"

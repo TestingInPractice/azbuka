@@ -171,6 +171,25 @@ func _apply_theme(_mode: int = 0) -> void:
 	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
 	var button_bg := colors["button_bg"] as Color
 	var button_text := colors["button_text"] as Color
+	# Видимые hover/focus-стили чекбоксов: белое выделение на белой
+	# карточке в светлой теме не читается, поэтому добавляем подложку
+	# и рамку акцентного цвета.
+	for key: String in _checkboxes:
+		var checkbox := _checkboxes[key] as CheckBox
+		var hover_box := StyleBoxFlat.new()
+		hover_box.bg_color = button_bg
+		hover_box.bg_color.a = 0.15
+		hover_box.set_border_width_all(3)
+		hover_box.set_border_color(button_bg)
+		hover_box.set_corner_radius_all(12)
+		checkbox.add_theme_stylebox_override("hover", hover_box)
+		var focus_box := StyleBoxFlat.new()
+		focus_box.bg_color = button_bg
+		focus_box.bg_color.a = 0.1
+		focus_box.set_border_width_all(3)
+		focus_box.set_border_color(button_bg)
+		focus_box.set_corner_radius_all(12)
+		checkbox.add_theme_stylebox_override("focus", focus_box)
 	ThemeManager.style_button(_reset_button, button_bg, button_text)
 	# Компактная кнопка «Сбросить» внутри строки «Азбука».
 	for sb_name: String in ["normal", "hover", "pressed"]:
@@ -220,6 +239,16 @@ func _style_card(panel: PanelContainer) -> void:
 	box.content_margin_top = 10
 	box.content_margin_bottom = 10
 	panel.add_theme_stylebox_override("panel", box)
+	# Фокусный стиль: рамка акцентного цвета, чтобы выделение строки
+	# читалось даже на белой карточке в светлой теме.
+	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
+	var accent := colors["button_bg"] as Color
+	var box_focus := StyleBoxFlat.new()
+	box_focus.bg_color = ThemeManager.get_card_bg()
+	box_focus.set_border_width_all(4)
+	box_focus.set_border_color(accent)
+	box_focus.set_corner_radius_all(24)
+	panel.add_theme_stylebox_override("focus", box_focus)
 
 
 ## Пересоздаёт крупные индикаторы чекбоксов под текущую тему.
@@ -252,9 +281,9 @@ func _make_checkbox_icon(checked: bool) -> ImageTexture:
 		_draw_thick_line(img, Vector2i(27, 44), Vector2i(47, 21), mark, 8)
 	else:
 		var border := text_color
-		border.a = 0.55
+		border.a = 0.85
 		var fill := text_color
-		fill.a = 0.06
+		fill.a = 0.25
 		for y in range(icon_size):
 			for x in range(icon_size):
 				if _inside_rounded(x, y, icon_size, icon_size, radius) and not _inside_rounded(x, y, icon_size, icon_size, radius - 5):
