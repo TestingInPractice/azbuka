@@ -1,0 +1,15 @@
+[     582ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://localhost:8090/index.js:451
+[     813ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://localhost:8090/index.js:451
+[    1093ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://localhost:8090/index.js:451
+[   29489ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"azbuka","title":"Азбука"} @ http://localhost:8090/index.js:451
+[   48453ms] [LOG] [INFO] AzbukaGame: letter_pressed  data={"letter":"А"} @ http://localhost:8090/index.js:451
+[   48453ms] [LOG] [INFO] nav: to_letter_card  data={"from":"azbuka","letter":"А"} @ http://localhost:8090/index.js:451
+[   48585ms] [LOG] [INFO] letter_card: ready  data={"index":0,"letter":"А"} @ http://localhost:8090/index.js:451
+[   75000ms] [ERROR] WARNING: /root/LetterCard/@AudioStreamPlayer@5 is trying to play a sample from a stream that cannot be sampled. @ http://localhost:8090/index.js:466
+[   75001ms] [ERROR]    at: play_basic (scene/audio/audio_stream_player_internal.cpp:168) @ http://localhost:8090/index.js:466
+[   75006ms] [LOG] [INFO] letter_card: mic_prepared  data={"letter":"А"} @ http://localhost:8090/index.js:451
+[   75008ms] [LOG] [INFO] letter_card: record_start  data={"letter":"А"} @ http://localhost:8090/index.js:451
+[  107138ms] [LOG] [INFO] letter_card: record_stop  data={"letter":"А"} @ http://localhost:8090/index.js:451
+[  115555ms] [LOG] [INFO] letter_card: play_start  data={"bytes":3046400,"letter":"А"} @ http://localhost:8090/index.js:451
+[  137570ms] [LOG] [INFO] letter_card: word_sound  data={"letter":"А"} @ http://localhost:8090/index.js:451
+[  187090ms] [LOG] [INFO] letter_card: letter_sound  data={"letter":"А"} @ http://localhost:8090/index.js:451

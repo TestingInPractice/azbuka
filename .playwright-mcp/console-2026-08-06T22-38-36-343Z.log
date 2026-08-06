@@ -1,0 +1,20 @@
+[     762ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://localhost:8766/:0
+[    1051ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://localhost:8766/index.js:451
+[    1459ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://localhost:8766/index.js:451
+[    2440ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://localhost:8766/index.js:451
+[   53722ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"find_letter","title":"Найди букву"} @ http://localhost:8766/index.js:451
+[  180049ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://localhost:8766/:0
+[  180626ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://localhost:8766/index.js:451
+[  180968ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://localhost:8766/index.js:451
+[  181344ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://localhost:8766/index.js:451
+[  181929ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95
+[  181971ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95
+[  182171ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95
+[  182371ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95
+[  182571ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95
+[  182771ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95
+[  182971ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95
+[  183171ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95
+[  183371ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95
+[  183571ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95
+[  183771ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:8766/:95

@@ -1,0 +1,94 @@
+[    1413ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://127.0.0.1:8080/index.js:451
+[    1969ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://127.0.0.1:8080/index.js:451
+[    2588ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://127.0.0.1:8080/index.js:451
+[   56802ms] [ERROR] ERROR: Error opening file 'res://assets/images/Puppy.png'. @ http://127.0.0.1:8080/index.js:466
+[   56803ms] [ERROR]    at: load_image (core/io/image_loader.cpp:89) @ http://127.0.0.1:8080/index.js:466
+[  213126ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://127.0.0.1:8080/index.js:451
+[  213720ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://127.0.0.1:8080/index.js:451
+[  214255ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://127.0.0.1:8080/index.js:451
+[  214380ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  214381ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:52) @ http://127.0.0.1:8080/index.js:466
+[  214381ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  214382ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:54) @ http://127.0.0.1:8080/index.js:466
+[  214382ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "texture_diag()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  214382ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:55) @ http://127.0.0.1:8080/index.js:466
+[  214382ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  214383ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:122) @ http://127.0.0.1:8080/index.js:466
+[  214384ms] [ERROR] ERROR: Failed to load script "res://scripts/letter_detail.gd" with error "Parse error". @ http://127.0.0.1:8080/index.js:466
+[  214384ms] [ERROR]    at: load (modules/gdscript/gdscript.cpp:2907) @ http://127.0.0.1:8080/index.js:466
+[  214861ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  214861ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:43) @ http://127.0.0.1:8080/index.js:466
+[  214862ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  214863ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:45) @ http://127.0.0.1:8080/index.js:466
+[  214863ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  214864ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:52) @ http://127.0.0.1:8080/index.js:466
+[  214864ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "error()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  214864ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:54) @ http://127.0.0.1:8080/index.js:466
+[  214864ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "debug()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  214865ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:110) @ http://127.0.0.1:8080/index.js:466
+[  214866ms] [ERROR] ERROR: Failed to load script "res://scripts/global.gd" with error "Parse error". @ http://127.0.0.1:8080/index.js:466
+[  214866ms] [ERROR]    at: load (modules/gdscript/gdscript.cpp:2907) @ http://127.0.0.1:8080/index.js:466
+[  214867ms] [ERROR] ERROR: Failed to instantiate an autoload, script 'res://scripts/global.gd' does not inherit from 'Node'. @ http://127.0.0.1:8080/index.js:466
+[  214868ms] [ERROR]    at: start (main/main.cpp:4440) @ http://127.0.0.1:8080/index.js:466
+[  215160ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ :2
+[  222492ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://127.0.0.1:8080/index.js:451
+[  222826ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://127.0.0.1:8080/index.js:451
+[  222949ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://127.0.0.1:8080/index.js:451
+[  223024ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  223025ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:52) @ http://127.0.0.1:8080/index.js:466
+[  223025ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  223025ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:54) @ http://127.0.0.1:8080/index.js:466
+[  223026ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "texture_diag()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  223026ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:55) @ http://127.0.0.1:8080/index.js:466
+[  223026ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  223027ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:122) @ http://127.0.0.1:8080/index.js:466
+[  223028ms] [ERROR] ERROR: Failed to load script "res://scripts/letter_detail.gd" with error "Parse error". @ http://127.0.0.1:8080/index.js:466
+[  223030ms] [ERROR]    at: load (modules/gdscript/gdscript.cpp:2907) @ http://127.0.0.1:8080/index.js:466
+[  223430ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  223431ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:43) @ http://127.0.0.1:8080/index.js:466
+[  223431ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  223431ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:45) @ http://127.0.0.1:8080/index.js:466
+[  223432ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  223432ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:52) @ http://127.0.0.1:8080/index.js:466
+[  223432ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "error()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  223432ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:54) @ http://127.0.0.1:8080/index.js:466
+[  223433ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "debug()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  223433ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:110) @ http://127.0.0.1:8080/index.js:466
+[  223433ms] [ERROR] ERROR: Failed to load script "res://scripts/global.gd" with error "Parse error". @ http://127.0.0.1:8080/index.js:466
+[  223434ms] [ERROR]    at: load (modules/gdscript/gdscript.cpp:2907) @ http://127.0.0.1:8080/index.js:466
+[  223434ms] [ERROR] ERROR: Failed to instantiate an autoload, script 'res://scripts/global.gd' does not inherit from 'Node'. @ http://127.0.0.1:8080/index.js:466
+[  223434ms] [ERROR]    at: start (main/main.cpp:4440) @ http://127.0.0.1:8080/index.js:466
+[  223644ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ :2
+[  552323ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://127.0.0.1:8080/index.js:451
+[  552582ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://127.0.0.1:8080/index.js:451
+[  552703ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://127.0.0.1:8080/index.js:451
+[  552772ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  552772ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:52) @ http://127.0.0.1:8080/index.js:466
+[  552772ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  552773ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:54) @ http://127.0.0.1:8080/index.js:466
+[  552773ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "texture_diag()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  552773ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:55) @ http://127.0.0.1:8080/index.js:466
+[  552774ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  552774ms] [ERROR]    at: GDScript::reload (res://scripts/letter_detail.gd:122) @ http://127.0.0.1:8080/index.js:466
+[  552775ms] [ERROR] ERROR: Failed to load script "res://scripts/letter_detail.gd" with error "Parse error". @ http://127.0.0.1:8080/index.js:466
+[  552775ms] [ERROR]    at: load (modules/gdscript/gdscript.cpp:2907) @ http://127.0.0.1:8080/index.js:466
+[  553164ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  553164ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:43) @ http://127.0.0.1:8080/index.js:466
+[  553164ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  553165ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:45) @ http://127.0.0.1:8080/index.js:466
+[  553165ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "info()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  553165ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:52) @ http://127.0.0.1:8080/index.js:466
+[  553165ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "error()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  553166ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:54) @ http://127.0.0.1:8080/index.js:466
+[  553166ms] [ERROR] SCRIPT ERROR: Parse Error: Static function "debug()" not found in base "GDScriptNativeClass". @ http://127.0.0.1:8080/index.js:466
+[  553166ms] [ERROR]    at: GDScript::reload (res://scripts/global.gd:110) @ http://127.0.0.1:8080/index.js:466
+[  553167ms] [ERROR] ERROR: Failed to load script "res://scripts/global.gd" with error "Parse error". @ http://127.0.0.1:8080/index.js:466
+[  553167ms] [ERROR]    at: load (modules/gdscript/gdscript.cpp:2907) @ http://127.0.0.1:8080/index.js:466
+[  553167ms] [ERROR] ERROR: Failed to instantiate an autoload, script 'res://scripts/global.gd' does not inherit from 'Node'. @ http://127.0.0.1:8080/index.js:466
+[  553167ms] [ERROR]    at: start (main/main.cpp:4440) @ http://127.0.0.1:8080/index.js:466
+[  553373ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ :2
+[  599459ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://127.0.0.1:8080/index.js:451
+[  599867ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://127.0.0.1:8080/index.js:451
+[  600296ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://127.0.0.1:8080/index.js:451
+[  601040ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ :2
+[  629223ms] [LOG] [2026-08-03 13:19:08][DEBUG][global] switch_scene {"to":"RoadmapScreen"} @ http://127.0.0.1:8080/index.js:451

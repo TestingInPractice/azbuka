@@ -1,0 +1,6 @@
+[     302ms] Unexpected end of input
+[     572ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ https://testinginpractice.github.io/azbuka/index.html?swreset=1:0
+[   37564ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ https://testinginpractice.github.io/azbuka/index.js:451
+[   37770ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ https://testinginpractice.github.io/azbuka/index.js:451
+[   38014ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ https://testinginpractice.github.io/azbuka/index.js:451
+[   91037ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"find_letter","title":"Найди букву"} @ https://testinginpractice.github.io/azbuka/index.js:451

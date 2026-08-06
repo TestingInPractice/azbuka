@@ -1,0 +1,21 @@
+[    1012ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://localhost:8090/index.js:451
+[    1331ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://localhost:8090/index.js:451
+[    1547ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://localhost:8090/index.js:451
+[   41184ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"azbuka","title":"Азбука"} @ http://localhost:8090/index.js:451
+[   53056ms] [LOG] [INFO] AzbukaGame: letter_pressed  data={"letter":"А"} @ http://localhost:8090/index.js:451
+[   53057ms] [LOG] [INFO] nav: to_letter_card  data={"from":"azbuka","letter":"А"} @ http://localhost:8090/index.js:451
+[   53190ms] [LOG] [INFO] letter_card: ready  data={"index":0,"letter":"А"} @ http://localhost:8090/index.js:451
+[   56819ms] [LOG] [INFO] letter_card: word_correct  data={"index":0,"letter":"А"} @ http://localhost:8090/index.js:451
+[   56821ms] [ERROR] WARNING: /root/LetterCard/@AudioStreamPlayer@5 is trying to play a sample from a stream that cannot be sampled. @ http://localhost:8090/index.js:466
+[   56821ms] [ERROR]    at: play_basic (scene/audio/audio_stream_player_internal.cpp:168) @ http://localhost:8090/index.js:466
+[   56824ms] [LOG] [INFO] letter_card: mic_prepared  data={"letter":"А"} @ http://localhost:8090/index.js:451
+[   69069ms] [LOG] [INFO] letter_card: auto_record_saved  data={"letter":"А","saved":true} @ http://localhost:8090/index.js:451
+[ 1026490ms] [LOG] [INFO] letter_card: play_start  data={"bytes":958464,"letter":"А"} @ http://localhost:8090/index.js:451
+[ 1026570ms] Cannot resume a closed AudioContext.
+[ 1026570ms] Cannot resume a closed AudioContext.
+[ 1040131ms] [LOG] [INFO] letter_card: play_start  data={"bytes":958464,"letter":"А"} @ http://localhost:8090/index.js:451
+[ 1040209ms] Cannot resume a closed AudioContext.
+[ 1040209ms] Cannot resume a closed AudioContext.
+[ 1102912ms] [LOG] [INFO] letter_card: word_sound  data={"letter":"А"} @ http://localhost:8090/index.js:451
+[ 1102952ms] Cannot resume a closed AudioContext.
+[ 1102952ms] Cannot resume a closed AudioContext.

@@ -1,0 +1,19 @@
+[    1421ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://localhost:8123/index.js:451
+[    1737ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://localhost:8123/index.js:451
+[    1860ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://localhost:8123/index.js:451
+[  269954ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"find_letter","title":"Найди букву"} @ http://localhost:8123/index.js:451
+[  299795ms] [LOG] [INFO] FindLetterGame: back_button_pressed  @ http://localhost:8123/index.js:451
+[  301605ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"find_letter","title":"Найди букву"} @ http://localhost:8123/index.js:451
+[  303452ms] [LOG] [INFO] FindLetterGame: back_button_pressed  @ http://localhost:8123/index.js:451
+[  305256ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"collect_word","title":"Собери слово"} @ http://localhost:8123/index.js:451
+[  305289ms] [LOG] [INFO] CollectWordGame: game_entered  data={"games_played":1} @ http://localhost:8123/index.js:451
+[  305325ms] [LOG] [INFO] CollectWordGame: word_shown  data={"letter":"М","letter_count":3,"word":"Мяч"} @ http://localhost:8123/index.js:451
+[  307121ms] [LOG] [INFO] CollectWordGame: back_button_pressed  data={"word":"Мяч"} @ http://localhost:8123/index.js:451
+[  308925ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"guess_picture","title":"Угадай картинку"} @ http://localhost:8123/index.js:451
+[  308975ms] [LOG] [INFO] GuessPictureGame: game_entered  data={"games_played":2} @ http://localhost:8123/index.js:451
+[  308977ms] [LOG] [INFO] GuessPictureGame: game_start  data={"total_rounds":10} @ http://localhost:8123/index.js:451
+[  309030ms] [LOG] [INFO] GuessPictureGame: round_start  data={"answers":["Жук","Яблоко","Юла","Заяц"],"correct_word":"Жук","letter":"Ж","round":1} @ http://localhost:8123/index.js:451
+[  310793ms] [LOG] [INFO] GuessPictureGame: back_button_pressed  @ http://localhost:8123/index.js:451
+[  312597ms] [LOG] [INFO] MainMenu: settings_button_pressed  @ http://localhost:8123/index.js:451
+[  341886ms] [LOG] [INFO] Settings: donate_button_pressed  @ http://localhost:8123/index.js:451
+[  343735ms] [LOG] [INFO] DonateOverlay: backdrop_pressed  @ http://localhost:8123/index.js:451

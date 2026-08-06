@@ -1,0 +1,42 @@
+====================================================
+ПРОВЕРКА ЗВУКА — команды для консоли Chrome (F12)
+Сайт: https://testinginpractice.github.io/azbuka/
+====================================================
+
+ШАГ 1. Проверка динамиков и AudioContext.
+Открой сайт, нажми F12, вкладка Console.
+Вставь одну строку ниже и нажми Enter:
+
+(() => { const c = window.__godotAudioCtx; if (!c) return 'НЕТ AudioContext — звук не инициализирован вообще'; const o = c.createOscillator(), g = c.createGain(); g.gain.value = 0.4; o.connect(g); g.connect(c.destination); o.frequency.value = 700; o.start(); setTimeout(() => o.stop(), 700); return 'state=' + c.state + ' — должен быть слышен писк 0.7с'; })()
+
+Результат Шага 1:
+- Писк слышен  -> динамики и контекст в порядке, проблема в игре
+- Писка нет, вернулось state=running -> глобальная проблема звука браузера/ОС
+- Вернулось state=suspended -> браузер заблокировал звук, unlock-скрипт не отработал
+
+----------------------------------------------------
+
+ШАГ 2. Перехват попыток Godot играть звук.
+Вставь эти две строки (Enter после каждой), ПОТОМ зайди в карточку
+буквы и нажми кнопку «Буква»:
+
+window.__aud = { tries: 0 };
+window.__origStart ||= AudioBufferSourceNode.prototype.start;
+AudioBufferSourceNode.prototype.start = function(...a) { window.__aud.tries++; console.log('[GODOT PLAY] buffer=' + (this.buffer ? this.buffer.duration.toFixed(2) + 's' : 'NULL!')); return window.__origStart.apply(this, a); };
+
+----------------------------------------------------
+
+ШАГ 3. Посмотреть результат.
+Вставь и нажми Enter:
+
+window.__aud
+
+Значение:
+- tries: 0 и нет строк [GODOT PLAY] -> Godot вообще не доходит до воспроизведения
+  (load() возвращает null, код молча выходит — это и есть баг)
+- tries: 1+ и строки [GODOT PLAY] есть -> Godot пытается играть, проблема ниже по цепочке
+
+====================================================
+Сообщи мне: вывод Шага 1 (state=... и слышен ли писк)
+и вывод Шага 3 (window.__aud).
+====================================================

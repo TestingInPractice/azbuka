@@ -1,0 +1,10 @@
+[     478ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ http://localhost:8772/:0
+[    1754ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://localhost:8772/index.js:451
+[    2488ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://localhost:8772/index.js:451
+[    3092ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://localhost:8772/index.js:451
+[    3147ms] [ERROR] SCRIPT ERROR: Parse Error: Cannot find member "PLAYBACK_TYPE_STREAM" in base "AudioStreamPlayer". @ http://localhost:8772/index.js:466
+[    3148ms] [ERROR]    at: GDScript::reload (res://audio_manager.gd:11) @ http://localhost:8772/index.js:466
+[    3149ms] [ERROR] ERROR: Failed to load script "res://audio_manager.gd" with error "Parse error". @ http://localhost:8772/index.js:466
+[    3149ms] [ERROR]    at: load (modules/gdscript/gdscript.cpp:2907) @ http://localhost:8772/index.js:466
+[    3150ms] [ERROR] ERROR: Failed to instantiate an autoload, script 'res://audio_manager.gd' does not inherit from 'Node'. @ http://localhost:8772/index.js:466
+[    3150ms] [ERROR]    at: start (main/main.cpp:4440) @ http://localhost:8772/index.js:466

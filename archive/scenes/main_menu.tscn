@@ -1,0 +1,123 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1"]
+
+[node name="MainMenu" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="BackgroundRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(1, 0.96, 0.9, 1)
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="SpacerTop" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "АЗБУКА"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 80
+modulate = Color(0.2, 0.2, 0.4, 1)
+
+[node name="SubtitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Учим русский алфавит"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+modulate = Color(0.5, 0.5, 0.6, 1)
+
+[node name="SpacerMid" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="ButtonGrid" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+custom_minimum_size = Vector2(0, 300)
+
+[node name="AlphabetButton" type="Button" parent="VBoxContainer/ButtonGrid"]
+layout_mode = 2
+text = "📖 Азбука"
+theme_override_font_sizes/font_size = 36
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_minimum_size = Vector2(200, 100)
+
+[node name="FindLetterButton" type="Button" parent="VBoxContainer/ButtonGrid"]
+layout_mode = 2
+text = "🔍 Найди букву"
+theme_override_font_sizes/font_size = 36
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_minimum_size = Vector2(200, 100)
+
+[node name="CollectWordButton" type="Button" parent="VBoxContainer/ButtonGrid"]
+layout_mode = 2
+text = "🧩 Собери слово"
+theme_override_font_sizes/font_size = 36
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_minimum_size = Vector2(200, 100)
+
+[node name="GuessPictureButton" type="Button" parent="VBoxContainer/ButtonGrid"]
+layout_mode = 2
+text = "🖼️ Угадай картинку"
+theme_override_font_sizes/font_size = 36
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_minimum_size = Vector2(200, 100)
+
+[node name="SpacerBottom" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="ProgressContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(0, 50)
+
+[node name="ProgressLabel" type="Label" parent="VBoxContainer/ProgressContainer"]
+layout_mode = 2
+text = "Прогресс: 0 / 33"
+horizontal_alignment = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/ProgressContainer"]
+layout_mode = 2
+show_percentage = false
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(200, 30)
+value = 0.0
+
+[node name="SpacerBottom2" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="SettingsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 980.0
+offset_top = 20.0
+offset_right = 1060.0
+offset_bottom = 80.0
+text = "⚙️"
+theme_override_font_sizes/font_size = 40

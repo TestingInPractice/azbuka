@@ -1,0 +1,207 @@
+# PLAN: Monetization — PurchaseManager + Backend
+
+> Ветка: `feature/monetization`
+> Статус: черновик
+> Зависит от: Godot 4.6, YooKassa
+
+---
+
+## Цель
+
+Добавить в приложение "Азбука" систему лицензирования: оплата через YooKassa → ключ на email → активация по UUID → проверка статуса при каждом запуске → блокировка ключа при >= 10 устройствах.
+
+---
+
+## Что даёт премиум-доступ
+
+- Мини-игры: "Найди букву", "Собери слово", "Угадай картинку"
+
+## Всегда бесплатно
+
+- Все 33 буквы, алфавит, карточка буквы, карта-змейка, настройки, тёмная тема, запись голоса, прогресс
+
+---
+
+## API (Backend)
+
+### Стек
+
+Любой минимальный: Fastify/Express (Node.js) или FastAPI (Python), SQLite/PostgreSQL.
+
+### Эндпоинты
+
+| Метод | Путь | Описание |
+|-------|------|----------|
+| `POST` | `/api/licenses` | Создать ключ по email. Вызывается вебхуком YooKassa. |
+| `GET` | `/api/licenses/{key}?device_id=xxx` | Проверить статус + авторегистрация device. |
+
+### GET /api/licenses/{key}?device_id=xxx — логика
+
+```
+key не найден →
+  { status: "invalid" }
+
+key.status == "blocked" →
+  { status: "blocked" }
+
+device_id уже привязан →
+  { status: "premium" }
+
+device_id новый:
+  devices < 10 →
+    добавить device, { status: "premium" }
+  devices >= 10 →
+    key.status = "blocked", { status: "blocked" }
+```
+
+### Модели БД
+
+```sql
+CREATE TABLE licenses (
+  key         TEXT PRIMARY KEY,   -- UUID v4
+  email       TEXT NOT NULL,
+  status      TEXT DEFAULT 'active',  -- active | blocked
+  created_at  TEXT DEFAULT (datetime('now'))
+);
+
+CREATE TABLE license_devices (
+  id           INTEGER PRIMARY KEY AUTOINCREMENT,
+  license_key  TEXT NOT NULL REFERENCES licenses(key),
+  device_id    TEXT NOT NULL,
+  first_seen   TEXT DEFAULT (datetime('now')),
+  UNIQUE(license_key, device_id)
+);
+```
+
+### YooKassa webhook
+
+```
+POST /api/yookassa-webhook
+  → проверить HMAC-SHA1 подпись
+  → если payment.status == "succeeded"
+  → generate UUID v4
+  → INSERT INTO licenses (key, email)
+  → отправить email с ключом
+```
+
+---
+
+## Изменения в Godot
+
+### 1. Новый файл: `scripts/purchase_manager.gd` (Autoload)
+
+```gdscript
+extends Node
+
+var status: String = "free"          # free | premium | blocked
+var license_key: String = ""
+var device_id: String = ""
+
+signal status_changed(new_status: String)
+
+func _ready():
+    _load_cache()
+    _ensure_device_id()
+    check_status()
+
+func is_feature_unlocked(feature: String) -> bool:
+    return status == "premium"
+
+func check_status():
+    """GET /api/licenses/{key}?device_id=xxx — при каждом запуске"""
+
+func enter_key(key: String):
+    """Сохранить ключ и проверить статус"""
+
+func _ensure_device_id():
+    """Сгенерировать device UUID, сохранить в user://device.json"""
+
+func _load_cache():
+    """Прочитать user://entitlement.json"""
+
+func _save_cache():
+    """Записать user://entitlement.json"""
+```
+
+### 2. Изменить `project.godot`
+
+Добавить в секцию autoload:
+```
+PurchaseManager="*res://scripts/purchase_manager.gd"
+```
+
+### 3. Новая сцена: `scenes/premium_overlay.tscn`
+
+Upsell-экран при попытке открыть премиум-функцию:
+- Текст: "Это премиум-режим"
+- Кнопка "Ввести ключ" → LineEdit + "Активировать"
+- Кнопка "Купить" → открыть YooKassa (WebView / redirect)
+- Кнопка "Назад"
+
+### 4. Gating мини-игр
+
+Файлы: `scripts/game_find_letter.gd`, `scripts/game_collect_word.gd`, `scripts/game_guess_picture.gd`
+
+В `_ready()`:
+```gdscript
+if not PurchaseManager.is_feature_unlocked("mini_games"):
+    show_premium_overlay()
+    return
+```
+
+### 5. Изменить `scenes/settings_screen.tscn` + `scripts/settings_screen.gd`
+
+Секция "Лицензия":
+- `status == "free"`: кнопка "Ввести ключ" → диалог ввода UUID
+- `status == "premium"`: "Премиум активен ✅"
+- `status == "blocked"`: "Ключ заблокирован ❌"
+
+### 6. Изменить `scripts/main_menu.gd` / `scenes/main_menu.tscn`
+
+🔒 на кнопках мини-игр, если не premium.
+
+---
+
+## Файлы для создания
+
+| # | Файл | Описание |
+|---|------|----------|
+| 1 | `scripts/purchase_manager.gd` | Autoload — управление лицензией |
+| 2 | `scenes/premium_overlay.tscn` | Upsell screen для премиум-функций |
+| 3 | (вне репозитория) Backend-проект | API + БД + YooKassa интеграция |
+
+## Файлы для изменения
+
+| # | Файл | Что |
+|---|------|-----|
+| 1 | `project.godot` | Autoload PurchaseManager |
+| 2 | `scripts/game_find_letter.gd` | Gating |
+| 3 | `scripts/game_collect_word.gd` | Gating |
+| 4 | `scripts/game_guess_picture.gd` | Gating |
+| 5 | `scripts/settings_screen.gd` | Ввод ключа, статус |
+| 6 | `scenes/settings_screen.tscn` | UI лицензии |
+| 7 | `scripts/main_menu.gd` | 🔒 на кнопках |
+| 8 | `scenes/main_menu.tscn` | 🔒 на кнопках |
+
+---
+
+## План реализации
+
+### Wave 1: Backend
+1. Инициализировать проект, БД, модели
+2. `POST /api/licenses` — создание ключа
+3. `GET /api/licenses/{key}?device_id=xxx` — проверка + device limit
+4. Webhook YooKassa `/api/yookassa-webhook`
+5. Отправка email с ключом
+
+### Wave 2: Godot Client
+6. `purchase_manager.gd` — кеш, device_id, check_status
+7. Autoload в project.godot
+8. `premium_overlay.tscn` — upsell экран
+9. Gating 3 мини-игр
+10. Settings — ввод ключа, отображение статуса
+11. Main menu — 🔒 на премиум-кнопках
+
+### Wave 3: QA
+12. E2E: оплата → ключ → активация → запуск → блокировка при 10+ устройствах
+13. Offline-кеш: поведение без интернета

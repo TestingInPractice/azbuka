@@ -1,0 +1,5 @@
+[    3612ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ https://testinginpractice.github.io/azbuka/index.js:451
+[    4101ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ https://testinginpractice.github.io/azbuka/index.js:451
+[    4591ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ https://testinginpractice.github.io/azbuka/index.js:451
+[   27562ms] [ERROR] ERROR: Error opening file 'res://assets/images/Nose.png'. @ https://testinginpractice.github.io/azbuka/index.js:466
+[   27563ms] [ERROR]    at: load_image (core/io/image_loader.cpp:89) @ https://testinginpractice.github.io/azbuka/index.js:466

@@ -1,0 +1,5 @@
+[     719ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://127.0.0.1:8080/index.js:451
+[     991ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://127.0.0.1:8080/index.js:451
+[    1154ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://127.0.0.1:8080/index.js:451
+[  421537ms] [ERROR] ERROR: Error opening file 'res://assets/images/Cake.png'. @ http://127.0.0.1:8080/index.js:466
+[  421541ms] [ERROR]    at: load_image (core/io/image_loader.cpp:89) @ http://127.0.0.1:8080/index.js:466

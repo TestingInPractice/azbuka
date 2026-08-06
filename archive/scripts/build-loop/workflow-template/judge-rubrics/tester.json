@@ -1,0 +1,75 @@
+{
+  "name": "tester",
+  "label": "Судья-тестировщик",
+  "description": "Оценка качества тестового покрытия (фаза write-tests). Критерии основаны на IEEE 29148:2018.",
+  "rubric": [
+    {
+      "id": "ac_coverage",
+      "label": "Все acceptance criteria (F-XXX) покрыты тест-кейсами (Traceable)",
+      "weight": 5,
+      "scale": 5,
+      "pass": 4,
+      "critical": true,
+      "evidence_required": true,
+      "ieee_29148": "Traceable"
+    },
+    {
+      "id": "verifiable_tests",
+      "label": "Каждый тест-кейс проверяем (Verifiable)",
+      "weight": 4,
+      "scale": 5,
+      "pass": 4,
+      "critical": true,
+      "evidence_required": true,
+      "ieee_29148": "Verifiable"
+    },
+    {
+      "id": "negative_scenarios",
+      "label": "Есть тесты на негативные сценарии",
+      "weight": 3,
+      "scale": 5,
+      "pass": 3,
+      "critical": false,
+      "evidence_required": true
+    },
+    {
+      "id": "boundary_cases",
+      "label": "Есть тесты на граничные случаи",
+      "weight": 3,
+      "scale": 5,
+      "pass": 3,
+      "critical": false,
+      "evidence_required": true
+    },
+    {
+      "id": "complete_coverage",
+      "label": "Покрытие тестами полное для текущего этапа (Complete)",
+      "weight": 4,
+      "scale": 5,
+      "pass": 4,
+      "critical": true,
+      "evidence_required": true,
+      "ieee_29148": "Complete"
+    },
+    {
+      "id": "integration_tests",
+      "label": "Интеграционные тесты проходят",
+      "weight": 4,
+      "scale": 5,
+      "pass": 4,
+      "critical": true,
+      "evidence_required": true
+    },
+    {
+      "id": "regression",
+      "label": "Регрессионные тесты не сломаны",
+      "weight": 4,
+      "scale": 5,
+      "pass": 4,
+      "critical": true,
+      "evidence_required": true
+    }
+  ],
+  "pass_threshold": 0.8,
+  "allow_passed_with_concerns": true
+}

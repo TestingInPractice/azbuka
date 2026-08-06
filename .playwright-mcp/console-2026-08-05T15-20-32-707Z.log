@@ -1,0 +1,23 @@
+[    1760ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://localhost:8123/index.js:451
+[    2158ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://localhost:8123/index.js:451
+[    2550ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://localhost:8123/index.js:451
+[   45747ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"azbuka","title":"Азбука"} @ http://localhost:8123/index.js:451
+[  220050ms] [LOG] [INFO] AzbukaGame: letter_pressed  data={"letter":"А"} @ http://localhost:8123/index.js:451
+[  220050ms] [LOG] [INFO] nav: to_letter_card  data={"from":"azbuka","letter":"А"} @ http://localhost:8123/index.js:451
+[  220305ms] [LOG] [INFO] letter_card: ready  data={"index":0,"letter":"А"} @ http://localhost:8123/index.js:451
+[  280308ms] [LOG] [INFO] nav: to_azbuka  data={"from":"letter_card","letter":"А"} @ http://localhost:8123/index.js:451
+[  281932ms] [LOG] [INFO] nav: to_main_menu  data={"from":"azbuka"} @ http://localhost:8123/index.js:451
+[  283438ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"find_letter","title":"Найди букву"} @ http://localhost:8123/index.js:451
+[  301380ms] [LOG] [INFO] FindLetterGame: back_button_pressed  @ http://localhost:8123/index.js:451
+[  302894ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"collect_word","title":"Собери слово"} @ http://localhost:8123/index.js:451
+[  302937ms] [LOG] [INFO] CollectWordGame: game_entered  data={"games_played":5} @ http://localhost:8123/index.js:451
+[  302986ms] [LOG] [INFO] CollectWordGame: word_shown  data={"letter":"Г","letter_count":4,"word":"Гусь"} @ http://localhost:8123/index.js:451
+[  320800ms] [LOG] [INFO] CollectWordGame: back_button_pressed  data={"word":"Гусь"} @ http://localhost:8123/index.js:451
+[  322311ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"guess_picture","title":"Угадай картинку"} @ http://localhost:8123/index.js:451
+[  322363ms] [LOG] [INFO] GuessPictureGame: game_entered  data={"games_played":6} @ http://localhost:8123/index.js:451
+[  322365ms] [LOG] [INFO] GuessPictureGame: game_start  data={"total_rounds":10} @ http://localhost:8123/index.js:451
+[  322417ms] [LOG] [INFO] GuessPictureGame: round_start  data={"answers":["Мыло","Утка","Шапка","Кот"],"correct_word":"Шапка","letter":"Ш","round":1} @ http://localhost:8123/index.js:451
+[  335908ms] [LOG] [INFO] GuessPictureGame: back_button_pressed  @ http://localhost:8123/index.js:451
+[  337416ms] [LOG] [INFO] MainMenu: settings_button_pressed  @ http://localhost:8123/index.js:451
+[  350930ms] [LOG] [INFO] Settings: donate_button_pressed  @ http://localhost:8123/index.js:451
+[  371335ms] [LOG] [INFO] DonateOverlay: backdrop_pressed  @ http://localhost:8123/index.js:451

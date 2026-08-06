@@ -1,0 +1,4 @@
+[    4519ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ https://testinginpractice.github.io/azbuka/:0
+[    4749ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ https://testinginpractice.github.io/azbuka/index.js:451
+[    5285ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ https://testinginpractice.github.io/azbuka/index.js:451
+[    5536ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ https://testinginpractice.github.io/azbuka/index.js:451
