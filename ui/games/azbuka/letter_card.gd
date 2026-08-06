@@ -48,7 +48,7 @@ const WORD_IMAGE := {
 	"Ж": "Beetle",
 	"З": "Hare",
 	"И": "Toy",
-	"Й": "Yogurt",
+	"Й": "yogurt",
 	"К": "Cat",
 	"Л": "Moon",
 	"М": "Ball",
