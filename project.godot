@@ -43,7 +43,7 @@ AudioManager="*res://addons/audio_manager.gd"
 window/size/viewport_width=1080
 window/size/viewport_height=2340
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
 window/size/initial_width=540
 window/size/initial_height=1170
 
