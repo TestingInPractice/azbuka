@@ -1,0 +1,9 @@
+# Инструментальные каталоги агентов и Godot (не часть проекта)
+.omo/
+.playwright-mcp/
+.graphmem/
+.godot/
+.codegraph/
+.superpowers/
+.build-loop/
+.DS_Store

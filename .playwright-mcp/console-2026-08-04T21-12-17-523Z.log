@@ -1,4 +1,0 @@
-[    2683ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ http://localhost:8090/index.js:451
-[    3080ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ http://localhost:8090/index.js:451
-[    3261ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ http://localhost:8090/index.js:451
-[  173643ms] [LOG] [INFO] MainMenu: letter_circle_pressed  data={"letter":"Б"} @ http://localhost:8090/index.js:451

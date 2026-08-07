@@ -1,6 +1,0 @@
-[     584ms] Unexpected end of input
-[     616ms] [WARNING] <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes"> @ https://testinginpractice.github.io/azbuka/index.html:0
-[    1554ms] [LOG] Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org @ https://testinginpractice.github.io/azbuka/index.js:451
-[    1922ms] [LOG] OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL @ https://testinginpractice.github.io/azbuka/index.js:451
-[    2245ms] [LOG] Build configuration: Emscripten 4.0.20, single-threaded, no GDExtension support. @ https://testinginpractice.github.io/azbuka/index.js:451
-[   20169ms] [LOG] [INFO] MainMenu: game_button_pressed  data={"game":"azbuka","title":"Азбука"} @ https://testinginpractice.github.io/azbuka/index.js:451
