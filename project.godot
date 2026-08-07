@@ -50,3 +50,4 @@ window/size/initial_height=1170
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.960784, 0.941176, 0.909804, 1)
