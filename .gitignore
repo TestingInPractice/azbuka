@@ -1,3 +1,6 @@
+# Исходники Godot (worktree ветки azbuka-v2) — не часть веб-сборки
+azbuka-src/
+
 # Инструментальные каталоги агентов и Godot (не часть проекта)
 .omo/
 .playwright-mcp/
