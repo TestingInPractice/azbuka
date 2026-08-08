@@ -75,6 +75,8 @@ func style_button(button: Button, bg_color: Color, text_color: Color = Color.WHI
 	button.add_theme_color_override("font_color", text_color)
 	button.add_theme_color_override("font_hover_color", text_color)
 	button.add_theme_color_override("font_pressed_color", text_color)
+	button.add_theme_color_override("font_focus_color", text_color)
+	button.add_theme_color_override("font_hover_pressed_color", text_color)
 
 
 func _color(key: String) -> Color:

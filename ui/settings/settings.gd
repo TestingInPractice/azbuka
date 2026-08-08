@@ -166,6 +166,8 @@ func _apply_theme(_mode: int = 0) -> void:
 		checkbox.add_theme_color_override("font_color", ThemeManager.get_text())
 		checkbox.add_theme_color_override("font_hover_color", ThemeManager.get_text())
 		checkbox.add_theme_color_override("font_pressed_color", ThemeManager.get_text())
+		checkbox.add_theme_color_override("font_focus_color", ThemeManager.get_text())
+		checkbox.add_theme_color_override("font_hover_pressed_color", ThemeManager.get_text())
 	_series_length_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	_series_length_spinbox.add_theme_color_override("font_color", ThemeManager.get_text())
 	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
