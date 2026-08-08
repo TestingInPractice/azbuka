@@ -4,8 +4,8 @@
 layout_mode = 0
 offset_left = 20.0
 offset_top = 170.0
-offset_right = 190.0
-offset_bottom = 230.0
+offset_right = 300.0
+offset_bottom = 265.0
 text = "‹ Назад"
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 40
 accessibility_name = "Назад"

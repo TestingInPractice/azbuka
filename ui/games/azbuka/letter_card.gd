@@ -199,6 +199,8 @@ func start_recording() -> bool:
 		return false
 	if not _mic_prepared:
 		prepare_microphone()
+	if _mic_player != null and not _mic_player.playing:
+		_mic_player.play()
 	_accumulated_frames.clear()
 	_recorded_data.clear()
 	_capture_effect.clear_buffer()
@@ -217,6 +219,10 @@ func stop_recording() -> void:
 	if _capture_effect and _capture_effect.get_frames_available() > 0:
 		_accumulated_frames.append_array(_capture_effect.get_buffer(_capture_effect.get_frames_available()))
 	_capture_effect.clear_buffer()
+	# Освобождаем микрофон сразу после записи: на iOS активная захват-сессия
+	# переводит аудиомикшер в "голосовой" режим и последующие звуки тише.
+	if _mic_player != null and _mic_player.playing:
+		_mic_player.stop()
 	if _accumulated_frames.is_empty():
 		_recorded_data = PackedByteArray()
 		_play_button.disabled = true
