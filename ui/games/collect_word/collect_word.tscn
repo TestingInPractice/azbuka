@@ -31,7 +31,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 60.0
-offset_top = 40.0
+offset_top = 170.0
 offset_right = -60.0
 offset_bottom = -60.0
 grow_horizontal = 2
@@ -57,28 +57,6 @@ layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="ArrowRow" type="HBoxContainer" parent="MainLayout"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-theme_override_constants/separation = 48
-
-[node name="PrevWordButton" type="Button" parent="MainLayout/ArrowRow"]
-unique_name_in_owner = true
-layout_mode = 2
-custom_minimum_size = Vector2(160, 96)
-theme_override_font_sizes/font_size = 48
-text = "‹"
-accessibility_name = "Предыдущее слово"
-
-[node name="NextWordButton" type="Button" parent="MainLayout/ArrowRow"]
-unique_name_in_owner = true
-layout_mode = 2
-custom_minimum_size = Vector2(160, 96)
-theme_override_font_sizes/font_size = 48
-text = "›"
-accessibility_name = "Следующее слово"
-
 [node name="PoolRow" type="CenterContainer" parent="MainLayout"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -96,6 +74,28 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 44
 text = "Собери слово из букв"
 horizontal_alignment = 1
+
+[node name="PrevWordButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 30.0
+offset_top = 1085.0
+offset_right = 170.0
+offset_bottom = 1255.0
+theme_override_font_sizes/font_size = 48
+text = "‹"
+accessibility_name = "Предыдущее слово"
+
+[node name="NextWordButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -170.0
+offset_top = 1085.0
+offset_right = -30.0
+offset_bottom = 1255.0
+theme_override_font_sizes/font_size = 48
+text = "›"
+accessibility_name = "Следующее слово"
 
 [node name="CollectWordBackButton" parent="." instance=ExtResource("3_back")]
 unique_name_in_owner = true

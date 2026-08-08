@@ -31,7 +31,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 90.0
-offset_top = 40.0
+offset_top = 170.0
 offset_right = -90.0
 offset_bottom = -40.0
 grow_horizontal = 2
@@ -99,6 +99,10 @@ stretch_mode = 5
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 accessibility_name = "Картинка слова"
+
+[node name="CardSpacer" type="Control" parent="MainLayout/CardPanel"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="LettersRow" type="HBoxContainer" parent="MainLayout/CardPanel"]
 layout_mode = 2

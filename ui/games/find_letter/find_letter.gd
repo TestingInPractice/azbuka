@@ -183,11 +183,18 @@ func _update_squares() -> void:
 	var solved := _solved[_card_index]
 	var button_bg := _get_button_bg()
 	var button_text := _get_button_text()
+	## Обновляет квадраты: текст букв, доступность и подсветку.
+func _update_squares() -> void:
+	var solved := _solved[_card_index]
+	var button_bg := _get_button_bg()
+	var button_text := _get_button_text()
 	for index in _square_buttons.size():
 		var button := _square_buttons[index]
 		button.text = _answers[index]
 		button.disabled = solved
 		button.rotation_degrees = 0.0
+		button.scale = Vector2.ONE
+		button.modulate = Color.WHITE
 		button.accessibility_name = "Буква " + _answers[index]
 		if solved:
 			var is_correct := _answers[index] == _correct_letter
@@ -204,6 +211,36 @@ func _set_square_color(button: Button, bg_color: Color) -> void:
 	button.add_theme_stylebox_override("normal", style)
 	button.add_theme_stylebox_override("hover", style)
 	button.add_theme_stylebox_override("pressed", style)
+
+
+## Анимация правильного ответа: зелёная подсветка + подпрыгивание (как в азбуке).
+func _play_square_correct_anim(button: Button) -> void:
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_BOUNCE)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(button, "scale", Vector2(1.3, 1.3), 0.15)
+	tween.tween_property(button, "scale", Vector2.ONE, 0.25)
+	tween.tween_property(button, "scale", Vector2(1.1, 1.1), 0.2)
+	tween.tween_property(button, "scale", Vector2.ONE, 0.2)
+	tween.tween_property(button, "scale", Vector2(1.08, 1.08), 0.15)
+	tween.tween_property(button, "scale", Vector2.ONE, 0.15)
+
+
+## Анимация ошибочного ответа: красная подсветка + тряска, затем возврат
+## (как в азбуке). Квадрат снова доступен для выбора.
+func _play_square_wrong_anim(button: Button) -> void:
+	button.modulate = Color.RED
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	var orig: float = button.rotation_degrees
+	for _k in 3:
+		tween.tween_property(button, "rotation_degrees", orig - 8.0, 0.04)
+		tween.tween_property(button, "rotation_degrees", orig + 8.0, 0.04)
+	tween.tween_property(button, "rotation_degrees", orig, 0.04)
+	var reset := create_tween()
+	reset.tween_interval(0.3)
+	reset.tween_property(button, "modulate", Color.WHITE, 0.2)
 
 
 ## Обновляет картинку слова текущей карточки. Если файл не найден, показывает
@@ -262,6 +299,7 @@ func _on_square_pressed(index: int) -> void:
 		_solved[_card_index] = true
 		button.disabled = true
 		_set_square_color(button, COLOR_CORRECT)
+		_play_square_correct_anim(button)
 		AudioManager.play_audio(PROMPT_CORRECT_PATH)
 		_hint_label.text = "Молодец!"
 		GameLogger.info("FindLetterGame", "answer_correct", {"letter": selected})
@@ -274,8 +312,7 @@ func _on_square_pressed(index: int) -> void:
 		else:
 			_show_card(_card_index + 1)
 	else:
-		button.disabled = true
-		_set_square_color(button, COLOR_WRONG)
+		_play_square_wrong_anim(button)
 		AudioManager.play_stream(_error_beep)
 		_hint_label.text = "Попробуй ещё!"
 		GameLogger.info("FindLetterGame", "answer_wrong", {"letter": selected})
