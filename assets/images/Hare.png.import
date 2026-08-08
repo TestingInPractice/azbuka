@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Hare.png-d08fbc7c10700b9fa8e1d7b2b7f854af.cte
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

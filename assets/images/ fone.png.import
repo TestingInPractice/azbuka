@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/ fone.png-24a73a745f88c99c9513a61ef22ed182.ct
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

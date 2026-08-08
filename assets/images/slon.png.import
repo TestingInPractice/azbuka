@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/slon.png-3c34d5bb276b36df0c7ee603de10adb7.cte
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

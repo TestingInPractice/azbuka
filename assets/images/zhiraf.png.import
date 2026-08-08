@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/zhiraf.png-caa9eb6155121f1e0655583d66ac5cf1.c
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/igla.png-0e307caf5e493c1f1aa61b91bb8c9067.cte
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

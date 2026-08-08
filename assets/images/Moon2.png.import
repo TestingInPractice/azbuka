@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Moon2.png-406d376229d8e761c51aaf0cacb00593.ct
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

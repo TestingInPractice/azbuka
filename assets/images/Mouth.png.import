@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Mouth.png-0066611b398d6dc391fd61ba366008fa.ct
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

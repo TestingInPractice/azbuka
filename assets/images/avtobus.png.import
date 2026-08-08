@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/avtobus.png-24c402e122ab9ef4e84286c5b4d532d7.
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/chayka.png-168d9f367655c7ac728d9f836e001ec1.c
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

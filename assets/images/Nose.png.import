@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Nose.png-c4f5df83abab935923a229ed08eb2f02.cte
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

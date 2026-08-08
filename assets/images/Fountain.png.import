@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Fountain.png-a3bc27b2dda96d1d56b158bf93a71df2
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
