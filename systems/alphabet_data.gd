@@ -56,8 +56,12 @@ func get_letters() -> Array[Dictionary]:
 
 
 func get_letter_data(letter: String) -> Dictionary:
-	if _by_letter.has(letter):
-		return (_by_letter[letter] as Dictionary).duplicate()
+	# Ключи в JSON только в верхнем регистре, а слова (например «Банан»)
+	# разбиваются на буквы с сохранением регистра: Б, а, н, а, н.
+	# Нормализуем ключ, чтобы строчные буквы тоже находили запись.
+	var key := letter.to_upper()
+	if _by_letter.has(key):
+		return (_by_letter[key] as Dictionary).duplicate()
 	return {}
 
 
