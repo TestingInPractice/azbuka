@@ -122,7 +122,8 @@ func _show_ready() -> void:
 	_ready_panel.visible = true
 	_card_panel.visible = false
 	_completion_panel.visible = false
-	_prev_card_button.get_parent().visible = false
+	_prev_card_button.visible = false
+	_next_card_button.visible = false
 	_back_button.disabled = false
 
 
@@ -157,7 +158,8 @@ func _show_card(index: int) -> void:
 	_ready_panel.visible = false
 	_card_panel.visible = true
 	_completion_panel.visible = false
-	_prev_card_button.get_parent().visible = true
+	_prev_card_button.visible = true
+	_next_card_button.visible = true
 	GameLogger.info("FindLetterGame", "card_shown", {
 		"index": _card_index + 1,
 		"total": _series.size(),
@@ -333,7 +335,8 @@ func _show_completion() -> void:
 	_correct_letter = ""
 	_hint_label.visible = false
 	_card_panel.visible = false
-	_prev_card_button.get_parent().visible = false
+	_prev_card_button.visible = false
+	_next_card_button.visible = false
 	_completion_panel.visible = true
 	GameLogger.info("FindLetterGame", "series_completed", {"length": _series.size()})
 
@@ -369,8 +372,8 @@ func _apply_theme(_mode: int = 0) -> void:
 	var button_text := _get_button_text()
 	ThemeManager.style_button(_back_button, button_bg, button_text)
 	ThemeManager.style_button(_ready_start_button, button_bg, button_text)
-	ThemeManager.style_button(_prev_card_button, button_bg, button_text)
-	ThemeManager.style_button(_next_card_button, button_bg, button_text)
+	_style_nav_button(_prev_card_button)
+	_style_nav_button(_next_card_button)
 	ThemeManager.style_button(_completion_yes_button, button_bg, button_text)
 	ThemeManager.style_button(_completion_no_button, button_bg, button_text)
 	if _state == STATE_PLAYING:
@@ -387,6 +390,57 @@ func _get_button_bg() -> Color:
 func _get_button_text() -> Color:
 	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
 	return colors["button_text"] as Color
+
+
+## Применяет стиль круглых навигационных кнопок «‹»/«›» (как в азбуке):
+## полупрозрачный фон, радиус 180, мягкая тень, без отступов контента.
+func _style_nav_button(btn: Button) -> void:
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = Color(ThemeManager.get_card_bg(), 0.7)
+	normal.set_corner_radius_all(180)
+	normal.shadow_size = 4
+	normal.shadow_color = Color(0, 0, 0, 0.25)
+	normal.content_margin_left = 0
+	normal.content_margin_right = 0
+	normal.content_margin_top = 0
+	normal.content_margin_bottom = 0
+	btn.add_theme_stylebox_override("normal", normal)
+
+	var hover := StyleBoxFlat.new()
+	hover.bg_color = Color(ThemeManager.get_card_bg(), 0.85)
+	hover.set_corner_radius_all(180)
+	hover.shadow_size = 6
+	hover.shadow_color = Color(0, 0, 0, 0.3)
+	hover.content_margin_left = 0
+	hover.content_margin_right = 0
+	hover.content_margin_top = 0
+	hover.content_margin_bottom = 0
+	btn.add_theme_stylebox_override("hover", hover)
+
+	var pressed := StyleBoxFlat.new()
+	pressed.bg_color = Color(ThemeManager.get_card_bg(), 0.9)
+	pressed.set_corner_radius_all(180)
+	pressed.shadow_size = 2
+	pressed.shadow_color = Color(0, 0, 0, 0.2)
+	pressed.content_margin_left = 0
+	pressed.content_margin_right = 0
+	pressed.content_margin_top = 0
+	pressed.content_margin_bottom = 0
+	btn.add_theme_stylebox_override("pressed", pressed)
+
+	var disabled := StyleBoxFlat.new()
+	disabled.bg_color = Color(0.5, 0.5, 0.5, 0.3)
+	disabled.set_corner_radius_all(180)
+	disabled.content_margin_left = 0
+	disabled.content_margin_right = 0
+	disabled.content_margin_top = 0
+	disabled.content_margin_bottom = 0
+	btn.add_theme_stylebox_override("disabled", disabled)
+
+	var text: Color = ThemeManager.get_text()
+	btn.add_theme_color_override("font_color", text)
+	btn.add_theme_color_override("font_hover_color", text)
+	btn.add_theme_color_override("font_pressed_color", text)
 
 
 ## Создаёт короткий звуковой сигнал ошибки.

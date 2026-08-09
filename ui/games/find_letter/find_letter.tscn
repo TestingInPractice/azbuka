@@ -182,30 +182,30 @@ theme_override_font_sizes/font_size = 44
 text = "Нет"
 accessibility_name = "Нет"
 
-[node name="BottomRow" type="HBoxContainer" parent="MainLayout"]
+[node name="PrevCardButton" type="Button" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
-visible = false
-theme_override_constants/separation = 24
-
-[node name="PrevCardButton" type="Button" parent="MainLayout/BottomRow"]
-unique_name_in_owner = true
-layout_mode = 2
-custom_minimum_size = Vector2(220, 80)
-theme_override_font_sizes/font_size = 36
-text = "Влево"
+layout_mode = 1
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 1085.0
+offset_right = 170.0
+offset_bottom = 1255.0
+text = "‹"
+theme_override_font_sizes/font_size = 64
 accessibility_name = "Предыдущая карточка"
 
-[node name="BottomSpacer" type="Control" parent="MainLayout/BottomRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="NextCardButton" type="Button" parent="MainLayout/BottomRow"]
+[node name="NextCardButton" type="Button" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
-custom_minimum_size = Vector2(220, 80)
-theme_override_font_sizes/font_size = 36
-text = "Вправо"
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 1085.0
+offset_right = -30.0
+offset_bottom = 1255.0
+text = "›"
+theme_override_font_sizes/font_size = 64
 accessibility_name = "Следующая карточка"
 
 [node name="FindLetterBackButton" parent="." instance=ExtResource("3_back")]
