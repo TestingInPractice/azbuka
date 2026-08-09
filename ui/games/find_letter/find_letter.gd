@@ -183,11 +183,6 @@ func _update_squares() -> void:
 	var solved := _solved[_card_index]
 	var button_bg := _get_button_bg()
 	var button_text := _get_button_text()
-	## Обновляет квадраты: текст букв, доступность и подсветку.
-func _update_squares() -> void:
-	var solved := _solved[_card_index]
-	var button_bg := _get_button_bg()
-	var button_text := _get_button_text()
 	for index in _square_buttons.size():
 		var button := _square_buttons[index]
 		button.text = _answers[index]
