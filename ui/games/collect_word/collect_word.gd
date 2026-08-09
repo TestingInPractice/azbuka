@@ -5,34 +5,32 @@ extends Control
 ## Ниже расположены перемешанные буквы этого слова: нажатие на букву ставит
 ## её в ближайший пустой слот слева направо. Правильная буква закрепляется
 ## в слоте и убирается из пула, неправильная возвращается в пул с подсказкой
-## «Попробуй ещё!». Когда слово собрано полностью, звучит «Молодец!» и слово
-## прочитывается ещё раз. Стрелки «влево» и «вправо» показывают случайное
-## другое слово и пересобирают пазл. Все подсказки и сообщения находятся в
-## одном месте: в StatusLabel.
+## «Попробуй ещё!». Когда слово собрано полностью, последняя буква озвучивается,
+## затем слово прочитывается ещё раз. Стрелки «влево» и «вправо» показывают
+## случайное другое слово и пересобирают пазл. Все подсказки и сообщения
+## находятся в одном месте: в StatusLabel.
 
 ## Путь к сцене главного меню.
 const MAIN_MENU_SCENE := "res://ui/main_menu/main_menu.tscn"
-## Путь к звуку похвалы «Молодец!».
-const PROMPT_CORRECT_AUDIO := "res://assets/audio/prompt_correct.wav"
 ## Начальная подсказка в статусе.
 const STATUS_HINT := "Собери слово из букв"
 ## Текст при неверной букве.
 const STATUS_WRONG := "Попробуй ещё!"
-## Текст при полностью собранном слове.
-const STATUS_DONE := "Молодец!"
 
 ## Ширина рабочей области под ряды слотов и пула.
 const WORK_AREA_WIDTH := 900.0
 ## Отступ между слотами в ряду.
-const SLOT_SEPARATION := 12.0
+const SLOT_SEPARATION := 20.0
 ## Минимальный размер слота.
-const SLOT_MIN_SIZE := 100.0
+const SLOT_MIN_SIZE := 140.0
 ## Максимальный размер слота.
-const SLOT_MAX_SIZE := 150.0
+const SLOT_MAX_SIZE := 190.0
+## Задержка перед озвучиванием слова при показе пазла (секунды).
+const WORD_INTRO_DELAY := 0.8
 ## Задержка перед повтором слова после сборки (секунды).
-const WORD_REPLAY_DELAY := 1.1
+const WORD_REPLAY_DELAY := 1.5
 ## Задержка перед переходом к следующему слову (секунды).
-const NEXT_WORD_DELAY := 2.4
+const NEXT_WORD_DELAY := 3.5
 
 ## Буква текущего слова.
 var current_letter: String = ""
@@ -155,7 +153,13 @@ func _build_puzzle(letter: String) -> void:
 	_apply_theme()
 	_status_label.text = STATUS_HINT
 	AudioManager.stop_all()
-	AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter))
+	var id := _puzzle_id
+	get_tree().create_timer(WORD_INTRO_DELAY).timeout.connect(func() -> void:
+		if id != _puzzle_id:
+			return
+		AudioManager.stop_all()
+		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter))
+	)
 	GameLogger.info("CollectWordGame", "word_shown", {"letter": current_letter, "word": current_word, "letter_count": count})
 
 
@@ -241,11 +245,10 @@ func try_place_letter(letter: String, source_button: Button = null) -> bool:
 			row.queue_free()
 	_flash_correct(slot)
 	GameLogger.info("CollectWordGame", "letter_tap_correct", {"letter": letter, "slot": slot_index, "word": current_word})
+	AudioManager.stop_all()
+	AudioManager.play_audio(AlphabetData.get_letter_audio_path(letter))
 	if slot_index >= word_letters.size():
 		_on_word_completed()
-	else:
-		AudioManager.stop_all()
-		AudioManager.play_audio(AlphabetData.get_letter_audio_path(letter))
 	return true
 
 
@@ -265,13 +268,11 @@ func _flash_wrong(button: Button) -> void:
 	tween.tween_property(button, "self_modulate", Color.WHITE, 0.5)
 
 
-## Слово собрано: похвала, повтор слова и переход к следующему слову.
+## Слово собрано: статус остаётся словом, затем слово повторяется
+## и происходит переход к следующему слову.
 func _on_word_completed() -> void:
 	is_word_complete = true
 	_completion_pending = true
-	_status_label.text = STATUS_DONE
-	AudioManager.stop_all()
-	AudioManager.play_audio(PROMPT_CORRECT_AUDIO)
 	GameLogger.info("CollectWordGame", "word_completed", {"word": current_word, "letter": current_letter})
 	var id := _puzzle_id
 	get_tree().create_timer(WORD_REPLAY_DELAY).timeout.connect(func() -> void:
