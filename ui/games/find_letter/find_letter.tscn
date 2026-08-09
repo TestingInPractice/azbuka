@@ -62,7 +62,7 @@ theme_override_constants/separation = 24
 
 [node name="ReadyTitleLabel" type="Label" parent="MainLayout/ReadyPanel"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 72
 text = "Готовы играть?"
 horizontal_alignment = 1
 
@@ -80,6 +80,7 @@ unique_name_in_owner = true
 layout_mode = 2
 visible = false
 size_flags_vertical = 3
+alignment = 1
 theme_override_constants/separation = 24
 
 [node name="CardNumberLabel" type="Label" parent="MainLayout/CardPanel"]
@@ -92,21 +93,18 @@ horizontal_alignment = 1
 [node name="WordImage" type="TextureRect" parent="MainLayout/CardPanel"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 200)
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(365, 365)
 expand_mode = 1
 stretch_mode = 5
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 accessibility_name = "Картинка слова"
 
-[node name="CardSpacer" type="Control" parent="MainLayout/CardPanel"]
-layout_mode = 2
-size_flags_vertical = 3
-
 [node name="LettersRow" type="HBoxContainer" parent="MainLayout/CardPanel"]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 theme_override_constants/separation = 24
 
 [node name="SquareLetter_1" type="Button" parent="MainLayout/CardPanel/LettersRow"]
