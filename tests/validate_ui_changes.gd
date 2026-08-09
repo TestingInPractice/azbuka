@@ -26,8 +26,11 @@ func _check_project_settings() -> void:
 	var vh: int = ProjectSettings.get_setting("display/window/size/viewport_height")
 	if vw != 1080 or vh != 2340:
 		_fail("project: viewport должен быть 1080x2340 (19.5:9), сейчас %dx%d" % [vw, vh])
-	if ProjectSettings.get_setting("display/window/stretch/aspect") != "keep":
-		_fail("project: stretch/aspect должен быть keep")
+	# expand — канвас масштабируется на весь экран без letterbox-полос
+	# (решение 79acec0; keep оставлял серые полосы по бокам на 19.5:9).
+	if ProjectSettings.get_setting("display/window/stretch/aspect") != "expand":
+		_fail("project: stretch/aspect должен быть expand (без полос), сейчас %s"
+				% ProjectSettings.get_setting("display/window/stretch/aspect"))
 
 
 func _check_main_menu() -> void:
