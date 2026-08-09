@@ -61,6 +61,7 @@ var _error_stream: AudioStreamWAV = null
 @onready var _back_button: Button = %CollectWordBackButton
 @onready var _prev_word_button: Button = %PrevWordButton
 @onready var _next_word_button: Button = %NextWordButton
+@onready var _word_image: TextureRect = %WordImage
 
 
 func _ready() -> void:
@@ -69,6 +70,7 @@ func _ready() -> void:
 	_back_button.pressed.connect(_on_back_button_pressed)
 	_prev_word_button.pressed.connect(_on_prev_word_button_pressed)
 	_next_word_button.pressed.connect(_on_next_word_button_pressed)
+	_word_image.gui_input.connect(_on_word_image_input)
 	_apply_theme()
 	ProgressManager.mark_game_played()
 	GameLogger.info("CollectWordGame", "game_entered", {"games_played": ProgressManager.games_played_count})
@@ -101,6 +103,7 @@ func _build_puzzle(letter: String) -> void:
 		return
 	current_letter = letter
 	current_word = str(data["word"])
+	_update_word_image()
 	word_letters = _split_word(current_word)
 	pool_letters = word_letters.duplicate()
 	pool_letters.shuffle()
@@ -197,7 +200,7 @@ func try_place_letter(letter: String, source_button: Button = null) -> bool:
 		_on_word_completed()
 	else:
 		AudioManager.stop_all()
-		AudioManager.play_audio(AlphabetData.get_letter_audio_path(current_letter))
+		AudioManager.play_audio(AlphabetData.get_letter_audio_path(letter))
 	return true
 
 
@@ -266,6 +269,45 @@ func _on_back_button_pressed() -> void:
 	AudioManager.stop_all()
 	GameLogger.info("CollectWordGame", "back_button_pressed", {"word": current_word})
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
+
+
+## Обновляет картинку слова текущей буквы. Если файл не найден, показывает
+## цветной placeholder, цвет которого вычислен из HSV-хэша буквы.
+func _update_word_image() -> void:
+	var img_path := _image_path_for(current_letter)
+	var tex: Texture2D = null
+	if not img_path.is_empty():
+		tex = load(img_path) as Texture2D
+	if tex:
+		_word_image.texture = tex
+	else:
+		_word_image.texture = _make_placeholder_texture(current_letter)
+		if not img_path.is_empty():
+			GameLogger.warning("CollectWordGame", "word_image_missing", {"letter": current_letter, "path": img_path})
+
+
+## Возвращает путь к картинке слова для буквы ("" если буквы нет в словаре).
+func _image_path_for(ltr: String) -> String:
+	var image_name: String = LetterCard.WORD_IMAGE.get(ltr, "")
+	if image_name.is_empty():
+		return ""
+	return "res://assets/images/" + image_name + ".png"
+
+
+## Создаёт цветную текстуру-заглушку по HSV-хэшу буквы.
+func _make_placeholder_texture(ltr: String) -> Texture2D:
+	var hue := fmod(float(abs(ltr.hash())) / 1000.0, 1.0)
+	var color := Color.from_hsv(hue, 0.5, 0.85)
+	var img := Image.create(64, 64, false, Image.FORMAT_RGBA8)
+	img.fill(color)
+	return ImageTexture.create_from_image(img)
+
+
+## Нажатие на картинку слова озвучивает текущее слово.
+func _on_word_image_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter))
+		GameLogger.info("CollectWordGame", "word_image_pressed", {"letter": current_letter, "word": current_word})
 
 
 ## Создаёт короткий низкий гудок для звука ошибки.
