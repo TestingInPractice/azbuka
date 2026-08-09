@@ -24,9 +24,9 @@ const STATUS_DONE := "Молодец!"
 ## Ширина рабочей области под ряды слотов и пула.
 const WORK_AREA_WIDTH := 900.0
 ## Отступ между слотами в ряду.
-const SLOT_SEPARATION := 8.0
+const SLOT_SEPARATION := 12.0
 ## Минимальный размер слота.
-const SLOT_MIN_SIZE := 64.0
+const SLOT_MIN_SIZE := 100.0
 ## Максимальный размер слота.
 const SLOT_MAX_SIZE := 150.0
 ## Задержка перед повтором слова после сборки (секунды).
@@ -55,8 +55,8 @@ var _error_stream: AudioStreamWAV = null
 
 @onready var _background: ColorRect = %Background
 @onready var _header_label: Label = %HeaderLabel
-@onready var _word_squares: HBoxContainer = %WordSquares
-@onready var _pool_container: HBoxContainer = %PoolContainer
+@onready var _word_squares: VBoxContainer = %WordSquares
+@onready var _pool_container: VBoxContainer = %PoolContainer
 @onready var _status_label: Label = %StatusLabel
 @onready var _back_button: Button = %CollectWordBackButton
 @onready var _prev_word_button: Button = %PrevWordButton
@@ -112,26 +112,46 @@ func _build_puzzle(letter: String) -> void:
 	var count := word_letters.size()
 	var slot_size := _compute_slot_size(count)
 	var font_size := int(clampf(slot_size * 0.5, 30.0, 72.0))
-	for i in count:
-		var slot := Button.new()
-		slot.name = "WordSlot_%d" % (i + 1)
-		slot.custom_minimum_size = Vector2(slot_size, slot_size)
-		slot.disabled = true
-		slot.focus_mode = Control.FOCUS_NONE
-		slot.text = ""
-		slot.add_theme_font_size_override("font_size", font_size)
-		slot.accessibility_name = "Слот слова %d" % (i + 1)
-		_word_squares.add_child(slot)
-		_slot_buttons.append(slot)
-		var pool := Button.new()
-		pool.name = "PoolLetter_%d" % (i + 1)
-		pool.custom_minimum_size = Vector2(slot_size, slot_size)
-		pool.text = pool_letters[i]
-		pool.add_theme_font_size_override("font_size", font_size)
-		pool.accessibility_name = "Буква " + pool_letters[i]
-		pool.pressed.connect(_on_pool_button_pressed.bind(pool))
-		_pool_container.add_child(pool)
-		_pool_buttons.append(pool)
+	var rows := _compute_rows(count)
+	var letter_index := 0
+	for row_index in rows.size():
+		var row_size := rows[row_index]
+		var row := HBoxContainer.new()
+		row.name = "Row_%d" % row_index
+		row.add_theme_constant_override("separation", int(SLOT_SEPARATION))
+		row.alignment = BoxContainer.ALIGNMENT_CENTER
+		_word_squares.add_child(row)
+		for j in row_size:
+			var slot := Button.new()
+			slot.name = "WordSlot_%d" % (letter_index + 1)
+			slot.custom_minimum_size = Vector2(slot_size, slot_size)
+			slot.disabled = true
+			slot.focus_mode = Control.FOCUS_NONE
+			slot.text = ""
+			slot.add_theme_font_size_override("font_size", font_size)
+			slot.accessibility_name = "Слот слова %d" % (letter_index + 1)
+			row.add_child(slot)
+			_slot_buttons.append(slot)
+			letter_index += 1
+	letter_index = 0
+	for row_index in rows.size():
+		var row_size := rows[row_index]
+		var row := HBoxContainer.new()
+		row.name = "PoolRow_%d" % row_index
+		row.add_theme_constant_override("separation", int(SLOT_SEPARATION))
+		row.alignment = BoxContainer.ALIGNMENT_CENTER
+		_pool_container.add_child(row)
+		for j in row_size:
+			var pool := Button.new()
+			pool.name = "PoolLetter_%d" % (letter_index + 1)
+			pool.custom_minimum_size = Vector2(slot_size, slot_size)
+			pool.text = pool_letters[letter_index]
+			pool.add_theme_font_size_override("font_size", font_size)
+			pool.accessibility_name = "Буква " + pool_letters[letter_index]
+			pool.pressed.connect(_on_pool_button_pressed.bind(pool))
+			row.add_child(pool)
+			_pool_buttons.append(pool)
+			letter_index += 1
 	_apply_theme()
 	_status_label.text = STATUS_HINT
 	AudioManager.stop_all()
@@ -167,6 +187,27 @@ func _compute_slot_size(count: int) -> float:
 	return clampf(size, SLOT_MIN_SIZE, SLOT_MAX_SIZE)
 
 
+## Возвращает сбалансированный список количества букв по рядам.
+## Если слово помещается в один ряд — возвращает [count]. Иначе раскладывает
+## буквы на несколько рядов, равномерно распределяя остаток (10 -> [5, 5],
+## 9 -> [5, 4]) так, чтобы каждый ряд не превышал максимально возможное
+## число слотов минимального размера в рабочей области.
+func _compute_rows(count: int) -> Array[int]:
+	if count <= 0:
+		return [0]
+	var size := _compute_slot_size(count)
+	if count * size + (count - 1) * SLOT_SEPARATION <= WORK_AREA_WIDTH:
+		return [count]
+	var max_per_row := floori((WORK_AREA_WIDTH + SLOT_SEPARATION) / (SLOT_MIN_SIZE + SLOT_SEPARATION))
+	var rows := ceili(float(count) / float(max_per_row))
+	var base := count / rows
+	var remainder := count % rows
+	var result: Array[int] = []
+	for i in rows:
+		result.append(base + (1 if i < remainder else 0))
+	return result
+
+
 ## Обработчик нажатия на букву в пуле.
 func _on_pool_button_pressed(button: Button) -> void:
 	try_place_letter(button.text, button)
@@ -191,9 +232,13 @@ func try_place_letter(letter: String, source_button: Button = null) -> bool:
 	slot_index += 1
 	pool_letters.erase(letter)
 	if source_button != null and is_instance_valid(source_button):
-		_pool_container.remove_child(source_button)
+		var row: Node = source_button.get_parent()
+		row.remove_child(source_button)
 		_pool_buttons.erase(source_button)
 		source_button.queue_free()
+		if row.get_child_count() == 0:
+			_pool_container.remove_child(row)
+			row.queue_free()
 	_flash_correct(slot)
 	GameLogger.info("CollectWordGame", "letter_tap_correct", {"letter": letter, "slot": slot_index, "word": current_word})
 	if slot_index >= word_letters.size():

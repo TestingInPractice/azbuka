@@ -60,11 +60,10 @@ mouse_filter = 0
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WordSquares" type="HBoxContainer" parent="MainLayout/WordSquaresRow"]
+[node name="WordSquares" type="VBoxContainer" parent="MainLayout/WordSquaresRow"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
+theme_override_constants/separation = 12
 
 [node name="Spacer" type="Control" parent="MainLayout"]
 layout_mode = 2
@@ -75,11 +74,10 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PoolContainer" type="HBoxContainer" parent="MainLayout/PoolRow"]
+[node name="PoolContainer" type="VBoxContainer" parent="MainLayout/PoolRow"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
+theme_override_constants/separation = 12
 
 [node name="StatusLabel" type="Label" parent="MainLayout"]
 unique_name_in_owner = true
