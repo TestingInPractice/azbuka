@@ -48,8 +48,16 @@ const CHECKBOX_ICON_RADIUS := 18
 @onready var _mode_card_collect_word: PanelContainer = %ModeCardCollectWord
 @onready var _mode_card_guess_picture: PanelContainer = %ModeCardGuessPicture
 @onready var _series_card: PanelContainer = %SeriesCard
+@onready var _word_set_card: PanelContainer = %WordSetCard
+@onready var _word_set_button_1: Button = %WordSetButton1
+@onready var _word_set_button_2: Button = %WordSetButton2
+@onready var _word_set_button_3: Button = %WordSetButton3
+@onready var _word_set_button_4: Button = %WordSetButton4
+@onready var _word_set_button_5: Button = %WordSetButton5
 
 var _checkboxes: Dictionary = {}
+## Кнопки наборов слов в порядке номеров (1-5).
+var _word_set_buttons: Array[Button] = []
 var _updating: bool = false
 
 
@@ -76,6 +84,20 @@ func _ready() -> void:
 	_series_length_spinbox.max_value = ProgressManager.SERIES_LENGTH_MAX
 	_series_length_spinbox.value = ProgressManager.get_series_length()
 	_series_length_spinbox.value_changed.connect(_on_series_length_value_changed)
+	_word_set_buttons = [
+		_word_set_button_1,
+		_word_set_button_2,
+		_word_set_button_3,
+		_word_set_button_4,
+		_word_set_button_5,
+	]
+	for i in range(1, ProgressManager.WORD_SET_COUNT + 1):
+		var word_set_button: Button = _word_set_buttons[i - 1]
+		word_set_button.toggled.connect(_on_word_set_button_toggled.bind(i))
+	# Наборы 2-5 пока заблокированы: их контент появится позже.
+	for i in range(1, _word_set_buttons.size()):
+		(_word_set_buttons[i] as Button).disabled = true
+	_sync_word_set_buttons()
 	_sync_checkboxes()
 	_update_theme_button_text()
 	_apply_theme()
@@ -103,6 +125,31 @@ func _on_mode_checkbox_toggled(toggled_on: bool, mode_key: String) -> void:
 		return
 	ProgressManager.set_mode_enabled(mode_key, toggled_on)
 	GameLogger.info("Settings", "mode_toggled", {"mode": mode_key, "enabled": toggled_on})
+
+
+## Синхронизирует состояние кнопок наборов с выбранным набором.
+func _sync_word_set_buttons() -> void:
+	_updating = true
+	for i in range(1, ProgressManager.WORD_SET_COUNT + 1):
+		var word_set_button: Button = _word_set_buttons[i - 1]
+		word_set_button.button_pressed = ProgressManager.get_word_set() == i
+	_updating = false
+
+
+func _on_word_set_button_toggled(toggled_on: bool, set_number: int) -> void:
+	if _updating:
+		return
+	if not toggled_on:
+		# Активный набор нельзя выключить: как минимум один набор остаётся.
+		_updating = true
+		(_word_set_buttons[set_number - 1] as Button).button_pressed = true
+		_updating = false
+		_show_warning()
+		GameLogger.warning("Settings", "word_set_disable_blocked", {"set": set_number})
+		return
+	ProgressManager.set_word_set(set_number)
+	_sync_word_set_buttons()
+	GameLogger.info("Settings", "word_set_changed", {"set": set_number})
 
 
 ## Обрабатывает изменение длины серии карточек игры «Найди букву».
@@ -208,6 +255,8 @@ func _apply_theme(_mode: int = 0) -> void:
 	_style_card(_mode_card_collect_word)
 	_style_card(_mode_card_guess_picture)
 	_style_card(_series_card)
+	_style_card(_word_set_card)
+	_style_word_set_buttons()
 	_apply_checkbox_icons()
 	_update_theme_button_text()
 
@@ -251,6 +300,33 @@ func _style_card(panel: PanelContainer) -> void:
 	box_focus.set_border_color(accent)
 	box_focus.set_corner_radius_all(24)
 	panel.add_theme_stylebox_override("focus", box_focus)
+
+
+## Стилизует кнопки наборов слов: акцентная заливка, серый вид
+## заблокированных наборов 2-5 и выделение выбранного набора рамкой.
+func _style_word_set_buttons() -> void:
+	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
+	var button_bg := colors["button_bg"] as Color
+	var button_text := colors["button_text"] as Color
+	var text_color := colors["text"] as Color
+	for word_set_button: Button in _word_set_buttons:
+		ThemeManager.style_button(word_set_button, button_bg, button_text)
+		# Выбранный набор выделяется акцентной заливкой и рамкой.
+		var pressed_box := StyleBoxFlat.new()
+		pressed_box.bg_color = button_bg
+		pressed_box.set_border_width_all(4)
+		pressed_box.set_border_color(text_color)
+		pressed_box.set_corner_radius_all(24)
+		word_set_button.add_theme_stylebox_override("pressed", pressed_box)
+		# Заблокированный набор: полупрозрачная подложка и серый текст.
+		var disabled_box := StyleBoxFlat.new()
+		disabled_box.bg_color = ThemeManager.get_card_bg()
+		disabled_box.bg_color.a = 0.4
+		disabled_box.set_corner_radius_all(24)
+		word_set_button.add_theme_stylebox_override("disabled", disabled_box)
+		var disabled_text := ThemeManager.get_text()
+		disabled_text.a = 0.4
+		word_set_button.add_theme_color_override("font_disabled_color", disabled_text)
 
 
 ## Пересоздаёт крупные индикаторы чекбоксов под текущую тему.

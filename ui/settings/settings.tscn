@@ -151,6 +151,72 @@ step = 1.0
 value = 10.0
 accessibility_name = "Карточек в серии"
 
+[node name="WordSetCard" type="PanelContainer" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WordSetRow" type="HBoxContainer" parent="MainLayout/WordSetCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="WordSetLabel" type="Label" parent="MainLayout/WordSetCard/WordSetRow"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+text = "Набор слов:"
+vertical_alignment = 1
+
+[node name="WordSetButton1" type="Button" parent="MainLayout/WordSetCard/WordSetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(88, 88)
+theme_override_font_sizes/font_size = 44
+text = "1"
+toggle_mode = true
+button_pressed = true
+accessibility_name = "Набор слов 1"
+
+[node name="WordSetButton2" type="Button" parent="MainLayout/WordSetCard/WordSetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(88, 88)
+theme_override_font_sizes/font_size = 44
+text = "2"
+toggle_mode = true
+disabled = true
+accessibility_name = "Набор слов 2"
+
+[node name="WordSetButton3" type="Button" parent="MainLayout/WordSetCard/WordSetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(88, 88)
+theme_override_font_sizes/font_size = 44
+text = "3"
+toggle_mode = true
+disabled = true
+accessibility_name = "Набор слов 3"
+
+[node name="WordSetButton4" type="Button" parent="MainLayout/WordSetCard/WordSetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(88, 88)
+theme_override_font_sizes/font_size = 44
+text = "4"
+toggle_mode = true
+disabled = true
+accessibility_name = "Набор слов 4"
+
+[node name="WordSetButton5" type="Button" parent="MainLayout/WordSetCard/WordSetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(88, 88)
+theme_override_font_sizes/font_size = 44
+text = "5"
+toggle_mode = true
+disabled = true
+accessibility_name = "Набор слов 5"
+
 [node name="ThemeToggleButton" type="Button" parent="MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2

@@ -1,10 +1,10 @@
 extends Node
-## ProgressManager: прогресс изучения букв и включённые режимы игр.
+## ProgressManager: прогресс изучения букв, включённые режимы игр и набор слов.
 ##
-## Хранит изученные буквы, счётчик сыгранных игр и список включённых режимов.
-## Состояние сохраняется в user://progress.json. Не ссылается на другие
-## автолоады: потребители слушают сигналы progress_changed,
-## progress_reset и enabled_modes_changed.
+## Хранит изученные буквы, счётчик сыгранных игр, список включённых режимов
+## и номер активного набора слов. Состояние сохраняется в user://progress.json.
+## Не ссылается на другие автолоады: потребители слушают сигналы
+## progress_changed, progress_reset и enabled_modes_changed.
 
 const SAVE_PATH := "user://progress.json"
 
@@ -22,6 +22,11 @@ const SERIES_LENGTH_MAX := 30
 ## Длина серии карточек в игре «Найди букву» по умолчанию.
 const DEFAULT_SERIES_LENGTH := 10
 
+## Число наборов слов (пока реализован только набор 1).
+const WORD_SET_COUNT := 5
+## Номер набора слов по умолчанию.
+const DEFAULT_WORD_SET := 1
+
 ## Число изученных букв изменилось.
 signal progress_changed(learned_count: int)
 
@@ -36,6 +41,8 @@ var games_played_count: int = 0
 var enabled_modes: Dictionary = DEFAULT_MODES.duplicate()
 ## Длина серии карточек в игре «Найди букву» (5-30).
 var series_length: int = DEFAULT_SERIES_LENGTH
+## Номер активного набора слов (1-WORD_SET_COUNT).
+var word_set: int = DEFAULT_WORD_SET
 
 
 func _ready() -> void:
@@ -107,6 +114,20 @@ func set_series_length(value: int) -> void:
 	save_progress()
 
 
+## Возвращает номер активного набора слов.
+func get_word_set() -> int:
+	return word_set
+
+
+## Устанавливает номер набора слов с ограничением 1-WORD_SET_COUNT.
+func set_word_set(value: int) -> void:
+	var clamped := clampi(value, 1, WORD_SET_COUNT)
+	if word_set == clamped:
+		return
+	word_set = clamped
+	save_progress()
+
+
 func load_progress() -> void:
 	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
 	if file == null:
@@ -128,6 +149,8 @@ func load_progress() -> void:
 				enabled_modes[mode_key] = bool(saved_modes[mode_key])
 	if root.has("series_length"):
 		series_length = clampi(int(root["series_length"]), SERIES_LENGTH_MIN, SERIES_LENGTH_MAX)
+	if root.has("word_set"):
+		word_set = clampi(int(root["word_set"]), 1, WORD_SET_COUNT)
 
 
 func save_progress() -> void:
@@ -136,6 +159,7 @@ func save_progress() -> void:
 		"games_played_count": games_played_count,
 		"enabled_modes": enabled_modes,
 		"series_length": series_length,
+		"word_set": word_set,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:
