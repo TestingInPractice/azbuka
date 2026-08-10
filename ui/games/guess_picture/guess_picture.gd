@@ -135,7 +135,7 @@ func _pick_distractor_letters(excluded: String) -> Array[String]:
 		var letter := str(entry["letter"])
 		if letter == excluded:
 			continue
-		if str(entry["word"]) == correct_word:
+		if _get_word(letter) == correct_word:
 			continue
 		pool.append(entry)
 	pool.shuffle()
@@ -145,9 +145,13 @@ func _pick_distractor_letters(excluded: String) -> Array[String]:
 	return result
 
 
-## Возвращает слово, соответствующее букве, из данных алфавита.
+## Возвращает слово, соответствующее букве, из выбранного набора слов
+## (с запасным вариантом из набора 1 через get_letter_data).
 func _get_word(letter: String) -> String:
-	return str(AlphabetData.get_letter_data(letter)["word"])
+	var word := str(AlphabetData.get_word_data(letter, ProgressManager.get_word_set()).get("word", ""))
+	if word.is_empty():
+		word = str(AlphabetData.get_letter_data(letter).get("word", ""))
+	return word
 
 
 func _on_answer_button_pressed(button: Button) -> void:

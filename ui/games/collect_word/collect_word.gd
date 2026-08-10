@@ -95,12 +95,15 @@ func _build_puzzle(letter: String) -> void:
 	_puzzle_id += 1
 	_completion_pending = false
 	is_word_complete = false
-	var data: Dictionary = AlphabetData.get_letter_data(letter)
+	var data: Dictionary = AlphabetData.get_word_data(letter, ProgressManager.get_word_set())
 	if data.is_empty():
 		GameLogger.warning("CollectWordGame", "word_not_found", {"letter": letter})
 		return
 	current_letter = letter
-	current_word = str(data["word"])
+	current_word = str(data.get("word", ""))
+	if current_word.is_empty():
+		# Запасной вариант: слово из набора 1 (совместимость с get_letter_data).
+		current_word = str(AlphabetData.get_letter_data(letter).get("word", ""))
 	_update_word_image()
 	word_letters = _split_word(current_word)
 	pool_letters = word_letters.duplicate()
@@ -158,7 +161,7 @@ func _build_puzzle(letter: String) -> void:
 		if id != _puzzle_id:
 			return
 		AudioManager.stop_all()
-		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter))
+		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set()))
 	)
 	GameLogger.info("CollectWordGame", "word_shown", {"letter": current_letter, "word": current_word, "letter_count": count})
 
@@ -279,7 +282,7 @@ func _on_word_completed() -> void:
 		if id != _puzzle_id:
 			return
 		AudioManager.stop_all()
-		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter))
+		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set()))
 		GameLogger.info("CollectWordGame", "word_audio_replayed", {"word": current_word})
 	)
 	get_tree().create_timer(NEXT_WORD_DELAY).timeout.connect(func() -> void:
@@ -333,8 +336,12 @@ func _update_word_image() -> void:
 
 
 ## Возвращает путь к картинке слова для буквы ("" если буквы нет в словаре).
+## Картинка берётся из выбранного набора слов, с запасным вариантом из
+## LetterCard.WORD_IMAGE (набор 1).
 func _image_path_for(ltr: String) -> String:
-	var image_name: String = LetterCard.WORD_IMAGE.get(ltr, "")
+	var image_name: String = str(AlphabetData.get_word_data(ltr, ProgressManager.get_word_set()).get("image", ""))
+	if image_name.is_empty():
+		image_name = LetterCard.WORD_IMAGE.get(ltr, "")
 	if image_name.is_empty():
 		return ""
 	return "res://assets/images/" + image_name + ".png"
@@ -352,7 +359,7 @@ func _make_placeholder_texture(ltr: String) -> Texture2D:
 ## Нажатие на картинку слова озвучивает текущее слово.
 func _on_word_image_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter))
+		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set()))
 		GameLogger.info("CollectWordGame", "word_image_pressed", {"letter": current_letter, "word": current_word})
 
 

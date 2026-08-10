@@ -256,8 +256,12 @@ func _update_word_image() -> void:
 
 
 ## Возвращает путь к картинке слова для буквы ("" если буквы нет в словаре).
+## Картинка берётся из выбранного набора слов, с запасным вариантом из
+## LetterCard.WORD_IMAGE (набор 1).
 func _image_path_for(ltr: String) -> String:
-	var image_name: String = LetterCard.WORD_IMAGE.get(ltr, "")
+	var image_name: String = str(AlphabetData.get_word_data(ltr, ProgressManager.get_word_set()).get("image", ""))
+	if image_name.is_empty():
+		image_name = LetterCard.WORD_IMAGE.get(ltr, "")
 	if image_name.is_empty():
 		return ""
 	return "res://assets/images/" + image_name + ".png"
