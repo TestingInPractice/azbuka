@@ -367,10 +367,16 @@ func _on_letter_sound_pressed() -> void:
 	AudioManager.play_audio(AlphabetData.get_letter_audio_path(letter))
 
 
+## Номер текущего набора слов. Берём из ProgressManager на каждом вызове,
+## чтобы смена набора в настройках сразу подхватывалась (без кэша).
+func _current_word_set() -> int:
+	return ProgressManager.get_word_set()
+
+
 func _on_word_sound_pressed() -> void:
 	GameLogger.info("letter_card", "word_sound", {"letter": letter})
 	AudioManager.stop_all()
-	AudioManager.play_audio(AlphabetData.get_word_audio_path(letter))
+	AudioManager.play_audio(AlphabetData.get_word_audio_path(letter, _current_word_set()))
 
 
 func _update_content() -> void:
@@ -394,7 +400,11 @@ func _update_content() -> void:
 
 
 func _image_path_for(ltr: String) -> String:
-	var image_name: String = WORD_IMAGE.get(ltr, "")
+	# Сначала имя картинки из данных выбранного набора, при пустом
+	# результате — запасной WORD_IMAGE (его используют и мини-игры).
+	var image_name: String = str(AlphabetData.get_word_data(ltr, _current_word_set()).get("image", ""))
+	if image_name.is_empty():
+		image_name = WORD_IMAGE.get(ltr, "")
 	if image_name.is_empty():
 		return ""
 	return "res://assets/images/" + image_name + ".png"
@@ -408,8 +418,13 @@ func _reset_word_game() -> void:
 	_hint_label.text = "Найди букву «%s» в слове" % letter
 	_hint_label.scale = Vector2.ONE
 	_hint_label.show()
-	var data: Dictionary = AlphabetData.get_letter_data(letter)
+	# Слово берём из выбранного набора; при пустом результате (нет набора
+	# или данных) — запасной вариант через старый get_letter_data.
+	var data: Dictionary = AlphabetData.get_word_data(letter, _current_word_set())
 	var word: String = str(data.get("word", ""))
+	if word.is_empty():
+		var legacy: Dictionary = AlphabetData.get_letter_data(letter)
+		word = str(legacy.get("word", ""))
 	if word.is_empty():
 		return
 	_setup_word_buttons(word)
@@ -514,11 +529,12 @@ func _save_auto_recording() -> bool:
 	# TODO: ИндексDB/локальное хранение записей - в отдельной фазе.
 	if _recorded_data.is_empty():
 		return false
-	var data: Dictionary = AlphabetData.get_letter_data(letter)
+	var word_set: int = _current_word_set()
+	var data: Dictionary = AlphabetData.get_word_data(letter, word_set)
 	var word: String = str(data.get("word", "unknown")).to_lower()
 	DirAccess.make_dir_recursive_absolute("user://recordings")
 	var ts: String = Time.get_datetime_string_from_system().replace("T", "_").replace(":", "-")
-	var path := "user://recordings/%s_%s_%s.wav" % [letter.to_lower(), word, ts]
+	var path := "user://recordings/%s_%s_set%d_%s.wav" % [letter.to_lower(), word, word_set, ts]
 	return save_recording(path)
 
 
