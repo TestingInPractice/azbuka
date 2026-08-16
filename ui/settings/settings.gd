@@ -94,9 +94,8 @@ func _ready() -> void:
 	for i in range(1, ProgressManager.WORD_SET_COUNT + 1):
 		var word_set_button: Button = _word_set_buttons[i - 1]
 		word_set_button.toggled.connect(_on_word_set_button_toggled.bind(i))
-	# Наборы 2-5 пока заблокированы: их контент появится позже.
-	for i in range(1, _word_set_buttons.size()):
-		(_word_set_buttons[i] as Button).disabled = true
+	# Все наборы доступны: картинки готовы для всех наборов (звук — общая
+	# заглушка для слов вне набора 1).
 	_sync_word_set_buttons()
 	_sync_checkboxes()
 	_update_theme_button_text()

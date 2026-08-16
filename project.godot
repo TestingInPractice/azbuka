@@ -27,11 +27,6 @@ bus/default_bus_layout="res://assets/audio/default_bus_layout.tres"
 
 [autoload]
 
-
-
-
-
-
 GameLogger="*res://addons/game_logger.gd"
 AlphabetData="*res://systems/alphabet_data.gd"
 ThemeManager="*res://addons/theme_manager.gd"

@@ -184,7 +184,6 @@ custom_minimum_size = Vector2(88, 88)
 theme_override_font_sizes/font_size = 44
 text = "2"
 toggle_mode = true
-disabled = true
 accessibility_name = "Набор слов 2"
 
 [node name="WordSetButton3" type="Button" parent="MainLayout/WordSetCard/WordSetRow"]
@@ -194,7 +193,6 @@ custom_minimum_size = Vector2(88, 88)
 theme_override_font_sizes/font_size = 44
 text = "3"
 toggle_mode = true
-disabled = true
 accessibility_name = "Набор слов 3"
 
 [node name="WordSetButton4" type="Button" parent="MainLayout/WordSetCard/WordSetRow"]
@@ -204,7 +202,6 @@ custom_minimum_size = Vector2(88, 88)
 theme_override_font_sizes/font_size = 44
 text = "4"
 toggle_mode = true
-disabled = true
 accessibility_name = "Набор слов 4"
 
 [node name="WordSetButton5" type="Button" parent="MainLayout/WordSetCard/WordSetRow"]
@@ -214,7 +211,6 @@ custom_minimum_size = Vector2(88, 88)
 theme_override_font_sizes/font_size = 44
 text = "5"
 toggle_mode = true
-disabled = true
 accessibility_name = "Набор слов 5"
 
 [node name="ThemeToggleButton" type="Button" parent="MainLayout"]

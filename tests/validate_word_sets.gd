@@ -16,10 +16,14 @@ func _ready() -> void:
 	_check(data1.get("word", "") == "Автобус",
 			"get_word_data(\"А\", 1)[\"word\"] == \"Автобус\" (получено: %s)" % str(data1.get("word", "")))
 
-	# 2. Пустой набор 2 → фолбэк на набор 1.
+	# 2. Слово из набора 2 (заполнен: генерация второго набора).
 	var data2: Dictionary = AlphabetData.get_word_data("А", 2)
-	_check(data2.get("word", "") == "Автобус",
-			"get_word_data(\"А\", 2) фолбэк на набор 1 (получено: %s)" % str(data2.get("word", "")))
+	_check(data2.get("word", "") == "Арбуз",
+			"get_word_data(\"А\", 2)[\"word\"] == \"Арбуз\" (получено: %s)" % str(data2.get("word", "")))
+	_check(str(data2.get("image", "")) == "generated/Watermelon",
+			"get_word_data(\"А\", 2)[\"image\"] == \"generated/Watermelon\" (получено: %s)" % str(data2.get("image", "")))
+	_check(data2.get("word_audio", "") == "res://assets/audio/автобус_tts.wav",
+			"набор 2 использует общий звук-заглушку (получено: %s)" % str(data2.get("word_audio", "")))
 
 	# 3. Путь к аудио слова по умолчанию (set_id = 1).
 	var audio: String = AlphabetData.get_word_audio_path("А")
