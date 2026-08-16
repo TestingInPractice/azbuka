@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhm7xmmkiv4xy"
-path="res://.godot/imported/walk_r_0.png-1a78bd5cc7728eadbde72abd41ee227c.ctex"
+uid="uid://bx2qv1xqmk8nv"
+path="res://.godot/imported/walk_0.png-cdae40feb8ea9b985839b01f72171176.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/sprites/kisa_frames/walk_r_0.png"
-dest_files=["res://.godot/imported/walk_r_0.png-1a78bd5cc7728eadbde72abd41ee227c.ctex"]
+source_file="res://assets/images/sprites/kisa_frames/walk_0.png"
+dest_files=["res://.godot/imported/walk_0.png-cdae40feb8ea9b985839b01f72171176.ctex"]
 
 [params]
 

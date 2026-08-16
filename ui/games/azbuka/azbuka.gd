@@ -163,11 +163,18 @@ func _animate_kisa_to(target_idx: int) -> void:
 	is_animating = true
 	_kisa.set_kisa_moving(true)
 	var positions: Array[Vector2] = _get_path_positions(current_letter_idx, target_idx)
-	var dx: float = positions[positions.size() - 1].x - positions[0].x
-	_kisa.set_facing(dx >= 0.0)
 
 	var tw := create_tween()
 	for i in range(1, positions.size()):
+		# Змейка на каждом ряду идёт в противоположном направлении: поворачиваем
+		# кису по ходу движения — callback срабатывает ПЕРЕД каждым сегментом,
+		# а не мгновенно при создании tween (иначе киса смотрит в сторону
+		# последнего сегмента весь маршрут).
+		var seg_dx: float = positions[i].x - positions[i - 1].x
+		if not is_equal_approx(seg_dx, 0.0):
+			tw.tween_callback(_kisa.set_facing.bind(seg_dx > 0.0))
+			GameLogger.info("AzbukaGame", "kisa_turn",
+				{"to": LETTERS[i], "seg_dx": seg_dx, "facing_right": seg_dx > 0.0})
 		var dist: float = positions[i - 1].distance_to(positions[i])
 		var seg_time: float = maxf(0.05, dist / RUN_SPEED)
 		tw.tween_property(_kisa, "position", positions[i] - KISA_ANCHOR, seg_time)

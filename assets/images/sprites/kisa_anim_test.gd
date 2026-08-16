@@ -1,10 +1,10 @@
 extends Node2D
 
-# Тестовая сцена: показывает анимации Киса (idle / walk_right / walk_left)
+# Тестовая сцена: показывает анимации Киса (idle / walk)
 # Запуск: godot --path . assets/images/sprites/kisa_anim_test.tscn
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
-var anim_names := ["idle", "walk_right", "walk_left"]
+var anim_names := ["idle", "walk"]
 var idx := 0
 var timer := 0.0
 

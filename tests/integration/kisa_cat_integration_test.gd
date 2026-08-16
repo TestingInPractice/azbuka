@@ -18,20 +18,26 @@ func _ready() -> void:
 		failures += 1
 		push_error("Ожидался idle, получен " + sprite.animation)
 
-	# walk_right при движении вправо
+	# walk при движении вправо: кадры walk, flip_h=true (поворот по змейке)
 	kisa.set_kisa_moving(true)
 	kisa.set_facing(true)
 	await get_tree().process_frame
-	if sprite.animation != "walk_right":
+	if sprite.animation != "walk":
 		failures += 1
-		push_error("Ожидался walk_right, получен " + sprite.animation)
+		push_error("Ожидался walk, получен " + sprite.animation)
+	if not sprite.flip_h:
+		failures += 1
+		push_error("Ожидался flip_h=true при беге вправо")
 
-	# walk_left при движении влево
+	# walk при движении влево: те же кадры walk, flip_h=false
 	kisa.set_facing(false)
 	await get_tree().process_frame
-	if sprite.animation != "walk_left":
+	if sprite.animation != "walk":
 		failures += 1
-		push_error("Ожидался walk_left, получен " + sprite.animation)
+		push_error("Ожидался walk, получен " + sprite.animation)
+	if sprite.flip_h:
+		failures += 1
+		push_error("Ожидался flip_h=false при беге влево")
 
 	# idle при остановке
 	kisa.set_kisa_moving(false)
@@ -48,7 +54,7 @@ func _ready() -> void:
 		push_error("Idle не должен меняться при set_facing")
 
 	# Кадры анимаций непустые
-	for anim_name in ["idle", "walk_right", "walk_left"]:
+	for anim_name in ["idle", "walk"]:
 		var count := sprite.sprite_frames.get_frame_count(anim_name)
 		if count == 0:
 			failures += 1

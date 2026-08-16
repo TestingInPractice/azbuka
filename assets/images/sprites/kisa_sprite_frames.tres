@@ -1,11 +1,9 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3]
+[gd_resource type="SpriteFrames" load_steps=5 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/images/sprites/kisa_frames/idle_0.png" id="1_1"]
 [ext_resource type="Texture2D" path="res://assets/images/sprites/kisa_frames/idle_1.png" id="1_2"]
-[ext_resource type="Texture2D" path="res://assets/images/sprites/kisa_frames/walk_r_0.png" id="1_3"]
-[ext_resource type="Texture2D" path="res://assets/images/sprites/kisa_frames/walk_r_1.png" id="1_4"]
-[ext_resource type="Texture2D" path="res://assets/images/sprites/kisa_frames/walk_l_0.png" id="1_5"]
-[ext_resource type="Texture2D" path="res://assets/images/sprites/kisa_frames/walk_l_1.png" id="1_6"]
+[ext_resource type="Texture2D" path="res://assets/images/sprites/kisa_frames/walk_0.png" id="1_3"]
+[ext_resource type="Texture2D" path="res://assets/images/sprites/kisa_frames/walk_1.png" id="1_4"]
 
 [resource]
 animations = [
@@ -36,22 +34,7 @@ animations = [
 },
 ],
 "loop": true,
-"name": &"walk_right",
-"speed": 6.0
-},
-{
-"frames": [
-{
-"duration": 1.0,
-"texture": ExtResource("1_5")
-},
-{
-"duration": 1.0,
-"texture": ExtResource("1_6")
-},
-],
-"loop": true,
-"name": &"walk_left",
+"name": &"walk",
 "speed": 6.0
 }
 ]
