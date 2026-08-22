@@ -429,7 +429,8 @@
     },
     "5": {
      "word": "Макароны",
-     "image": "generated/Pasta"
+     "image": "generated/Pasta",
+     "word_audio": "res://assets/audio/макароны_tts.wav"
     }
    }
   },
@@ -604,7 +605,8 @@
     },
     "3": {
      "word": "Телефон",
-     "image": "generated/Phone"
+     "image": "generated/Phone",
+     "word_audio": "res://assets/audio/телефон_tts.wav"
     },
     "4": {
      "word": "Тарелка",
@@ -944,7 +946,8 @@
     },
     "3": {
      "word": "Эму",
-     "image": "generated/Emu"
+     "image": "generated/Emu",
+     "word_audio": "res://assets/audio/эму_tts.wav"
     },
     "4": {
      "word": "Электричка",
@@ -1009,7 +1012,8 @@
     },
     "4": {
      "word": "Ящерица",
-     "image": "generated/Lizard"
+     "image": "generated/Lizard",
+     "word_audio": "res://assets/audio/ящерица_tts.wav"
     },
     "5": {
      "word": "Яхта",
