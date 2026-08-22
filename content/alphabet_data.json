@@ -11,22 +11,22 @@
     },
     "2": {
      "word": "Арбуз",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/арбуз_tts.wav",
      "image": "generated/Watermelon"
     },
     "3": {
      "word": "Аист",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/аист_tts.wav",
      "image": "generated/Stork"
     },
     "4": {
      "word": "Ананас",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ананас_tts.wav",
      "image": "generated/Pineapple"
     },
     "5": {
      "word": "Абрикос",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/абрикос_tts.wav",
      "image": "generated/Apricot"
     }
    }
@@ -42,22 +42,22 @@
     },
     "2": {
      "word": "Белка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/белка_tts.wav",
      "image": "generated/Squirrel"
     },
     "3": {
      "word": "Бочка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/бочка_tts.wav",
      "image": "generated/Barrel"
     },
     "4": {
      "word": "Ботинок",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ботинок_tts.wav",
      "image": "generated/Boot"
     },
     "5": {
      "word": "Барабан",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/барабан_tts.wav",
      "image": "generated/Drum"
     }
    }
@@ -73,22 +73,22 @@
     },
     "2": {
      "word": "Ведро",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ведро_tts.wav",
      "image": "generated/Bucket"
     },
     "3": {
      "word": "Волк",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/волк_tts.wav",
      "image": "generated/Wolf"
     },
     "4": {
      "word": "Ворона",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ворона_tts.wav",
      "image": "generated/Crow"
     },
     "5": {
      "word": "Варежки",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/варежки_tts.wav",
      "image": "generated/Mittens"
     }
    }
@@ -104,22 +104,22 @@
     },
     "2": {
      "word": "Гриб",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/гриб_tts.wav",
      "image": "generated/Mushroom"
     },
     "3": {
      "word": "Гора",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/гора_tts.wav",
      "image": "generated/Mountain"
     },
     "4": {
      "word": "Галстук",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/галстук_tts.wav",
      "image": "generated/Tie"
     },
     "5": {
      "word": "Глобус",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/глобус_tts.wav",
      "image": "generated/Globe"
     }
    }
@@ -135,22 +135,22 @@
     },
     "2": {
      "word": "Дерево",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/дерево_tts.wav",
      "image": "generated/Tree"
     },
     "3": {
      "word": "Диван",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/диван_tts.wav",
      "image": "generated/Sofa"
     },
     "4": {
      "word": "Дельфин",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/дельфин_tts.wav",
      "image": "generated/Dolphin"
     },
     "5": {
      "word": "Дятел",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/дятел_tts.wav",
      "image": "generated/Woodpecker"
     }
    }
@@ -166,22 +166,22 @@
     },
     "2": {
      "word": "Енот",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/енот_tts.wav",
      "image": "generated/Raccoon"
     },
     "3": {
      "word": "Ежевика",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ежевика_tts.wav",
      "image": "generated/Blackberry"
     },
     "4": {
      "word": "Ежиха",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ежиха_tts.wav",
      "image": "generated/Hedgehog"
     },
     "5": {
      "word": "Еда",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/еда_tts.wav",
      "image": "generated/Food"
     }
    }
@@ -197,22 +197,22 @@
     },
     "2": {
      "word": "Ёлка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ёлка_tts.wav",
      "image": "generated/Fir_Tree"
     },
     "3": {
      "word": "Ёрш",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ёрш_tts.wav",
      "image": "generated/Ruff"
     },
     "4": {
      "word": "Ёршик",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ёршик_tts.wav",
      "image": "generated/Bottle_Brush"
     },
     "5": {
      "word": "Ёлочная игрушка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ёлочная игрушка_tts.wav",
      "image": "generated/Christmas_Toy"
     }
    }
@@ -228,22 +228,22 @@
     },
     "2": {
      "word": "Жираф",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/жираф_tts.wav",
      "image": "generated/Giraffe"
     },
     "3": {
      "word": "Жёлудь",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/жёлудь_tts.wav",
      "image": "generated/Acorn"
     },
     "4": {
      "word": "Журнал",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/журнал_tts.wav",
      "image": "generated/Magazine"
     },
     "5": {
      "word": "Жемчуг",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/жемчуг_tts.wav",
      "image": "generated/Pearl"
     }
    }
@@ -259,22 +259,22 @@
     },
     "2": {
      "word": "Зонт",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/зонт_tts.wav",
      "image": "generated/Umbrella"
     },
     "3": {
      "word": "Звезда",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/звезда_tts.wav",
      "image": "generated/Star"
     },
     "4": {
      "word": "Зебра",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/зебра_tts.wav",
      "image": "generated/Zebra"
     },
     "5": {
      "word": "Земляника",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/земляника_tts.wav",
      "image": "generated/Strawberry"
     }
    }
@@ -290,22 +290,22 @@
     },
     "2": {
      "word": "Индюк",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/индюк_tts.wav",
      "image": "generated/Turkey"
     },
     "3": {
      "word": "Игла",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/игла_tts.wav",
      "image": "generated/Needle"
     },
     "4": {
      "word": "Ирис",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ирис_tts.wav",
      "image": "generated/Iris"
     },
     "5": {
      "word": "Избушка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/избушка_tts.wav",
      "image": "generated/Hut"
     }
    }
@@ -321,22 +321,22 @@
     },
     "2": {
      "word": "Йети",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/йети_tts.wav",
      "image": "generated/Yeti"
     },
     "3": {
      "word": "Йод",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/йод_tts.wav",
      "image": "generated/Iodine"
     },
     "4": {
      "word": "Чайник",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/чайник_tts.wav",
      "image": "generated/Teapot"
     },
     "5": {
      "word": "Чайка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/чайка_tts.wav",
      "image": "generated/Seagull"
     }
    }
@@ -352,22 +352,22 @@
     },
     "2": {
      "word": "Карандаш",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/карандаш_tts.wav",
      "image": "generated/Pencil"
     },
     "3": {
      "word": "Курица",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/курица_tts.wav",
      "image": "generated/Hen"
     },
     "4": {
      "word": "Капуста",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/капуста_tts.wav",
      "image": "generated/Cabbage"
     },
     "5": {
      "word": "Кенгуру",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/кенгуру_tts.wav",
      "image": "generated/Kangaroo"
     }
    }
@@ -383,22 +383,22 @@
     },
     "2": {
      "word": "Лиса",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/лиса_tts.wav",
      "image": "generated/Fox"
     },
     "3": {
      "word": "Лягушка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/лягушка_tts.wav",
      "image": "generated/Frog"
     },
     "4": {
      "word": "Лимон",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/лимон_tts.wav",
      "image": "generated/Lemon"
     },
     "5": {
      "word": "Ласточка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ласточка_tts.wav",
      "image": "generated/Swallow"
     }
    }
@@ -414,22 +414,21 @@
     },
     "2": {
      "word": "Машина",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/машина_tts.wav",
      "image": "generated/Car"
     },
     "3": {
      "word": "Морковь",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/морковь_tts.wav",
      "image": "generated/Carrot"
     },
     "4": {
      "word": "Муха",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/муха_tts.wav",
      "image": "generated/Fly"
     },
     "5": {
      "word": "Макароны",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
      "image": "generated/Pasta"
     }
    }
@@ -445,22 +444,22 @@
     },
     "2": {
      "word": "Носок",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/носок_tts.wav",
      "image": "generated/Sock"
     },
     "3": {
      "word": "Нитка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/нитка_tts.wav",
      "image": "generated/Thread"
     },
     "4": {
      "word": "Ножницы",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ножницы_tts.wav",
      "image": "generated/Scissors"
     },
     "5": {
      "word": "Небо",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/небо_tts.wav",
      "image": "generated/Sky"
     }
    }
@@ -476,22 +475,22 @@
     },
     "2": {
      "word": "Обезьяна",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/обезьяна_tts.wav",
      "image": "generated/Monkey"
     },
     "3": {
      "word": "Очки",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/очки_tts.wav",
      "image": "generated/Glasses"
     },
     "4": {
      "word": "Огурец",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/огурец_tts.wav",
      "image": "generated/Cucumber"
     },
     "5": {
      "word": "Осьминог",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/осьминог_tts.wav",
      "image": "generated/Octopus"
     }
    }
@@ -507,22 +506,22 @@
     },
     "2": {
      "word": "Паровоз",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/паровоз_tts.wav",
      "image": "generated/Locomotive"
     },
     "3": {
      "word": "Пчела",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/пчела_tts.wav",
      "image": "generated/Bee"
     },
     "4": {
      "word": "Петух",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/петух_tts.wav",
      "image": "generated/Rooster"
     },
     "5": {
      "word": "Пингвин",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/пингвин_tts.wav",
      "image": "generated/Penguin"
     }
    }
@@ -538,22 +537,22 @@
     },
     "2": {
      "word": "Радуга",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/радуга_tts.wav",
      "image": "raduga"
     },
     "3": {
      "word": "Ракета",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ракета_tts.wav",
      "image": "generated/Rocket"
     },
     "4": {
      "word": "Робот",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/робот_tts.wav",
      "image": "generated/Robot"
     },
     "5": {
      "word": "Ручей",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ручей_tts.wav",
      "image": "generated/Stream"
     }
    }
@@ -569,22 +568,22 @@
     },
     "2": {
      "word": "Самолёт",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/самолёт_tts.wav",
      "image": "generated/Airplane"
     },
     "3": {
      "word": "Слон",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/слон_tts.wav",
      "image": "generated/Elephant"
     },
     "4": {
      "word": "Светофор",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/светофор_tts.wav",
      "image": "generated/Traffic_Light"
     },
     "5": {
      "word": "Скворец",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/скворец_tts.wav",
      "image": "generated/Starling"
     }
    }
@@ -600,22 +599,21 @@
     },
     "2": {
      "word": "Тыква",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/тыква_tts.wav",
      "image": "generated/Pumpkin"
     },
     "3": {
      "word": "Телефон",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
      "image": "generated/Phone"
     },
     "4": {
      "word": "Тарелка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/тарелка_tts.wav",
      "image": "generated/Plate"
     },
     "5": {
      "word": "Трактор",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/трактор_tts.wav",
      "image": "generated/Tractor"
     }
    }
@@ -631,22 +629,22 @@
     },
     "2": {
      "word": "Улитка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/улитка_tts.wav",
      "image": "generated/Snail"
     },
     "3": {
      "word": "Улей",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/улей_tts.wav",
      "image": "generated/Beehive"
     },
     "4": {
      "word": "Утюг",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/утюг_tts.wav",
      "image": "generated/Iron"
     },
     "5": {
      "word": "Усы",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/усы_tts.wav",
      "image": "generated/Whiskers"
     }
    }
@@ -662,22 +660,22 @@
     },
     "2": {
      "word": "Флаг",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/флаг_tts.wav",
      "image": "generated/Flag"
     },
     "3": {
      "word": "Филин",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/филин_tts.wav",
      "image": "generated/Owl"
     },
     "4": {
      "word": "Фартук",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/фартук_tts.wav",
      "image": "generated/Apron"
     },
     "5": {
      "word": "Фламинго",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/фламинго_tts.wav",
      "image": "generated/Flamingo"
     }
    }
@@ -693,22 +691,22 @@
     },
     "2": {
      "word": "Хомяк",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/хомяк_tts.wav",
      "image": "generated/Hamster"
     },
     "3": {
      "word": "Хвост",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/хвост_tts.wav",
      "image": "generated/Tail"
     },
     "4": {
      "word": "Халат",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/халат_tts.wav",
      "image": "generated/Robe"
     },
     "5": {
      "word": "Халва",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/халва_tts.wav",
      "image": "generated/Halva"
     }
    }
@@ -724,22 +722,22 @@
     },
     "2": {
      "word": "Цветок",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/цветок_tts.wav",
      "image": "generated/Flower"
     },
     "3": {
      "word": "Цапля",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/цапля_tts.wav",
      "image": "generated/Heron"
     },
     "4": {
      "word": "Цирк",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/цирк_tts.wav",
      "image": "generated/Circus"
     },
     "5": {
      "word": "Цепочка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/цепочка_tts.wav",
      "image": "generated/Chain"
     }
    }
@@ -755,22 +753,22 @@
     },
     "2": {
      "word": "Часы",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/часы_tts.wav",
      "image": "generated/Clock"
     },
     "3": {
      "word": "Черепаха",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/черепаха_tts.wav",
      "image": "generated/Turtle"
     },
     "4": {
      "word": "Чемодан",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/чемодан_tts.wav",
      "image": "generated/Suitcase"
     },
     "5": {
      "word": "Червяк",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/червяк_tts.wav",
      "image": "generated/Worm"
     }
    }
@@ -786,22 +784,22 @@
     },
     "2": {
      "word": "Шар",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/шар_tts.wav",
      "image": "generated/Balloon"
     },
     "3": {
      "word": "Шишка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/шишка_tts.wav",
      "image": "generated/Pinecone"
     },
     "4": {
      "word": "Шарф",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/шарф_tts.wav",
      "image": "generated/Scarf"
     },
     "5": {
      "word": "Шоколад",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/шоколад_tts.wav",
      "image": "generated/Chocolate"
     }
    }
@@ -817,22 +815,22 @@
     },
     "2": {
      "word": "Щётка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/щётка_tts.wav",
      "image": "generated/Brush"
     },
     "3": {
      "word": "Щука",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/щука_tts.wav",
      "image": "generated/Pike"
     },
     "4": {
      "word": "Щи",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/щи_tts.wav",
      "image": "generated/Shchi"
     },
     "5": {
      "word": "Щит",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/щит_tts.wav",
      "image": "generated/Shield"
     }
    }
@@ -848,22 +846,22 @@
     },
     "2": {
      "word": "Подъезд",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/подъезд_tts.wav",
      "image": "generated/Entrance"
     },
     "3": {
      "word": "Объятие",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/объятие_tts.wav",
      "image": "generated/Hug"
     },
     "4": {
      "word": "Съёмка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/съёмка_tts.wav",
      "image": "generated/Filming"
     },
     "5": {
      "word": "Подъёмник",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/подъёмник_tts.wav",
      "image": "generated/Lift"
     }
    }
@@ -879,22 +877,22 @@
     },
     "2": {
      "word": "Сыр",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/сыр_tts.wav",
      "image": "generated/Cheese"
     },
     "3": {
      "word": "Дым",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/дым_tts.wav",
      "image": "generated/Smoke"
     },
     "4": {
      "word": "Рысь",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/рысь_tts.wav",
      "image": "generated/Lynx"
     },
     "5": {
      "word": "Мышь",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/мышь_tts.wav",
      "image": "generated/Mouse"
     }
    }
@@ -910,22 +908,22 @@
     },
     "2": {
      "word": "Медведь",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/медведь_tts.wav",
      "image": "generated/Bear"
     },
     "3": {
      "word": "Олень",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/олень_tts.wav",
      "image": "generated/Deer"
     },
     "4": {
      "word": "Дверь",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/дверь_tts.wav",
      "image": "generated/Door"
     },
     "5": {
      "word": "Тюлень",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/тюлень_tts.wav",
      "image": "generated/Seal"
     }
    }
@@ -941,22 +939,21 @@
     },
     "2": {
      "word": "Эскалатор",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/эскалатор_tts.wav",
      "image": "generated/Escalator"
     },
     "3": {
      "word": "Эму",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
      "image": "generated/Emu"
     },
     "4": {
      "word": "Электричка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/электричка_tts.wav",
      "image": "generated/Electric_Train"
     },
     "5": {
      "word": "Эскимо",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/эскимо_tts.wav",
      "image": "generated/Popsicle"
     }
    }
@@ -972,22 +969,21 @@
     },
     "2": {
      "word": "Юбка",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/юбка_tts.wav",
      "image": "generated/Skirt"
     },
     "3": {
      "word": "Юг",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
      "image": "generated/South"
     },
     "4": {
      "word": "Юпитер",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/юпитер_tts.wav",
      "image": "generated/Jupiter"
     },
     "5": {
      "word": "Юрта",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/юрта_tts.wav",
      "image": "generated/Yurt"
     }
    }
@@ -1003,22 +999,21 @@
     },
     "2": {
      "word": "Ягода",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/ягода_tts.wav",
      "image": "generated/Berry"
     },
     "3": {
      "word": "Якорь",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/якорь_tts.wav",
      "image": "generated/Anchor"
     },
     "4": {
      "word": "Ящерица",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
      "image": "generated/Lizard"
     },
     "5": {
      "word": "Яхта",
-     "word_audio": "res://assets/audio/автобус_tts.wav",
+     "word_audio": "res://assets/audio/яхта_tts.wav",
      "image": "generated/Yacht"
     }
    }
