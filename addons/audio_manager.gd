@@ -14,12 +14,17 @@ signal sound_toggled(enabled: bool)
 var sound_enabled: bool = true
 
 var _player: AudioStreamPlayer
+var _music_player: AudioStreamPlayer
+var _music_path: String = ""
 
 
 func _ready() -> void:
 	_player = AudioStreamPlayer.new()
 	_player.bus = &"Master"
 	add_child(_player)
+	_music_player = AudioStreamPlayer.new()
+	_music_player.bus = &"Master"
+	add_child(_music_player)
 
 
 func set_sound_enabled(enabled: bool) -> void:
@@ -53,3 +58,30 @@ func play_stream(stream: AudioStream) -> void:
 func stop_all() -> void:
 	if _player != null:
 		_player.stop()
+	stop_music()
+
+
+## Запускает зацикленную музыку по пути ресурса. Если этот трек уже играет,
+## ничего не делает (не перезапускает с начала).
+func play_music(path: String) -> void:
+	if not sound_enabled:
+		return
+	if path.is_empty():
+		return
+	if _music_path == path and _music_player.playing:
+		return
+	var stream := load(path) as AudioStream
+	if stream == null:
+		push_error("AudioManager: не найден музыкальный файл " + path)
+		return
+	stream.loop = true
+	_music_path = path
+	_music_player.stream = stream
+	_music_player.play()
+
+
+## Останавливает музыку и сбрасывает запомненный трек.
+func stop_music() -> void:
+	_music_path = ""
+	if _music_player != null:
+		_music_player.stop()

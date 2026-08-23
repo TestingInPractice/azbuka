@@ -20,11 +20,14 @@ const GAME_TITLES := {
 	"azbuka": "Азбука",
 	"find_letter": "Найди букву",
 	"collect_word": "Собери слово",
-	"guess_picture": "Угадай картинку",
+	"guess_picture": "Угадай букву",
 }
 
 ## Путь к сцене главного меню.
 const MAIN_MENU_SCENE := "res://ui/main_menu/main_menu.tscn"
+
+## Фоновая музыка главного меню (зацикленная).
+const MENU_MUSIC := "res://assets/audio/music/menu_theme.ogg"
 
 ## Цвет фона кнопки каждой игры — разный, чтобы ребёнок различал игры.
 const GAME_BUTTON_COLORS := {
@@ -65,6 +68,7 @@ func _ready() -> void:
 	}
 	_apply_theme()
 	_update_game_buttons_visibility()
+	AudioManager.play_music(MENU_MUSIC)
 
 
 ## Показывает только включённые в настройках игры, скрывая выключенные.
@@ -104,6 +108,8 @@ func _on_game_button_pressed(game_key: String) -> void:
 	var scene_path: String = GAME_SCENES[game_key]
 	var title: String = GAME_TITLES[game_key]
 	GameLogger.info("MainMenu", "game_button_pressed", {"game": game_key, "title": title})
+	# Меню-музыка играет только на экране выбора игры.
+	AudioManager.stop_music()
 	get_tree().change_scene_to_file(scene_path)
 
 
