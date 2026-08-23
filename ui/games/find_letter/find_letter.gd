@@ -38,6 +38,7 @@ const PROMPT_CORRECT_PATH := "res://assets/audio/prompt_correct.wav"
 @onready var _hint_label: Label = %HintLabel
 @onready var _back_button: Button = %FindLetterBackButton
 @onready var _ready_panel: VBoxContainer = %ReadyPanel
+@onready var _ready_title_label: Label = %ReadyTitleLabel
 @onready var _ready_start_button: Button = %ReadyStartButton
 @onready var _card_panel: VBoxContainer = %CardPanel
 @onready var _card_number_label: Label = %CardNumberLabel
@@ -200,7 +201,9 @@ func _update_squares() -> void:
 			ThemeManager.style_button(button, button_bg, button_text)
 
 
-## Перекрашивает квадрат в указанный цвет фона.
+## Перекрашивает квадрат в указанный цвет фона. Оверрайдим и disabled-состояние:
+## после правильного ответа кнопка disable'ится, иначе вместо цвета показался
+## серый stylebox темы.
 func _set_square_color(button: Button, bg_color: Color) -> void:
 	var style := StyleBoxFlat.new()
 	style.bg_color = bg_color
@@ -208,6 +211,9 @@ func _set_square_color(button: Button, bg_color: Color) -> void:
 	button.add_theme_stylebox_override("normal", style)
 	button.add_theme_stylebox_override("hover", style)
 	button.add_theme_stylebox_override("pressed", style)
+	button.add_theme_stylebox_override("disabled", style)
+	button.add_theme_color_override("font_disabled_color", Color.WHITE)
+	button.add_theme_color_override("font_focus_color", Color.WHITE)
 
 
 ## Анимация правильного ответа: зелёная подсветка + подпрыгивание (как в азбуке).
@@ -370,6 +376,7 @@ func _go_to_main_menu() -> void:
 func _apply_theme(_mode: int = 0) -> void:
 	_background.color = ThemeManager.get_bg()
 	_title_label.add_theme_color_override("font_color", ThemeManager.get_text())
+	_ready_title_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	_hint_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	_card_number_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	var button_bg := _get_button_bg()

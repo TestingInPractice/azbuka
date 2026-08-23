@@ -119,8 +119,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 88)
 theme_override_font_sizes/font_size = 44
-text = "Угадай картинку"
-accessibility_name = "Угадай картинку"
+text = "Угадай букву"
+accessibility_name = "Угадай букву"
 
 [node name="SeriesCard" type="PanelContainer" parent="MainLayout"]
 unique_name_in_owner = true
@@ -228,8 +228,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 96)
 theme_override_font_sizes/font_size = 44
-text = "Донат"
-accessibility_name = "Донат"
+text = "Поддержать проект"
+accessibility_name = "Поддержать проект"
 
 [node name="FeedbackButton" type="Button" parent="MainLayout"]
 unique_name_in_owner = true

@@ -79,8 +79,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 96)
 theme_override_font_sizes/font_size = 48
-text = "Угадай картинку"
-accessibility_name = "Угадай картинку"
+text = "Угадай букву"
+accessibility_name = "Угадай букву"
 
 [node name="SettingsButton" type="Button" parent="."]
 unique_name_in_owner = true

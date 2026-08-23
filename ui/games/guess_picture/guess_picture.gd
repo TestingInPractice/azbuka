@@ -1,10 +1,10 @@
 extends Control
-## Игра «Угадай картинку»: подбор слова к показанной букве.
+## Игра «Угадай букву»: подбор слова к показанной букве.
 ##
 ## Игра состоит из 10 раундов. В каждом раунде по центру показывается буква,
-## а ниже четыре большие кнопки со словами: три случайных слова и одно
-## правильное (слово текущей буквы из AlphabetData). За правильный ответ
-## начисляется очко, звучит «Молодец!» и название буквы, кнопка подсвечивается
+## звучит её название, а ниже четыре большие кнопки со словами: три случайных
+## слова и одно правильное (слово текущей буквы из AlphabetData). За
+## правильный ответ начисляется очко, звучит «Молодец!», кнопка подсвечивается
 ## зелёным. За неправильный ответ кнопка блокируется и подсвечивается красным,
 ## показывается подсказка «Попробуй ещё!». После 10 раундов показывается финал
 ## со счётом и кнопками «Играть ещё» и «Назад».
@@ -111,6 +111,8 @@ func _start_round() -> void:
 	_letter_label.text = _current_letter
 	_status_label.text = ""
 	_apply_theme()
+	# Звук буквы звучит в начале раунда, пока буква перед глазами.
+	AudioManager.play_audio(AlphabetData.get_letter_audio_path(_current_letter))
 	GameLogger.info("GuessPictureGame", "round_start", {
 		"round": _rounds_played + 1,
 		"letter": _current_letter,
@@ -166,8 +168,8 @@ func _on_answer_button_pressed(button: Button) -> void:
 		_handle_wrong_answer(button, button.text)
 
 
-## Обрабатывает правильный ответ: зелёная подсветка, «Молодец!», звук буквы,
-## увеличение счёта и переход к следующему раунду (или к финалу).
+## Обрабатывает правильный ответ: зелёная подсветка, «Молодец!», увеличение
+## счёта и переход к следующему раунду (или к финалу).
 func _handle_correct_answer(button: Button, word: String) -> void:
 	_round_active = false
 	_score += 1
@@ -183,10 +185,6 @@ func _handle_correct_answer(button: Button, word: String) -> void:
 		"score": _score,
 	})
 	AudioManager.play_audio(PROMPT_CORRECT_PATH)
-	await get_tree().create_timer(0.6).timeout
-	if not is_inside_tree():
-		return
-	AudioManager.play_audio(AlphabetData.get_letter_audio_path(_current_letter))
 	await get_tree().create_timer(0.7).timeout
 	if not is_inside_tree():
 		return
@@ -252,6 +250,11 @@ func _apply_theme(_mode: int = 0) -> void:
 			_style_button_flat(button, WRONG_COLOR)
 		else:
 			ThemeManager.style_button(button, button_bg, button_text)
+			# Сброс устаревших flat-оверрайдов (disabled-стиль и белый шрифт),
+			# оставшихся от прошлых раундов: иначе при блокировке кнопки
+			# всплывал зелёный/красный цвет чужого ответа.
+			button.remove_theme_stylebox_override("disabled")
+			button.remove_theme_color_override("font_disabled_color")
 	if _correct_button_index >= 0 and not _round_active:
 		_style_button_flat(_answer_buttons[_correct_button_index], CORRECT_COLOR)
 
