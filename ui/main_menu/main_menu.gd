@@ -115,4 +115,6 @@ func _on_game_button_pressed(game_key: String) -> void:
 
 func _on_settings_button_pressed() -> void:
 	GameLogger.info("MainMenu", "settings_button_pressed", {})
-	get_tree().change_scene_to_file("res://ui/settings/settings.tscn")
+	ParentalGate.open(self, func() -> void:
+		get_tree().change_scene_to_file("res://ui/settings/settings.tscn")
+	)

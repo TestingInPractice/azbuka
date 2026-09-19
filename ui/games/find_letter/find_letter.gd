@@ -22,6 +22,8 @@ const ERROR_BEEP_SAMPLE_RATE := 22050
 const STATE_READY := 0
 const STATE_PLAYING := 1
 const STATE_COMPLETED := 2
+## Задержка перед автоподсказкой при простое (секунды).
+const IDLE_HINT_DELAY := 6.0
 
 ## Цвет подсветки правильного квадрата.
 const COLOR_CORRECT := Color(0.2, 0.7, 0.2)
@@ -37,6 +39,7 @@ const PROMPT_CORRECT_PATH := "res://assets/audio/prompt_correct.wav"
 @onready var _title_label: Label = %TitleLabel
 @onready var _hint_label: Label = %HintLabel
 @onready var _back_button: Button = %FindLetterBackButton
+@onready var _home_button: Button = %HomeButton
 @onready var _ready_panel: VBoxContainer = %ReadyPanel
 @onready var _ready_title_label: Label = %ReadyTitleLabel
 @onready var _ready_start_button: Button = %ReadyStartButton
@@ -63,8 +66,10 @@ var _answers: Array[String] = []
 var _correct_letter: String = ""
 ## Блокировка ввода во время паузы после правильного ответа.
 var _input_blocked: bool = false
+var _navigating: bool = false
 
 var _error_beep: AudioStreamWAV
+var _idle_timer: Timer = null
 
 
 func _ready() -> void:
@@ -76,6 +81,7 @@ func _ready() -> void:
 	]
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_back_button.pressed.connect(_on_back_button_pressed)
+	_home_button.pressed.connect(_on_home_button_pressed)
 	_ready_start_button.pressed.connect(_on_ready_start_pressed)
 	_word_image.gui_input.connect(_on_word_image_input)
 	for index in _square_buttons.size():
@@ -85,6 +91,7 @@ func _ready() -> void:
 	_completion_yes_button.pressed.connect(_on_completion_yes_pressed)
 	_completion_no_button.pressed.connect(_on_completion_no_pressed)
 	_error_beep = _build_error_beep()
+	_setup_idle_timer()
 	_show_ready()
 	_apply_theme()
 
@@ -166,6 +173,7 @@ func _show_card(index: int) -> void:
 		"total": _series.size(),
 		"letter": _correct_letter,
 	})
+	_reset_idle_timer()
 
 
 ## Собирает варианты ответов: правильная буква и три случайные.
@@ -283,6 +291,8 @@ func _make_placeholder_texture(ltr: String) -> Texture2D:
 
 
 func _on_ready_start_pressed() -> void:
+	if _navigating:
+		return
 	GameLogger.info("FindLetterGame", "ready_start_pressed", {})
 	_start_series()
 
@@ -291,14 +301,16 @@ func _on_word_image_input(event: InputEvent) -> void:
 	if _state != STATE_PLAYING:
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var audio_path := AlphabetData.get_letter_audio_path(_correct_letter)
+		var audio_path := AlphabetData.get_letter_audio_path(_correct_letter, ProgressManager.get_voice_variant())
 		AudioManager.play_audio(audio_path)
 		GameLogger.info("FindLetterGame", "word_image_pressed", {"letter": _correct_letter})
+		_reset_idle_timer()
 
 
 func _on_square_pressed(index: int) -> void:
-	if _state != STATE_PLAYING or _input_blocked or _solved[_card_index]:
+	if _state != STATE_PLAYING or _input_blocked or _navigating or _solved[_card_index]:
 		return
+	_reset_idle_timer()
 	var selected := _answers[index]
 	var button := _square_buttons[index]
 	if selected == _correct_letter:
@@ -326,14 +338,14 @@ func _on_square_pressed(index: int) -> void:
 
 
 func _on_prev_card_pressed() -> void:
-	if _state != STATE_PLAYING:
+	if _state != STATE_PLAYING or _navigating:
 		return
 	if _card_index > 0:
 		_show_card(_card_index - 1)
 
 
 func _on_next_card_pressed() -> void:
-	if _state != STATE_PLAYING:
+	if _state != STATE_PLAYING or _navigating:
 		return
 	if _card_index + 1 < _series.size():
 		_show_card(_card_index + 1)
@@ -352,17 +364,36 @@ func _show_completion() -> void:
 
 
 func _on_completion_yes_pressed() -> void:
+	if _navigating:
+		return
 	GameLogger.info("FindLetterGame", "completion_yes_pressed", {})
 	_start_series()
 
 
 func _on_completion_no_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	_stop_idle_timer()
 	GameLogger.info("FindLetterGame", "completion_no_pressed", {})
 	_go_to_main_menu()
 
 
 func _on_back_button_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	_stop_idle_timer()
 	GameLogger.info("FindLetterGame", "back_button_pressed", {})
+	_go_to_main_menu()
+
+
+func _on_home_button_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	_stop_idle_timer()
+	GameLogger.info("FindLetterGame", "home_button_pressed", {})
 	_go_to_main_menu()
 
 
@@ -382,6 +413,7 @@ func _apply_theme(_mode: int = 0) -> void:
 	var button_bg := _get_button_bg()
 	var button_text := _get_button_text()
 	ThemeManager.style_button(_back_button, button_bg, button_text)
+	ThemeManager.style_button(_home_button, button_bg, button_text)
 	ThemeManager.style_button(_ready_start_button, button_bg, button_text)
 	_style_nav_button(_prev_card_button)
 	_style_nav_button(_next_card_button)
@@ -401,6 +433,38 @@ func _get_button_bg() -> Color:
 func _get_button_text() -> Color:
 	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
 	return colors["button_text"] as Color
+
+
+func _setup_idle_timer() -> void:
+	_idle_timer = Timer.new()
+	_idle_timer.name = "IdleTimer"
+	_idle_timer.wait_time = IDLE_HINT_DELAY
+	_idle_timer.one_shot = true
+	_idle_timer.autostart = false
+	_idle_timer.timeout.connect(_on_idle_timeout)
+	add_child(_idle_timer)
+	_idle_timer.owner = self
+	_idle_timer.unique_name_in_owner = true
+
+
+func _reset_idle_timer() -> void:
+	if _navigating or not AudioManager.sound_enabled or _solved[_card_index] or _input_blocked or _state != STATE_PLAYING:
+		return
+	_idle_timer.stop()
+	_idle_timer.start()
+
+
+func _stop_idle_timer() -> void:
+	_idle_timer.stop()
+
+
+func _on_idle_timeout() -> void:
+	if _navigating or not AudioManager.sound_enabled or _solved[_card_index] or _input_blocked or _state != STATE_PLAYING:
+		return
+	var audio_path := AlphabetData.get_letter_audio_path(_correct_letter, ProgressManager.get_voice_variant())
+	AudioManager.play_audio(audio_path)
+	GameLogger.info("FindLetterGame", "idle_hint", {"letter": _correct_letter})
+	_reset_idle_timer()
 
 
 ## Применяет стиль круглых навигационных кнопок «‹»/«›» (как в азбуке):

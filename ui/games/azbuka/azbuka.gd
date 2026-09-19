@@ -32,6 +32,7 @@ const KISA_ANCHOR := Vector2.ZERO
 
 @onready var _background_overlay: ColorRect = %BackgroundOverlay
 @onready var _back_button: Button = %BackButton
+@onready var _home_button: Button = %HomeButton
 @onready var _title_label: Label = %TitleLabel
 @onready var _snake_area: Control = %SnakeArea
 @onready var _snake_path: Line2D = %SnakePath
@@ -44,12 +45,14 @@ var is_animating := false
 var _dot_r: float = DOT_RADIUS
 var _dot_styles: Dictionary = {}
 var _building := false
+var _navigating := false
 
 
 func _ready() -> void:
 	ProgressManager.mark_game_played()
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_back_button.pressed.connect(_on_back_button_pressed)
+	_home_button.pressed.connect(_on_home_button_pressed)
 	_kisa.set_kisa_moving(false)
 	_apply_theme()
 	_snake_area.resized.connect(_on_snake_area_resized)
@@ -150,7 +153,7 @@ func _place_kisa_at_start() -> void:
 
 
 func _on_dot_pressed(index: int) -> void:
-	if is_animating:
+	if is_animating or _navigating:
 		return
 	GameLogger.info("AzbukaGame", "letter_pressed", {"letter": LETTERS[index]})
 	if index == current_letter_idx:
@@ -205,6 +208,9 @@ func _get_path_positions(from_idx: int, to_idx: int) -> Array[Vector2]:
 
 
 func _open_letter_card(index: int) -> void:
+	if _navigating:
+		return
+	_navigating = true
 	LetterCard.from_letter = LETTERS[index]
 	GameLogger.info("nav", "to_letter_card", {"from": "azbuka", "letter": LETTERS[index]})
 	AudioManager.stop_all()
@@ -285,9 +291,22 @@ func _apply_theme(_mode: int = 0) -> void:
 	_background_overlay.visible = ThemeManager.current_theme == ThemeManager.THEME_DARK
 	_title_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	ThemeManager.style_button(_back_button, Color("#E8A87C"), Color("#2D2D2D"))
+	ThemeManager.style_button(_home_button, Color("#E8A87C"), Color("#2D2D2D"))
 
 
 func _on_back_button_pressed() -> void:
+	if _navigating or is_animating or _building:
+		return
+	_navigating = true
 	GameLogger.info("nav", "to_main_menu", {"from": "azbuka"})
+	AudioManager.stop_all()
+	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
+
+
+func _on_home_button_pressed() -> void:
+	if _navigating or is_animating or _building:
+		return
+	_navigating = true
+	GameLogger.info("nav", "to_main_menu", {"from": "azbuka_home"})
 	AudioManager.stop_all()
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)

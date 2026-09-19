@@ -27,6 +27,13 @@ const WORD_SET_COUNT := 5
 ## Номер набора слов по умолчанию.
 const DEFAULT_WORD_SET := 1
 
+## Вариант озвучки: старая (текущие файлы *_tts.wav).
+const VOICE_VARIANT_OLD := "old"
+## Вариант озвучки: новая (файлы *_new.ogg).
+const VOICE_VARIANT_NEW := "new"
+## Вариант озвучки по умолчанию.
+const DEFAULT_VOICE_VARIANT := VOICE_VARIANT_OLD
+
 ## Число изученных букв изменилось.
 signal progress_changed(learned_count: int)
 
@@ -43,6 +50,8 @@ var enabled_modes: Dictionary = DEFAULT_MODES.duplicate()
 var series_length: int = DEFAULT_SERIES_LENGTH
 ## Номер активного набора слов (1-WORD_SET_COUNT).
 var word_set: int = DEFAULT_WORD_SET
+## Активный вариант озвучки ("old" или "new").
+var voice_variant: String = DEFAULT_VOICE_VARIANT
 
 
 func _ready() -> void:
@@ -128,6 +137,21 @@ func set_word_set(value: int) -> void:
 	save_progress()
 
 
+## Возвращает активный вариант озвучки.
+func get_voice_variant() -> String:
+	return voice_variant
+
+
+## Устанавливает вариант озвучки (только "old" или "new", иначе игнор).
+func set_voice_variant(value: String) -> void:
+	if value != VOICE_VARIANT_OLD and value != VOICE_VARIANT_NEW:
+		return
+	if voice_variant == value:
+		return
+	voice_variant = value
+	save_progress()
+
+
 func load_progress() -> void:
 	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
 	if file == null:
@@ -151,6 +175,12 @@ func load_progress() -> void:
 		series_length = clampi(int(root["series_length"]), SERIES_LENGTH_MIN, SERIES_LENGTH_MAX)
 	if root.has("word_set"):
 		word_set = clampi(int(root["word_set"]), 1, WORD_SET_COUNT)
+	if root.has("voice_variant"):
+		var saved_variant := str(root["voice_variant"])
+		if saved_variant == VOICE_VARIANT_OLD or saved_variant == VOICE_VARIANT_NEW:
+			voice_variant = saved_variant
+		else:
+			voice_variant = DEFAULT_VOICE_VARIANT
 
 
 func save_progress() -> void:
@@ -160,6 +190,7 @@ func save_progress() -> void:
 		"enabled_modes": enabled_modes,
 		"series_length": series_length,
 		"word_set": word_set,
+		"voice_variant": voice_variant,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:

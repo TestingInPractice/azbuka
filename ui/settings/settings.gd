@@ -54,10 +54,15 @@ const CHECKBOX_ICON_RADIUS := 18
 @onready var _word_set_button_3: Button = %WordSetButton3
 @onready var _word_set_button_4: Button = %WordSetButton4
 @onready var _word_set_button_5: Button = %WordSetButton5
+@onready var _voice_card: PanelContainer = %VoiceCard
+@onready var _voice_button_old: Button = %VoiceButtonOld
+@onready var _voice_button_new: Button = %VoiceButtonNew
 
 var _checkboxes: Dictionary = {}
 ## Кнопки наборов слов в порядке номеров (1-5).
 var _word_set_buttons: Array[Button] = []
+## Кнопки вариантов озвучки в порядке: старая, новая.
+var _voice_buttons: Array[Button] = []
 var _updating: bool = false
 
 
@@ -97,6 +102,10 @@ func _ready() -> void:
 	# Все наборы доступны: картинки готовы для всех наборов (звук — общая
 	# заглушка для слов вне набора 1).
 	_sync_word_set_buttons()
+	_voice_buttons = [_voice_button_old, _voice_button_new]
+	_voice_button_old.toggled.connect(_on_voice_button_toggled.bind(ProgressManager.VOICE_VARIANT_OLD))
+	_voice_button_new.toggled.connect(_on_voice_button_toggled.bind(ProgressManager.VOICE_VARIANT_NEW))
+	_sync_voice_buttons()
 	_sync_checkboxes()
 	_update_theme_button_text()
 	_apply_theme()
@@ -151,6 +160,33 @@ func _on_word_set_button_toggled(toggled_on: bool, set_number: int) -> void:
 	GameLogger.info("Settings", "word_set_changed", {"set": set_number})
 
 
+## Синхронизирует состояние кнопок озвучки с выбранным вариантом.
+func _sync_voice_buttons() -> void:
+	_updating = true
+	_voice_button_old.button_pressed = ProgressManager.get_voice_variant() == ProgressManager.VOICE_VARIANT_OLD
+	_voice_button_new.button_pressed = ProgressManager.get_voice_variant() == ProgressManager.VOICE_VARIANT_NEW
+	_updating = false
+
+
+func _on_voice_button_toggled(toggled_on: bool, variant: String) -> void:
+	if _updating:
+		return
+	if not toggled_on:
+		# Активный вариант озвучки нельзя выключить: как минимум один остаётся.
+		_updating = true
+		if variant == ProgressManager.VOICE_VARIANT_OLD:
+			_voice_button_old.button_pressed = true
+		else:
+			_voice_button_new.button_pressed = true
+		_updating = false
+		_show_warning()
+		GameLogger.warning("Settings", "voice_variant_disable_blocked", {"variant": variant})
+		return
+	ProgressManager.set_voice_variant(variant)
+	_sync_voice_buttons()
+	GameLogger.info("Settings", "voice_variant_changed", {"variant": variant})
+
+
 ## Обрабатывает изменение длины серии карточек игры «Найди букву».
 func _on_series_length_value_changed(value: float) -> void:
 	var int_value := int(value)
@@ -173,7 +209,9 @@ func _on_warning_timer_timeout() -> void:
 
 func _on_reset_button_pressed() -> void:
 	GameLogger.info("Settings", "reset_button_pressed", {})
-	_confirm_reset_dialog.popup_centered()
+	ParentalGate.open(self, func() -> void:
+		_confirm_reset_dialog.popup_centered()
+	)
 
 
 func _on_reset_confirmed() -> void:
@@ -255,7 +293,8 @@ func _apply_theme(_mode: int = 0) -> void:
 	_style_card(_mode_card_guess_picture)
 	_style_card(_series_card)
 	_style_card(_word_set_card)
-	_style_word_set_buttons()
+	_style_card(_voice_card)
+	_style_toggle_buttons()
 	_apply_checkbox_icons()
 	_update_theme_button_text()
 
@@ -268,15 +307,19 @@ func _on_back_button_pressed() -> void:
 ## Открывает попап доната, указав ему сцену возврата — этот экран.
 func _on_donate_button_pressed() -> void:
 	GameLogger.info("Settings", "donate_button_pressed", {})
-	DonateOverlay.return_scene = SETTINGS_SCENE
-	get_tree().change_scene_to_file("res://ui/donate/donate_overlay.tscn")
+	ParentalGate.open(self, func() -> void:
+		DonateOverlay.return_scene = SETTINGS_SCENE
+		get_tree().change_scene_to_file("res://ui/donate/donate_overlay.tscn")
+	)
 
 
 ## Открывает экран обратной связи, указав ему сцену возврата — этот экран.
 func _on_feedback_button_pressed() -> void:
 	GameLogger.info("Settings", "feedback_button_pressed", {})
-	FeedbackScreen.return_scene = SETTINGS_SCENE
-	get_tree().change_scene_to_file("res://ui/feedback/feedback.tscn")
+	ParentalGate.open(self, func() -> void:
+		FeedbackScreen.return_scene = SETTINGS_SCENE
+		get_tree().change_scene_to_file("res://ui/feedback/feedback.tscn")
+	)
 
 
 ## Окрашивает карточку PanelContainer цветом фона карточек текущей темы.
@@ -301,31 +344,32 @@ func _style_card(panel: PanelContainer) -> void:
 	panel.add_theme_stylebox_override("focus", box_focus)
 
 
-## Стилизует кнопки наборов слов: акцентная заливка, серый вид
-## заблокированных наборов 2-5 и выделение выбранного набора рамкой.
-func _style_word_set_buttons() -> void:
+## Стилизует кнопки наборов слов и вариантов озвучки: акцентная заливка,
+## серый вид заблокированных наборов 2-5 и выделение выбранного элемента
+## рамкой. Обе строки кнопок выглядят одинаково.
+func _style_toggle_buttons() -> void:
 	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
 	var button_bg := colors["button_bg"] as Color
 	var button_text := colors["button_text"] as Color
 	var text_color := colors["text"] as Color
-	for word_set_button: Button in _word_set_buttons:
-		ThemeManager.style_button(word_set_button, button_bg, button_text)
-		# Выбранный набор выделяется акцентной заливкой и рамкой.
+	for toggle_button: Button in _word_set_buttons + _voice_buttons:
+		ThemeManager.style_button(toggle_button, button_bg, button_text)
+		# Выбранный элемент выделяется акцентной заливкой и рамкой.
 		var pressed_box := StyleBoxFlat.new()
 		pressed_box.bg_color = button_bg
 		pressed_box.set_border_width_all(4)
 		pressed_box.set_border_color(text_color)
 		pressed_box.set_corner_radius_all(24)
-		word_set_button.add_theme_stylebox_override("pressed", pressed_box)
-		# Заблокированный набор: полупрозрачная подложка и серый текст.
+		toggle_button.add_theme_stylebox_override("pressed", pressed_box)
+		# Заблокированный элемент: полупрозрачная подложка и серый текст.
 		var disabled_box := StyleBoxFlat.new()
 		disabled_box.bg_color = ThemeManager.get_card_bg()
 		disabled_box.bg_color.a = 0.4
 		disabled_box.set_corner_radius_all(24)
-		word_set_button.add_theme_stylebox_override("disabled", disabled_box)
+		toggle_button.add_theme_stylebox_override("disabled", disabled_box)
 		var disabled_text := ThemeManager.get_text()
 		disabled_text.a = 0.4
-		word_set_button.add_theme_color_override("font_disabled_color", disabled_text)
+		toggle_button.add_theme_color_override("font_disabled_color", disabled_text)
 
 
 ## Пересоздаёт крупные индикаторы чекбоксов под текущую тему.

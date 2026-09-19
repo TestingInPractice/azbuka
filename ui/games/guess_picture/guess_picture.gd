@@ -27,6 +27,8 @@ const ERROR_BEEP_FREQUENCY := 300.0
 const ERROR_BEEP_DURATION := 0.18
 ## Число дистракторов в раунде.
 const DISTRACTOR_COUNT := 3
+## Задержка перед автоподсказкой при простое (секунды).
+const IDLE_HINT_DELAY := 6.0
 
 @onready var _background: ColorRect = %Background
 @onready var _round_label: Label = %RoundLabel
@@ -44,6 +46,7 @@ const DISTRACTOR_COUNT := 3
 @onready var _finale_score_label: Label = %FinaleScoreLabel
 @onready var _play_again_button: Button = %PlayAgainButton
 @onready var _back_button: Button = %BackButton
+@onready var _home_button: Button = %HomeButton
 
 ## Кнопки ответов в порядке AnswerButton_1..4.
 var _answer_buttons: Array[Button] = []
@@ -57,19 +60,23 @@ var _current_letter := ""
 var _correct_button_index := -1
 ## Можно ли отвечать в текущем раунде.
 var _round_active := false
+var _navigating := false
 ## Программный звук ошибки. Файла звука ошибки в assets/audio нет, поэтому
 ## генерируем короткий тон 300 Гц (как задумано в SPEC-REWRITE, error_beep).
 var _error_beep: AudioStreamWAV
+var _idle_timer: Timer = null
 
 
 func _ready() -> void:
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_back_button.pressed.connect(_on_back_button_pressed)
+	_home_button.pressed.connect(_on_home_button_pressed)
 	_play_again_button.pressed.connect(_on_play_again_button_pressed)
 	_answer_buttons = [_answer_button_1, _answer_button_2, _answer_button_3, _answer_button_4]
 	for button: Button in _answer_buttons:
 		button.pressed.connect(_on_answer_button_pressed.bind(button))
 	_error_beep = _make_error_beep()
+	_setup_idle_timer()
 	ProgressManager.mark_game_played()
 	GameLogger.info("GuessPictureGame", "game_entered", {"games_played": ProgressManager.games_played_count})
 	_apply_theme()
@@ -112,13 +119,14 @@ func _start_round() -> void:
 	_status_label.text = ""
 	_apply_theme()
 	# Звук буквы звучит в начале раунда, пока буква перед глазами.
-	AudioManager.play_audio(AlphabetData.get_letter_audio_path(_current_letter))
+	AudioManager.play_audio(AlphabetData.get_letter_audio_path(_current_letter, ProgressManager.get_voice_variant()))
 	GameLogger.info("GuessPictureGame", "round_start", {
 		"round": _rounds_played + 1,
 		"letter": _current_letter,
 		"correct_word": correct_word,
 		"answers": words,
 	})
+	_reset_idle_timer()
 
 
 ## Возвращает случайную букву из всех букв алфавита.
@@ -157,8 +165,9 @@ func _get_word(letter: String) -> String:
 
 
 func _on_answer_button_pressed(button: Button) -> void:
-	if not _round_active:
+	if not _round_active or _navigating:
 		return
+	_reset_idle_timer()
 	var index := _answer_buttons.find(button)
 	if index < 0:
 		return
@@ -220,12 +229,29 @@ func _show_finale() -> void:
 
 
 func _on_play_again_button_pressed() -> void:
+	if _navigating:
+		return
 	GameLogger.info("GuessPictureGame", "play_again_pressed", {"score": _score})
 	_start_new_game()
 
 
 func _on_back_button_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	_stop_idle_timer()
 	GameLogger.info("GuessPictureGame", "back_button_pressed", {})
+	AudioManager.stop_all()
+	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
+
+
+func _on_home_button_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	_stop_idle_timer()
+	GameLogger.info("GuessPictureGame", "home_button_pressed", {})
+	AudioManager.stop_all()
 	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
 
 
@@ -244,6 +270,7 @@ func _apply_theme(_mode: int = 0) -> void:
 	var button_bg := colors["button_bg"] as Color
 	var button_text := colors["button_text"] as Color
 	ThemeManager.style_button(_back_button, button_bg, button_text)
+	ThemeManager.style_button(_home_button, button_bg, button_text)
 	ThemeManager.style_button(_play_again_button, button_bg, button_text)
 	for button: Button in _answer_buttons:
 		if button.disabled:
@@ -289,6 +316,37 @@ func _style_button_flat(button: Button, color: Color) -> void:
 	button.add_theme_color_override("font_hover_color", Color.WHITE)
 	button.add_theme_color_override("font_pressed_color", Color.WHITE)
 	button.add_theme_color_override("font_disabled_color", Color.WHITE)
+
+
+func _setup_idle_timer() -> void:
+	_idle_timer = Timer.new()
+	_idle_timer.name = "IdleTimer"
+	_idle_timer.wait_time = IDLE_HINT_DELAY
+	_idle_timer.one_shot = true
+	_idle_timer.autostart = false
+	_idle_timer.timeout.connect(_on_idle_timeout)
+	add_child(_idle_timer)
+	_idle_timer.owner = self
+	_idle_timer.unique_name_in_owner = true
+
+
+func _reset_idle_timer() -> void:
+	if _navigating or not AudioManager.sound_enabled or not _round_active:
+		return
+	_idle_timer.stop()
+	_idle_timer.start()
+
+
+func _stop_idle_timer() -> void:
+	_idle_timer.stop()
+
+
+func _on_idle_timeout() -> void:
+	if _navigating or not AudioManager.sound_enabled or not _round_active:
+		return
+	AudioManager.play_audio(AlphabetData.get_letter_audio_path(_current_letter, ProgressManager.get_voice_variant()))
+	GameLogger.info("GuessPictureGame", "idle_hint", {"letter": _current_letter})
+	_reset_idle_timer()
 
 
 ## Создаёт программный звук ошибки: короткий тон 300 Гц с затуханием.

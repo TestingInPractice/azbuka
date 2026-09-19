@@ -97,18 +97,33 @@ func get_word_data(letter: String, set_id: int = 1) -> Dictionary:
 	return data.duplicate()
 
 
-func get_letter_audio_path(letter: String) -> String:
+## Возвращает путь к аудио буквы. voice_variant — вариант озвучки
+## ("new" — файлы *_new.ogg, пусто/"old" — текущие *_tts.wav).
+func get_letter_audio_path(letter: String, voice_variant: String = "") -> String:
 	var entry := get_letter_data(letter)
+	var path := ""
 	if entry.has("letter_audio"):
-		return str(entry["letter_audio"])
-	return ""
+		path = str(entry["letter_audio"])
+	return _resolve_voice_path(path, voice_variant)
 
 
-func get_word_audio_path(letter: String, set_id: int = 1) -> String:
+## Возвращает путь к аудио слова. voice_variant — вариант озвучки
+## ("new" — файлы *_new.ogg, пусто/"old" — текущие *_tts.wav).
+func get_word_audio_path(letter: String, set_id: int = 1, voice_variant: String = "") -> String:
 	var data := get_word_data(letter, set_id)
+	var path := ""
 	if data.has("word_audio"):
-		return str(data["word_audio"])
-	return ""
+		path = str(data["word_audio"])
+	return _resolve_voice_path(path, voice_variant)
+
+
+## Подменяет путь к аудио под вариант озвучки: для "new" заменяет суффикс
+## "_tts.wav" на "_new.ogg" (регистр букв в имени файла сохраняется).
+## Пустой voice_variant означает старую озвучку — путь не меняется.
+func _resolve_voice_path(path: String, voice_variant: String) -> String:
+	if voice_variant == "new" and not path.is_empty() and path.contains("_tts.wav"):
+		return path.replace("_tts.wav", "_new.ogg")
+	return path
 
 
 ## Возвращает словарь набора по id или {} если набор отсутствует/пуст.

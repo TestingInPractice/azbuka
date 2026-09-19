@@ -213,6 +213,43 @@ text = "5"
 toggle_mode = true
 accessibility_name = "Набор слов 5"
 
+[node name="VoiceCard" type="PanelContainer" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VoiceRow" type="HBoxContainer" parent="MainLayout/VoiceCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="VoiceLabel" type="Label" parent="MainLayout/VoiceCard/VoiceRow"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+text = "Озвучка:"
+vertical_alignment = 1
+
+[node name="VoiceButtonOld" type="Button" parent="MainLayout/VoiceCard/VoiceRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 88)
+theme_override_font_sizes/font_size = 40
+text = "Старая"
+toggle_mode = true
+button_pressed = true
+accessibility_name = "Старая озвучка"
+
+[node name="VoiceButtonNew" type="Button" parent="MainLayout/VoiceCard/VoiceRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 88)
+theme_override_font_sizes/font_size = 40
+text = "Новая"
+toggle_mode = true
+accessibility_name = "Новая озвучка"
+
 [node name="ThemeToggleButton" type="Button" parent="MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2

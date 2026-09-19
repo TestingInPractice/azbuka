@@ -31,6 +31,8 @@ const WORD_INTRO_DELAY := 0.8
 const WORD_REPLAY_DELAY := 1.5
 ## Задержка перед переходом к следующему слову (секунды).
 const NEXT_WORD_DELAY := 3.5
+## Задержка перед автоподсказкой при простое (секунды).
+const IDLE_HINT_DELAY := 6.0
 
 ## Буква текущего слова.
 var current_letter: String = ""
@@ -49,7 +51,9 @@ var _slot_buttons: Array[Button] = []
 var _pool_buttons: Array[Button] = []
 var _puzzle_id: int = 0
 var _completion_pending: bool = false
+var _navigating: bool = false
 var _error_stream: AudioStreamWAV = null
+var _idle_timer: Timer = null
 
 @onready var _background: ColorRect = %Background
 @onready var _header_label: Label = %HeaderLabel
@@ -57,6 +61,7 @@ var _error_stream: AudioStreamWAV = null
 @onready var _pool_container: VBoxContainer = %PoolContainer
 @onready var _status_label: Label = %StatusLabel
 @onready var _back_button: Button = %CollectWordBackButton
+@onready var _home_button: Button = %HomeButton
 @onready var _prev_word_button: Button = %PrevWordButton
 @onready var _next_word_button: Button = %NextWordButton
 @onready var _word_image: TextureRect = %WordImage
@@ -66,10 +71,12 @@ func _ready() -> void:
 	_error_stream = _make_error_stream()
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_back_button.pressed.connect(_on_back_button_pressed)
+	_home_button.pressed.connect(_on_home_button_pressed)
 	_prev_word_button.pressed.connect(_on_prev_word_button_pressed)
 	_next_word_button.pressed.connect(_on_next_word_button_pressed)
 	_word_image.gui_input.connect(_on_word_image_input)
 	_apply_theme()
+	_setup_idle_timer()
 	ProgressManager.mark_game_played()
 	GameLogger.info("CollectWordGame", "game_entered", {"games_played": ProgressManager.games_played_count})
 	_show_random_word()
@@ -156,12 +163,13 @@ func _build_puzzle(letter: String) -> void:
 	_apply_theme()
 	_status_label.text = STATUS_HINT
 	AudioManager.stop_all()
+	_reset_idle_timer()
 	var id := _puzzle_id
 	get_tree().create_timer(WORD_INTRO_DELAY).timeout.connect(func() -> void:
 		if id != _puzzle_id:
 			return
 		AudioManager.stop_all()
-		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set()))
+		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set(), ProgressManager.get_voice_variant()))
 	)
 	GameLogger.info("CollectWordGame", "word_shown", {"letter": current_letter, "word": current_word, "letter_count": count})
 
@@ -217,12 +225,13 @@ func _compute_rows(count: int) -> Array[int]:
 
 ## Обработчик нажатия на букву в пуле.
 func _on_pool_button_pressed(button: Button) -> void:
+	_reset_idle_timer()
 	try_place_letter(button.text, button)
 
 
 ## Пытается поставить букву в текущий слот. Возвращает true, если буква подошла.
 func try_place_letter(letter: String, source_button: Button = null) -> bool:
-	if is_word_complete or _completion_pending:
+	if is_word_complete or _completion_pending or _navigating:
 		return false
 	if slot_index >= word_letters.size():
 		return false
@@ -249,7 +258,7 @@ func try_place_letter(letter: String, source_button: Button = null) -> bool:
 	_flash_correct(slot)
 	GameLogger.info("CollectWordGame", "letter_tap_correct", {"letter": letter, "slot": slot_index, "word": current_word})
 	AudioManager.stop_all()
-	AudioManager.play_audio(AlphabetData.get_letter_audio_path(letter))
+	AudioManager.play_audio(AlphabetData.get_letter_audio_path(letter, ProgressManager.get_voice_variant()))
 	if slot_index >= word_letters.size():
 		_on_word_completed()
 	return true
@@ -282,7 +291,7 @@ func _on_word_completed() -> void:
 		if id != _puzzle_id:
 			return
 		AudioManager.stop_all()
-		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set()))
+		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set(), ProgressManager.get_voice_variant()))
 		GameLogger.info("CollectWordGame", "word_audio_replayed", {"word": current_word})
 	)
 	get_tree().create_timer(NEXT_WORD_DELAY).timeout.connect(func() -> void:
@@ -293,12 +302,18 @@ func _on_word_completed() -> void:
 
 
 func _on_prev_word_button_pressed() -> void:
+	if _navigating:
+		return
 	GameLogger.info("CollectWordGame", "prev_word_button_pressed", {})
+	_reset_idle_timer()
 	show_prev_word()
 
 
 func _on_next_word_button_pressed() -> void:
+	if _navigating:
+		return
 	GameLogger.info("CollectWordGame", "next_word_button_pressed", {})
+	_reset_idle_timer()
 	show_next_word()
 
 
@@ -313,10 +328,26 @@ func show_next_word() -> void:
 
 
 func _on_back_button_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	_stop_idle_timer()
 	_puzzle_id += 1
 	_completion_pending = false
 	AudioManager.stop_all()
 	GameLogger.info("CollectWordGame", "back_button_pressed", {"word": current_word})
+	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
+
+
+func _on_home_button_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	_stop_idle_timer()
+	_puzzle_id += 1
+	_completion_pending = false
+	AudioManager.stop_all()
+	GameLogger.info("CollectWordGame", "home_button_pressed", {"word": current_word})
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
 
 
@@ -359,8 +390,9 @@ func _make_placeholder_texture(ltr: String) -> Texture2D:
 ## Нажатие на картинку слова озвучивает текущее слово.
 func _on_word_image_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set()))
+		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set(), ProgressManager.get_voice_variant()))
 		GameLogger.info("CollectWordGame", "word_image_pressed", {"letter": current_letter, "word": current_word})
+		_reset_idle_timer()
 
 
 ## Создаёт короткий низкий гудок для звука ошибки.
@@ -393,6 +425,37 @@ func _play_error_sound() -> void:
 	AudioManager.play_stream(_error_stream)
 
 
+func _setup_idle_timer() -> void:
+	_idle_timer = Timer.new()
+	_idle_timer.name = "IdleTimer"
+	_idle_timer.wait_time = IDLE_HINT_DELAY
+	_idle_timer.one_shot = true
+	_idle_timer.autostart = false
+	_idle_timer.timeout.connect(_on_idle_timeout)
+	add_child(_idle_timer)
+	_idle_timer.owner = self
+	_idle_timer.unique_name_in_owner = true
+
+
+func _reset_idle_timer() -> void:
+	if _navigating or not AudioManager.sound_enabled or is_word_complete or _completion_pending:
+		return
+	_idle_timer.stop()
+	_idle_timer.start()
+
+
+func _stop_idle_timer() -> void:
+	_idle_timer.stop()
+
+
+func _on_idle_timeout() -> void:
+	if _navigating or not AudioManager.sound_enabled or is_word_complete or _completion_pending:
+		return
+	AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set(), ProgressManager.get_voice_variant()))
+	GameLogger.info("CollectWordGame", "idle_hint", {"letter": current_letter, "word": current_word})
+	_reset_idle_timer()
+
+
 ## Применяет цвета текущей темы.
 func _apply_theme(_mode: int = 0) -> void:
 	_background.color = ThemeManager.get_bg()
@@ -404,6 +467,7 @@ func _apply_theme(_mode: int = 0) -> void:
 	var button_bg := colors["button_bg"] as Color
 	var button_text := colors["button_text"] as Color
 	ThemeManager.style_button(_back_button, button_bg, button_text)
+	ThemeManager.style_button(_home_button, button_bg, button_text)
 	ThemeManager.style_button(_prev_word_button, button_bg, button_text)
 	ThemeManager.style_button(_next_word_button, button_bg, button_text)
 	for i in _slot_buttons.size():

@@ -10,6 +10,7 @@ class_name LetterCard
 ## при воспроизведении, сохранение в user://recordings.
 
 const AZBUKA_SCENE := "res://ui/games/azbuka/azbuka.tscn"
+const MAIN_MENU_SCENE := "res://ui/main_menu/main_menu.tscn"
 const RECORD_BUS := "VoiceRecord"
 
 const LETTERS := [
@@ -20,6 +21,7 @@ const LETTERS := [
 
 const RECORD_DURATION := 10.0
 const SLIDE_DURATION := 0.3
+const IDLE_HINT_DELAY := 6.0
 
 const PROMPT_CORRECT := "res://assets/audio/prompt_correct.wav"
 const PROMPT_FORWARD := "res://assets/audio/prompt_forward.wav"
@@ -82,12 +84,14 @@ var _current_index: int = 0
 var _is_transitioning := false
 var _game_solved := false
 var _game_input_blocked := false
+var _navigating := false
 var _word_letter_buttons: Array[Button] = []
 var _level_meter: ColorRect = null
 var _level_fill: ColorRect = null
 
 # Рекордер.
 var _capture_effect: AudioEffectCapture = null
+var _idle_timer: Timer = null
 var _mic_player: AudioStreamPlayer = null
 var _playback_player: AudioStreamPlayer = null
 var _prompt_player: AudioStreamPlayer = null
@@ -110,6 +114,7 @@ var _current_level := 0.0
 @onready var _mic_button: Button = %MicButton
 @onready var _play_button: Button = %RecordPlaybackButton
 @onready var _back_button: Button = %LetterBackButton
+@onready var _home_button: Button = %HomeButton
 
 
 func _ready() -> void:
@@ -122,6 +127,7 @@ func _ready() -> void:
 		letter = LETTERS[0]
 	_setup_players()
 	_setup_capture_bus()
+	_setup_idle_timer()
 	_create_level_meter()
 	_connect_signals()
 	_apply_theme()
@@ -177,6 +183,37 @@ func _setup_capture_bus() -> void:
 	else:
 		_capture_effect = AudioServer.get_bus_effect(bus_index, 0) as AudioEffectCapture
 	AudioServer.set_bus_volume_db(bus_index, -80.0)
+
+
+func _setup_idle_timer() -> void:
+	_idle_timer = Timer.new()
+	_idle_timer.name = "IdleTimer"
+	_idle_timer.wait_time = IDLE_HINT_DELAY
+	_idle_timer.one_shot = true
+	_idle_timer.autostart = false
+	_idle_timer.timeout.connect(_on_idle_timeout)
+	add_child(_idle_timer)
+	_idle_timer.owner = self
+	_idle_timer.unique_name_in_owner = true
+
+
+func _reset_idle_timer() -> void:
+	if _navigating or not AudioManager.sound_enabled or _game_solved or _is_transitioning or _game_input_blocked:
+		return
+	_idle_timer.stop()
+	_idle_timer.start()
+
+
+func _stop_idle_timer() -> void:
+	_idle_timer.stop()
+
+
+func _on_idle_timeout() -> void:
+	if _navigating or not AudioManager.sound_enabled or _game_solved or _is_transitioning or _game_input_blocked:
+		return
+	_play_hint_sound()
+	GameLogger.info("letter_card", "idle_hint", {"letter": letter})
+	_reset_idle_timer()
 
 
 func prepare_microphone() -> void:
@@ -353,6 +390,7 @@ func _on_play_pressed() -> void:
 
 func _connect_signals() -> void:
 	_back_button.pressed.connect(_on_back_pressed)
+	_home_button.pressed.connect(_on_home_pressed)
 	_button_letter.pressed.connect(_on_letter_sound_pressed)
 	_button_word.pressed.connect(_on_word_sound_pressed)
 	_prev_button.pressed.connect(_on_prev_pressed)
@@ -364,7 +402,8 @@ func _connect_signals() -> void:
 func _on_letter_sound_pressed() -> void:
 	GameLogger.info("letter_card", "letter_sound", {"letter": letter})
 	AudioManager.stop_all()
-	AudioManager.play_audio(AlphabetData.get_letter_audio_path(letter))
+	AudioManager.play_audio(AlphabetData.get_letter_audio_path(letter, ProgressManager.get_voice_variant()))
+	_reset_idle_timer()
 
 
 ## Номер текущего набора слов. Берём из ProgressManager на каждом вызове,
@@ -376,7 +415,8 @@ func _current_word_set() -> int:
 func _on_word_sound_pressed() -> void:
 	GameLogger.info("letter_card", "word_sound", {"letter": letter})
 	AudioManager.stop_all()
-	AudioManager.play_audio(AlphabetData.get_word_audio_path(letter, _current_word_set()))
+	AudioManager.play_audio(AlphabetData.get_word_audio_path(letter, _current_word_set(), ProgressManager.get_voice_variant()))
+	_reset_idle_timer()
 
 
 func _update_content() -> void:
@@ -397,6 +437,7 @@ func _update_content() -> void:
 		if not img_path.is_empty():
 			GameLogger.warning("letter_card", "word_image_missing", {"letter": letter, "path": img_path})
 	_reset_word_game()
+	_reset_idle_timer()
 
 
 func _image_path_for(ltr: String) -> String:
@@ -467,6 +508,7 @@ func _setup_word_buttons(word: String) -> void:
 func _on_word_square_pressed(index: int) -> void:
 	if _game_solved or _game_input_blocked or _is_transitioning:
 		return
+	_reset_idle_timer()
 	var btn: Button = _word_letter_buttons[index]
 	var btn_letter: String = btn.text
 	if btn_letter.to_lower() == letter.to_lower():
@@ -631,19 +673,21 @@ func _update_nav_buttons() -> void:
 
 
 func _on_prev_pressed() -> void:
-	if _is_transitioning or _current_index <= 0:
+	if _is_transitioning or _navigating or _current_index <= 0:
 		return
 	GameLogger.info("letter_card", "prev", {"from": letter})
 	_stop_recording_if_active()
 	_navigate_to(_current_index - 1, -1)
+	_reset_idle_timer()
 
 
 func _on_next_pressed() -> void:
-	if _is_transitioning or _current_index >= LETTERS.size() - 1:
+	if _is_transitioning or _navigating or _current_index >= LETTERS.size() - 1:
 		return
 	GameLogger.info("letter_card", "next", {"from": letter})
 	_stop_recording_if_active()
 	_navigate_to(_current_index + 1, 1)
+	_reset_idle_timer()
 
 
 func _navigate_to(target_idx: int, direction: int) -> void:
@@ -750,6 +794,7 @@ func _apply_theme(_mode: int = 0) -> void:
 	ThemeManager.style_button(_mic_button, COLOR_MIC_BTN)
 	ThemeManager.style_button(_play_button, COLOR_PLAY_BTN)
 	ThemeManager.style_button(_back_button, COLOR_BACK_BTN, Color("#2D2D2D"))
+	ThemeManager.style_button(_home_button, COLOR_BACK_BTN, Color("#2D2D2D"))
 	_style_nav_button(_prev_button)
 	_style_nav_button(_next_button)
 
@@ -804,9 +849,23 @@ func _style_nav_button(btn: Button) -> void:
 
 
 func _on_back_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	_stop_idle_timer()
 	GameLogger.info("nav", "to_azbuka", {"from": "letter_card", "letter": letter})
 	AudioManager.stop_all()
 	get_tree().change_scene_to_file(AZBUKA_SCENE)
+
+
+func _on_home_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	_stop_idle_timer()
+	GameLogger.info("nav", "to_main_menu", {"from": "letter_card_home", "letter": letter})
+	AudioManager.stop_all()
+	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
 
 
 func _exit_tree() -> void:

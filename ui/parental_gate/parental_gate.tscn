@@ -1,0 +1,101 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/parental_gate/parental_gate.gd" id="1_script"]
+
+[node name="ParentalGate" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_script")
+
+[node name="Overlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0, 0, 0, 0.7)
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -440.0
+offset_top = -400.0
+offset_right = 440.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "Это экран для взрослых"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="QuestionLabel" type="Label" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Сколько будет 3 + 4?"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="AnswerButton1" type="Button" parent="MainLayout/ButtonsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(200, 96)
+theme_override_font_sizes/font_size = 52
+text = "7"
+accessibility_name = "Ответ 1"
+
+[node name="AnswerButton2" type="Button" parent="MainLayout/ButtonsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(200, 96)
+theme_override_font_sizes/font_size = 52
+text = "6"
+accessibility_name = "Ответ 2"
+
+[node name="AnswerButton3" type="Button" parent="MainLayout/ButtonsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(200, 96)
+theme_override_font_sizes/font_size = 52
+text = "8"
+accessibility_name = "Ответ 3"
+
+[node name="ResultCard" type="PanelContainer" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+visible = false
+
+[node name="ResultLabel" type="Label" parent="MainLayout/ResultCard"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = ""
+horizontal_alignment = 1
+
+[node name="CancelButton" type="Button" parent="MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+theme_override_font_sizes/font_size = 40
+text = "✕ Закрыть"
+accessibility_name = "Закрыть"
