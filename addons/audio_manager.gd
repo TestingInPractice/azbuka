@@ -16,6 +16,11 @@ var sound_enabled: bool = true
 var _player: AudioStreamPlayer
 var _music_player: AudioStreamPlayer
 var _music_path: String = ""
+## Прогревался ли _player в этой сессии (веб-сборка теряет стартовый буфер
+## первого play(); тихий предварительный play на -80 дБ решает проблему).
+var _player_warmed: bool = false
+## Идёт ли сейчас тихий прогрев (защита от остановки реального play()).
+var _warmup_active: bool = false
 
 
 func _ready() -> void:
@@ -51,6 +56,8 @@ func play_audio(path: String) -> void:
 func play_stream(stream: AudioStream) -> void:
 	if not sound_enabled:
 		return
+	_warmup_active = false
+	_player.volume_db = 0.0
 	_player.stream = stream
 	_player.play()
 
@@ -59,6 +66,35 @@ func stop_all() -> void:
 	if _player != null:
 		_player.stop()
 	stop_music()
+
+
+## Прогрев звукового пайплайна веб-сборки: первый play() в сессии теряет
+## стартовый буфер (задержка старта worklet/декодера). Тихий play на -80 дБ
+## «прогревает» плеер. Вызывать при загрузке сцены с короткими звуками.
+func warmup_player(path: String) -> void:
+	if not sound_enabled or _player_warmed:
+		return
+	var stream := load(path) as AudioStream
+	if stream == null:
+		return
+	_player_warmed = true
+	_warmup_active = true
+	_player.stream = stream
+	_player.volume_db = -80.0
+	_player.play()
+	# Через 800 мс останавливаем прогрев (если он не был прерван реальным play()).
+	var timer := Timer.new()
+	timer.one_shot = true
+	timer.wait_time = 0.8
+	timer.timeout.connect(func() -> void:
+		if _warmup_active:
+			_player.stop()
+			_player.volume_db = 0.0
+			_warmup_active = false
+		timer.queue_free()
+	)
+	add_child(timer)
+	timer.start()
 
 
 ## Запускает зацикленную музыку по пути ресурса. Если этот трек уже играет,

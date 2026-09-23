@@ -128,6 +128,7 @@ func _ready() -> void:
 	_setup_players()
 	_setup_capture_bus()
 	_setup_idle_timer()
+	AudioManager.warmup_player(AlphabetData.get_letter_audio_path(letter, ProgressManager.get_voice_variant()))
 	_create_level_meter()
 	_connect_signals()
 	_apply_theme()
