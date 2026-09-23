@@ -174,9 +174,21 @@ func _setup_players() -> void:
 func _setup_capture_bus() -> void:
 	var bus_index: int = AudioServer.get_bus_index(RECORD_BUS)
 	if bus_index == -1:
-		AudioServer.add_bus()
-		bus_index = AudioServer.get_bus_count() - 1
-		AudioServer.set_bus_name(bus_index, RECORD_BUS)
+		# Web export: AudioServer.add_bus() (at_pos=-1) попадает в JS Bus.addAt(-1),
+		# который через move()+splice(-2,0) ПЕРЕВОРАЧИВАЕТ JS-массив шин
+		# ([master, record] -> [record, master]) при существующей одной шине.
+		# C++ при этом думает, что индексы [Master(0), VoiceRecord(1)] — расходятся.
+		# Результат: set_bus_volume_db(1,-80) глушит Master, а буквы по индексу 0
+		# уходят в VoiceRecord — тишина. set_bus_layout() создаёт шины через
+		# set_sample_bus_count -> Bus.setCount -> create() (append без move) — порядок
+		# [master, record] корректен. default_bus_layout.tres уже содержит VoiceRecord.
+		var layout := load("res://assets/audio/default_bus_layout.tres") as AudioBusLayout
+		if layout != null:
+			AudioServer.set_bus_layout(layout)
+			bus_index = AudioServer.get_bus_index(RECORD_BUS)
+	if bus_index == -1:
+		push_warning("LetterCard: шина %s не создана — продолжаем, но запись может быть недоступна" % RECORD_BUS)
+		return
 	if AudioServer.get_bus_effect_count(bus_index) == 0:
 		_capture_effect = AudioEffectCapture.new()
 		_capture_effect.set_buffer_length(6.0)
