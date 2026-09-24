@@ -4,6 +4,7 @@
       "letter": "А",
       "letter_name": "А",
       "letter_audio": "res://assets/audio/а_letter_tts.wav",
+      "letter_sound": "res://assets/audio/а_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Авто́бус",
@@ -36,6 +37,7 @@
       "letter": "Б",
       "letter_name": "Бэ",
       "letter_audio": "res://assets/audio/б_letter_tts.wav",
+      "letter_sound": "res://assets/audio/б_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Бана́н",
@@ -68,6 +70,7 @@
       "letter": "В",
       "letter_name": "Вэ",
       "letter_audio": "res://assets/audio/в_letter_tts.wav",
+      "letter_sound": "res://assets/audio/в_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Вода́",
@@ -100,6 +103,7 @@
       "letter": "Г",
       "letter_name": "Гэ",
       "letter_audio": "res://assets/audio/г_letter_tts.wav",
+      "letter_sound": "res://assets/audio/г_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Гусь",
@@ -132,6 +136,7 @@
       "letter": "Д",
       "letter_name": "Дэ",
       "letter_audio": "res://assets/audio/д_letter_tts.wav",
+      "letter_sound": "res://assets/audio/д_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Дом",
@@ -164,6 +169,7 @@
       "letter": "Е",
       "letter_name": "Е",
       "letter_audio": "res://assets/audio/е_letter_tts.wav",
+      "letter_sound": "res://assets/audio/е_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Ель",
@@ -196,6 +202,7 @@
       "letter": "Ё",
       "letter_name": "Ё",
       "letter_audio": "res://assets/audio/ё_letter_tts.wav",
+      "letter_sound": "res://assets/audio/ё_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Ёж",
@@ -228,6 +235,7 @@
       "letter": "Ж",
       "letter_name": "Жэ",
       "letter_audio": "res://assets/audio/ж_letter_tts.wav",
+      "letter_sound": "res://assets/audio/ж_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Жу́к",
@@ -260,6 +268,7 @@
       "letter": "З",
       "letter_name": "Зэ",
       "letter_audio": "res://assets/audio/з_letter_tts.wav",
+      "letter_sound": "res://assets/audio/з_sound_new.ogg",
       "sets": {
         "1": {
           "word": "За́яц",
@@ -292,6 +301,7 @@
       "letter": "И",
       "letter_name": "И",
       "letter_audio": "res://assets/audio/и_letter_tts.wav",
+      "letter_sound": "res://assets/audio/и_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Игру́шка",
@@ -324,6 +334,7 @@
       "letter": "Й",
       "letter_name": "И́ кра́ткое",
       "letter_audio": "res://assets/audio/й_letter_tts.wav",
+      "letter_sound": "res://assets/audio/й_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Йо́гурт",
@@ -356,6 +367,7 @@
       "letter": "К",
       "letter_name": "Ка",
       "letter_audio": "res://assets/audio/к_letter_tts.wav",
+      "letter_sound": "res://assets/audio/к_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Кот",
@@ -388,6 +400,7 @@
       "letter": "Л",
       "letter_name": "Эль",
       "letter_audio": "res://assets/audio/л_letter_tts.wav",
+      "letter_sound": "res://assets/audio/л_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Луна́",
@@ -420,6 +433,7 @@
       "letter": "М",
       "letter_name": "Эм",
       "letter_audio": "res://assets/audio/м_letter_tts.wav",
+      "letter_sound": "res://assets/audio/м_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Мяч",
@@ -452,6 +466,7 @@
       "letter": "Н",
       "letter_name": "Эн",
       "letter_audio": "res://assets/audio/н_letter_tts.wav",
+      "letter_sound": "res://assets/audio/н_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Нос",
@@ -484,6 +499,7 @@
       "letter": "О",
       "letter_name": "О",
       "letter_audio": "res://assets/audio/о_letter_tts.wav",
+      "letter_sound": "res://assets/audio/о_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Окно́",
@@ -516,6 +532,7 @@
       "letter": "П",
       "letter_name": "Пэ",
       "letter_audio": "res://assets/audio/п_letter_tts.wav",
+      "letter_sound": "res://assets/audio/п_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Пода́рок",
@@ -548,6 +565,7 @@
       "letter": "Р",
       "letter_name": "Эр",
       "letter_audio": "res://assets/audio/р_letter_tts.wav",
+      "letter_sound": "res://assets/audio/р_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Рот",
@@ -580,6 +598,7 @@
       "letter": "С",
       "letter_name": "Эс",
       "letter_audio": "res://assets/audio/с_letter_tts.wav",
+      "letter_sound": "res://assets/audio/с_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Сок",
@@ -612,6 +631,7 @@
       "letter": "Т",
       "letter_name": "Тэ",
       "letter_audio": "res://assets/audio/т_letter_tts.wav",
+      "letter_sound": "res://assets/audio/т_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Торт",
@@ -644,6 +664,7 @@
       "letter": "У",
       "letter_name": "У",
       "letter_audio": "res://assets/audio/у_letter_tts.wav",
+      "letter_sound": "res://assets/audio/у_sound_new.ogg",
       "sets": {
         "1": {
           "word": "У́тка",
@@ -676,6 +697,7 @@
       "letter": "Ф",
       "letter_name": "Эф",
       "letter_audio": "res://assets/audio/ф_letter_tts.wav",
+      "letter_sound": "res://assets/audio/ф_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Фонта́н",
@@ -708,6 +730,7 @@
       "letter": "Х",
       "letter_name": "Ха",
       "letter_audio": "res://assets/audio/х_letter_tts.wav",
+      "letter_sound": "res://assets/audio/х_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Хлеб",
@@ -740,6 +763,7 @@
       "letter": "Ц",
       "letter_name": "Цэ",
       "letter_audio": "res://assets/audio/ц_letter_tts.wav",
+      "letter_sound": "res://assets/audio/ц_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Цыплёнок",
@@ -772,6 +796,7 @@
       "letter": "Ч",
       "letter_name": "Чэ",
       "letter_audio": "res://assets/audio/ч_letter_tts.wav",
+      "letter_sound": "res://assets/audio/ч_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Чай",
@@ -804,6 +829,7 @@
       "letter": "Ш",
       "letter_name": "Ша",
       "letter_audio": "res://assets/audio/ш_letter_tts.wav",
+      "letter_sound": "res://assets/audio/ш_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Ша́пка",
@@ -836,6 +862,7 @@
       "letter": "Щ",
       "letter_name": "Ща",
       "letter_audio": "res://assets/audio/щ_letter_tts.wav",
+      "letter_sound": "res://assets/audio/щ_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Щено́к",
@@ -900,6 +927,7 @@
       "letter": "Ы",
       "letter_name": "Ы",
       "letter_audio": "res://assets/audio/ы_letter_tts.wav",
+      "letter_sound": "res://assets/audio/ы_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Мы́ло",
@@ -964,6 +992,7 @@
       "letter": "Э",
       "letter_name": "Э",
       "letter_audio": "res://assets/audio/э_letter_tts.wav",
+      "letter_sound": "res://assets/audio/э_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Экра́н",
@@ -996,6 +1025,7 @@
       "letter": "Ю",
       "letter_name": "Ю",
       "letter_audio": "res://assets/audio/ю_letter_tts.wav",
+      "letter_sound": "res://assets/audio/ю_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Юла́",
@@ -1028,6 +1058,7 @@
       "letter": "Я",
       "letter_name": "Я",
       "letter_audio": "res://assets/audio/я_letter_tts.wav",
+      "letter_sound": "res://assets/audio/я_sound_new.ogg",
       "sets": {
         "1": {
           "word": "Я́блоко",

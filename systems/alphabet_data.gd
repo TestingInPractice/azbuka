@@ -107,6 +107,19 @@ func get_letter_audio_path(letter: String, voice_variant: String = "") -> String
 	return _resolve_voice_path(path, voice_variant)
 
 
+## Возвращает путь к звуку буквы (фонеме). Если у буквы нет отдельного
+## звука (например, Ъ/Ь — поле letter_sound отсутствует или пустое) —
+## фолбэк на путь к названию буквы (старое поведение).
+func get_letter_sound_path(letter: String) -> String:
+	var entry := get_letter_data(letter)
+	var path := ""
+	if entry.has("letter_sound"):
+		path = str(entry["letter_sound"])
+	if path.is_empty():
+		return get_letter_audio_path(letter)
+	return path
+
+
 ## Возвращает путь к аудио слова. voice_variant — вариант озвучки
 ## ("new" — файлы *_new.ogg, пусто/"old" — текущие *_tts.wav).
 func get_word_audio_path(letter: String, set_id: int = 1, voice_variant: String = "") -> String:

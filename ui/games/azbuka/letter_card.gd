@@ -414,7 +414,21 @@ func _connect_signals() -> void:
 func _on_letter_sound_pressed() -> void:
 	GameLogger.info("letter_card", "letter_sound", {"letter": letter})
 	AudioManager.stop_all()
-	AudioManager.play_audio(AlphabetData.get_letter_audio_path(letter, ProgressManager.get_voice_variant()))
+	var letter_data := AlphabetData.get_letter_data(letter)
+	var sound_path := AlphabetData.get_letter_sound_path(letter)
+	var name_path := AlphabetData.get_letter_audio_path(letter, ProgressManager.get_voice_variant())
+	# У букв без отдельного звука (Ъ/Ь) поле letter_sound отсутствует —
+	# играем только название один раз, чтобы не дублировать звук.
+	if not letter_data.has("letter_sound") or str(letter_data.get("letter_sound", "")).is_empty():
+		AudioManager.play_audio(name_path)
+		_reset_idle_timer()
+		return
+	# Сначала звук буквы (фонема), по окончании — название буквы.
+	_play_prompt(sound_path)
+	await _await_prompt_finished()
+	if not is_inside_tree():
+		return
+	AudioManager.play_audio(name_path)
 	_reset_idle_timer()
 
 
