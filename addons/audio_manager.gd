@@ -16,9 +16,6 @@ var sound_enabled: bool = true
 var _player: AudioStreamPlayer
 var _music_player: AudioStreamPlayer
 var _music_path: String = ""
-## Прогревался ли _player в этой сессии (веб-сборка теряет стартовый буфер
-## первого play(); тихий предварительный play на -80 дБ решает проблему).
-var _player_warmed: bool = false
 
 
 func _ready() -> void:
@@ -54,7 +51,6 @@ func play_audio(path: String) -> void:
 func play_stream(stream: AudioStream) -> void:
 	if not sound_enabled:
 		return
-	_player.volume_db = 0.0
 	_player.stream = stream
 	_player.play()
 
@@ -63,23 +59,6 @@ func stop_all() -> void:
 	if _player != null:
 		_player.stop()
 	stop_music()
-
-
-## Прогрев звукового пайплайна веб-сборки: первый play() в сессии теряет
-## стартовый буфер (задержка старта worklet/декодера). Тихий play на -80 дБ
-## «прогревает» плеер: файл досыгрывается неслышно, а реальный клик
-## останавливает его через stop_all() и играет громко (второй play — полный).
-## Вызывать при загрузке сцены с короткими звуками.
-func warmup_player(path: String) -> void:
-	if not sound_enabled or _player_warmed:
-		return
-	var stream := load(path) as AudioStream
-	if stream == null:
-		return
-	_player_warmed = true
-	_player.stream = stream
-	_player.volume_db = -80.0
-	_player.play()
 
 
 ## Запускает зацикленную музыку по пути ресурса. Если этот трек уже играет,

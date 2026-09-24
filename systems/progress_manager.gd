@@ -32,7 +32,7 @@ const VOICE_VARIANT_OLD := "old"
 ## Вариант озвучки: новая (файлы *_new.ogg).
 const VOICE_VARIANT_NEW := "new"
 ## Вариант озвучки по умолчанию.
-const DEFAULT_VOICE_VARIANT := VOICE_VARIANT_OLD
+const DEFAULT_VOICE_VARIANT := VOICE_VARIANT_NEW
 
 ## Число изученных букв изменилось.
 signal progress_changed(learned_count: int)

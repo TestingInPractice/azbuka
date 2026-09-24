@@ -2,12 +2,14 @@ extends Control
 ## Игра «Найди букву»: соотнесение звука буквы с её начертанием.
 ##
 ## Экран «Готовы играть?» запускает серию из N карточек (N настраивается в
-## настройках, 5-30). На карточке картинка слова: нажатие на неё озвучивает
-## правильную букву, а под ней четыре квадрата: одна правильная буква и три
-## случайные. Правильный выбор подсвечивает квадрат зелёным, звучит
-## «Молодец!», игра переходит к следующей карточке. Ошибочный выбор
-## блокирует квадрат, звучит короткий сигнал и подсказка «Попробуй ещё!».
-## После N карточек - экран завершения серии с кнопками «Да» и «Нет».
+## настройках, 5-30). На карточке картинка слова: через 2 с после открытия
+## автоматически озвучивается название картинки (слово), а нажатие на
+## картинку озвучивает правильную букву. Под картинкой четыре квадрата:
+## одна правильная буква и три случайные. Правильный выбор подсвечивает
+## квадрат зелёным, звучит «Молодец!», игра переходит к следующей карточке.
+## Ошибочный выбор блокирует квадрат, звучит короткий сигнал и подсказка
+## «Попробуй ещё!». После N карточек - экран завершения серии с кнопками
+## «Да» и «Нет».
 
 const ANSWER_COUNT := 4
 ## Пауза после правильного ответа перед переходом к следующей карточке.
@@ -24,6 +26,8 @@ const STATE_PLAYING := 1
 const STATE_COMPLETED := 2
 ## Задержка перед автоподсказкой при простое (секунды).
 const IDLE_HINT_DELAY := 6.0
+## Задержка перед автоматическим озвучиванием слова при открытии карточки (секунды).
+const WORD_VOICE_DELAY := 2.0
 
 ## Цвет подсветки правильного квадрата.
 const COLOR_CORRECT := Color(0.2, 0.7, 0.2)
@@ -174,6 +178,34 @@ func _show_card(index: int) -> void:
 		"letter": _correct_letter,
 	})
 	_reset_idle_timer()
+	_play_word_voice_delayed()
+
+
+## Озвучивает слово текущей карточки голосом через WORD_VOICE_DELAY секунд
+## после открытия (чтобы ребёнок успел рассмотреть картинку). Если за время
+## задержки карточка сменилась, игра завершилась или звук выключили —
+## озвучка не играет.
+func _play_word_voice_delayed() -> void:
+	var card_index := _card_index
+	await get_tree().create_timer(WORD_VOICE_DELAY).timeout
+	if not is_inside_tree():
+		return
+	if _navigating or _state != STATE_PLAYING or _card_index != card_index:
+		return
+	if _solved[card_index]:
+		return
+	if not AudioManager.sound_enabled:
+		return
+	var word_path := AlphabetData.get_word_audio_path(
+		_correct_letter, ProgressManager.get_word_set(), ProgressManager.get_voice_variant())
+	if word_path.is_empty() or not ResourceLoader.exists(word_path):
+		GameLogger.warning("FindLetterGame", "word_audio_missing", {
+			"letter": _correct_letter,
+			"path": word_path,
+		})
+		return
+	AudioManager.play_audio(word_path)
+	GameLogger.info("FindLetterGame", "word_voice", {"word_audio": word_path})
 
 
 ## Собирает варианты ответов: правильная буква и три случайные.
