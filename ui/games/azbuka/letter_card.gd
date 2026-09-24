@@ -128,7 +128,6 @@ func _ready() -> void:
 	_setup_players()
 	_setup_capture_bus()
 	_setup_idle_timer()
-	AudioManager.warmup_player(AlphabetData.get_letter_audio_path(letter, ProgressManager.get_voice_variant()))
 	_create_level_meter()
 	_connect_signals()
 	_apply_theme()
@@ -492,21 +491,29 @@ func _clear_word_buttons() -> void:
 
 
 func _setup_word_buttons(word: String) -> void:
+	var letters := _word_letters_without_combining(word)
+	if letters.is_empty():
+		return
 	var vp_w: float = get_viewport_rect().size.x
-	var padding: float = 80.0
+	# Тап-таргеты ≥190px (детская норма 10–12 мм на базе 1080×2340 ≈ 0.052 мм/px).
+	# Нижняя граница 95px: квадраты букв слова не могут быть меньше 190px.
+	# Компромисс: слова из 10+ букв (Электричка, Объявление, Ёлочная игрушка)
+	# не влезают в 1080px при 190px квадратах — они остаются 190px и выходят за
+	# край экрана (редкие слова, осознанно задокументировано).
+	var padding: float = 40.0
 	var separation: float = 24.0
-	var max_btn_w := 110.0
-	var min_btn_w := 56.0
+	var max_btn_w := 190.0
+	var min_btn_w := 95.0
 	var available: float = vp_w - padding * 2.0
-	var btn_w: float = clampf((available - separation * float(word.length() - 1)) / float(word.length()), min_btn_w, max_btn_w)
+	var btn_w: float = clampf((available - separation * float(letters.size() - 1)) / float(letters.size()), min_btn_w, max_btn_w)
 	var btn_size := Vector2(btn_w, btn_w)
 	var font_size: int = maxi(28, mini(56, int(btn_w * 0.5)))
-	for i in word.length():
+	for i in letters.size():
 		var btn := Button.new()
 		btn.name = "WordSquare_%d" % (i + 1)
 		btn.accessibility_name = "WordSquare %d" % (i + 1)
 		btn.unique_name_in_owner = true
-		btn.text = word[i]
+		btn.text = letters[i]
 		btn.add_theme_font_size_override("font_size", font_size)
 		btn.custom_minimum_size = btn_size
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -516,6 +523,18 @@ func _setup_word_buttons(word: String) -> void:
 		_word_squares.add_child(btn)
 		btn.owner = self
 		_word_letter_buttons.append(btn)
+
+
+## Возвращает буквы слова без комбинируемых диакритических знаков (U+0300–U+036F).
+## Ударения в данных нужны TTS-озвучке, но не должны получать отдельную кнопку.
+func _word_letters_without_combining(word: String) -> Array[String]:
+	var letters: Array[String] = []
+	for i in word.length():
+		var cp: int = word.unicode_at(i)
+		if cp >= 0x0300 and cp <= 0x036F:
+			continue
+		letters.append(word[i])
+	return letters
 
 
 func _on_word_square_pressed(index: int) -> void:

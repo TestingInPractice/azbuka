@@ -17,9 +17,19 @@ const LETTERS := [
 const DOTS_PER_LINE := 4
 ## Максимальный межстрочный шаг: на очень высоких экранах строки не разъезжаются.
 const LINE_HEIGHT_MAX := 240.0
-const DOT_RADIUS := 65.0
+## Радиус кружка-буквы. Диаметр 190px — детская норма тап-таргета (≥10–12 мм:
+## база 1080×2340 ≈ 0.052 мм/px → 190px ≈ 9.9 мм). Нижняя граница clamp в
+## _build_path поднята до 95, чтобы на телефоне точки были ≥190px; на планшете
+## (шире) радиус остаётся 95 — змейка не ломается, точки крупнее нормы.
+const DOT_RADIUS := 95.0
 const LINE_WIDTH := 6.0
 const VBOX_TOP := 60.0
+## Минимальная полоса сверху SnakeArea под кнопки BackButton/HomeButton.
+## Реальная полоса вычисляется в _build_path из геометрии кнопок (низ HomeButton
+## минус верх SnakeArea + запас 12px): увеличенные кнопки (190px, фаза 2 #18)
+## не должны перекрывать первый ряд кружков. Эта константа — страховка на случай,
+## если кнопки ещё не разложены (get_global_rect вернёт нули).
+const BUTTON_BAND_MIN := 150.0
 const RUN_SPEED := 420.0
 
 const PATH_COLOR := Color("#5B8C5A")
@@ -87,11 +97,21 @@ func _build_path() -> void:
 	var spacing: float = (area_size.x - 2.0 * maxf(60.0, area_size.x * 0.06)) / float(DOTS_PER_LINE - 1)
 	var total_snake_width: float = spacing * float(DOTS_PER_LINE - 1)
 	var margin_x: float = (area_size.x - total_snake_width) / 2.0
-	_dot_r = clampf(spacing * 0.38, 40.0, DOT_RADIUS)
+	_dot_r = clampf(spacing * 0.38, 95.0, DOT_RADIUS)
 	_make_dot_styles()
 
 	var total_lines: int = int(ceil(LETTERS.size() / float(DOTS_PER_LINE)))
-	var available_height: float = area_size.y - VBOX_TOP
+	# Полоса сверху под кнопки BackButton/HomeButton: реально низ HomeButton
+	# (глобально) минус верх SnakeArea + запас 12px, чтобы увеличенные кнопки
+	# (190px, фаза 2 #18) не перекрывали первый ряд кружков. BUTTON_BAND_MIN —
+	# страховка, если кнопки ещё не разложены (get_global_rect вернёт нули).
+	var band: float = maxf(
+		BUTTON_BAND_MIN,
+		_home_button.get_global_rect().end.y - _snake_area.get_global_rect().position.y + 12.0
+	)
+	# Доступная высота — минус верхняя полоса под кнопки (band) и отступ
+	# VBOX_TOP. maxf защищает от отрицательной высоты на очень маленьких экранах.
+	var available_height: float = maxf(0.0, area_size.y - VBOX_TOP - band)
 	# Межстрочный шаг подбирается так, чтобы все 9 строк (33 буквы / 4 в строке)
 	# влезали в доступную высоту: не больше LINE_HEIGHT_MAX, не меньше _dot_r * 1.8.
 	var line_height: float = clampf(
@@ -100,11 +120,12 @@ func _build_path() -> void:
 		LINE_HEIGHT_MAX
 	)
 	var snake_content_height: float = float(total_lines - 1) * line_height + _dot_r * 2.0
-	# y_start — центр первого кружка. Змейка центрируется по вертикали; слагаемое
-	# _dot_r держит верхний край первого ряда внутри области (не обрезается).
-	var y_start: float = (available_height - snake_content_height) / 2.0 + _dot_r
+	# y_start — центр первого кружка. Змейка центрируется по вертикали в области
+	# ниже band; слагаемое _dot_r держит верхний край первого ряда внутри
+	# области (не обрезается) и ниже кнопок.
+	var y_start: float = band + (available_height - snake_content_height) / 2.0 + _dot_r
 	if snake_content_height >= available_height:
-		y_start = _dot_r
+		y_start = band + _dot_r
 
 	for i in LETTERS.size():
 		var line: int = i / DOTS_PER_LINE

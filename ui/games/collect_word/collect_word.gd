@@ -17,14 +17,21 @@ const STATUS_HINT := "Собери слово из букв"
 ## Текст при неверной букве.
 const STATUS_WRONG := "Попробуй ещё!"
 
-## Ширина рабочей области под ряды слотов и пула.
-const WORK_AREA_WIDTH := 900.0
+## Эффективная ширина рабочей области под ряды слотов и пула: между кнопками
+## PrevWordButton (x∈[30..220]) и NextWordButton (x∈[860..1050]) — 860−220 = 640px.
+## Ряды центрируются в этой зоне, чтобы слоты/пул не пересекались с кнопками
+## (190px, фаза 2 #18). Полная ширина MainLayout 900px, но края заняты кнопками.
+const WORK_AREA_EFFECTIVE_WIDTH := 640.0
 ## Отступ между слотами в ряду.
 const SLOT_SEPARATION := 20.0
-## Минимальный размер слота.
-const SLOT_MIN_SIZE := 140.0
-## Максимальный размер слота.
-const SLOT_MAX_SIZE := 190.0
+## Минимальный размер слота. 170px — компромисс: детская норма тап-таргета
+## ≥190px (10–12 мм на базе 1080×2340 ≈ 0.052 мм/px), но пул из 15 букв
+## (Ёлочная игрушка) физически не влезает в 640px эффективной рабочей области
+## при 190px слотах. 170px ≈ 8.8 мм — осознанно задокументированное исключение.
+const SLOT_MIN_SIZE := 170.0
+## Максимальный размер слота: 230px — крупные буквы для коротких слов
+## (2–4 буквы), чтобы пул не выглядел пустым и оставался удобным для детей.
+const SLOT_MAX_SIZE := 230.0
 ## Задержка перед озвучиванием слова при показе пазла (секунды).
 const WORD_INTRO_DELAY := 0.8
 ## Задержка перед повтором слова после сборки (секунды).
@@ -186,10 +193,15 @@ func _clear_puzzle_nodes() -> void:
 	_pool_buttons.clear()
 
 
-## Разбивает слово на отдельные буквы.
+## Разбивает слово на отдельные буквы, пропуская комбинируемые
+## диакритические знаки (U+0300–U+036F) — ударения нужны TTS-озвучке,
+## но не должны получать отдельную кнопку.
 func _split_word(word: String) -> Array[String]:
 	var chars: Array[String] = []
 	for i in word.length():
+		var cp: int = word.unicode_at(i)
+		if cp >= 0x0300 and cp <= 0x036F:
+			continue
 		chars.append(word[i])
 	return chars
 
@@ -198,7 +210,7 @@ func _split_word(word: String) -> Array[String]:
 func _compute_slot_size(count: int) -> float:
 	if count <= 0:
 		return SLOT_MAX_SIZE
-	var size := (WORK_AREA_WIDTH - (count - 1) * SLOT_SEPARATION) / count
+	var size := (WORK_AREA_EFFECTIVE_WIDTH - (count - 1) * SLOT_SEPARATION) / count
 	return clampf(size, SLOT_MIN_SIZE, SLOT_MAX_SIZE)
 
 
@@ -211,9 +223,9 @@ func _compute_rows(count: int) -> Array[int]:
 	if count <= 0:
 		return [0]
 	var size := _compute_slot_size(count)
-	if count * size + (count - 1) * SLOT_SEPARATION <= WORK_AREA_WIDTH:
+	if count * size + (count - 1) * SLOT_SEPARATION <= WORK_AREA_EFFECTIVE_WIDTH:
 		return [count]
-	var max_per_row := floori((WORK_AREA_WIDTH + SLOT_SEPARATION) / (SLOT_MIN_SIZE + SLOT_SEPARATION))
+	var max_per_row := floori((WORK_AREA_EFFECTIVE_WIDTH + SLOT_SEPARATION) / (SLOT_MIN_SIZE + SLOT_SEPARATION))
 	var rows := ceili(float(count) / float(max_per_row))
 	var base := count / rows
 	var remainder := count % rows
