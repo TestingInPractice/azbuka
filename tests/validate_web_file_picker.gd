@@ -8,6 +8,11 @@ extends Node
 const PNG_DATA_URL := "data:image/png;base64," + \
 		"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
 
+## Скрипт хранилища грузится напрямую, а не через автозагрузку: нужна только
+## статическая extension_for_mime(), а у node-инстанса Godot ругается на вызов
+## статического метода (STATIC_CALLED_ON_INSTANCE).
+const CustomSetsStoreScript := preload("res://systems/custom_sets_store.gd")
+
 var failures := 0
 
 
@@ -26,6 +31,7 @@ func _ready() -> void:
 
 	_check_kind_tables()
 	_check_table_invariants()
+	_check_audio_extensions()
 	_check_data_url_decoding()
 	await _check_bad_input()
 	await _check_pick_off_web()
@@ -54,6 +60,13 @@ func _check_kind_tables() -> void:
 	_check(WebFilePicker.kind_for_mime("audio/wav") == "audio", "audio/wav -> audio")
 	_check(WebFilePicker.kind_for_mime("audio/mpeg") == "audio", "audio/mpeg -> audio")
 	_check(WebFilePicker.kind_for_mime("audio/mp4") == "audio", "audio/mp4 -> audio (iPhone)")
+	# .ogg приходит и под псевдонимами: без них легальный файл уходил в отказ.
+	_check(WebFilePicker.kind_for_mime("audio/vorbis") == "audio", "audio/vorbis -> audio (.ogg)")
+	_check(WebFilePicker.kind_for_mime("audio/oga") == "audio", "audio/oga -> audio (.oga)")
+	# Форматов вне контракта (WAV/OGG/MP3/M4A) пикер не принимает: им нечем
+	# дать имя при сохранении — extension_for_mime() вернёт пустую строку.
+	_check(WebFilePicker.kind_for_mime("audio/aac") == "", "audio/aac -> пусто (нет расширения)")
+	_check(WebFilePicker.kind_for_mime("audio/webm") == "", "audio/webm -> пусто (нет расширения)")
 	_check(WebFilePicker.kind_for_mime("application/pdf") == "", "application/pdf -> пусто")
 	_check(WebFilePicker.kind_for_mime("") == "", "пустой mime -> пусто")
 	# Регистр и параметры после mime не должны ломать распознавание.
@@ -87,6 +100,29 @@ func _check_table_invariants() -> void:
 			seen[mime] = true
 			_check(WebFilePicker.kind_for_mime(mime) != "",
 					"%s: %s достижим через kind_for_mime" % [table_name, mime])
+
+
+## Кросс-табличный инвариант AUDIO_MIME_TYPES <-> extension_for_mime().
+## Каждый принятый MIME-тип обязан получить расширение, иначе файл сохранится
+## без него; набор полученных расширений обязан быть ровно аудиоконтрактом
+## проекта. Проверять поштучно бессмысленно — поштучно баг и жил: audio/aac и
+## audio/webm проходили как «есть в таблице и распознаётся», пока давали пустое
+## расширение, а audio/vorbis не было в таблице вовсе, хотя .ogg — основной
+## формат проекта. Это тот же урок, что с коллизией имён Е/Э: поштучные
+## проверки зелёные, коллекция неверная. Поэтому сверяем множество целиком.
+func _check_audio_extensions() -> void:
+	var extensions := {}
+	for mime: String in PackedStringArray(WebFilePicker.AUDIO_MIME_TYPES):
+		var extension := str(CustomSetsStoreScript.extension_for_mime(mime))
+		_check(not extension.is_empty(),
+				"AUDIO_MIME_TYPES: %s даёт расширение для сохранения" % mime)
+		if not extension.is_empty():
+			extensions[extension] = true
+	var actual := extensions.keys()
+	actual.sort()
+	var expected := ["m4a", "mp3", "ogg", "wav"]
+	_check(actual == expected,
+			"набор расширений AUDIO_MIME_TYPES = %s, ожидалось %s" % [actual, expected])
 
 
 func _check_data_url_decoding() -> void:
