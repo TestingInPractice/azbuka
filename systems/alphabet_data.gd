@@ -11,6 +11,21 @@ extends Node
 
 const DATA_PATH := "res://content/alphabet_data.json"
 
+## Запасная картинка буквы, когда в наборе слов поле image пустое.
+## Имя файла без расширения в res://assets/images. Раньше карта жила в
+## LetterCard.WORD_IMAGE, но её читают все четыре игры, и system's слой
+## не должен зависеть от ui/.
+const FALLBACK_WORD_IMAGE := {
+	"А": "Bus", "Б": "Banana", "В": "Water", "Г": "Goose", "Д": "House",
+	"Е": "Christmas_Tree", "Ё": "Hedgehog", "Ж": "Beetle", "З": "Hare",
+	"И": "Toy", "Й": "yogurt", "К": "Cat", "Л": "Moon", "М": "Ball",
+	"Н": "Nose", "О": "Window", "П": "Gift", "Р": "Mouth", "С": "Juice",
+	"Т": "Cake", "У": "Duck", "Ф": "Fountain", "Х": "Bread",
+	"Ц": "Chicken", "Ч": "Tea", "Ш": "Hat", "Щ": "Puppy",
+	"Ъ": "announcement", "Ы": "Soap", "Ь": "Horse", "Э": "Screen",
+	"Ю": "Spinning_Top", "Я": "Apple",
+}
+
 ## Данные загружены. letter_count - число букв в наборе.
 signal data_loaded(letter_count: int)
 
@@ -52,6 +67,11 @@ func load_data() -> bool:
 
 func get_letter_count() -> int:
 	return _letters.size()
+
+
+## Возвращает имя запасной картинки буквы (без расширения) или "".
+func get_fallback_image(letter: String) -> String:
+	return str(FALLBACK_WORD_IMAGE.get(letter.to_upper(), ""))
 
 
 func get_letters() -> Array[Dictionary]:
