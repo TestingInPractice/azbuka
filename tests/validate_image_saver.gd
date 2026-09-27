@@ -158,21 +158,53 @@ func _check_accepted_formats() -> void:
 
 ## Кросс-компонентный инвариант: путь, который CustomSetsStore запрашивает у
 ## ImageSaver, обязан быть тем, который ImageSaver принимает. Иначе
-## конструктор писал бы в img_a.png и получал bad_target на каждой букве —
-## и заметил бы это только на устройстве родителя. Проверяем не «оба webp», а
-## настоящий путь целиком, вплоть до успешной записи.
+## конструктор писал бы не туда и получал bad_target/write_failed на каждой
+## букве — и заметил бы это только на устройстве родителя.
+##
+## Проверяется НАСТОЯЩИЙ путь набора, а не «user:// + имя файла». Имя файла,
+## которое даёт хранилище, — голое ("img_a.webp"); путь на диске это
+## set_dir(set_id) + image_file_name(letter), то есть
+## user://custom_sets/<set_id>/img_a.webp. Префикс user:// в set_dir() уже
+## стоит, а подстановка его ещё раз дала бы путь в корне user://, которого
+## нет ни в одном реальном вызове. Папку набора создаёт create_set(), а не
+## ImageSaver, поэтому валидатор создаёт её сам — иначе save_image() честно
+## вернул бы write_failed (см. _check_bad_target_path).
 func _check_store_path_is_accepted() -> void:
+	var set_id := CustomSetsStore.make_set_id()
+	var set_dir := CustomSetsStore.set_dir(set_id)
 	var name := CustomSetsStore.image_file_name("А")
-	var path := "user://" + name
+	var path := set_dir + name
 	_check(name == "img_a.webp",
 			"хранилище просит img_a.webp (получено: %s)" % name)
+	# Обе половины пути проверяются по отдельности: префикс — что это каталог
+	# наборов, суффикс — что это имя файла буквы. Проверка только одной из них
+	# пропустила бы и запись в корень user://, и потерю подкаталога набора.
+	_check(path.begins_with("user://custom_sets/"),
+			"путь набора лежит в user://custom_sets/ (получено: %s)" % path)
+	_check(path.ends_with("img_a.webp"),
+			"путь набора оканчивается именем файла буквы (получено: %s)" % path)
 	_check(path.get_extension() == "webp",
 			"путь хранилища оканчивается .webp (получено: %s)" % path)
-	_check(bool(ImageSaver.save_image(
-			_fixture(32, "png", Color(0.1, 0.1, 0.8, 1.0)), path).get("ok", false)),
+
+	# Два разных набора обязаны давать два разных пути для ОДНОЙ буквы. Иначе
+	# картинка «А» второго набора затёрла бы картинку «А» первого. Это тот же
+	# урок Task 1 (Е/Э схлопывались в одно имя), перенесённый на измерение
+	# набора: filename одинаков по построению, различает только подкаталог.
+	var other := CustomSetsStore.set_dir("c_bbbbbb") + CustomSetsStore.image_file_name("А")
+	_check(path != other,
+			"два набора дают разные пути для одной буквы (%s против %s)" % [path, other])
+
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(set_dir))
+	var saved := ImageSaver.save_image(
+			_fixture(32, "png", Color(0.1, 0.1, 0.8, 1.0)), path)
+	_check(bool(saved.get("ok", false)),
 			"ImageSaver принимает и пишет ровно тот путь, который даёт хранилище: %s" % path)
 	_check(FileAccess.file_exists(path), "файл по пути хранилища появился: %s" % path)
+
+	# Убираем и файл, и подкаталог набора: оставшийся пустой
+	# user://custom_sets/<id>/ в пользовательских данных — тоже баг.
 	_remove_path(path)
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(set_dir))
 
 
 ## Инвариант всего правила ресайза, а не одной удачной пары чисел. Правило
