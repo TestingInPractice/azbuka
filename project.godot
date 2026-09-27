@@ -32,6 +32,7 @@ GameLogger="*res://addons/game_logger.gd"
 AlphabetData="*res://systems/alphabet_data.gd"
 ThemeManager="*res://addons/theme_manager.gd"
 ProgressManager="*res://systems/progress_manager.gd"
+CustomSetsStore="*res://systems/custom_sets_store.gd"
 AudioManager="*res://addons/audio_manager.gd"
 
 [display]
