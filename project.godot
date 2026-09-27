@@ -34,6 +34,7 @@ ThemeManager="*res://addons/theme_manager.gd"
 ProgressManager="*res://systems/progress_manager.gd"
 CustomSetsStore="*res://systems/custom_sets_store.gd"
 AudioManager="*res://addons/audio_manager.gd"
+VoiceRecord="*res://systems/voice_record.gd"
 SetRepository="*res://systems/set_repository.gd"
 
 [display]

@@ -5,13 +5,13 @@ class_name LetterCard
 ## Слева вверху - кнопка назад, в центре - большая буква и картинка слова,
 ## ниже - квадраты букв слова (мини-игра "найди букву"), кнопки навигации
 ## по алфавиту, звуки буквы/слова, микрофон и воспроизведение записи.
-## Рекордер встроен в этот скрипт (нет отдельного автолоада): шина
-## VoiceRecord с AudioEffectCapture, запись 10 секунд, автонормализация
-## при воспроизведении, сохранение в user://recordings.
+## Запись ведёт автозагрузка VoiceRecord (захват с микрофона и WAV-конвертация
+## живут там), а этот скрипт отвечает только за кнопки и индикатор уровня.
+## Запись 10 секунд, автонормализация при воспроизведении, сохранение в
+## user://recordings.
 
 const AZBUKA_SCENE := "res://ui/games/azbuka/azbuka.tscn"
 const MAIN_MENU_SCENE := "res://ui/main_menu/main_menu.tscn"
-const RECORD_BUS := "VoiceRecord"
 
 const LETTERS := [
 	"А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й",
@@ -89,17 +89,10 @@ var _word_letter_buttons: Array[Button] = []
 var _level_meter: ColorRect = null
 var _level_fill: ColorRect = null
 
-# Рекордер.
-var _capture_effect: AudioEffectCapture = null
+# Плееры и таймеры. Сам рекордер живёт в автозагрузке VoiceRecord.
 var _idle_timer: Timer = null
-var _mic_player: AudioStreamPlayer = null
 var _playback_player: AudioStreamPlayer = null
 var _prompt_player: AudioStreamPlayer = null
-var _accumulated_frames := PackedVector2Array()
-var _recorded_data := PackedByteArray()
-var _is_recording := false
-var _mic_prepared := false
-var _current_level := 0.0
 
 @onready var _background_overlay: ColorRect = %BackgroundOverlay
 @onready var _content_wrapper: Control = %ContentWrapper
@@ -126,7 +119,6 @@ func _ready() -> void:
 		_current_index = 0
 		letter = LETTERS[0]
 	_setup_players()
-	_setup_capture_bus()
 	_setup_idle_timer()
 	_create_level_meter()
 	_connect_signals()
@@ -139,19 +131,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if _is_recording and _capture_effect:
-		var available: int = _capture_effect.get_frames_available()
-		if available > 0:
-			var frames: PackedVector2Array = _capture_effect.get_buffer(available)
-			_accumulated_frames.append_array(frames)
-			var sum_sq := 0.0
-			for f in frames:
-				var s: float = (f.x + f.y) * 0.5
-				sum_sq += s * s
-			var rms: float = sqrt(sum_sq / float(frames.size()))
-			_current_level = lerpf(_current_level, rms, 0.25)
+	# Кадры из микрофона забирает VoiceRecord; здесь только индикатор.
+	var level: float = VoiceRecord.get_level()
 	if _level_meter != null and _level_meter.visible:
-		var level: float = _current_level
 		_level_fill.size.x = _level_meter.size.x * minf(level * 10.0, 1.0)
 		if level > 0.5:
 			_level_fill.color = COLOR_LEVEL_HIGH
@@ -168,33 +150,6 @@ func _setup_players() -> void:
 	_prompt_player = AudioStreamPlayer.new()
 	_prompt_player.bus = &"Master"
 	add_child(_prompt_player)
-
-
-func _setup_capture_bus() -> void:
-	var bus_index: int = AudioServer.get_bus_index(RECORD_BUS)
-	if bus_index == -1:
-		# Web export: AudioServer.add_bus() (at_pos=-1) попадает в JS Bus.addAt(-1),
-		# который через move()+splice(-2,0) ПЕРЕВОРАЧИВАЕТ JS-массив шин
-		# ([master, record] -> [record, master]) при существующей одной шине.
-		# C++ при этом думает, что индексы [Master(0), VoiceRecord(1)] — расходятся.
-		# Результат: set_bus_volume_db(1,-80) глушит Master, а буквы по индексу 0
-		# уходят в VoiceRecord — тишина. set_bus_layout() создаёт шины через
-		# set_sample_bus_count -> Bus.setCount -> create() (append без move) — порядок
-		# [master, record] корректен. default_bus_layout.tres уже содержит VoiceRecord.
-		var layout := load("res://assets/audio/default_bus_layout.tres") as AudioBusLayout
-		if layout != null:
-			AudioServer.set_bus_layout(layout)
-			bus_index = AudioServer.get_bus_index(RECORD_BUS)
-	if bus_index == -1:
-		push_warning("LetterCard: шина %s не создана — продолжаем, но запись может быть недоступна" % RECORD_BUS)
-		return
-	if AudioServer.get_bus_effect_count(bus_index) == 0:
-		_capture_effect = AudioEffectCapture.new()
-		_capture_effect.set_buffer_length(6.0)
-		AudioServer.add_bus_effect(bus_index, _capture_effect)
-	else:
-		_capture_effect = AudioServer.get_bus_effect(bus_index, 0) as AudioEffectCapture
-	AudioServer.set_bus_volume_db(bus_index, -80.0)
 
 
 func _setup_idle_timer() -> void:
@@ -228,140 +183,64 @@ func _on_idle_timeout() -> void:
 	_reset_idle_timer()
 
 
-func prepare_microphone() -> void:
-	if _mic_prepared:
-		return
-	_mic_player = AudioStreamPlayer.new()
-	_mic_player.stream = AudioStreamMicrophone.new()
-	_mic_player.bus = RECORD_BUS
-	add_child(_mic_player)
-	_mic_player.play()
-	_mic_prepared = true
-	GameLogger.info("letter_card", "mic_prepared", {"letter": letter})
+## Готовит микрофон через VoiceRecord. Возвращает false, если устройство
+## недоступно: тогда автозапись не запустится, а пользователь увидит подсказку.
+func prepare_microphone() -> bool:
+	return VoiceRecord.prepare_microphone()
 
 
+## Начинает запись на шине VoiceRecord. false — микрофон недоступен.
 func start_recording() -> bool:
-	if _is_recording:
+	if not VoiceRecord.start_recording():
 		return false
-	if _capture_effect == null:
-		push_error("LetterCard: AudioEffectCapture is null - cannot record")
-		return false
-	if not _mic_prepared:
-		prepare_microphone()
-	if _mic_player != null and not _mic_player.playing:
-		_mic_player.play()
-	_accumulated_frames.clear()
-	_recorded_data.clear()
-	_capture_effect.clear_buffer()
-	_capture_effect.set_buffer_length(5.0)
-	_is_recording = true
 	set_process(true)
 	return true
 
 
+## Останавливает запись. Данные живут в VoiceRecord.
 func stop_recording() -> void:
-	if not _is_recording:
+	if not VoiceRecord.is_recording():
 		return
-	_is_recording = false
-	set_process(false)
-	_current_level = 0.0
-	if _capture_effect and _capture_effect.get_frames_available() > 0:
-		_accumulated_frames.append_array(_capture_effect.get_buffer(_capture_effect.get_frames_available()))
-	_capture_effect.clear_buffer()
-	# Освобождаем микрофон сразу после записи: на iOS активная захват-сессия
-	# переводит аудиомикшер в "голосовой" режим и последующие звуки тише.
-	if _mic_player != null and _mic_player.playing:
-		_mic_player.stop()
-	if _accumulated_frames.is_empty():
-		_recorded_data = PackedByteArray()
-		_play_button.disabled = true
-		push_warning("LetterCard: no frames captured - microphone may be silent or permissions denied")
-		return
-	var mix_rate: float = AudioServer.get_mix_rate()
-	_recorded_data.resize(_accumulated_frames.size() * 2)
-	for i in _accumulated_frames.size():
-		var sample := (_accumulated_frames[i].x + _accumulated_frames[i].y) * 0.5
-		sample = clampf(sample, -1.0, 1.0)
-		var val := int(sample * 32767)
-		_recorded_data[i * 2] = val & 0xFF
-		_recorded_data[i * 2 + 1] = (val >> 8) & 0xFF
-	_accumulated_frames.clear()
-	_play_button.disabled = false
+	var has_data := VoiceRecord.stop_recording()
+	_play_button.disabled = not has_data
 
 
+## Проигрывает запись с выравниванием громкости.
 func play_recording() -> void:
-	if _recorded_data.is_empty():
+	if not VoiceRecord.has_data():
 		return
-	var playback_data: PackedByteArray = _recorded_data
-	var max_abs: int = 0
-	for i in range(0, _recorded_data.size(), 2):
-		var sample: int = _recorded_data[i] | (_recorded_data[i + 1] << 8)
-		if sample > 32767:
-			sample -= 65536
-		var abs_sample: int = -sample if sample < 0 else sample
-		if abs_sample > max_abs:
-			max_abs = abs_sample
-	if max_abs > 0 and max_abs < 26214:
-		var scale: float = 26214.0 / max_abs
-		playback_data = PackedByteArray()
-		playback_data.resize(_recorded_data.size())
-		for i in range(0, _recorded_data.size(), 2):
-			var sample: int = _recorded_data[i] | (_recorded_data[i + 1] << 8)
-			if sample > 32767:
-				sample -= 65536
-			var scaled: int = clampi(int(sample * scale), -32768, 32767)
-			var uscaled: int = scaled + 65536 if scaled < 0 else scaled
-			playback_data[i] = uscaled & 0xFF
-			playback_data[i + 1] = (uscaled >> 8) & 0xFF
 	var wav := AudioStreamWAV.new()
 	wav.format = AudioStreamWAV.FORMAT_16_BITS
 	wav.mix_rate = AudioServer.get_mix_rate()
 	wav.stereo = false
-	wav.data = playback_data
+	wav.data = VoiceRecord.normalize_pcm(VoiceRecord.get_data())
 	_playback_player.stream = wav
 	_playback_player.play()
 
 
+## Сохраняет запись в WAV по указанному пути.
 func save_recording(path: String) -> bool:
-	if _recorded_data.is_empty():
+	var bytes := VoiceRecord.get_wav_bytes()
+	if bytes.is_empty():
 		return false
 	var file := FileAccess.open(path, FileAccess.WRITE)
-	if not file:
+	if file == null:
 		return false
-	var data_size: int = _recorded_data.size()
-	var file_size: int = 36 + data_size
-	var sample_rate: float = AudioServer.get_mix_rate()
-	var header := PackedByteArray()
-	header.resize(44)
-	header.encode_u32(0, 0x46464952)
-	header.encode_u32(4, file_size)
-	header.encode_u32(8, 0x45564157)
-	header.encode_u32(12, 0x20746D66)
-	header.encode_u32(16, 16)
-	header.encode_u16(20, 1)
-	header.encode_u16(22, 1)
-	header.encode_u32(24, sample_rate)
-	header.encode_u32(28, sample_rate * 2)
-	header.encode_u16(32, 2)
-	header.encode_u16(34, 16)
-	header.encode_u32(36, 0x61746164)
-	header.encode_u32(40, data_size)
-	file.store_buffer(header)
-	file.store_buffer(_recorded_data)
+	file.store_buffer(bytes)
 	file.close()
 	return true
 
 
 func is_recording() -> bool:
-	return _is_recording
+	return VoiceRecord.is_recording()
 
 
 func has_recording() -> bool:
-	return not _recorded_data.is_empty()
+	return VoiceRecord.has_data()
 
 
 func _on_mic_pressed() -> void:
-	if _is_recording:
+	if VoiceRecord.is_recording():
 		_stop_recording()
 		_mic_button.text = "Микрофон"
 		_level_meter.hide()
@@ -381,7 +260,7 @@ func _stop_recording() -> void:
 
 
 func _stop_recording_if_active() -> void:
-	if _is_recording:
+	if VoiceRecord.is_recording():
 		_stop_recording()
 		_mic_button.text = "Микрофон"
 		_level_meter.hide()
@@ -390,14 +269,14 @@ func _stop_recording_if_active() -> void:
 
 
 func _on_play_pressed() -> void:
-	if _recorded_data.is_empty():
+	if not VoiceRecord.has_data():
 		return
 	if _playback_player.playing:
 		_playback_player.stop()
 		GameLogger.info("letter_card", "play_stop", {"letter": letter})
 		return
 	play_recording()
-	GameLogger.info("letter_card", "play_start", {"letter": letter, "bytes": _recorded_data.size()})
+	GameLogger.info("letter_card", "play_start", {"letter": letter, "bytes": VoiceRecord.get_data().size()})
 
 
 func _connect_signals() -> void:
@@ -599,7 +478,7 @@ func _auto_record_correct() -> void:
 		_stop_recording()
 		_mic_button.text = "Микрофон"
 		_level_meter.hide()
-		if _recorded_data.is_empty():
+		if not VoiceRecord.has_data():
 			_hint_label.text = "Запись не получилась. Проверь микрофон."
 			GameLogger.warning("letter_card", "auto_record_empty", {"letter": letter})
 			return
@@ -615,7 +494,7 @@ func _auto_record_correct() -> void:
 
 func _save_auto_recording() -> bool:
 	# TODO: ИндексDB/локальное хранение записей - в отдельной фазе.
-	if _recorded_data.is_empty():
+	if not VoiceRecord.has_data():
 		return false
 	var word_set: int = _current_word_set()
 	var data: Dictionary = AlphabetData.get_word_data(letter, word_set)
@@ -916,8 +795,7 @@ func _on_home_pressed() -> void:
 
 func _exit_tree() -> void:
 	set_process(false)
-	if _is_recording and _mic_player:
-		_mic_player.stop()
+	VoiceRecord.release_microphone()
 	if _prompt_player:
 		_prompt_player.stop()
 	if _playback_player:
