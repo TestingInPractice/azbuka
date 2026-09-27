@@ -26,6 +26,8 @@ const DEFAULT_SERIES_LENGTH := 10
 const WORD_SET_COUNT := 5
 ## Номер набора слов по умолчанию.
 const DEFAULT_WORD_SET := 1
+## Префикс идентификатора пользовательского набора (см. CustomSetsStore.make_set_id).
+const CUSTOM_SET_ID_PREFIX := "c_"
 
 ## Вариант озвучки: старая (текущие файлы *_tts.wav).
 const VOICE_VARIANT_OLD := "old"
@@ -48,8 +50,13 @@ var games_played_count: int = 0
 var enabled_modes: Dictionary = DEFAULT_MODES.duplicate()
 ## Длина серии карточек в игре «Найди букву» (5-30).
 var series_length: int = DEFAULT_SERIES_LENGTH
-## Номер активного набора слов (1-WORD_SET_COUNT).
+## Номер активного набора слов (1-WORD_SET_COUNT) для встроенных наборов.
 var word_set: int = DEFAULT_WORD_SET
+## Идентификатор активного набора. Для встроенных — строка номера ("1".."5"),
+## для пользовательских — id вида "c_0a1b2c". Пустая строка означает "использовать
+## word_set": так файл, сохранённый до миграции, продолжает работать.
+var word_set_id: String = ""
+var save_path: String = SAVE_PATH
 ## Активный вариант озвучки ("old" или "new").
 var voice_variant: String = DEFAULT_VOICE_VARIANT
 
@@ -123,17 +130,50 @@ func set_series_length(value: int) -> void:
 	save_progress()
 
 
-## Возвращает номер активного набора слов.
+## Возвращает номер активного встроенного набора слов.
 func get_word_set() -> int:
 	return word_set
 
 
-## Устанавливает номер набора слов с ограничением 1-WORD_SET_COUNT.
+## Возвращает идентификатор активного набора: id пользовательского набора
+## либо строку номера встроенного. Всегда непустая строка.
+func get_word_set_id() -> String:
+	if not word_set_id.is_empty():
+		return word_set_id
+	return str(word_set)
+
+
+## Устанавливает номер встроенного набора (1-WORD_SET_COUNT) и синхронизирует
+## word_set_id, чтобы оба поля всегда описывали один и тот же выбор.
 func set_word_set(value: int) -> void:
 	var clamped := clampi(value, 1, WORD_SET_COUNT)
-	if word_set == clamped:
+	if word_set == clamped and word_set_id == str(clamped):
 		return
 	word_set = clamped
+	word_set_id = str(clamped)
+	save_progress()
+
+
+## Устанавливает активный набор по идентификатору. Числовой id ("1".."5")
+## означает встроенный набор; любой другой непустой id — пользовательский.
+## Пустая строка очищает выбор: тогда источником истины остаётся word_set.
+func set_word_set_id(value: String) -> void:
+	var trimmed := value.strip_edges()
+	if trimmed.is_empty():
+		if word_set_id.is_empty():
+			return
+		word_set_id = ""
+		save_progress()
+		return
+	if trimmed.is_valid_int():
+		set_word_set(clampi(trimmed.to_int(), 1, WORD_SET_COUNT))
+		return
+	if word_set_id == trimmed:
+		return
+	word_set_id = trimmed
+	# Пользовательский набор не имеет номера: сбрасываем int-поле в значение
+	# по умолчанию, чтобы старый код видел валидный номер.
+	word_set = DEFAULT_WORD_SET
 	save_progress()
 
 
@@ -153,7 +193,7 @@ func set_voice_variant(value: String) -> void:
 
 
 func load_progress() -> void:
-	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var file := FileAccess.open(save_path, FileAccess.READ)
 	if file == null:
 		return
 	var parsed: Variant = JSON.parse_string(file.get_as_text())
@@ -175,6 +215,12 @@ func load_progress() -> void:
 		series_length = clampi(int(root["series_length"]), SERIES_LENGTH_MIN, SERIES_LENGTH_MAX)
 	if root.has("word_set"):
 		word_set = clampi(int(root["word_set"]), 1, WORD_SET_COUNT)
+	# Миграция: в старых файлах word_set_id нет, поэтому выводим его из word_set.
+	# Приоритет у явно сохранённого word_set_id — он и есть выбор пользователя.
+	if root.has("word_set_id"):
+		word_set_id = str(root["word_set_id"]).strip_edges()
+	else:
+		word_set_id = str(word_set)
 	if root.has("voice_variant"):
 		var saved_variant := str(root["voice_variant"])
 		if saved_variant == VOICE_VARIANT_OLD or saved_variant == VOICE_VARIANT_NEW:
@@ -190,10 +236,11 @@ func save_progress() -> void:
 		"enabled_modes": enabled_modes,
 		"series_length": series_length,
 		"word_set": word_set,
+		"word_set_id": word_set_id,
 		"voice_variant": voice_variant,
 	}
-	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	var file := FileAccess.open(save_path, FileAccess.WRITE)
 	if file == null:
-		push_error("ProgressManager: не удалось открыть файл для записи " + SAVE_PATH)
+		push_error("ProgressManager: не удалось открыть файл для записи " + save_path)
 		return
 	file.store_string(JSON.stringify(root))
