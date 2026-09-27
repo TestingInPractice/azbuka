@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://ui/constructor/letter_slot/letter_slot.gd" id="1_slot"]
+[ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+
+[node name="LetterSlot" type="PanelContainer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_slot")
+
+[node name="Row" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Thumbnail" type="TextureRect" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LetterLabel" type="Label" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 64
+text = "А"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextColumn" type="VBoxContainer" parent="Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="WordEdit" type="LineEdit" parent="Row/TextColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+placeholder_text = "Слово"
+max_length = 40
+accessibility_name = "Слово к букве"
+
+[node name="StatusLabel" type="Label" parent="Row/TextColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "нет картинки и звука"
+
+[node name="Buttons" type="HBoxContainer" parent="Row"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ImageButton" type="Button" parent="Row/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Картинка"
+accessibility_name = "Выбрать картинку"
+
+[node name="AudioButton" type="Button" parent="Row/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Записать"
+accessibility_name = "Записать голос"
+
+[node name="PlayButton" type="Button" parent="Row/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Слушать"
+disabled = true
+accessibility_name = "Прослушать запись"
+
+[node name="ClearButton" type="Button" parent="Row/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Очистить"
+disabled = true
+accessibility_name = "Очистить картинку и звук"
