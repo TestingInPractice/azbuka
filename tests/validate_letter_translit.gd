@@ -14,6 +14,8 @@ func _ready() -> void:
 	_check(LetterTranslit.to_ascii("Ы") == "y", "Ы -> y")
 	_check(LetterTranslit.to_ascii("Ь") == "soft", "Ь -> soft")
 	_check(LetterTranslit.to_ascii("Е") == "e", "Е -> e")
+	_check(LetterTranslit.to_ascii("Э") == "eh", "Э -> eh (не e, как у Е)")
+	_check(LetterTranslit.to_ascii("Й") == "j", "Й -> j (не y, как у Ы)")
 	_check(LetterTranslit.to_ascii("Я") == "ya", "Я -> ya")
 	_check(LetterTranslit.to_ascii("Ю") == "yu", "Ю -> yu")
 	_check(LetterTranslit.to_ascii("Ё") == "yo", "Ё -> yo")
@@ -24,6 +26,20 @@ func _ready() -> void:
 	_check(LetterTranslit.to_ascii("АБ") == "_", "две буквы -> _")
 	# Результат всегда безопасен как имя файла.
 	_check(LetterTranslit.to_ascii("Ж").is_valid_filename(), "Ж -> валидное имя файла")
+
+	# Все 33 буквы обязаны давать РАЗНЫЕ имена. Набор может быть заполнен
+	# целиком, и две буквы с одинаковым ASCII-именем записали бы файл
+	# друг на друга: img_e.webp от Е и от Э — вторая молча перетирает первую.
+	# Раньше здесь были Е/Э -> "e" и Й/Ы -> "y", и тест этого не ловил,
+	# потому что проверял буквы по одной.
+	var seen := {}
+	for letter: String in "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ":
+		var ascii := LetterTranslit.to_ascii(letter)
+		if seen.has(ascii):
+			_fail("коллизия имён: %s и %s дают одинаковое %s"
+					% [str(seen[ascii]), letter, ascii])
+		seen[ascii] = letter
+	_check(seen.size() == 33, "уникальных имён ровно 33 (получено: %d)" % seen.size())
 
 	_finish()
 
