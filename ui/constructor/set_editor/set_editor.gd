@@ -28,6 +28,7 @@ signal close_requested()
 @onready var _save_button: Button = %SaveButton
 @onready var _readiness_label: Label = %ReadinessLabel
 @onready var _slots: GridContainer = %Slots
+@onready var _back_button: Button = %BackButton
 
 var _set_id := ""
 var _slots_by_letter: Dictionary = {}
@@ -42,6 +43,7 @@ var _updating := false
 func _ready() -> void:
 	_build_slots()
 	_save_button.pressed.connect(_on_save_pressed)
+	_back_button.pressed.connect(_on_back_pressed)
 	_name_edit.text_submitted.connect(_on_name_submitted)
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_apply_theme()
@@ -349,10 +351,22 @@ func _on_save_pressed() -> void:
 	GameLogger.info("SetEditor", "set_saved", {"set_id": _set_id})
 
 
+## Родитель нажал «Назад»: единственный путь выхода из редактора. Редактор
+## сам не знает, куда возвращать, поэтому объявляет намерение сигналом, а
+## навигацией занимается SetList. Раньше сигнал был объявлен и подключён, но
+## не эмитился нигде, и список звал _show_list() напрямую — объявленный API
+## был мёртвым, а путь назад был неявным.
+func _on_back_pressed() -> void:
+	close_requested.emit()
+	GameLogger.info("SetEditor", "close_requested", {"set_id": _set_id})
+
+
 ## Карточка и кнопки красятся под тему, как в LetterSlot.
 func _apply_theme(_mode: int = 0) -> void:
 	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
 	_name_edit.add_theme_color_override("font_color", ThemeManager.get_text())
 	_readiness_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	ThemeManager.style_button(_save_button, colors["button_bg"] as Color,
+			colors["button_text"] as Color)
+	ThemeManager.style_button(_back_button, colors["button_bg"] as Color,
 			colors["button_text"] as Color)

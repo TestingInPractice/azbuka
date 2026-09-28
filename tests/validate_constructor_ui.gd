@@ -606,6 +606,32 @@ func _check_set_editor() -> void:
 	_check(saved_ids == [set_id], "SaveButton эмитит set_saved с id (получено: %s)"
 			% str(saved_ids))
 
+	# DEFECT 2. close_requested был объявлен и подключён, но не эмитился нигде:
+	# кнопки «Назад» в редакторе не было, а список звал _show_list() напрямую.
+	# Теперь назад — один путь: BackButton редактора эмитит сигнал, и SetList
+	# на него реагирует. Проверяем и узел, и факт эмита, и что эмит РОВНО ОДИН
+	# (двойная навигация закрыла бы список и тут же открыла его снова).
+	# Путь без «%»: редактор здесь — прямой потомок валидатора, и «%» искал бы
+	# уникальное имя от владельца ВАЛИДАТОРА, а не от сцены редактора.
+	var back_button := editor.get_node_or_null("BackButton") as Button
+	_check(back_button != null, "в set_editor.tscn есть узел BackButton")
+	if back_button != null:
+		_check(back_button.pressed.get_connections().size() == 1,
+				"SetEditor._ready() подключил BackButton (подключений: %d)"
+				% back_button.pressed.get_connections().size())
+		_check(not back_button.accessibility_name.strip_edges().is_empty(),
+				"у BackButton редактора есть accessibility_name")
+		var closes: Array[String] = []
+		(editor as SetEditor).close_requested.connect(
+				func() -> void: closes.append("close"))
+		back_button.emit_signal("pressed")
+		_check(closes == ["close"],
+				"BackButton редактора эмитит close_requested ровно один раз (получено: %s)"
+				% str(closes))
+		# Сигнал закрытия не должен тащить за собой закрытие набора.
+		_check(saved_ids == [set_id],
+				"нажатие «Назад» не эмитит set_saved заново (получено: %s)" % str(saved_ids))
+
 	CustomSetsStore.delete_set(set_id)
 	editor.queue_free()
 	await get_tree().process_frame
@@ -653,6 +679,63 @@ func _check_set_list() -> void:
 	CustomSetsStore.delete_set(str(first.get("id", "")))
 	(list as SetList).refresh()
 	_check((list as SetList).get_row_count() == 0, "после удаления всех список пуст")
+
+	# DEFECT 2. Один путь назад: BackButton редактора эмитит close_requested, и
+	# именно SetList на него реагирует. Проверяем наблюдаемый результат — список
+	# снова виден, редактор скрыт, — а не то, какой обработчик отработал.
+	# Двойная навигация (сигнал ПЛЮС прямой _show_list()) выглядела бы так же,
+	# поэтому сверяем ещё и число переходов: счётчик закрытий обязан вырасти
+	# ровно на один.
+	var editor_node := list.get_node("%SetEditor") as Control
+	var layout_node := list.get_node("Layout") as Control
+	_check(editor_node != null and layout_node != null,
+			"у SetList есть и встроенный редактор, и список в дереве")
+	var closes: Array[String] = []
+	(editor_node as SetEditor).close_requested.connect(func() -> void: closes.append("c"))
+	var back_button := list.get_node("%BackButton") as Button
+	(list.get_node("%NewButton") as Button).emit_signal("pressed")
+	_check(editor_node.visible and layout_node.visible == false,
+			"после «Создать набор» виден редактор, а список скрыт")
+	# Один путь назад. Пока виден редактор, кнопка списка спрятана: иначе на
+	# экране две кнопки «Назад» с разными маршрутами, и нажатие любой из них
+	# закрывает редактор — то есть двойная навигация.
+	_check(back_button.visible == false,
+			"пока открыт редактор, кнопка «Назад» списка спрятана (один путь назад)")
+	# Из списка та же кнопка уводит в настройки — второй маршрут не тронут.
+	# Назад из редактора — через BackButton САМОГО РЕДАКТОРА, не через кнопку
+	# списка: так проверяется именно соединение close_requested -> SetList.
+	#
+	# Путь БЕЗ «%»: редактор вложен в set_list.tscn, и «%BackButton» отрезолвился
+	# бы в кнопку СПИСКА (уникальное имя ищется от владельца сцены), то есть
+	# проверка прошла бы по старой прямой ветке _on_back_pressed и ничего не
+	# сказала бы про close_requested. Обычный относительный путь адресует узел
+	# внутри самого редактора.
+	var editor_back := editor_node.get_node_or_null("BackButton") as Button
+	_check(editor_back != null,
+			"у вложенного в SetList редактора есть свой узел BackButton")
+	if editor_back != null:
+		editor_back.emit_signal("pressed")
+		_check(layout_node.visible and editor_node.visible == false,
+				"close_requested вернул SetList к списку и скрыл редактор")
+		_check(back_button.visible,
+				"после возврата кнопка «Назад» списка снова на месте")
+		_check(str(back_button.text) == "Назад",
+				"после возврата кнопка снова «Назад» (получено: %s)" % str(back_button.text))
+		_check(closes == ["c"],
+				"редактор эмитил close_requested ровно один раз (получено: %s)"
+				% str(closes))
+
+	# Из списка та же кнопка уводит в настройки — второй маршрут не тронут.
+	_check((list as SetList).get_row_count() >= 1,
+			"набор, созданный кнопкой, остался в списке")
+	# Уборка за собой: следующая функция ждёт ПУСТОЕ хранилище, и оставленный
+	# набор сдвинул бы счётчик строк на единицу во всех её проверках.
+	for record: Dictionary in CustomSetsStore.get_sets():
+		CustomSetsStore.delete_set(str(record.get("id", "")))
+	(list as SetList).refresh()
+	_check((list as SetList).get_row_count() == 0,
+			"после уборки хранилище снова пусто")
+
 	list.queue_free()
 	await get_tree().process_frame
 	_print("set_editor + set_list: OK")

@@ -13,6 +13,9 @@ signal open_editor(set_id: String)
 ## Список изменился: создали, удалили, переименовали.
 signal sets_changed()
 
+## Экран открывает SetList сменой сцены (Settings), а редактор встроен в сцену
+## списка, поэтому open_editor и sets_changed никому извне не нужны: сигналы
+## оставлены как публичный контракт, на них подписан сам список в тестах.
 const ROW_SCENE := preload("res://ui/constructor/set_list/set_list_row.tscn")
 ## Сцена настроек: «Назад» из списка возвращает туда, откуда пришли.
 const SETTINGS_SCENE := "res://ui/settings/settings.tscn"
@@ -25,8 +28,9 @@ const SETTINGS_SCENE := "res://ui/settings/settings.tscn"
 @onready var _layout: VBoxContainer = $Layout
 
 var _rows: Array[SetListRow] = []
-## true, когда поверх списка открыт редактор. По флагу BackButton знает,
-## куда возвращать: из редактора — в список, из списка — в настройки.
+## true, когда поверх списка открыт редактор. По флагу кнопка списка знает,
+## куда возвращать: из списка — в настройки, из редактора назад ведёт уже
+## собственная кнопка редактора (close_requested).
 var _editor_open: bool = false
 
 
@@ -108,25 +112,31 @@ func _on_row_delete(set_id: String) -> void:
 
 ## Показывает редактор набора поверх списка. Сначала add_child-а не нужно —
 ## редактор уже в сцене, его достаточно показать.
+##
+## Кнопка списка на это время прячется: у редактора есть своя «Назад», которая
+## эмитит close_requested, и две кнопки «Назад» на экране означали бы два
+## маршрута к одному результату.
 func _show_editor(set_id: String) -> void:
 	_editor_open = true
 	_layout.visible = false
+	_back_button.visible = false
 	_editor.visible = true
 	# Порядок именно такой: сначала видимость, потом open_set(). Наоборот
 	# нельзя — refresh() редактора при invisible-узле всё равно отработал бы,
 	# но родительский Margin мог бы не успеть пересчитать раскладку.
 	_editor.open_set(set_id)
-	_back_button.text = "К списку"
 	GameLogger.info("SetList", "editor_opened", {"set_id": set_id})
 
 
 ## Возвращает список наверх. Редактор скрывается, а не удаляется: набор
 ## может открываться много раз подряд, и пересоздавать 33 слота каждый раз
-## незачем.
+## незачем. Сюда приходят оба пути назад — «Готово» (set_saved) и «Назад»
+## редактора (close_requested), — и оба обязаны привести к одному состоянию.
 func _show_list() -> void:
 	_editor_open = false
 	_editor.visible = false
 	_layout.visible = true
+	_back_button.visible = true
 	_back_button.text = "Назад"
 
 
@@ -141,11 +151,14 @@ func _on_editor_close_requested() -> void:
 	_show_list()
 
 
-## Одна кнопка на два состояния: из редактора — назад в список, из списка —
-## в настройки, откуда пришли. Отдельную кнопку внутри редактора не заводим,
-## чтобы не трогать SetEditor: план его не меняет.
+## Одна кнопка списка на два состояния: из списка — в настройки, откуда
+## пришли. Из редактора она спрятана (_show_editor), и назад ведёт кнопка
+## самого редактора через close_requested: один путь назад, а не два.
 func _on_back_pressed() -> void:
 	if _editor_open:
+		# Страховка от двойной навигации: состояние могло разъехаться
+		# (например, open_set() снаружи), и тогда лучше закрыть редактор
+		# напрямую, чем нажать на скрытую кнопку, которая ничего не нажмётся.
 		_show_list()
 		return
 	get_tree().change_scene_to_file(SETTINGS_SCENE)

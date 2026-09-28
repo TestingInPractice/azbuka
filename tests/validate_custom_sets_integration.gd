@@ -450,8 +450,15 @@ func _check_builtin_parity() -> void:
 func _check_restart_persistence() -> void:
 	var record := CustomSetsStore.create_set("После перезапуска")
 	var set_id := str(record.get("id", ""))
-	CustomSetsStore.set_entry(set_id, "А", "Автобус", "", "")
-	CustomSetsStore.set_entry(set_id, "Б", "Бампер", "", "")
+	# Отличие от кода из плана — записи заполнены ЦЕЛИКОМ (слово, картинка,
+	# звук), а не одним словом. Провка здесь о персистентности: переживает ли
+	# слово перечитывание JSON. Но с правилом отката по букве (см.
+	# set_repository.gd: неполная запись уходит на встроенные данные целиком)
+	# запись из одного слова больше не пользовательская, и get_word_data()
+	# вернул бы встроенное «Авто́бус». Утверждение не ослаблено — проверяется
+	# тот же факт, просто на записи, которая по контракту является пользовательской.
+	_custom_entry(set_id, "А", "Автобус")
+	_custom_entry(set_id, "Б", "Бампер")
 	ProgressManager.set_word_set_id(set_id)
 
 	# Имитация перезапуска: сбрасываем кэш и память, читаем оба файла заново.
@@ -473,6 +480,14 @@ func _check_restart_persistence() -> void:
 			"после перечитывания слово «А» сохранилось")
 	CustomSetsStore.delete_set(set_id)
 	ProgressManager.set_word_set(1)
+
+
+## Полная пользовательская запись буквы: слово, картинка и звук. Файлы на диск
+## не пишутся — здесь проверяется разбор метаданных, а не загрузка медиа.
+func _custom_entry(set_id: String, letter: String, word: String) -> void:
+	CustomSetsStore.set_entry(set_id, letter, word,
+			CustomSetsStore.set_dir(set_id) + CustomSetsStore.image_file_name(letter),
+			CustomSetsStore.set_dir(set_id) + CustomSetsStore.audio_file_name(letter))
 
 
 ## Все четыре игры должны пережить старт на своём наборе.
