@@ -3,7 +3,8 @@ extends Control
 ##
 ## Игра состоит из 10 раундов. В каждом раунде по центру показывается буква,
 ## звучит её название, а ниже четыре большие кнопки со словами: три случайных
-## слова и одно правильное (слово текущей буквы из AlphabetData). За
+## слова и одно правильное (слово текущей буквы из активного набора через
+## SetRepository). За
 ## правильный ответ начисляется очко, звучит «Молодец!», кнопка подсвечивается
 ## зелёным. За неправильный ответ кнопка блокируется и подсвечивается красным,
 ## показывается подсказка «Попробуй ещё!». После 10 раундов показывается финал
@@ -21,6 +22,8 @@ const WRONG_COLOR := Color("#E53935")
 const HINT_CORRECT := "Молодец!"
 ## Текст подсказки при неправильном ответе.
 const HINT_WRONG := "Попробуй ещё!"
+## Текст подсказки, когда активный набор ещё не заполнен ни одной буквой.
+const HINT_EMPTY_SET := "В этом наборе пока нет букв. Заполни его в настройках."
 ## Частота программного звука ошибки в герцах.
 const ERROR_BEEP_FREQUENCY := 300.0
 ## Длительность программного звука ошибки в секундах.
@@ -100,11 +103,33 @@ func _start_round() -> void:
 	_round_active = true
 	_correct_button_index = -1
 	_current_letter = _pick_random_letter()
+	# Набор создан, но родитель ещё ничего не заполнил: букв в нём нет, и
+	# раунд из одной кнопки без текста ребёнку бессмыслен. Это не подмена
+	# данных набора, а отказ играть в незаполненный набор, поэтому пишем в
+	# лог и не начинаем раунд вовсе.
+	if _current_letter.is_empty():
+		_round_active = false
+		_status_label.text = HINT_EMPTY_SET
+		_round_label.text = "Раунд %d / %d" % [_rounds_played + 1, TOTAL_ROUNDS]
+		_score_label.text = "Счёт: %d" % _score
+		_letter_label.text = ""
+		_apply_theme()
+		for button: Button in _answer_buttons:
+			button.disabled = true
+			button.text = ""
+		GameLogger.warning("GuessPictureGame", "active_set_empty", {
+			"set_id": SetRepository.get_active_set_id(),
+		})
+		_reset_idle_timer()
+		return
 	var correct_word := _get_word(_current_letter)
 	var distractor_letters := _pick_distractor_letters(_current_letter)
 	var words: Array[String] = [correct_word]
 	for letter: String in distractor_letters:
-		words.append(_get_word(letter))
+		# Именно _distractor_word, а не _get_word: слово, по которому буква
+		# отобрана как неповторяющаяся, и слово на кнопке должны быть одним и
+		# тем же. Иначе две кнопки в раунде окажутся с одинаковым текстом.
+		words.append(_distractor_word(letter))
 	words.shuffle()
 	for index in range(words.size()):
 		var button := _answer_buttons[index]
@@ -119,7 +144,7 @@ func _start_round() -> void:
 	_status_label.text = ""
 	_apply_theme()
 	# Звук буквы звучит в начале раунда, пока буква перед глазами.
-	AudioManager.play_audio(AlphabetData.get_letter_audio_path(_current_letter, ProgressManager.get_voice_variant()))
+	AudioManager.play_stream(SetRepository.get_letter_audio(_current_letter))
 	GameLogger.info("GuessPictureGame", "round_start", {
 		"round": _rounds_played + 1,
 		"letter": _current_letter,
@@ -129,39 +154,60 @@ func _start_round() -> void:
 	_reset_idle_timer()
 
 
-## Возвращает случайную букву из всех букв алфавита.
+## Возвращает случайную букву из активного набора. Свой набор из двух букв
+## обязан крутить эти две, а не весь алфавит.
 func _pick_random_letter() -> String:
-	var letters := AlphabetData.get_letters()
-	return str(letters[randi_range(0, letters.size() - 1)]["letter"])
+	var letters := SetRepository.get_active_letters()
+	if letters.is_empty():
+		return ""
+	return letters[randi_range(0, letters.size() - 1)]
 
 
-## Возвращает три разные буквы-дистрактора, чьи слова не совпадают со словом
-## исключённой буквы (гарантия четырёх разных слов на кнопках).
+## Буквы-дистракторы. Основной источник — буквы активного набора: их слова
+## обязаны прийти из своего набора, это и смысл игры. Но три дистрактора
+## набрать из них можно не всегда: в своём наборе родитель заполнил, скажем,
+## две буквы, а кнопок на экране четыре. Нехватку добираем из полного
+## алфавита — это шум, а не данные буквы: слово такой буквы в своём наборе
+## отсутствует, и SetRepository для неё ничего не вернёт (откат на встроенный
+## набор там намеренно запрещён). Поэтому слово дистрактора берётся отдельной
+## функцией _distractor_word(), которая честно говорит, откуда оно.
 func _pick_distractor_letters(excluded: String) -> Array[String]:
 	var correct_word := _get_word(excluded)
-	var letters := AlphabetData.get_letters()
-	var pool: Array[Dictionary] = []
-	for entry: Dictionary in letters:
-		var letter := str(entry["letter"])
-		if letter == excluded:
+	var pool: Array[String] = []
+	for letter: String in SetRepository.get_active_letters():
+		if letter == excluded or _distractor_word(letter) == correct_word:
 			continue
-		if _get_word(letter) == correct_word:
-			continue
-		pool.append(entry)
+		pool.append(letter)
+	if pool.size() < DISTRACTOR_COUNT:
+		for entry: Dictionary in AlphabetData.get_letters():
+			var letter := str(entry.get("letter", ""))
+			if letter == excluded or pool.has(letter) or _distractor_word(letter) == correct_word:
+				continue
+			pool.append(letter)
 	pool.shuffle()
 	var result: Array[String] = []
 	for index in range(mini(DISTRACTOR_COUNT, pool.size())):
-		result.append(str(pool[index]["letter"]))
+		result.append(pool[index])
 	return result
 
 
-## Возвращает слово, соответствующее букве, из выбранного набора слов
-## (с запасным вариантом из набора 1 через get_letter_data).
+## Слово буквы из активного набора. Отдельного отката на
+## AlphabetData.get_letter_data() больше нет намеренно: у своего набора
+## заполнены не все буквы, и тихий откат на встроенный набор показал бы
+## ребёнку слово из чужого набора вместо его собственного.
 func _get_word(letter: String) -> String:
-	var word := str(AlphabetData.get_word_data(letter, ProgressManager.get_word_set()).get("word", ""))
-	if word.is_empty():
-		word = str(AlphabetData.get_letter_data(letter).get("word", ""))
-	return word
+	return str(SetRepository.get_word_data(letter).get("word", ""))
+
+
+## Слово для буквы-дистрактора. Если буква есть в активном наборе — слово
+## оттуда же. Если нет (она набрана из полного алфавита, чтобы добрать
+## варианты) — из встроенного набора 1, и это осознанный шум, а не содержимое
+## набора. Ключ set1 обоснован контрактом: по validate_word_sets
+## get_letter_data() — это ровно данные набора 1.
+func _distractor_word(letter: String) -> String:
+	if SetRepository.has_letter(letter):
+		return _get_word(letter)
+	return str(AlphabetData.get_letter_data(letter).get("word", ""))
 
 
 func _on_answer_button_pressed(button: Button) -> void:
@@ -344,7 +390,7 @@ func _stop_idle_timer() -> void:
 func _on_idle_timeout() -> void:
 	if _navigating or not AudioManager.sound_enabled or not _round_active:
 		return
-	AudioManager.play_audio(AlphabetData.get_letter_audio_path(_current_letter, ProgressManager.get_voice_variant()))
+	AudioManager.play_stream(SetRepository.get_letter_audio(_current_letter))
 	GameLogger.info("GuessPictureGame", "idle_hint", {"letter": _current_letter})
 	_reset_idle_timer()
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://ui/constructor/set_list/set_list.gd" id="1_list"]
 [ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" path="res://ui/constructor/set_editor/set_editor.tscn" id="3_editor"]
 
 [node name="SetList" type="Control"]
 layout_mode = 3
@@ -21,7 +22,7 @@ anchor_bottom = 1.0
 offset_left = 40.0
 offset_top = 40.0
 offset_right = -40.0
-offset_bottom = -40.0
+offset_bottom = -140.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 24
@@ -51,3 +52,29 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 16
+
+[node name="SetEditor" parent="." instance=ExtResource("3_editor")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -100.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Назад"
+accessibility_name = "Назад"

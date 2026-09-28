@@ -91,15 +91,17 @@ func _ready() -> void:
 
 ## Показывает случайное слово из набора, отличное от текущего.
 func _show_random_word() -> void:
-	var letters: Array[Dictionary] = AlphabetData.get_letters()
+	# Буквы берём из репозитория: у встроенного набора это все 33, у
+	# пользовательского — только заполненные родителем. Игра со своим набором
+	# из двух букв обязана крутить эти две, а не весь алфавит.
+	var letters := SetRepository.get_active_letters()
 	var total := letters.size()
 	if total == 0:
 		return
 	var letter := current_letter
 	var guard := 0
 	while letter == current_letter and guard < total:
-		var candidate: Dictionary = letters[randi_range(0, total - 1)]
-		letter = str(candidate["letter"])
+		letter = letters[randi_range(0, total - 1)]
 		guard += 1
 	_build_puzzle(letter)
 
@@ -109,15 +111,14 @@ func _build_puzzle(letter: String) -> void:
 	_puzzle_id += 1
 	_completion_pending = false
 	is_word_complete = false
-	var data: Dictionary = AlphabetData.get_word_data(letter, ProgressManager.get_word_set())
+	var data := SetRepository.get_word_data(letter)
 	if data.is_empty():
 		GameLogger.warning("CollectWordGame", "word_not_found", {"letter": letter})
 		return
 	current_letter = letter
 	current_word = str(data.get("word", ""))
 	if current_word.is_empty():
-		# Запасной вариант: слово из набора 1 (совместимость с get_letter_data).
-		current_word = str(AlphabetData.get_letter_data(letter).get("word", ""))
+		return
 	_update_word_image()
 	word_letters = _split_word(current_word)
 	pool_letters = word_letters.duplicate()
@@ -176,7 +177,7 @@ func _build_puzzle(letter: String) -> void:
 		if id != _puzzle_id:
 			return
 		AudioManager.stop_all()
-		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set(), ProgressManager.get_voice_variant()))
+		AudioManager.play_stream(SetRepository.get_word_audio(current_letter))
 	)
 	GameLogger.info("CollectWordGame", "word_shown", {"letter": current_letter, "word": current_word, "letter_count": count})
 
@@ -270,7 +271,7 @@ func try_place_letter(letter: String, source_button: Button = null) -> bool:
 	_flash_correct(slot)
 	GameLogger.info("CollectWordGame", "letter_tap_correct", {"letter": letter, "slot": slot_index, "word": current_word})
 	AudioManager.stop_all()
-	AudioManager.play_audio(AlphabetData.get_letter_audio_path(letter, ProgressManager.get_voice_variant()))
+	AudioManager.play_stream(SetRepository.get_letter_audio(letter))
 	if slot_index >= word_letters.size():
 		_on_word_completed()
 	return true
@@ -303,7 +304,7 @@ func _on_word_completed() -> void:
 		if id != _puzzle_id:
 			return
 		AudioManager.stop_all()
-		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set(), ProgressManager.get_voice_variant()))
+		AudioManager.play_stream(SetRepository.get_word_audio(current_letter))
 		GameLogger.info("CollectWordGame", "word_audio_replayed", {"word": current_word})
 	)
 	get_tree().create_timer(NEXT_WORD_DELAY).timeout.connect(func() -> void:
@@ -363,31 +364,18 @@ func _on_home_button_pressed() -> void:
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
 
 
-## Обновляет картинку слова текущей буквы. Если файл не найден, показывает
-## цветной placeholder, цвет которого вычислен из HSV-хэша буквы.
+## Обновляет картинку слова текущей буквы. Если файла нет, показывает цветной
+## placeholder, цвет которого вычислен из HSV-хэша буквы.
 func _update_word_image() -> void:
-	var img_path := _image_path_for(current_letter)
-	var tex: Texture2D = null
-	if not img_path.is_empty():
-		tex = load(img_path) as Texture2D
-	if tex:
+	# Текстуру слова берём из SetRepository: он сам различает встроенный набор
+	# (res://) и пользовательский (user://, через Image.load_from_file — в
+	# веб-сборке у таких файлов нет импорта). Свой _image_path_for() искал
+	# только res:// и умел встроенные наборы, поэтому свой набор был не виден.
+	var tex := SetRepository.get_word_texture(current_letter)
+	if tex != null:
 		_word_image.texture = tex
 	else:
 		_word_image.texture = _make_placeholder_texture(current_letter)
-		if not img_path.is_empty():
-			GameLogger.warning("CollectWordGame", "word_image_missing", {"letter": current_letter, "path": img_path})
-
-
-## Возвращает путь к картинке слова для буквы ("" если буквы нет в словаре).
-## Картинка берётся из выбранного набора слов, с запасным вариантом из
-## LetterCard.WORD_IMAGE (набор 1).
-func _image_path_for(ltr: String) -> String:
-	var image_name: String = str(AlphabetData.get_word_data(ltr, ProgressManager.get_word_set()).get("image", ""))
-	if image_name.is_empty():
-		image_name = LetterCard.WORD_IMAGE.get(ltr, "")
-	if image_name.is_empty():
-		return ""
-	return "res://assets/images/" + image_name + ".png"
 
 
 ## Создаёт цветную текстуру-заглушку по HSV-хэшу буквы.
@@ -402,7 +390,7 @@ func _make_placeholder_texture(ltr: String) -> Texture2D:
 ## Нажатие на картинку слова озвучивает текущее слово.
 func _on_word_image_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set(), ProgressManager.get_voice_variant()))
+		AudioManager.play_stream(SetRepository.get_word_audio(current_letter))
 		GameLogger.info("CollectWordGame", "word_image_pressed", {"letter": current_letter, "word": current_word})
 		_reset_idle_timer()
 
@@ -463,7 +451,7 @@ func _stop_idle_timer() -> void:
 func _on_idle_timeout() -> void:
 	if _navigating or not AudioManager.sound_enabled or is_word_complete or _completion_pending:
 		return
-	AudioManager.play_audio(AlphabetData.get_word_audio_path(current_letter, ProgressManager.get_word_set(), ProgressManager.get_voice_variant()))
+	AudioManager.play_stream(SetRepository.get_word_audio(current_letter))
 	GameLogger.info("CollectWordGame", "idle_hint", {"letter": current_letter, "word": current_word})
 	_reset_idle_timer()
 

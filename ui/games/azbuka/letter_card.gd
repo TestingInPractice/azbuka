@@ -293,44 +293,50 @@ func _connect_signals() -> void:
 func _on_letter_sound_pressed() -> void:
 	GameLogger.info("letter_card", "letter_sound", {"letter": letter})
 	AudioManager.stop_all()
-	var letter_data := AlphabetData.get_letter_data(letter)
-	var sound_path := AlphabetData.get_letter_sound_path(letter)
-	var name_path := AlphabetData.get_letter_audio_path(letter, ProgressManager.get_voice_variant())
-	# У букв без отдельного звука (Ъ/Ь) поле letter_sound отсутствует —
-	# играем только название один раз, чтобы не дублировать звук.
-	if not letter_data.has("letter_sound") or str(letter_data.get("letter_sound", "")).is_empty():
-		AudioManager.play_audio(name_path)
+	# Данные буквы — только через SetRepository. У Ъ/Ь своего фонемного звука
+	# нет, и get_letter_sound() возвращает название буквы; репозиторий кэширует
+	# по пути, поэтому это тот же самый объект. Сравнение по идентичности вместо
+	# дублирования: играть «ы-ы-...» и сразу «эр» — это повтор, а не два звука.
+	var name_stream := SetRepository.get_letter_audio(letter)
+	var sound_stream := SetRepository.get_letter_sound(letter)
+	if name_stream == null:
+		_reset_idle_timer()
+		return
+	if sound_stream == null or sound_stream == name_stream:
+		AudioManager.play_stream(name_stream)
 		_reset_idle_timer()
 		return
 	# Сначала звук буквы (фонема), по окончании — название буквы.
-	_play_prompt(sound_path)
+	_play_prompt_stream(sound_stream)
 	await _await_prompt_finished()
 	if not is_inside_tree():
 		return
-	AudioManager.play_audio(name_path)
+	AudioManager.play_stream(name_stream)
 	_reset_idle_timer()
 
 
-## Номер текущего набора слов. Берём из ProgressManager на каждом вызове,
-## чтобы смена набора в настройках сразу подхватывалась (без кэша).
-func _current_word_set() -> int:
-	return ProgressManager.get_word_set()
+## Идентификатор текущего набора слов. Берём из репозитория на каждом вызове,
+## чтобы смена набора в настройках сразу подхватывалась (без кэша). Возвращаем
+## строку, потому что у пользовательского набора номера нет.
+func _current_word_set() -> String:
+	return SetRepository.get_active_set_id()
 
 
 func _on_word_sound_pressed() -> void:
 	GameLogger.info("letter_card", "word_sound", {"letter": letter})
 	AudioManager.stop_all()
-	AudioManager.play_audio(AlphabetData.get_word_audio_path(letter, _current_word_set(), ProgressManager.get_voice_variant()))
+	AudioManager.play_stream(SetRepository.get_word_audio(letter))
 	_reset_idle_timer()
 
 
 func _update_content() -> void:
 	_letter_label.text = letter + letter.to_lower()
-	var img_path := _image_path_for(letter)
-	var tex: Texture2D = null
-	if not img_path.is_empty():
-		tex = load(img_path) as Texture2D
-	if tex:
+	# Текстуру слова берём из SetRepository: он сам различает встроенный набор
+	# (res://) и пользовательский (user://, через Image.load_from_file — в
+	# веб-сборке у таких файлов нет импорта). Раньше здесь был свой
+	# _image_path_for(), который искал только res:// и умел встроенные наборы.
+	var tex := SetRepository.get_word_texture(letter)
+	if tex != null:
 		_word_image.texture = tex
 		_word_image.visible = true
 		var vp: Vector2 = get_viewport_rect().size
@@ -339,21 +345,8 @@ func _update_content() -> void:
 	else:
 		_word_image.texture = null
 		_word_image.visible = false
-		if not img_path.is_empty():
-			GameLogger.warning("letter_card", "word_image_missing", {"letter": letter, "path": img_path})
 	_reset_word_game()
 	_reset_idle_timer()
-
-
-func _image_path_for(ltr: String) -> String:
-	# Сначала имя картинки из данных выбранного набора, при пустом
-	# результате — запасной WORD_IMAGE (его используют и мини-игры).
-	var image_name: String = str(AlphabetData.get_word_data(ltr, _current_word_set()).get("image", ""))
-	if image_name.is_empty():
-		image_name = WORD_IMAGE.get(ltr, "")
-	if image_name.is_empty():
-		return ""
-	return "res://assets/images/" + image_name + ".png"
 
 
 func _reset_word_game() -> void:
@@ -364,13 +357,13 @@ func _reset_word_game() -> void:
 	_hint_label.text = "Найди букву «%s» в слове" % letter
 	_hint_label.scale = Vector2.ONE
 	_hint_label.show()
-	# Слово берём из выбранного набора; при пустом результате (нет набора
-	# или данных) — запасной вариант через старый get_letter_data.
-	var data: Dictionary = AlphabetData.get_word_data(letter, _current_word_set())
+	# Слово берём из выбранного набора через SetRepository. Отдельного
+	# отката на AlphabetData.get_letter_data() больше нет намеренно: у
+	# пользовательского набора заполнены не все буквы, и тихий откат на
+	# встроенный набор показал бы ребёнку слово из другого набора вместо
+	# его собственного. Пустое слово — это пустая карточка, а не подмена.
+	var data := SetRepository.get_word_data(letter)
 	var word: String = str(data.get("word", ""))
-	if word.is_empty():
-		var legacy: Dictionary = AlphabetData.get_letter_data(letter)
-		word = str(legacy.get("word", ""))
 	if word.is_empty():
 		return
 	_setup_word_buttons(word)
@@ -496,12 +489,17 @@ func _save_auto_recording() -> bool:
 	# TODO: ИндексDB/локальное хранение записей - в отдельной фазе.
 	if not VoiceRecord.has_data():
 		return false
-	var word_set: int = _current_word_set()
-	var data: Dictionary = AlphabetData.get_word_data(letter, word_set)
+	# id набора в имени файла — строка: у пользовательского набора номера
+	# нет, и %d на строке вроде "c_a1b2c3" печатал бы нули, склеивая записи
+	# разных наборов в одно имя. Отличие от плана: тот предлагал сделать
+	# _current_word_set() параметризованной функцией, но он и до этого не
+	# был параметризованным — просто локальным помощником без аргументов.
+	var word_set := _current_word_set()
+	var data := SetRepository.get_word_data(letter)
 	var word: String = str(data.get("word", "unknown")).to_lower()
 	DirAccess.make_dir_recursive_absolute("user://recordings")
 	var ts: String = Time.get_datetime_string_from_system().replace("T", "_").replace(":", "-")
-	var path := "user://recordings/%s_%s_set%d_%s.wav" % [letter.to_lower(), word, word_set, ts]
+	var path := "user://recordings/%s_%s_set%s_%s.wav" % [letter.to_lower(), word, word_set, ts]
 	return save_recording(path)
 
 
@@ -510,6 +508,16 @@ func _play_prompt(path: String) -> void:
 		return
 	var stream := load(path) as AudioStream
 	if stream == null:
+		return
+	_prompt_player.stream = stream
+	_prompt_player.play()
+
+
+## То же, но для уже загруженного потока. Звуки буквы приходят из
+## SetRepository готовыми AudioStream, а load() по пути здесь не годится:
+## у файлов из user:// в веб-сборке нет импорта.
+func _play_prompt_stream(stream: AudioStream) -> void:
+	if not AudioManager.sound_enabled or stream == null:
 		return
 	_prompt_player.stream = stream
 	_prompt_player.play()

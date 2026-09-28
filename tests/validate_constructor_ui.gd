@@ -1032,8 +1032,19 @@ func _check_set_list_ready_ran() -> void:
 	await get_tree().process_frame
 
 	_check(list is SetList, "второй экземпляр set_list.tscn тоже инстанцируется")
-	_check(ThemeManager.theme_changed.get_connections().size() == theme_links_before + 1,
+	# Отличие от плана — прямая проверка своей подписки вместо сравнения числа
+	# подключений. План писал «стало ровно на одну больше», и это работало, пока
+	# set_list.tscn был одиноким. Теперь список хостит SetEditor, а у того своя
+	# подписка на theme_changed (set_editor.gd), так что инстанцирование списка
+	# добавляет ДВЕ подписки — и проверка на «+1» падала на совершенно рабочей
+	# сцене. Считать чужие подписки и требовать ровно одну — проверка не про то,
+	# что она проверяет: set_list может лежать рядом с любым числом слушателей
+	# темы. Вопрос «подписался ли _ready() ЭТОГО списка» — и есть is_connected().
+	_check(ThemeManager.theme_changed.is_connected(
+			Callable(list, "_apply_theme")),
 			"set_list._ready() подписался на theme_changed")
+	_check(ThemeManager.theme_changed.get_connections().size() >= theme_links_before + 1,
+			"инстанцирование списка добавило подписку на тему")
 	_check(CustomSetsStore.sets_changed.get_connections().size() == store_links_before + 1,
 			"set_list._ready() подписался на sets_changed хранилища")
 	var new_button := list.get_node_or_null("%NewButton") as Button

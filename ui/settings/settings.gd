@@ -7,6 +7,9 @@ extends Control
 
 ## Сцена настроек (для возврата из попапов доната и обратной связи).
 const SETTINGS_SCENE := "res://ui/settings/settings.tscn"
+## Список своих наборов. Открывается по кнопке «Создать набор» и ведёт
+## в конструктор, где набор создаётся, заполняется и выбирается.
+const SET_LIST_SCENE := "res://ui/constructor/set_list/set_list.tscn"
 ## Минимальное число включённых режимов игр.
 const MIN_ENABLED_MODES := 1
 ## Цвет текста предупреждения.
@@ -54,6 +57,10 @@ const CHECKBOX_ICON_RADIUS := 18
 @onready var _word_set_button_3: Button = %WordSetButton3
 @onready var _word_set_button_4: Button = %WordSetButton4
 @onready var _word_set_button_5: Button = %WordSetButton5
+## Контейнер своих наборов: сюда добавляются кнопки наборов родителя.
+@onready var _set_button_container: VBoxContainer = %CustomSets
+## Кнопка входа в конструктор наборов.
+@onready var _my_sets_button: Button = %MySetsButton
 @onready var _voice_card: PanelContainer = %VoiceCard
 @onready var _voice_button_old: Button = %VoiceButtonOld
 @onready var _voice_button_new: Button = %VoiceButtonNew
@@ -63,6 +70,11 @@ var _checkboxes: Dictionary = {}
 var _word_set_buttons: Array[Button] = []
 ## Кнопки вариантов озвучки в порядке: старая, новая.
 var _voice_buttons: Array[Button] = []
+## Кнопки своих наборов, созданные родителем. Пересоздаются на каждом sync.
+var _custom_set_buttons: Array[Button] = []
+## Общая группа переключателей для встроенных и своих наборов. Без неё
+## встроченная и своя кнопки смогли бы быть нажаты одновременно.
+var _set_button_group: ButtonGroup = null
 var _updating: bool = false
 
 
@@ -101,6 +113,22 @@ func _ready() -> void:
 		word_set_button.toggled.connect(_on_word_set_button_toggled.bind(i))
 	# Все наборы доступны: картинки готовы для всех наборов (звук — общая
 	# заглушка для слов вне набора 1).
+	# Встроенные и свои наборы делят одну группу переключателей: активный
+	# набор ровно один, и без общей группы нажатая кнопка своего набора не
+	# сняла бы нажатие с кнопки встроенного.
+	_set_button_group = ButtonGroup.new()
+	# allow_unpress = false (значение по умолчанию) — это и есть гарантия
+	# «активен ровно один набор»: снять нажатие с единственной нажатой кнопки
+	# группа не даёт. Задано явно, потому что на этом теперь держится
+	# обработчик, и смена дефолта в будущей версии тихо сломала бы выбор.
+	_set_button_group.allow_unpress = false
+	for i in range(1, ProgressManager.WORD_SET_COUNT + 1):
+		_word_set_buttons[i - 1].button_group = _set_button_group
+	_my_sets_button.pressed.connect(_on_my_sets_pressed)
+	# Наборы создаются, переименовываются и удаляются в конструкторе, а
+	# список на этом экране обязан узнать об этом без перезахода в настройки.
+	CustomSetsStore.sets_changed.connect(sync_custom_set_buttons)
+	sync_custom_set_buttons()
 	_sync_word_set_buttons()
 	_voice_buttons = [_voice_button_old, _voice_button_new]
 	_voice_button_old.toggled.connect(_on_voice_button_toggled.bind(ProgressManager.VOICE_VARIANT_OLD))
@@ -138,22 +166,127 @@ func _on_mode_checkbox_toggled(toggled_on: bool, mode_key: String) -> void:
 ## Синхронизирует состояние кнопок наборов с выбранным набором.
 func _sync_word_set_buttons() -> void:
 	_updating = true
+	var active_id := ProgressManager.get_word_set_id()
 	for i in range(1, ProgressManager.WORD_SET_COUNT + 1):
 		var word_set_button: Button = _word_set_buttons[i - 1]
-		word_set_button.button_pressed = ProgressManager.get_word_set() == i
+		word_set_button.button_pressed = active_id == str(i)
+	# Свои наборы сопоставляются по id из meta, а не по имени: два набора
+	# могут называться одинаково, и тогда нажатым оказался бы не тот.
+	for button: Button in _custom_set_buttons:
+		button.button_pressed = active_id == str(button.get_meta("set_id", ""))
 	_updating = false
+
+
+## Пересоздаёт кнопки своих наборов по данным хранилища. Вызывается при входе
+## на экран и по сигналу sets_changed, то есть после любого изменения наборов
+## в конструкторе. Кнопки удалённого набора исчезают, переименованного —
+## меняют подпись, а нажатым остаётся тот, что выбран в прогрессе.
+func sync_custom_set_buttons() -> void:
+	for button: Button in _custom_set_buttons:
+		_set_button_container.remove_child(button)
+		button.queue_free()
+	_custom_set_buttons.clear()
+	var active_id := ProgressManager.get_word_set_id()
+	for set_data: Dictionary in CustomSetsStore.get_sets():
+		var button := _make_custom_set_button(set_data)
+		_set_button_container.add_child(button)
+		_custom_set_buttons.append(button)
+		if str(set_data.get("id", "")) == active_id:
+			# Назначаем нажатие после add_child и после _updating: иначе
+			# обработчик увидит не своё состояние и решит, что кнопку
+			# пытаются выключить.
+			_updating = true
+			button.button_pressed = true
+			_updating = false
+	# Набор, удалённый будучи активным, не должен оставлять выбор на id,
+	# которого больше нет: возвращаемся на первый встроенный, иначе игры
+	# читали бы несуществующий набор.
+	if not ProgressManager.get_word_set_id().is_empty() \
+			and ProgressManager.get_word_set_id() not in _known_set_ids():
+		ProgressManager.set_word_set(1)
+	_style_custom_set_buttons()
+	_sync_word_set_buttons()
+
+
+## Создаёт кнопку своего набора. Подпись — имя набора, а не его id: id вида
+## "c_a1b2c3" родителю показать нечего.
+func _make_custom_set_button(set_data: Dictionary) -> Button:
+	var button := Button.new()
+	button.text = str(set_data.get("name", ""))
+	button.toggle_mode = true
+	button.button_group = _set_button_group
+	button.custom_minimum_size = Vector2(0, 190)
+	button.add_theme_font_size_override("font_size", 40)
+	button.accessibility_name = "Свой набор %s" % button.text
+	button.set_meta("set_id", str(set_data.get("id", "")))
+	button.toggled.connect(_on_custom_set_toggled.bind(str(set_data.get("id", ""))))
+	return button
+
+
+## Выбор своего набора: переключает прогресс. PIN не спрашивается — это
+## обычный переключатель, как встроенные наборы, а не вход в конструктор.
+func _on_custom_set_toggled(toggled_on: bool, set_id: String) -> void:
+	if _updating:
+		return
+	if not toggled_on:
+		# Отличие от плана — тихий выход, как и во встроенном наборе: снятие
+		# нажатия пришло от ButtonGroup, а не от попытки родителя выключить
+		# набор. Возвращать нажатие здесь нельзя — оно ушло бы на кнопку,
+		# которую нажали только что.
+		GameLogger.warning("Settings", "custom_set_released_by_group", {"set_id": set_id})
+		return
+	ProgressManager.set_word_set_id(set_id)
+	_sync_word_set_buttons()
+	GameLogger.info("Settings", "custom_set_changed", {"set_id": set_id})
+
+
+## Кнопки своих наборов. Отдаётся наружу, чтобы валидатор мог проверить, что
+## два набора родителя дают две кнопки, а удалённый — ноль.
+func get_custom_set_buttons() -> Array[Button]:
+	return _custom_set_buttons
+
+
+## Все id, которые сейчас можно выбрать: пять встроенных плюс свои наборы.
+## Нужен, чтобы отличить «набор удалили» от «выбран существующий набор»:
+## пустой store дал бы в обоих случаях список без активного id.
+func _known_set_ids() -> PackedStringArray:
+	var ids := PackedStringArray()
+	for i in range(1, ProgressManager.WORD_SET_COUNT + 1):
+		ids.append(str(i))
+	for record: Dictionary in CustomSetsStore.get_sets():
+		ids.append(str(record.get("id", "")))
+	return ids
+
+
+## Обработчик кнопки «Создать набор». Вход в конструктор защищён
+## Родительской Защитой (арифметический пример), поэтому переход происходит
+## только из её колбэка. open_constructor() вынесен отдельным методом, чтобы
+## и переход, и шов «кнопка -> Защита -> метод» можно было проверить по
+## отдельности: в headless примера не отгадать, а метод перехода проверяется
+## напрямую.
+func _on_my_sets_pressed() -> void:
+	ParentalGate.open(self, open_constructor)
+
+
+## Переход в список своих наборов. Колбэк Родительской Защиты.
+func open_constructor() -> void:
+	GameLogger.info("Settings", "constructor_opened", {})
+	get_tree().change_scene_to_file(SET_LIST_SCENE)
 
 
 func _on_word_set_button_toggled(toggled_on: bool, set_number: int) -> void:
 	if _updating:
 		return
 	if not toggled_on:
-		# Активный набор нельзя выключить: как минимум один набор остаётся.
-		_updating = true
-		(_word_set_buttons[set_number - 1] as Button).button_pressed = true
-		_updating = false
-		_show_warning()
-		GameLogger.warning("Settings", "word_set_disable_blocked", {"set": set_number})
+		# Отличие от плана — тихий выход вместо возврата нажатия.
+		# Кнопки наборов теперь в одной ButtonGroup, и группа снимает нажатие
+		# с прежней кнопки сама, когда нажимают следующую. Прежний код на это
+		# «снятие» отвечал «нажать обратно» — и нажатие возвращалось уже на
+		# ВЫБРАННУЮ соседнюю кнопку, то есть выбор своего набора отбирался
+		# назад (в тесте это давало set 1 вместо c_… после нажатия своей
+		# кнопки). Гарантировать «нажат ровно один» теперь не нужно: это и так
+		# делает группа, allow_unpress у неё выключен по умолчанию.
+		GameLogger.warning("Settings", "word_set_released_by_group", {"set": set_number})
 		return
 	ProgressManager.set_word_set(set_number)
 	_sync_word_set_buttons()
@@ -295,6 +428,10 @@ func _apply_theme(_mode: int = 0) -> void:
 	_style_card(_word_set_card)
 	_style_card(_voice_card)
 	_style_toggle_buttons()
+	# Свои наборы создаются в коду, поэтому перекрашиваются здесь, а не в
+	# _style_toggle_buttons(): без этого смена темы оставила бы кнопки
+	# родителя в старых цветах.
+	_style_custom_set_buttons()
 	_apply_checkbox_icons()
 	_update_theme_button_text()
 
@@ -370,6 +507,26 @@ func _style_toggle_buttons() -> void:
 		var disabled_text := ThemeManager.get_text()
 		disabled_text.a = 0.4
 		toggle_button.add_theme_color_override("font_disabled_color", disabled_text)
+
+
+## Стилизует кнопки своих наборов и кнопку входа в конструктор так же, как
+## встроенные наборы: свои кнопки создаются в коде, а не в сцене, поэтому
+## _style_toggle_buttons() их не видит, и без этого они остались бы серыми
+## системными. Правила ровно те же, иначе два вида кнопок выбора набора
+## различались бы на глаз.
+func _style_custom_set_buttons() -> void:
+	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
+	var button_bg := colors["button_bg"] as Color
+	var button_text := colors["button_text"] as Color
+	var text_color := colors["text"] as Color
+	for target: Button in _custom_set_buttons + [_my_sets_button]:
+		ThemeManager.style_button(target, button_bg, button_text)
+		var pressed_box := StyleBoxFlat.new()
+		pressed_box.bg_color = button_bg
+		pressed_box.set_border_width_all(4)
+		pressed_box.set_border_color(text_color)
+		pressed_box.set_corner_radius_all(24)
+		target.add_theme_stylebox_override("pressed", pressed_box)
 
 
 ## Пересоздаёт крупные индикаторы чекбоксов под текущую тему.

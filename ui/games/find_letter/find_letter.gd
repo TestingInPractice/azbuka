@@ -60,7 +60,7 @@ var _square_buttons: Array[Button] = []
 
 var _state: int = STATE_READY
 ## Серия карточек текущей игры (записи из AlphabetData).
-var _series: Array[Dictionary] = []
+var _series: Array[String] = []
 ## Отмечены ли карточки решёнными.
 var _solved: Array[bool] = []
 var _card_index: int = 0
@@ -142,7 +142,9 @@ func _show_ready() -> void:
 ## Начинает новую серию карточек.
 func _start_series() -> void:
 	var count := ProgressManager.get_series_length()
-	var letters := AlphabetData.get_letters()
+	# Буквы серии берём из репозитория: свой набор из двух букв обязан дать
+	# серию из этих двух карточек, а не из тридцати трёх встроенных.
+	var letters := SetRepository.get_active_letters()
 	letters.shuffle()
 	_series = letters.slice(0, min(count, letters.size()))
 	_solved.clear()
@@ -160,7 +162,7 @@ func _show_card(index: int) -> void:
 	_state = STATE_PLAYING
 	_card_index = clampi(index, 0, _series.size() - 1)
 	_input_blocked = false
-	_correct_letter = str(_series[_card_index]["letter"])
+	_correct_letter = _series[_card_index]
 	_card_number_label.text = "Карточка %d из %d" % [_card_index + 1, _series.size()]
 	_build_answers()
 	_update_squares()
@@ -196,29 +198,49 @@ func _play_word_voice_delayed() -> void:
 		return
 	if not AudioManager.sound_enabled:
 		return
-	var word_path := AlphabetData.get_word_audio_path(
-		_correct_letter, ProgressManager.get_word_set(), ProgressManager.get_voice_variant())
-	if word_path.is_empty() or not ResourceLoader.exists(word_path):
+	# Звук слова — через SetRepository: у пользовательского набора это файл
+	# из user://, у которого в веб-сборке нет импорта, поэтому ResourceLoader
+	# и AudioManager.play_audio() по пути его не видят.
+	var stream := SetRepository.get_word_audio(_correct_letter)
+	if stream == null:
 		GameLogger.warning("FindLetterGame", "word_audio_missing", {
 			"letter": _correct_letter,
-			"path": word_path,
 		})
 		return
-	AudioManager.play_audio(word_path)
-	GameLogger.info("FindLetterGame", "word_voice", {"word_audio": word_path})
+	AudioManager.play_stream(stream)
+	GameLogger.info("FindLetterGame", "word_voice", {"word_audio": stream.resource_path})
 
 
 ## Собирает варианты ответов: правильная буква и три случайные.
 func _build_answers() -> void:
 	_answers = [_correct_letter]
-	var distractors: Array[String] = []
-	for letter_data: Dictionary in AlphabetData.get_letters():
-		var letter := str(letter_data["letter"])
-		if letter != _correct_letter:
-			distractors.append(letter)
+	var distractors := _distractor_pool(_correct_letter)
 	distractors.shuffle()
 	_answers.append_array(distractors.slice(0, ANSWER_COUNT - 1))
 	_answers.shuffle()
+
+
+## Буквы-дистракторы. Сначала берём буквы активного набора, но ими одними
+## четыре варианта не наберутся: своему набору из одной буквы дистракторы нужны
+## не меньше, чем встроенному, иначе вариантов ответов будет один, а квадратов
+## на карточке — четыре, и индекс уйдёт за границу. При нехватке добираем из
+## полного алфавита. Дистрактор здесь — это шум, а не данные буквы: на экране
+## показывается только сама буква, слово и картинка читаются лишь для
+## правильного варианта. Поэтому AlphabetData.get_letters() тут уместен — он
+## даёт список из 33 букв, а не содержимое набора.
+func _distractor_pool(correct: String) -> Array[String]:
+	var pool: Array[String] = []
+	for letter: String in SetRepository.get_active_letters():
+		if letter != correct:
+			pool.append(letter)
+	if pool.size() >= ANSWER_COUNT - 1:
+		return pool
+	for entry: Dictionary in AlphabetData.get_letters():
+		var letter := str(entry.get("letter", ""))
+		if letter == correct or pool.has(letter):
+			continue
+		pool.append(letter)
+	return pool
 
 
 ## Обновляет квадраты: текст букв, доступность и подсветку.
@@ -289,28 +311,15 @@ func _play_square_wrong_anim(button: Button) -> void:
 ## Обновляет картинку слова текущей карточки. Если файл не найден, показывает
 ## цветной placeholder, цвет которого вычислен из HSV-хэша буквы.
 func _update_word_image() -> void:
-	var img_path := _image_path_for(_correct_letter)
-	var tex: Texture2D = null
-	if not img_path.is_empty():
-		tex = load(img_path) as Texture2D
-	if tex:
+	# Текстуру слова берём из SetRepository: он сам различает встроенный набор
+	# (res://) и пользовательский (user://, через Image.load_from_file — в
+	# веб-сборке у таких файлов нет импорта). Свой _image_path_for() искал
+	# только res:// и умел встроенные наборы, поэтому свой набор был не виден.
+	var tex := SetRepository.get_word_texture(_correct_letter)
+	if tex != null:
 		_word_image.texture = tex
 	else:
 		_word_image.texture = _make_placeholder_texture(_correct_letter)
-		if not img_path.is_empty():
-			GameLogger.warning("FindLetterGame", "word_image_missing", {"letter": _correct_letter, "path": img_path})
-
-
-## Возвращает путь к картинке слова для буквы ("" если буквы нет в словаре).
-## Картинка берётся из выбранного набора слов, с запасным вариантом из
-## LetterCard.WORD_IMAGE (набор 1).
-func _image_path_for(ltr: String) -> String:
-	var image_name: String = str(AlphabetData.get_word_data(ltr, ProgressManager.get_word_set()).get("image", ""))
-	if image_name.is_empty():
-		image_name = LetterCard.WORD_IMAGE.get(ltr, "")
-	if image_name.is_empty():
-		return ""
-	return "res://assets/images/" + image_name + ".png"
 
 
 ## Создаёт цветную текстуру-заглушку по HSV-хэшу буквы.
@@ -333,8 +342,7 @@ func _on_word_image_input(event: InputEvent) -> void:
 	if _state != STATE_PLAYING:
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var audio_path := AlphabetData.get_letter_audio_path(_correct_letter, ProgressManager.get_voice_variant())
-		AudioManager.play_audio(audio_path)
+		AudioManager.play_stream(SetRepository.get_letter_audio(_correct_letter))
 		GameLogger.info("FindLetterGame", "word_image_pressed", {"letter": _correct_letter})
 		_reset_idle_timer()
 
@@ -493,8 +501,7 @@ func _stop_idle_timer() -> void:
 func _on_idle_timeout() -> void:
 	if _navigating or not AudioManager.sound_enabled or _solved[_card_index] or _input_blocked or _state != STATE_PLAYING:
 		return
-	var audio_path := AlphabetData.get_letter_audio_path(_correct_letter, ProgressManager.get_voice_variant())
-	AudioManager.play_audio(audio_path)
+	AudioManager.play_stream(SetRepository.get_letter_audio(_correct_letter))
 	GameLogger.info("FindLetterGame", "idle_hint", {"letter": _correct_letter})
 	_reset_idle_timer()
 

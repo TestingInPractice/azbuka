@@ -3,6 +3,10 @@ extends Control
 ## Список пользовательских наборов: создать, открыть, удалить.
 ##
 ## Встроенные наборы здесь не показываются — родитель создаёт только свои.
+##
+## Экран сам хостит редактор набора: Settings открывает SetList сменой сцены,
+## и принимать сигнал open_editor было некому. Поэтому нажатие строки не
+## только эмитит сигнал, но и открывает встроенный SetEditor поверх списка.
 
 ## Родитель хочет открыть набор в редакторе.
 signal open_editor(set_id: String)
@@ -10,16 +14,30 @@ signal open_editor(set_id: String)
 signal sets_changed()
 
 const ROW_SCENE := preload("res://ui/constructor/set_list/set_list_row.tscn")
+## Сцена настроек: «Назад» из списка возвращает туда, откуда пришли.
+const SETTINGS_SCENE := "res://ui/settings/settings.tscn"
 
 @onready var _new_button: Button = %NewButton
 @onready var _scroll: VBoxContainer = %Scroll
 @onready var _empty_label: Label = %EmptyLabel
+@onready var _editor: SetEditor = %SetEditor
+@onready var _back_button: Button = %BackButton
+@onready var _layout: VBoxContainer = $Layout
 
 var _rows: Array[SetListRow] = []
+## true, когда поверх списка открыт редактор. По флагу BackButton знает,
+## куда возвращать: из редактора — в список, из списка — в настройки.
+var _editor_open: bool = false
 
 
 func _ready() -> void:
 	_new_button.pressed.connect(_on_new_pressed)
+	_back_button.pressed.connect(_on_back_pressed)
+	# Редактор встроен в сцену, поэтому его сигналы доступны сразу. set_saved
+	# закрывает редактор и перечитывает список: имя набора могло измениться,
+	# а счётчик букв — пополниться.
+	_editor.set_saved.connect(_on_editor_set_saved)
+	_editor.close_requested.connect(_on_editor_close_requested)
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_apply_theme()
 	CustomSetsStore.sets_changed.connect(refresh)
@@ -75,10 +93,12 @@ func _on_new_pressed() -> void:
 		return
 	sets_changed.emit()
 	open_editor.emit(set_id)
+	_show_editor(set_id)
 
 
 func _on_row_pressed(set_id: String) -> void:
 	open_editor.emit(set_id)
+	_show_editor(set_id)
 
 
 func _on_row_delete(set_id: String) -> void:
@@ -86,8 +106,55 @@ func _on_row_delete(set_id: String) -> void:
 	sets_changed.emit()
 
 
+## Показывает редактор набора поверх списка. Сначала add_child-а не нужно —
+## редактор уже в сцене, его достаточно показать.
+func _show_editor(set_id: String) -> void:
+	_editor_open = true
+	_layout.visible = false
+	_editor.visible = true
+	# Порядок именно такой: сначала видимость, потом open_set(). Наоборот
+	# нельзя — refresh() редактора при invisible-узле всё равно отработал бы,
+	# но родительский Margin мог бы не успеть пересчитать раскладку.
+	_editor.open_set(set_id)
+	_back_button.text = "К списку"
+	GameLogger.info("SetList", "editor_opened", {"set_id": set_id})
+
+
+## Возвращает список наверх. Редактор скрывается, а не удаляется: набор
+## может открываться много раз подряд, и пересоздавать 33 слота каждый раз
+## незачем.
+func _show_list() -> void:
+	_editor_open = false
+	_editor.visible = false
+	_layout.visible = true
+	_back_button.text = "Назад"
+
+
+## «Готово» в редакторе: возвращаемся к списку и перечитываем его, потому
+## что имя набора и число заполненных букв как раз изменились.
+func _on_editor_set_saved(_set_id: String) -> void:
+	_show_list()
+	refresh()
+
+
+func _on_editor_close_requested() -> void:
+	_show_list()
+
+
+## Одна кнопка на два состояния: из редактора — назад в список, из списка —
+## в настройки, откуда пришли. Отдельную кнопку внутри редактора не заводим,
+## чтобы не трогать SetEditor: план его не меняет.
+func _on_back_pressed() -> void:
+	if _editor_open:
+		_show_list()
+		return
+	get_tree().change_scene_to_file(SETTINGS_SCENE)
+
+
 func _apply_theme(_mode: int = 0) -> void:
 	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
-	ThemeManager.style_button(_new_button, colors["button_bg"] as Color,
-			colors["button_text"] as Color)
+	var button_bg := colors["button_bg"] as Color
+	var button_text := colors["button_text"] as Color
+	ThemeManager.style_button(_new_button, button_bg, button_text)
+	ThemeManager.style_button(_back_button, button_bg, button_text)
 	_empty_label.add_theme_color_override("font_color", ThemeManager.get_text())
