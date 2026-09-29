@@ -59,6 +59,30 @@ const TEST_STORE_PATH := "user://constructor_ui_test_sets.json"
 ## плана: план такого счётчика не предусматривал.
 const TASK8_CHECKS := 50
 
+## Пол зелёного прогона этого файла (221 проверка) — нижняя граница, ниже
+## которой блок Родительской Защиты удалил бы чужую проверку. Считается
+## НАМИ на прогонах, а не взято из плана.
+const BASELINE_TOTAL := 221
+
+## Сцена Родительской Защиты и её скрипт. Заданы строками, а не именем класса
+## ParentalGate намеренно: если parental_gate.gd перестанет компилироваться,
+## ссылка на класс в этом файле уронила бы его РАЗБОР, и валидатор завис бы
+## молча (ровно тот отказ, которого здесь боимся). Со строкой вместо класса
+## некомпилирующийся скрипт читается как FAIL «Защита не открылась».
+const GATE_SCENE_PATH := "res://ui/parental_gate/parental_gate.tscn"
+const GATE_SCRIPT_PATH := "res://ui/parental_gate/parental_gate.gd"
+
+## Экран настроек и его тестовый двойник. Путь задаётся строкой, а не именем
+## класса Settings: падение компиляции settings.gd должно дать проверку,
+## а не висящий валидатор.
+const SETTINGS_SCENE_PATH := "res://ui/settings/settings.tscn"
+const SPY_SCRIPT_PATH := "res://tests/settings_constructor_spy.gd"
+
+## Наименьшее число проверок, которое обязан выполнить блок Защиты. Считает не
+## «сколько получилось», а «блок вообще отработал»: проверка, которой нет,
+## должна валить прогон так же надёжно, как неверный результат.
+const MIN_GATE_CHECKS := 55
+
 ## Сохранённый боевой путь хранилища: восстанавливается в _finish-цепочке.
 var _saved_store_path: String = ""
 
@@ -95,6 +119,7 @@ func _ready() -> void:
 	await _check_set_list()
 	await _check_set_list_ready_ran()
 	await _check_two_sets_never_share_path()
+	await _check_parental_gate()
 
 	CustomSetsStore.save_path = _saved_store_path
 	_finish()
@@ -1263,6 +1288,322 @@ func _check_two_sets_never_share_path() -> void:
 	_print("two sets paths: OK")
 
 
+## Экран настроек, у которого open_constructor() считает вызовы вместо смены
+## сцены. Подмена скрипта — ДО add_child(), иначе _ready() отработает на
+## боевом скрипте, подпишет кнопку дважды и обрушит прогон чужой ошибкой.
+func _spy_settings() -> Node:
+	if not ResourceLoader.exists(SETTINGS_SCENE_PATH):
+		_fail("нет сцены настроек по пути %s" % SETTINGS_SCENE_PATH)
+		return null
+	var settings: Node = load(SETTINGS_SCENE_PATH).instantiate()
+	var spy_script: Script = load(SPY_SCRIPT_PATH)
+	if spy_script == null:
+		_fail("не загрузился тестовый двойник %s" % SPY_SCRIPT_PATH)
+		return null
+	settings.set_script(spy_script)
+	add_child(settings)
+	return settings
+
+
+## Узел Родительской Защиты, поднятый над сценой, либо null. Ищем по пути
+## скрипта, а не по имени класса: сломанный parental_gate.gd должен дать
+## FAIL-проверку, а не уронить РАЗБОР этого файла (тогда валидатор зависнет
+## молча, и watchdog сработает бессильно).
+func _find_parental_gate() -> Node:
+	for child: Node in get_tree().root.get_children():
+		var script: Script = child.get_script()
+		if script != null and str(script.resource_path) == GATE_SCRIPT_PATH:
+			return child
+	return null
+
+
+## Сколько оверлеев Защиты висит в корне. Утечка проявит себя здесь: сцена
+## открыта, оверлей закрыт, а узел остался.
+func _count_parental_gates() -> int:
+	var total := 0
+	for child: Node in get_tree().root.get_children():
+		var script: Script = child.get_script()
+		if script != null and str(script.resource_path) == GATE_SCRIPT_PATH:
+			total += 1
+	return total
+
+
+## Три кнопки ответа Защиты — по публичным именам сцены, а не по приватному
+## _answer_buttons: проверка должна опираться на то, что видит родитель.
+func _gate_answer_buttons(gate: Node) -> Array:
+	var buttons: Array = []
+	for node_name: String in ["%AnswerButton1", "%AnswerButton2", "%AnswerButton3"]:
+		var button := gate.get_node_or_null(NodePath(node_name)) as Button
+		if button != null:
+			buttons.append(button)
+	return buttons
+
+
+## Операнды из ВИДИМОГО текста вопроса: «Сколько будет 9 + 8?» -> [9, 8].
+## Правильный ответ выводится именно так, а не из приватного _correct_answer:
+## иначе тест повторил бы реализацию и не поймал бы рассинхрон надписей с ключом.
+func _gate_operands(question: String) -> Array[int]:
+	var numbers: Array[int] = []
+	var current := ""
+	for index: int in range(question.length()):
+		var symbol := question.substr(index, 1)
+		if symbol >= "0" and symbol <= "9":
+			current += symbol
+			continue
+		if not current.is_empty():
+			numbers.append(int(current))
+			current = ""
+	if not current.is_empty():
+		numbers.append(int(current))
+	return numbers
+
+
+## Кнопка с подписью, равной sum — верный ответ. null, если такой нет.
+## Сознательно отдельная функция, а не флаг внутри общей: смешанный поиск
+## «сначала совпадение, потом первое несовпадение» однажды уже вернул вместо
+## неверного ответа верный, и тест «неверный ответ не пускает дальше» тихо
+## превратился в «верный ответ пускает дальше» — красной была одна строка.
+func _gate_correct_button(gate: Node, sum: int) -> Button:
+	for button: Button in _gate_answer_buttons(gate):
+		if button.text == str(sum):
+			return button
+	return null
+
+
+## Первая кнопка, подпись которой НЕ равна sum, — заведомо неверный ответ.
+func _gate_wrong_button(gate: Node, sum: int) -> Button:
+	for button: Button in _gate_answer_buttons(gate):
+		if button.text != str(sum):
+			return button
+	return null
+
+
+## Сколько подписан на `pressed` кнопки. Ноль означает, что _ready() не
+## отработал и нажатие ушло бы в пустоту.
+func _pressed_connections(button: Signal) -> int:
+	return button.get_connections().size()
+
+
+## Родительская Защита перед конструктором: кнопка «Свои наборы» не должна
+## открывать конструктор сразу — сначала верный ответ на пример.
+##
+## Проверяется сквозной путь %MySetsButton -> ParentalGate -> open_constructor().
+## Реальный open_constructor() зовёт change_scene_to_file(), а валидатор сам
+## является current_scene, поэтому переход подменён счётчиком; но объект и имя
+## метода колбэка берутся из живой Защиты, так что шов «кнопка -> Защита ->
+## метод» проверен настоящим, а не смоделированным.
+func _check_parental_gate() -> void:
+	var start_checks := checks
+	var spy := _spy_settings()
+	if spy == null:
+		return
+
+	# --- Сцена настроек действительно поднялась и прошла _ready().
+	var button := spy.get_node_or_null("%MySetsButton") as Button
+	_check(button != null, "в настройках есть кнопка «Свои наборы» (%MySetsButton)")
+	if button == null:
+		spy.queue_free()
+		return
+	var ready_witness := false
+	for connection: Dictionary in ThemeManager.theme_changed.get_connections():
+		var callback: Callable = connection.get("callable", Callable())
+		if callback.is_valid() and callback.get_object() == spy:
+			ready_witness = true
+	_check(ready_witness,
+			"Settings._ready() отработал: theme_changed подписан на сам экран настроек")
+	_check(_pressed_connections(button.pressed) >= 1,
+			"кнопка «Свои наборы» подписана на pressed (связей: %d)"
+			% _pressed_connections(button.pressed))
+
+	# --- Нажатие открывает Защиту и НЕ открывает конструктор.
+	var calls_before: int = spy.constructor_calls
+	button.emit_signal("pressed")
+	await get_tree().process_frame
+	var gate := _find_parental_gate()
+	_check(gate != null, "нажатие «Свои наборы» подняло Родительскую Защиту")
+	_check(spy.constructor_calls == calls_before,
+			"защита НЕ пропустила в конструктор без ответа (вызовов: %d)"
+			% spy.constructor_calls)
+	if gate == null:
+		spy.queue_free()
+		await get_tree().process_frame
+		return
+
+	# --- Оверлей, а не соседняя сцена: должен пережить своего создателя.
+	_check(gate.get_script().resource_path == GATE_SCRIPT_PATH,
+			"поднят именно parental_gate.gd, а не одноимённый дубль")
+	_check(gate is CanvasLayer, "Защита — оверлей CanvasLayer, а не обычная Control")
+	_check(int(gate.get("layer")) >= 100,
+			"Защита лежит поверх прочих слоёв (layer=%d, минимум 100)"
+			% int(gate.get("layer")))
+	_check(gate.get_parent() == get_tree().root,
+			"Защита — потомок корня, поэтому не умрёт вместе с экраном настроек")
+	_check(gate.is_inside_tree() and not gate.is_queued_for_deletion(),
+			"Защита жива в дереве сразу после открытия")
+
+	# --- Точка интеграции: чей это колбэк и какой метод.
+	var callback: Callable = gate.get("_on_success_callback")
+	_check(callback.is_valid(),
+			"у открытой Защиты задан _on_success_callback")
+	_check(callback.is_valid() and callback.get_object() == spy,
+			"колбэк Защиты ведёт на ЭКРАН настроек, а не на что-то постороннее")
+	_check(callback.is_valid() and callback.get_method() == "open_constructor",
+			"колбэк Защиты — именно open_constructor (получено: %s)"
+			% (callback.get_method() if callback.is_valid() else "<нет callable>"))
+	var target := str(spy.constructor_target())
+	_check(ResourceLoader.exists(target),
+			"боевой open_constructor() ведёт на существующую сцену %s" % target)
+
+	# --- Сам пример: три числовых кнопки и ровно один верный ответ, посчитанный
+	#     из надписи, а не вытащенный из приватного поля.
+	var seen_questions := {}
+	var wrong_pressed := 0
+	var keys_follow_text := 0
+	for attempt: int in range(8):
+		if not is_instance_valid(gate) or not gate.is_inside_tree() \
+				or gate.is_queued_for_deletion():
+			break
+		var label := gate.get_node_or_null("%QuestionLabel") as Label
+		if label == null:
+			break
+		var question: String = label.text
+		seen_questions[question] = true
+		_check(question.begins_with("Сколько будет ") and question.ends_with("?"),
+				"вопрос задан в формате «Сколько будет a + b?» (получено: %s)" % question)
+		var operands := _gate_operands(question)
+		_check(operands.size() == 2,
+				"из надписи читаются ровно два слагаемых (получено: %s)" % str(operands))
+		if operands.size() != 2:
+			continue
+		_check(operands[0] >= 2 and operands[0] <= 9 and operands[1] >= 2 and operands[1] <= 9,
+				"слагаемые в заявленном диапазоне 2..9 (получено: %s)" % str(operands))
+		var sum: int = operands[0] + operands[1]
+		var buttons := _gate_answer_buttons(gate)
+		_check(buttons.size() == 3, "у примера ровно три кнопки ответа (получено: %d)"
+				% buttons.size())
+		var texts := {}
+		var correct_pressed := 0
+		for answer: Button in buttons:
+			texts[answer.text] = true
+			if answer.text == str(sum):
+				correct_pressed += 1
+		_check(texts.size() == 3,
+				"все три ответа различны (получено: %s)" % str(texts.keys()))
+		_check(correct_pressed == 1,
+				"верный ответ ровно один, и он равен сумме из надписи %d (найдено: %d)"
+				% [sum, correct_pressed])
+		if correct_pressed == 1:
+			keys_follow_text += 1
+		# жмём НЕВЕРНЫЙ: конструктор обязан остаться закрытым
+		var wrong := _gate_wrong_button(gate, sum)
+		if wrong == null:
+			break
+		wrong.emit_signal("pressed")
+		wrong_pressed += 1
+		await get_tree().process_frame
+		_check(spy.constructor_calls == calls_before,
+				"неверный ответ %d не открыл конструктор (вызовов: %d)"
+				% [wrong_pressed, spy.constructor_calls])
+	_check(wrong_pressed == 8,
+			"все 8 неверных ответов нажаты (нажато: %d)" % wrong_pressed)
+	_check(keys_follow_text == 8,
+			"на каждом из 8 примеров ключ сходился с НАДПИСЬЮ (совпало: %d)"
+			% keys_follow_text)
+	_check(seen_questions.size() >= 2,
+			"после ошибки показывается НОВЫЙ пример (уникальных надписей: %d из 9)"
+			% seen_questions.size())
+	_check(is_instance_valid(gate) and gate.is_inside_tree(),
+			"Защита пережила 8 неверных ответов и не закрылась сама")
+
+	# --- Верный ответ: колбэк РОВНО ОДИН раз, оверлей убран.
+	#     Второе нажатие в том же кадре — ровно тот случай, который ловит
+	#     _callback_fired; если бы его не было, получили бы два вызова.
+	_check(is_instance_valid(gate), "Защита жива к моменту верного ответа")
+	if not is_instance_valid(gate):
+		return
+	var final_label := gate.get_node("%QuestionLabel") as Label
+	var final_operands := _gate_operands(final_label.text)
+	var final_sum: int = final_operands[0] + final_operands[1]
+	var correct := _gate_correct_button(gate, final_sum)
+	_check(correct != null,
+			"верный ответ %d нажат на последнем примере" % final_sum)
+	if correct != null:
+		correct.emit_signal("pressed")
+		correct.emit_signal("pressed")
+		await _settle()
+		_check(spy.constructor_calls == calls_before + 1,
+				"верный ответ вызвал open_constructor() РОВНО ОДИН раз, двойное нажатие не дало второго (вызовов: %d)"
+				% spy.constructor_calls)
+		_check(_count_parental_gates() == 0,
+				"после верного ответа оверлей Защиты убран из корня")
+		_check(not is_instance_valid(gate),
+				"узел Защиты освобождён, а не просто скрыт")
+
+	# --- «Закрыть»: отказ не должен выглядеть как разрешение.
+	button.emit_signal("pressed")
+	await get_tree().process_frame
+	var cancel_gate := _find_parental_gate()
+	_check(cancel_gate != null, "Защита снова открывается после предыдущей")
+	if cancel_gate != null:
+		var calls_now: int = spy.constructor_calls
+		var cancel := cancel_gate.get_node_or_null("%CancelButton") as Button
+		_check(cancel != null, "у Защиты есть кнопка «Закрыть»")
+		if cancel != null:
+			cancel.emit_signal("pressed")
+			await _settle()
+			_check(spy.constructor_calls == calls_now,
+					"«Закрыть» НЕ вызывает open_constructor() (вызовов: %d)"
+					% spy.constructor_calls)
+			_check(_count_parental_gates() == 0, "«Закрыть» убирает оверлей Защиты")
+
+	# --- Четыре полных цикла: подтверждаем, что оверлеи не копятся.
+	var cycle_calls: int = spy.constructor_calls
+	var previous_gate_id := 0
+	var cycles := 0
+	for cycle: int in range(4):
+		button.emit_signal("pressed")
+		await get_tree().process_frame
+		var fresh := _find_parental_gate()
+		_check(fresh != null, "цикл %d: нажатие открыло Защиту" % (cycle + 1))
+		_check(_count_parental_gates() == 1,
+				"цикл %d: одновременно висит ровно один оверлей (найдено: %d)"
+				% [cycle + 1, _count_parental_gates()])
+		if fresh == null:
+			break
+		_check(fresh.get_instance_id() != previous_gate_id,
+				"цикл %d: это НОВЫЙ узел, а не переиспользованный" % (cycle + 1))
+		previous_gate_id = fresh.get_instance_id()
+		var label := fresh.get_node("%QuestionLabel") as Label
+		var operands := _gate_operands(label.text)
+		if operands.size() != 2:
+			break
+		var answer := _gate_correct_button(fresh, operands[0] + operands[1])
+		if answer == null:
+			break
+		answer.emit_signal("pressed")
+		await _settle()
+		cycles += 1
+		_check(_count_parental_gates() == 0,
+				"цикл %d: после ответа оверлея не осталось" % (cycle + 1))
+	_check(cycles == 4, "проведены все 4 полных цикла (проведено: %d)" % cycles)
+	_check(spy.constructor_calls == cycle_calls + cycles,
+			"4 цикла дали ровно 4 вызова open_constructor() (%d)"
+			% (spy.constructor_calls - cycle_calls))
+	_check(_count_parental_gates() == 0,
+			"в корне не осталось ни одного оверлея Защиты")
+
+	spy.queue_free()
+	await get_tree().process_frame
+	_check(_count_parental_gates() == 0,
+			"после освобождения экрана настроек оверлеев не осталось")
+	var block_checks := checks - start_checks
+	_check(block_checks >= MIN_GATE_CHECKS,
+			"блок Защиты выполнил не меньше %d проверок (выполнил: %d)"
+			% [MIN_GATE_CHECKS, block_checks])
+	_print("parental gate: OK (%d проверок)" % (checks - start_checks))
+
+
+
 ## Новый экземпляр редактора без открытого набора.
 func _fresh_editor() -> Node:
 	var scene: PackedScene = load("res://ui/constructor/set_editor/set_editor.tscn")
@@ -1345,6 +1686,14 @@ func _finish() -> void:
 			% [task9_checks, checks])
 	if checks == 0:
 		printerr("FAILED: не выполнено ни одной проверки — валидатор не отработал")
+		get_tree().quit(1)
+		return
+	# Нижняя граница зелёного прогона: блок Защиты не имеет права вытеснить
+	# чужую проверку. Без этой строки можно было бы случайно удалить половину
+	# файла и всё равно увидеть PASSED.
+	if checks < BASELINE_TOTAL:
+		printerr("FAILED: проверок %d меньше зелёного прогона %d — старые проверки вытеснены"
+				% [checks, BASELINE_TOTAL])
 		get_tree().quit(1)
 		return
 	if task9_checks <= 0:

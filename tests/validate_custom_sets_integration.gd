@@ -95,6 +95,7 @@ func _ready() -> void:
 	await _check_settings_custom_buttons()
 	_check_repository_follows_selection()
 	await _check_full_custom_set()
+	await _check_full_parent_journey()
 	await _check_builtin_parity()
 	await _check_restart_persistence()
 	await _check_game_scenes_witness()
@@ -380,6 +381,311 @@ func _check_full_custom_set() -> void:
 	ProgressManager.set_word_set(1)
 
 
+## Полный родительский маршрут одним куском: пустой список -> «Новый набор» ->
+## редактор -> слово, картинка, звук -> «Готово» -> выбор своего набора в
+## настройках -> игра читает именно эти данные.
+##
+## Отличие от плана — плана не было. Каждый шаг по отдельности уже проверен
+## (_check_full_custom_set, _check_settings_custom_buttons, _check_builtin_parity),
+## но СБОЙ МЕЖДУ шагами ими не ловился: записать можно было в каталог одного
+## набора, а прочитать из другого, и каждый отдельный тест оставался зелёным.
+## Здесь данные идут через те же методы, что и у родителя в UI:
+## SetList.%NewButton -> SetEditor.save_word/apply_image/apply_audio ->
+## %SaveButton -> Settings.get_custom_set_buttons() -> SetRepository.
+##
+## Половина проверок — обратная: второй набор обязан остаться пустым, а
+## встроенные — нетронутыми. Иначе «свои наборы» чинят тем, что портят чужие.
+func _check_full_parent_journey() -> void:
+	var chain_start := checks
+	# Чистый старт. Без сброса кэша и хранилища цепочка стартовала бы на мусоре
+	# от предыдущих блоков, и падение на первой же букве было бы нечем объяснить.
+	CustomSetsStore.clear_memory()
+	CustomSetsStore.load_sets()
+	ProgressManager.set_word_set(1)
+	SetRepository.clear_cache()
+
+	# --- Шаг 1. Экран списка поднялся и честно показывает пустое состояние.
+	# Сцену проверяем ДО load(): у пропавшего файла load() вернул бы null, и
+	# вызов instantiate() на нём уронил бы всю корутину. Тогда _finish() увидел бы
+	# ровно базовые 51 проверку, ни одного FAIL и радостно напечатал PASSED —
+	# валидатор покраснел бы в зелёный из-за сломанного set_list.gd.
+	if ResourceLoader.exists(SET_LIST_SCENE) == false:
+		_check(false, "сцена списка наборов лежит по пути %s" % SET_LIST_SCENE)
+		return
+	var list: SetList = load(SET_LIST_SCENE).instantiate() as SetList
+	_check(list != null, "set_list.tscn привязан к классу SetList")
+	if list == null:
+		return
+	add_child(list)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_check(list.get_row_count() == 0, "список своих наборов пуст на старте (строк: %d)"
+			% list.get_row_count())
+	var new_button := list.get_node_or_null("%NewButton") as Button
+	_check(new_button != null, "у списка наборов есть кнопка «Новый набор»")
+	var editor := list.get_node_or_null("%SetEditor") as SetEditor
+	_check(editor != null, "редактор встроен в сцену списка")
+	if new_button == null or editor == null:
+		list.queue_free()
+		await get_tree().process_frame
+		return
+	_check(editor.visible == false, "редактор спрятан, пока открыт список")
+	_check(list.get_node_or_null("%EmptyLabel").visible,
+			"на пустом списке видна подсказка «создайте набор»")
+	_check(new_button.pressed.get_connections().size() >= 1,
+			"кнопка «Новый набор» подписана на pressed (связей: %d)"
+			% new_button.pressed.get_connections().size())
+
+	# --- Шаг 2. «Новый набор» создаёт набор и открывает его на редактирование.
+	var opened_ids: Array[String] = []
+	list.open_editor.connect(func(set_id: String) -> void: opened_ids.append(set_id))
+	new_button.emit_signal("pressed")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_check(opened_ids.size() == 1,
+			"«Новый набор» эмитит open_editor ровно один раз (получено: %d)"
+			% opened_ids.size())
+	if opened_ids.is_empty():
+		list.queue_free()
+		await get_tree().process_frame
+		return
+	var set_id: String = opened_ids[0]
+	_check(set_id.begins_with("c_"),
+			"новый набор получил пользовательский id, а не номер (получено: %s)" % set_id)
+	_check(not CustomSetsStore.get_set_by_id(set_id).is_empty(),
+			"набор появился в хранилище сразу после нажатия")
+	_check(list.get_row_count() == 1,
+			"строка набора появилась в списке без ручного refresh (строк: %d)"
+			% list.get_row_count())
+	_check(editor.visible and not list.get_node("Layout").visible,
+			"открылся редактор, а список ушёл в фон")
+	_check(not (list.get_node_or_null("%BackButton") as Button).visible,
+			"кнопка списка «Назад» спрятана, пока открыт редактор")
+	_check(editor.get_set_id() == set_id,
+			"редактор открыт на созданный набор (получено: %s)" % editor.get_set_id())
+	var readiness := editor.get_node_or_null("%ReadinessLabel") as Label
+	_check(readiness != null and readiness.text == "заполнено 0 из 33",
+			"новый набор пуст: счётчик готовности «%s»"
+			% (readiness.text if readiness != null else "<нет Label>"))
+
+	# --- Шаг 3. Родитель заполняет букву. Слово, картинка, звук — настоящие:
+	#     без файлов на диске get_word_texture вернул бы null и проверка в шаге 5
+	#     прошла бы на пустоте, а не на данных.
+	var letter := "А"
+	var word := "Аист"
+	var image_file := CustomSetsStore.set_dir(set_id) + CustomSetsStore.image_file_name(letter)
+	var audio_file := CustomSetsStore.set_dir(set_id) + CustomSetsStore.audio_file_name(letter)
+	_check(FileAccess.file_exists(image_file) == false,
+			"до apply_image() файла картинки нет — иначе проверка ниже прошла бы на старом мусоре")
+	_check(editor.save_word(letter, word),
+			"save_word() принял слово «%s»" % word)
+	_check(str(CustomSetsStore.get_entry(set_id, letter).get("word", "")) == word,
+			"слово доехало до хранилища")
+	_check(CustomSetsStore.is_entry_complete(set_id, letter) == false,
+			"запись со словом без медиа НЕ считается готовой (иначе игра показала бы пустую карточку)")
+	var image_result := editor.apply_image(letter, _journey_png())
+	_check(bool(image_result.get("ok", false)),
+			"apply_image() отчитался об успехе (получено: %s)"
+			% str(image_result.get("error", "")))
+	_check(FileAccess.file_exists(image_file),
+			"apply_image() записал WebP в каталог набора (получено: %s)" % image_file)
+	_check(FileAccess.file_exists(image_file) and FileAccess.get_file_as_bytes(image_file).size() > 0,
+			"файл картинки не пустой")
+	var audio_result := editor.apply_audio(letter, _journey_wav())
+	_check(bool(audio_result.get("ok", false)),
+			"apply_audio() отчитался об успехе (получено: %s)"
+			% str(audio_result.get("error", "")))
+	_check(FileAccess.file_exists(audio_file),
+			"apply_audio() записал звук в каталог набора (получено: %s)" % audio_file)
+	_check(FileAccess.file_exists(audio_file) and FileAccess.get_file_as_bytes(audio_file).size() > 0,
+			"файл звука не пустой")
+	_check(CustomSetsStore.is_entry_complete(set_id, letter),
+			"после слова, картинки и звука запись «%s» полная" % letter)
+	var entry := CustomSetsStore.get_entry(set_id, letter)
+	_check(str(entry.get("image", "")).contains(set_id)
+			and str(entry.get("audio", "")).contains(set_id),
+			"файлы легли в каталог СВОЕГО набора, а не в корень user://")
+	_check(editor.get_node("%ReadinessLabel").text == "заполнено 1 из 33",
+			"счётчик готовности учёл заполненную букву (получено: %s)"
+			% editor.get_node("%ReadinessLabel").text)
+
+	# --- Шаг 4. «Готово»: редактор закрывается, список перечитывает набор сам.
+	var name_edit := editor.get_node_or_null("%NameEdit") as LineEdit
+	_check(name_edit != null, "у редактора есть поле имени набора")
+	if name_edit != null:
+		name_edit.text = "Набор родителя"
+	var save_button := editor.get_node_or_null("%SaveButton") as Button
+	_check(save_button != null, "у редактора есть кнопка «Готово»")
+	if save_button != null:
+		save_button.emit_signal("pressed")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_check(editor.visible == false and list.get_node("Layout").visible,
+			"после «Готово» редактор закрылся, список вернулся")
+	_check((list.get_node_or_null("%BackButton") as Button).visible,
+			"кнопка «Назад» списка вернулась вместе со списком")
+	_check(list.get_row_count() == 1, "после «Готово» в списке снова одна строка (строк: %d)"
+			% list.get_row_count())
+	var row := list.get_row(0)
+	_check(row != null, "строка набора доступна по get_row(0)")
+	if row != null:
+		var name_label := row.get_node_or_null("%NameLabel") as Label
+		var count_label := row.get_node_or_null("%CountLabel") as Label
+		_check(name_label != null and name_label.text == "Набор родителя",
+				"переименование доехало до строки списка (получено: %s)"
+				% (name_label.text if name_label != null else "<нет Label>"))
+		_check(count_label != null and count_label.text == "заполнено 1 из 33",
+				"строка показывает одну заполненную букву (получено: %s)"
+				% (count_label.text if count_label != null else "<нет Label>"))
+
+	# --- Шаг 5. Родитель выбирает свой набор в настройках.
+	# Тот же предохранитель, что и на шаге 1: без него пропавший settings.tscn
+	# уронил бы корутину на instantiate() и _finish() напечатал бы PASSED.
+	if ResourceLoader.exists(SETTINGS_SCENE) == false:
+		_check(false, "сцена настроек лежит по пути %s" % SETTINGS_SCENE)
+		list.queue_free()
+		return
+	var settings: Node = load(SETTINGS_SCENE).instantiate()
+	if settings == null:
+		_check(false, "settings.tscn превращается в узел")
+		list.queue_free()
+		return
+	add_child(settings)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	settings.sync_custom_set_buttons()
+	var set_buttons: Array[Button] = settings.get_custom_set_buttons()
+	_check(set_buttons.size() == 1,
+			"в настройках появилась ровно одна кнопка своего набора (получено: %d)"
+			% set_buttons.size())
+	if not set_buttons.is_empty():
+		_check(set_buttons[0].text.contains("Набор родителя"),
+				"кнопка подписана именем набора, а не его id (получено: %s)"
+				% set_buttons[0].text)
+		set_buttons[0].button_pressed = true
+		_check(ProgressManager.get_word_set_id() == set_id,
+				"выбор кнопки переключил прогресс на свой набор (получено: %s)"
+				% ProgressManager.get_word_set_id())
+
+	# --- Шаг 6. Игра читает именно эти данные.
+	SetRepository.clear_cache()
+	_check(SetRepository.get_active_set_id() == set_id,
+			"репозиторий читает тот же набор, что выбран в прогрессе")
+	_check(SetRepository.is_custom_set(set_id),
+			"репозиторий считает набор пользовательским")
+	var data := SetRepository.get_word_data(letter)
+	_check(str(data.get("word", "")) == word,
+			"игра получила родительское слово «%s» (получено: %s)"
+			% [word, str(data.get("word", ""))])
+	_check(bool(data.get("is_custom", false)),
+			"запись помечена как пользовательская, а не встроенная")
+	_check(str(data.get("image_path", "")) == image_file,
+			"путь картинки у игры совпал с записанным файлом (получено: %s, ждали %s)"
+			% [str(data.get("image_path", "")), image_file])
+	_check(str(data.get("audio_path", "")) == audio_file,
+			"путь звука у игры совпал с записанным файлом (получено: %s, ждали %s)"
+			% [str(data.get("audio_path", "")), audio_file])
+	_check(SetRepository.get_word_texture(letter) != null,
+			"игра реально загрузила картинку набора, а не заглушку")
+	_check(SetRepository.get_word_audio(letter) != null,
+			"игра реально загрузила звук набора, а не заглушку")
+	var active_letters := SetRepository.get_active_letters()
+	_check(active_letters.size() == 1 and str(active_letters[0]) == letter,
+			"в наборе для игры ровно одна буква, и это «%s» (получено: %s)"
+			% [letter, str(active_letters)])
+	_check(SetRepository.has_letter(letter) and not SetRepository.has_letter("Б"),
+			"has_letter() отвечает по набору, а не по встроенному алфавиту")
+
+	# --- Шаг 7. Обратная половина. Второй набор не должен унаследовать первый.
+	var second := CustomSetsStore.create_set("Второй набор")
+	var second_id := str(second.get("id", ""))
+	_check(second_id != set_id, "второй набор получил другой id (получено: %s)" % second_id)
+	_check(CustomSetsStore.set_dir(second_id) != CustomSetsStore.set_dir(set_id),
+			"у наборов разные каталоги")
+	ProgressManager.set_word_set_id(second_id)
+	SetRepository.clear_cache()
+	var second_data := SetRepository.get_word_data(letter)
+	_check(bool(second_data.get("is_custom", true)) == false,
+			"пустой второй набор не выдаёт запись за пользовательскую")
+	_check(str(second_data.get("word", "")) != word,
+			"слово «%s» не утекло во второй набор (получено: %s)"
+			% [word, str(second_data.get("word", ""))])
+	_check(str(second_data.get("image_path", "")).begins_with("res://"),
+			"второй набор отдаёт встроенную картинку из res://, а не файл первого (получено: %s)"
+			% str(second_data.get("image_path", "")))
+	_check(SetRepository.get_active_letters().is_empty(),
+			"из пустого второго набора игра не получила ни одной буквы (получено: %d)"
+			% SetRepository.get_active_letters().size())
+	_check(CustomSetsStore.get_entry(second_id, letter).is_empty(),
+			"во втором наборе нет записи «%s» вовсе" % letter)
+	_check(FileAccess.file_exists(
+			CustomSetsStore.set_dir(second_id) + CustomSetsStore.image_file_name(letter)) == false,
+			"файлы первого набора не появились в каталоге второго")
+	_check(FileAccess.file_exists(image_file),
+			"файлы первого набора остались на месте — чистить не те каталоги")
+
+	# --- Шаг 8. Встроенные наборы не задеты работой с собственными.
+	for set_number in range(1, ProgressManager.WORD_SET_COUNT + 1):
+		ProgressManager.set_word_set(set_number)
+		SetRepository.clear_cache()
+		var builtin := SetRepository.get_word_data(letter)
+		_check(bool(builtin.get("is_custom", true)) == false,
+				"встроенный набор %d не выдаёт пользовательскую запись" % set_number)
+		_check(str(builtin.get("word", "")) != word,
+				"встроенный набор %d не отдал родительское слово «%s»" % [set_number, word])
+		_check(str(builtin.get("image_path", "")).begins_with("res://"),
+				"встроенный набор %d по-прежнему читает картинку из res://" % set_number)
+	_progress_guard(set_id, letter, word)
+	CustomSetsStore.delete_set(set_id)
+	CustomSetsStore.delete_set(second_id)
+	settings.queue_free()
+	list.queue_free()
+	await get_tree().process_frame
+	# delete_set() обязан унести папку набора: иначе в user:// остаётся мусор,
+	# который следующий прогон примет за боевые данные.
+	_check(DirAccess.dir_exists_absolute(
+			ProjectSettings.globalize_path(CustomSetsStore.set_dir(set_id))) == false,
+			"каталог набора удалён вместе с набором — мусор не остался")
+	_check(DirAccess.dir_exists_absolute(
+			ProjectSettings.globalize_path(CustomSetsStore.set_dir(second_id))) == false,
+			"каталог второго набора тоже удалён")
+	ProgressManager.set_word_set(1)
+	SetRepository.clear_cache()
+	_check(CustomSetsStore.get_set_by_id(set_id).is_empty(),
+			"удалённый набор больше не виден хранилищу")
+	_check(CustomSetsStore.get_set_by_id(second_id).is_empty(),
+			"удалённый второй набор больше не виден хранилищу")
+	var chain_checks := checks - chain_start
+	_check(chain_checks >= MIN_CHAIN_CHECKS,
+			"полный маршрут выполнил не меньше %d проверок (выполнил: %d)"
+			% [MIN_CHAIN_CHECKS, chain_checks])
+	_print("full parent journey: OK (%d проверок)" % (checks - chain_start))
+
+
+## Отдельная функция, а не тело шага 8: слишком много в одну не читается, а
+## вернуть прогресс на свой набор забыть легче в коротком блоке.
+func _progress_guard(set_id: String, letter: String, word: String) -> void:
+	ProgressManager.set_word_set_id(set_id)
+	SetRepository.clear_cache()
+	var data := SetRepository.get_word_data(letter)
+	_check(str(data.get("word", "")) == word and bool(data.get("is_custom", false)),
+			"после обхода встроенных наборов свой набор цел и снова выбран")
+
+
+## Валидный PNG 8x8, собранный в памяти: внешний файл для теста не нужен.
+func _journey_png() -> PackedByteArray:
+	var image := Image.create(8, 8, false, Image.FORMAT_RGBA8)
+	image.fill(Color("#1E88E5"))
+	return image.save_png_to_buffer()
+
+
+## Корректный WAV через конвертер боевого кода: проверяется и заголовок, и путь.
+func _journey_wav() -> PackedByteArray:
+	var pcm := PackedByteArray()
+	pcm.resize(128)
+	return VoiceRecord.pcm_to_wav_bytes(pcm, 22050)
+
+
 ## Кладёт настоящий WebP и настоящий WAV для каждой буквы. Пишутся разные
 ## картинки (цвет по индексу), чтобы кэш репозитория по пути не смог замаскировать
 ## «все буквы смотрят в один файл».
@@ -576,6 +882,21 @@ func _contract_ok(klass: Variant, required: Array, expected_signals: Array) -> b
 const TEST_STORE_PATH := "user://custom_sets_integration_test.json"
 const TEST_PROGRESS_PATH := "user://custom_sets_integration_progress.json"
 
+## Сцены полного маршрута. Строками, а не именами классов: сломанный
+## set_list.gd должен дать проверку, а не висящий валидатор.
+const SET_LIST_SCENE := "res://ui/constructor/set_list/set_list.tscn"
+const SETTINGS_SCENE := "res://ui/settings/settings.tscn"
+
+## Пол зелёного прогона этого файла (51 проверка) — нижняя граница, ниже
+## которой блок полного маршрута удалил бы чужую проверку. Считается НАМИ на
+## прогонах, а не взято из плана: плана на этот блок не было.
+const BASELINE_CHECKS := 51
+
+## Сколько проверок обязан выполнить блок полного маршрута. Порог ниже
+## фактического числа намеренно: он ловит «блок молча не отработал», а не
+## меняет вместе с ним каждую правку формулировки.
+const MIN_CHAIN_CHECKS := 70
+
 
 ## Убирает тестовые файлы. Каталоги наборов при этом остаются боевыми, но id
 ## генерируются случайно, а наборы удаляются в конце прогона.
@@ -608,6 +929,14 @@ func _finish() -> void:
 	# валидатор: печатать PASSED в таком случае нельзя.
 	if checks == 0:
 		printerr("FAILED: не выполнено ни одной проверки — валидатор не отработал")
+		get_tree().quit(1)
+		return
+	# Нижняя граница зелёного прогона: блок полного маршрута не имеет права
+	# вытеснить чужую проверку. Иначе можно удалить половину файла и всё равно
+	# увидеть PASSED.
+	if checks < BASELINE_CHECKS:
+		printerr("FAILED: проверок %d меньше зелёного прогона %d — старые проверки вытеснены"
+				% [checks, BASELINE_CHECKS])
 		get_tree().quit(1)
 		return
 	if failures > 0:
