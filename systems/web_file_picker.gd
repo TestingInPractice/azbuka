@@ -133,6 +133,14 @@ static func pick(kind: String) -> Dictionary:
 	if max_bytes_for_kind(kind) == 0:
 		return _pick_error(kind, "bad_kind")
 	if _awaiting:
+		# Мобильный симптом: пока системный диалог открыт, повторное нажатие
+		# возвращало already_open и навсегда заклинивало _awaiting на 120 с —
+		# новый выбор был невозможен до перезагрузки. Повторный click() по
+		# уже открытому input — best effort разбудить тот же системный диалог,
+		# после чего отдаём already_open вызывающему, чтобы тот показал
+		# сообщение, а не молчал.
+		if _input_ref != null:
+			_input_ref.click()
 		return _pick_error(kind, "already_open")
 	if not OS.has_feature("web"):
 		return _pick_error(kind, "not_web")

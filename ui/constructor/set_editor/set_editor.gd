@@ -19,6 +19,17 @@ const LETTERS := [
 ]
 const LETTER_SLOT_SCENE := preload("res://ui/constructor/letter_slot/letter_slot.tscn")
 
+## Автостоп: запись, которую никто не остановил, выключается сама через 10
+## секунд. Без этого уход со экрана или пропущенный «Стоп» оставляли микрофон
+## открытым навсегда. Зеркалит RECORD_DURATION из letter_card.gd.
+const RECORD_DURATION := 10.0
+
+## Ширина design-экрана, начиная которой сетка слотов идёт в три колонки.
+## Телефон (~1080 design px) получает одну колонку и листается сверху вниз;
+## трём колонкам нужно ~2500 design px (4 кнопки в строку + поля слота),
+## широкий десктоп (~4889 при stretch canvas_items/expand) — их и получает.
+const WIDE_COLUMNS_WIDTH := 2560
+
 ## Набор сохранился целиком — можно идти играть.
 signal set_saved(set_id: String)
 ## Родитель нажал «Назад».
@@ -34,6 +45,14 @@ var _set_id := ""
 var _slots_by_letter: Dictionary = {}
 ## Буква, для которой сейчас идёт запись, чтобы слоты не мешали друг другу.
 var _recording_letter := ""
+## Токен автостопа: каждый старт записи увеличивает счётчик, и таймер со
+## старым токеном при срабатывании молча выходит — иначе таймер первой
+## записи мог остановить уже вторую.
+var _record_guard_token := 0
+## true, когда запись остановлена по кнопке «Стоп» или автостопом. Запись,
+## пришедшая не от нас (сырой сигнал в тесте), не должна навешивать
+## «ничего не записалось» поверх подписи состояния.
+var _record_stop_requested := false
 ## Пока true, правки поля имени не эмитятся наружу: refresh() и open_set()
 ## заполняют поле программно, и без флага каждый чтение набора помечало бы
 ## его сохранённым и рассылало бы set_saved без причины.
@@ -47,7 +66,28 @@ func _ready() -> void:
 	_name_edit.text_submitted.connect(_on_name_submitted)
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_apply_theme()
+	_update_columns()
+	get_viewport().size_changed.connect(_update_columns)
 	refresh()
+
+
+## Число колонок сетки слотов для ширины design-экрана. Статик, чтобы тест
+## проверял правило без инстанциирования сцены.
+static func columns_for_width(width: int) -> int:
+	if width >= WIDE_COLUMNS_WIDTH:
+		return 3
+	return 1
+
+
+## Подгоняет колонки под текущую ширину окна: телефон — одна колонка
+## сверху вниз, широкий десктоп — три.
+func _update_columns() -> void:
+	if _slots == null:
+		return
+	var viewport := get_viewport()
+	if viewport == null:
+		return
+	_slots.columns = columns_for_width(int(viewport.size.x))
 
 
 ## Подпись готовности. Считаются только полные записи: буква со словом и
@@ -90,7 +130,7 @@ func open_set(set_id: String) -> void:
 ## create_set(), и до первой записи он уже существует.
 func apply_image(letter: String, bytes: PackedByteArray) -> Dictionary:
 	if _set_id.is_empty():
-		return _apply_error("no_set")
+		return _apply_fail(letter, "no_set", "не удалось сохранить картинку")
 	if not _has_slot(letter):
 		return _apply_error("bad_letter")
 	var target := CustomSetsStore.set_dir(_set_id) + CustomSetsStore.image_file_name(letter)
@@ -99,7 +139,7 @@ func apply_image(letter: String, bytes: PackedByteArray) -> Dictionary:
 		var code := str(saved.get("error", "save_failed"))
 		GameLogger.warning("SetEditor", "image_save_failed",
 				{"letter": letter, "error": code})
-		return _apply_error(code)
+		return _apply_fail(letter, code, "не удалось сохранить картинку")
 	var entry := CustomSetsStore.get_entry(_set_id, letter)
 	CustomSetsStore.set_entry(_set_id, letter, str(entry.get("word", "")), target,
 			str(entry.get("audio", "")))
@@ -115,17 +155,17 @@ func apply_image(letter: String, bytes: PackedByteArray) -> Dictionary:
 func apply_audio(letter: String, bytes: PackedByteArray,
 		extension: String = "wav") -> Dictionary:
 	if _set_id.is_empty():
-		return _apply_error("no_set")
+		return _apply_fail(letter, "no_set", "не удалось сохранить звук")
 	if not _has_slot(letter):
 		return _apply_error("bad_letter")
 	if bytes.is_empty():
-		return _apply_error("no_bytes")
+		return _apply_fail(letter, "no_bytes", "не удалось сохранить звук")
 	var target := CustomSetsStore.set_dir(_set_id) \
 			+ CustomSetsStore.audio_file_name(letter, extension)
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	if file == null:
 		GameLogger.warning("SetEditor", "audio_write_failed", {"letter": letter})
-		return _apply_error("write_failed")
+		return _apply_fail(letter, "write_failed", "не удалось сохранить звук")
 	file.store_buffer(bytes)
 	file.close()
 	var entry := CustomSetsStore.get_entry(_set_id, letter)
@@ -259,34 +299,84 @@ func _apply_error(code: String) -> Dictionary:
 	return {"ok": false, "error": code}
 
 
+## Ошибка применения, видимая человеку: код ошибки пишем в лог, а слот
+## показывает понятное сообщение. Для несуществующей буквы слота нет —
+## тогда остаётся только лог.
+func _apply_fail(letter: String, code: String, message: String) -> Dictionary:
+	if _has_slot(letter):
+		_slot(letter).show_message(message)
+	return _apply_error(code)
+
+
+## Понятный текст для отказа пикера. cancelled — не ошибка, а обычный
+## возврат без выбора; остальные коды означают, что файл не добрали.
+func _pick_message(kind: String, error: String) -> String:
+	if error == "cancelled":
+		return "выбор отменён"
+	if kind == "audio" and error == "unsupported_type":
+		return "формат звука не поддерживается"
+	if kind == "image":
+		return "не удалось выбрать картинку"
+	return "не удалось выбрать звук"
+
+
 ## Родитель нажал «Картинка»: берём файл и сразу отдаём его apply_image().
+## Пока пикер открыт, слот показывает «выберите файл…», после отказа —
+## причину. Молчание здесь выглядело как зависание на телефоне.
 func _on_image_requested(letter: String) -> void:
+	if not _has_slot(letter):
+		return
+	_slot(letter).show_message("выберите файл…")
 	var picked := await WebFilePicker.pick("image")
 	if not bool(picked.get("ok", false)):
+		var error := str(picked.get("error", ""))
 		GameLogger.info("SetEditor", "image_pick_failed",
-				{"letter": letter, "error": str(picked.get("error", ""))})
+				{"letter": letter, "error": error})
+		_slot(letter).show_message(_pick_message("image", error))
 		return
 	_slot(letter).set_busy(true)
 	apply_image(letter, picked.get("bytes", PackedByteArray()))
 	_slot(letter).set_busy(false)
 
 
-## Родитель нажал «Записать»: сначала пробуем микрофон, при отказе — файл.
-## Так работает и на телефоне, и на настольном браузере без разрешения.
+## Родитель нажал «Записать» или «Стоп»: кнопка звука — тумблер. Пока идёт
+## запись этой же буквы, останавливаем; запись другой буквы игнорируем
+## (вторая запись поверх первой затёрла бы первую); в обычном состоянии
+## пробуем микрофон, при отказе — файл. Так работает и на телефоне, и на
+## настольном браузере без разрешения.
 func _on_audio_requested(letter: String) -> void:
+	if _recording_letter == letter:
+		_stop_recording_for(letter)
+		return
 	if _recording_letter != "":
 		return
+	var slot := _slot(letter)
 	if VoiceRecord.prepare_microphone():
+		if not VoiceRecord.start_recording():
+			GameLogger.warning("SetEditor", "recording_start_failed",
+					{"letter": letter})
+			slot.show_message("не удалось записать звук")
+			return
 		_recording_letter = letter
-		_slot(letter).set_recording(true)
+		_record_stop_requested = false
+		slot.set_recording(true)
 		VoiceRecord.recording_finished.connect(_on_recording_finished, CONNECT_ONE_SHOT)
-		VoiceRecord.start_recording()
 		GameLogger.info("SetEditor", "recording_started", {"letter": letter})
+		_record_guard_token += 1
+		var token := _record_guard_token
+		await get_tree().create_timer(RECORD_DURATION).timeout
+		if token == _record_guard_token and _recording_letter == letter \
+				and VoiceRecord.is_recording():
+			GameLogger.info("SetEditor", "recording_auto_stopped", {"letter": letter})
+			_stop_recording_for(letter)
 		return
+	slot.show_message("выберите файл…")
 	var picked := await WebFilePicker.pick("audio")
 	if not bool(picked.get("ok", false)):
+		var error := str(picked.get("error", ""))
 		GameLogger.info("SetEditor", "audio_pick_failed",
-				{"letter": letter, "error": str(picked.get("error", ""))})
+				{"letter": letter, "error": error})
+		slot.show_message(_pick_message("audio", error))
 		return
 	# Формат берём из mime браузера. iPhone отдаёт .m4a, и если сохранить его
 	# под .wav, Godot не найдёт для него загрузчик и звук не заиграет.
@@ -294,21 +384,40 @@ func _on_audio_requested(letter: String) -> void:
 	if extension.is_empty():
 		GameLogger.info("SetEditor", "audio_mime_unsupported",
 				{"letter": letter, "mime": str(picked.get("mime", ""))})
+		slot.show_message("формат звука не поддерживается")
 		return
-	_slot(letter).set_busy(true)
+	slot.set_busy(true)
 	apply_audio(letter, picked.get("bytes", PackedByteArray()), extension)
-	_slot(letter).set_busy(false)
+	slot.set_busy(false)
+
+
+## Останавливает запись конкретной буквы по кнопке «Стоп» или автостопом.
+## stop_recording() синхронно эмитит recording_finished, и дальше состояние
+## приводит _on_recording_finished(). Если запись уже не идёт (сбой шины),
+## чистим состояние сами, чтобы слот не навсегда остался в «запись…».
+func _stop_recording_for(letter: String) -> void:
+	_record_stop_requested = true
+	if VoiceRecord.is_recording():
+		VoiceRecord.stop_recording()
+		return
+	_on_recording_finished(VoiceRecord.has_data())
 
 
 ## Запись закончилась: сохраняем WAV, если микрофон что-то услышал.
 func _on_recording_finished(_has_data: bool) -> void:
 	var letter := _recording_letter
+	var stop_requested := _record_stop_requested
 	_recording_letter = ""
+	_record_stop_requested = false
 	if letter.is_empty() or not _has_slot(letter):
 		return
 	_slot(letter).set_recording(false)
 	if not VoiceRecord.has_data():
 		GameLogger.info("SetEditor", "recording_empty", {"letter": letter})
+		# «Ничего не записалось» показываем только когда запись остановили мы:
+		# тестовый сигнал без нашего стопа не должен затирать подпись состояния.
+		if stop_requested:
+			_slot(letter).show_message("ничего не записалось, попробуйте снова")
 		return
 	# Именно get_wav_bytes(), а не get_data(): второй отдаёт сырой PCM без
 	# заголовка, и такой файл с расширением .wav не загрузится.

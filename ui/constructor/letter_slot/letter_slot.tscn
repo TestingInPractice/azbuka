@@ -13,18 +13,22 @@ grow_vertical = 2
 theme = ExtResource("2_theme")
 script = ExtResource("1_slot")
 
-[node name="Row" type="HBoxContainer" parent="."]
+[node name="Root" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Row" type="HBoxContainer" parent="Root"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Thumbnail" type="TextureRect" parent="Row"]
+[node name="Thumbnail" type="TextureRect" parent="Root/Row"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LetterLabel" type="Label" parent="Row"]
+[node name="LetterLabel" type="Label" parent="Root/Row"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -34,12 +38,12 @@ text = "А"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextColumn" type="VBoxContainer" parent="Row"]
+[node name="TextColumn" type="VBoxContainer" parent="Root/Row"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="WordEdit" type="LineEdit" parent="Row/TextColumn"]
+[node name="WordEdit" type="LineEdit" parent="Root/Row/TextColumn"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
@@ -47,45 +51,49 @@ placeholder_text = "Слово"
 max_length = 40
 accessibility_name = "Слово к букве"
 
-[node name="StatusLabel" type="Label" parent="Row/TextColumn"]
+[node name="StatusLabel" type="Label" parent="Root/Row/TextColumn"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "нет картинки и звука"
 
-[node name="Buttons" type="HBoxContainer" parent="Row"]
+[node name="Buttons" type="HBoxContainer" parent="Root"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ImageButton" type="Button" parent="Row/Buttons"]
+[node name="ImageButton" type="Button" parent="Root/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Картинка"
 accessibility_name = "Выбрать картинку"
 
-[node name="AudioButton" type="Button" parent="Row/Buttons"]
+[node name="AudioButton" type="Button" parent="Root/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Записать"
 accessibility_name = "Записать голос"
 
-[node name="PlayButton" type="Button" parent="Row/Buttons"]
+[node name="PlayButton" type="Button" parent="Root/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Слушать"
 disabled = true
 accessibility_name = "Прослушать запись"
 
-[node name="ClearButton" type="Button" parent="Row/Buttons"]
+[node name="ClearButton" type="Button" parent="Root/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "Очистить"
 disabled = true

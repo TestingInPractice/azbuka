@@ -273,15 +273,23 @@ func _check_letter_slot() -> void:
 			"очистить разблокировано")
 	_check((slot.get_node("%WordEdit") as LineEdit).text == "Банан", "поле слова обновилось")
 
-	# Запись идёт: кнопки блокируются, чтобы не начать вторую запись.
+	# Запись идёт: «Слушать» и «Очистить» блокируются, а кнопка звука
+	# остаётся активной и превращается в «Стоп» — иначе остановить запись
+	# было бы нечем (мобильный контракт: стоп только по кнопке слота).
 	slot.set_recording(true)
-	_check((slot.get_node("%AudioButton") as Button).disabled == true,
-			"во время записи кнопка звука заблокирована")
+	_check((slot.get_node("%AudioButton") as Button).disabled == false,
+			"во время записи кнопка звука активна — только ею можно остановиться")
+	_check((slot.get_node("%AudioButton") as Button).text == "Стоп",
+			"во время записи кнопка звука подписана «Стоп» (получено: %s)"
+			% (slot.get_node("%AudioButton") as Button).text)
 	_check((slot.get_node("%StatusLabel") as Label).text == "запись…",
 			"подпись показывает запись")
 	slot.set_recording(false)
 	_check((slot.get_node("%AudioButton") as Button).disabled == false,
 			"после записи кнопка звука разблокирована")
+	_check((slot.get_node("%AudioButton") as Button).text == "Записать",
+			"после записи кнопка снова подписана «Записать» (получено: %s)"
+			% (slot.get_node("%AudioButton") as Button).text)
 
 	# Сигналы уходят с правильной буквой.
 	var seen: Array[String] = []
@@ -874,7 +882,18 @@ func _check_set_editor_collection() -> void:
 	_check(mismatched.is_empty(),
 			"строка N в сетке — это ровно get_slot(LETTERS[N]) (расхождений: %d: %s)"
 			% [mismatched.size(), str(mismatched)])
-	_check(slots.columns == 3, "сетка в три колонки (получено: %d)" % slots.columns)
+	# Колонки подчиняются ширине экрана: телефон (1080 design px) — одна
+	# колонка сверху вниз, широкий десктоп — три. Раньше здесь было
+	# жёсткое columns == 3, и на телефоне сетка рвалась в три узкие
+	# колонки без прокрутки.
+	var viewport_width := int(editor.get_viewport().size.x)
+	_check(slots.columns == SetEditor.columns_for_width(viewport_width),
+			"колонки сетки подобраны под ширину экрана (колонок: %d, для ширины %d ожидалось %d)"
+			% [slots.columns, viewport_width, SetEditor.columns_for_width(viewport_width)])
+	_check(SetEditor.columns_for_width(1080) == 1,
+			"телефон (1080 design px) -> 1 колонка")
+	_check(SetEditor.columns_for_width(4889) == 3,
+			"шириный десктоп (4889 design px) -> 3 колонки")
 	# Ровно одна строка на букву: тот же узел дважды не отдаётся.
 	_check(_distinct_slots(editor, letters).size() == 33,
 			"33 разных узла слота, ни один не переиспользован")
@@ -973,8 +992,11 @@ func _check_set_editor_signals() -> void:
 	_check((slot.get_node("%StatusLabel") as Label).text == "запись…",
 			"началась запись: слот показывает «запись…» (получено: %s)"
 			% (slot.get_node("%StatusLabel") as Label).text)
-	_check((slot.get_node("%AudioButton") as Button).disabled == true,
-			"во время записи кнопка звука заблокирована")
+	_check((slot.get_node("%AudioButton") as Button).disabled == false,
+			"во время записи кнопка звука активна — ею останавливают")
+	_check((slot.get_node("%AudioButton") as Button).text == "Стоп",
+			"во время записи кнопка звука подписана «Стоп» (получено: %s)"
+			% (slot.get_node("%AudioButton") as Button).text)
 	# Вторая попытка записи для другой буквы обязана игнорироваться: иначе
 	# микрофон получил бы два наложенных потока в один файл.
 	var other := (editor as SetEditor).get_slot("Б")
@@ -991,6 +1013,9 @@ func _check_set_editor_signals() -> void:
 			"после записи слот вернулся в исходное состояние")
 	_check((slot.get_node("%AudioButton") as Button).disabled == false,
 			"после записи кнопка звука снова активна")
+	_check((slot.get_node("%AudioButton") as Button).text == "Записать",
+			"после записи кнопка снова подписана «Записать» (получено: %s)"
+			% (slot.get_node("%AudioButton") as Button).text)
 	VoiceRecord.release_microphone()
 	VoiceRecord.clear()
 
