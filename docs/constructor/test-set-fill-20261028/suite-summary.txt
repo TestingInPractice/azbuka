@@ -1,0 +1,16 @@
+validate_audio_transcoder exit=0 PASSED: все проверки успешны
+validate_constructor_ui exit=0 PASSED: 347 проверок успешны
+validate_custom_sets_integration exit=0 PASSED: 130 проверок успешны
+validate_custom_sets_store exit=0 PASSED: все проверки успешны
+validate_find_letter exit=0 PASSED: все проверки успешны
+validate_image_saver exit=0 PASSED: 126 проверок успешны
+validate_letter_translit exit=0 PASSED: все проверки успешны
+validate_native_file_picker exit=0 PASSED: все проверки успешны
+validate_progress_set_id exit=0 PASSED: все проверки успешны
+validate_set_repository exit=0 PASSED: 74 проверок успешны
+validate_test_set_fill exit=0 PASSED: 73 проверок
+validate_ui_changes exit=0 PASSED: все проверки успешны
+validate_voice_record exit=0 PASSED: 53 проверок успешны
+validate_web_file_picker exit=0 PASSED: все проверки успешны
+validate_word_sets exit=0 PASSED: все проверки успешны
+OVERALL=0

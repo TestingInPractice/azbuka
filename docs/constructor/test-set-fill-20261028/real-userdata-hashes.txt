@@ -1,0 +1,20 @@
+Реальный каталог: ~/Library/Application Support/Godot/app_userdata/Азбука
+
+До прогонов:
+custom_sets.json sha256 = 500e3c896fa096b567a3569a50269acb9d050ef7c19e16e818141378072fa5bf
+наборы в custom_sets.json: c_8c3b33 "Новый набор"
+
+После восстановления:
+custom_sets.json sha256 = 500e3c896fa096b567a3569a50269acb9d050ef7c19e16e818141378072fa5bf
+наборы в custom_sets.json: c_8c3b33 "Новый набор"
+каталоги custom_sets: только c_8c3b33
+progress.json sha256 = fd87d804149345eb06fb0340719115813c54a352c70a8fc0c9913eebe024e88a
+settings.json sha256 = 184c98c67c30e399fcc2d59b5347f48af5652440daef892052bff9714689babd
+
+Списки файлов до и после лежат рядом:
+real-userdata-before.txt
+real-userdata-after.txt
+
+Остаточное отличие: два старых лога Godot (18.10.46 и 19.18.25) заменены ротацией
+на логи аварийного прогона, сами аварийные логи удалены. Подробности в разделе
+"Инцидент изоляции" основного документа.

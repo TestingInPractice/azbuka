@@ -1,0 +1,59 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[custom_sets_store_validate] OK: load_sets() на пустом хранилище успешен
+[custom_sets_store_validate] OK: хранилище изначально пусто
+[custom_sets_store_validate] OK: create_set вернул запись
+[custom_sets_store_validate] OK: id начинается с c_ (получено: c_11ac21)
+[custom_sets_store_validate] OK: имя набора сохранено
+[custom_sets_store_validate] OK: новый набор без букв
+[custom_sets_store_validate] OK: счётчик букв = 0
+[custom_sets_store_validate] OK: create_set с пустым именем отклонён
+[custom_sets_store_validate] OK: create_set с пробелами отклонён
+[custom_sets_store_validate] OK: set_entry сохранил запись
+[custom_sets_store_validate] OK: word прочитан
+[custom_sets_store_validate] OK: image прочитан
+[custom_sets_store_validate] OK: audio прочитан
+[custom_sets_store_validate] OK: Б без записи неполная
+[custom_sets_store_validate] OK: строчная буква пишет в ту же запись, что заглавная
+[custom_sets_store_validate] OK: запись без слова, но с медиа, сохранена
+[custom_sets_store_validate] OK: пустое слово остаётся пустым, а не записывается пробелами
+[custom_sets_store_validate] OK: запись без слова неполная
+[custom_sets_store_validate] OK: запись только со словом сохранена
+[custom_sets_store_validate] OK: слово без картинки и звука неполная
+[custom_sets_store_validate] OK: запись, где пусто всё, отклонена
+[custom_sets_store_validate] OK: отклонённая пустая запись не создана
+[custom_sets_store_validate] OK: префикс user:// срезан (получено: custom_sets/c_11ac21/img_d.webp)
+[custom_sets_store_validate] OK: ведущий слэш срезан (получено: custom_sets/c_11ac21/aud_d.wav)
+[custom_sets_store_validate] OK: неизвестный set_id -> {}
+[custom_sets_store_validate] OK: неизвестный набор -> {}
+[custom_sets_store_validate] OK: неизвестная буква -> {}
+[custom_sets_store_validate] OK: удаление несуществующего набора -> false
+[custom_sets_store_validate] OK: переименование несуществующего -> false
+[custom_sets_store_validate] OK: после записи 4 буквы
+[custom_sets_store_validate] OK: повторный load_sets() успешен
+[custom_sets_store_validate] OK: после перезагрузки имя набора сохранено
+[custom_sets_store_validate] OK: после перезагрузки запись буквы сохранена
+[custom_sets_store_validate] OK: после перезагрузки нормализованный путь сохранён
+[custom_sets_store_validate] OK: image_file_name(Я)
+[custom_sets_store_validate] OK: audio_file_name(Ъ)
+[custom_sets_store_validate] OK: set_dir для набора
+[custom_sets_store_validate] OK: audio_file_name с mp3
+[custom_sets_store_validate] OK: точка и регистр в расширении нормализуются
+[custom_sets_store_validate] OK: пустое расширение -> wav
+[custom_sets_store_validate] OK: audio/wav -> wav
+[custom_sets_store_validate] OK: audio/mpeg -> mp3
+[custom_sets_store_validate] OK: audio/mp4 -> m4a (iPhone)
+[custom_sets_store_validate] OK: audio/ogg -> ogg
+[custom_sets_store_validate] OK: mime с параметрами разбирается
+[custom_sets_store_validate] OK: неизвестный mime отвергнут пустой строкой
+[custom_sets_store_validate] OK: набор с 4 буквами неполный
+[custom_sets_store_validate] OK: в наборе 5 букв (получено: 5)
+[custom_sets_store_validate] OK: буквы отсортированы по алфавиту (получено: ["А", "Б", "В", "Д", "Я"])
+[custom_sets_store_validate] OK: rename_set успешен
+[custom_sets_store_validate] OK: новое имя
+[custom_sets_store_validate] OK: переименование в пустое имя отклонено
+[custom_sets_store_validate] OK: delete_set успешен
+[custom_sets_store_validate] OK: набор удалён
+[custom_sets_store_validate] OK: хранилище снова пустое
+[custom_sets_store_validate] OK: is_storage_available() вне web = true
+[custom_sets_store_validate] PASSED: все проверки успешны

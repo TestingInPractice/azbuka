@@ -1,0 +1,14 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_608238/img_a.webp","width":1024}
+WARNING: fill_test_set: буква ZZ пропущена: нет слова в данных буквы
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] fill (res://tools/test_set_filler.gd:71)
+         [1] _ready (res://tools/fill_test_set.gd:20)
+[fill_test_set] набор: Проверка ошибок
+[fill_test_set] id: c_608238 (создан)
+[fill_test_set] запрошено букв: 2 (А, ZZ)
+[fill_test_set] полностью заполнено: 1
+[fill_test_set] ОШИБКА буква ZZ: нет слова в данных буквы
+[fill_test_set] ИТОГ: есть ошибки

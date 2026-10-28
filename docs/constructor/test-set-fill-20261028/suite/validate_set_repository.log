@@ -1,0 +1,101 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[set_repository_validate] OK: встроенный набор отдаёт слово из set 1
+[set_repository_validate] OK: встроенный набор помечен как не пользовательский
+[set_repository_validate] OK: встроенный набор отдаёт res://-путь картинки
+[set_repository_validate] OK: встроенная картинка загрузилась в Texture2D
+[set_repository_validate] OK: встроенное слово озвучено
+[set_repository_validate] OK: встроенное название буквы озвучено
+[set_repository_validate] OK: у Ъ фолбэк на название буквы
+[set_repository_validate] OK: у Ъ есть название буквы
+[set_repository_validate] OK: у А есть и звук буквы
+[set_repository_validate] OK: во встроенном наборе 33 буквы
+[set_repository_validate] OK: пустая буква -> пустые данные
+[set_repository_validate] OK: пустая буква -> нет текстуры
+[set_repository_validate] OK: пустая буква -> нет звука
+[set_repository_validate] OK: тестовый набор создан
+[set_repository_validate] OK: запись буквы сохранена
+[set_repository_validate] OK: активный набор — пользовательский
+[set_repository_validate] OK: набор распознан как пользовательский
+[set_repository_validate] OK: встроенный набор не пользовательский
+[set_repository_validate] OK: пользовательское слово прочитано
+[set_repository_validate] OK: данные помечены как пользовательские
+[set_repository_validate] OK: путь картинки ведёт в user://
+[set_repository_validate] OK: путь звука ведёт в user://
+[set_repository_validate] OK: картинка из user:// загрузилась
+[set_repository_validate] OK: размер загруженной картинки 8x8
+[set_repository_validate] OK: текстура берётся из кэша
+[set_repository_validate] OK: звук из user:// загрузился
+[set_repository_validate] OK: загружен AudioStreamWAV
+[set_repository_validate] OK: у звука ненулевая длительность
+[set_repository_validate] OK: в наборе только одна буква
+[set_repository_validate] OK: has_letter находит заполненную букву
+[set_repository_validate] OK: выбор набора не сбился
+[set_repository_validate] OK: название буквы наследуется из встроенных данных
+[set_repository_validate] OK: звук буквы наследуется из встроенных данных
+[set_repository_validate] OK: незаполненная буква Ъ помечена is_custom=false
+[set_repository_validate] OK: незаполненная буква Ъ отдаёт встроенное слово
+[set_repository_validate] OK: незаполненная буква Ъ грузит встроенную текстуру
+[set_repository_validate] OK: незаполненной буквы нет в списке букв набора
+[set_repository_validate] OK: частичный набор: А заполнена целиком
+[set_repository_validate] OK: частичный набор: Б записана без медиа, то есть неполна
+[set_repository_validate] OK: полная пользовательская запись помечена is_custom=true
+[set_repository_validate] OK: полная пользовательская запись отдаёт слово родителя
+[set_repository_validate] OK: полная пользовательская запись отдаёт путь из user://
+[set_repository_validate] OK: неполная запись помечена is_custom=false, а не true
+[set_repository_validate] OK: неполная запись не подставляет слово родителя (получено: Бана́н)
+[set_repository_validate] OK: неполная запись получает встроенную картинку, а не картинку родителя
+[set_repository_validate] OK: неполная запись: текстура грузится, карточка не пустая
+[set_repository_validate] OK: неполная запись: звук слова грузится
+[set_repository_validate] OK: неполная запись: название буквы доступно
+[set_repository_validate] OK: неполная запись: фонема буквы доступна
+[set_repository_validate] OK: в тестовом алфавите 33 буквы (получено: 33)
+[set_repository_validate] OK: у всех незаполненных букв есть слово (нет: [])
+[set_repository_validate] OK: у всех незаполненных букв is_custom=false (нарушено: [])
+[set_repository_validate] OK: у всех незаполненных букв встроенный путь картинки (нарушено: [])
+[set_repository_validate] OK: текстура грузится для всех незаполненных букв (нет: [])
+[set_repository_validate] OK: звук слова есть для всех незаполненных букв (нет: [])
+[set_repository_validate] OK: название буквы есть для всех незаполненных букв (нет: [])
+[set_repository_validate] OK: фонема буквы есть для всех незаполненных букв (нет: [])
+[set_repository_validate] OK: слово родителя не подставляется в другие буквы (подставлено: [])
+[set_repository_validate] OK: откат совпадает со встроенным набором 1 побайтово (расхождений: [])
+[set_repository_validate] OK: у 33 букв 33 разных картинок (получено: 33)
+[set_repository_validate] fallback для всех 33 букв: OK
+[set_repository_validate] OK: встроенный набор не затронут откатом
+[set_repository_validate] OK: встроенный набор по-прежнему is_custom=false
+ERROR: Error opening file 'user://custom_sets/c_8c0e58/img_a.webp'.
+   at: load_image (core/io/image_loader.cpp:89)
+   GDScript backtrace (most recent call first):
+       [0] get_word_texture (res://systems/set_repository.gd:75)
+       [1] _ready (res://tests/validate_set_repository.gd:212)
+[WARNING] SetRepository: image_load_failed  data={"err":7,"path":"user://custom_sets/c_8c0e58/img_a.webp"}
+[WARNING] SetRepository: image_missing  data={"letter":"А","path":"user://custom_sets/c_8c0e58/img_a.webp"}
+[set_repository_validate] OK: удалённый файл картинки -> null, а не падение
+[set_repository_validate] OK: удалённый набор больше не пользовательский
+[set_repository_validate] OK: после удаления набора вернулись встроенные данные
+[set_repository_validate] OK: запись буквы пережила перечитывание JSON
+[set_repository_validate] OK: пустой путь -> null
+[set_repository_validate] OK: ogg -> AudioStreamOggVorbis (получено: AudioStreamOggVorbis)
+[set_repository_validate] OK: ogg читается целиком, длительность > 0
+[set_repository_validate] OK: wav из user:// -> AudioStreamWAV (получено: AudioStreamWAV)
+[set_repository_validate] OK: wav читается целиком, длительность > 0
+ERROR: Failed to decode mp3 file. Make sure it is a valid mp3 audio file.
+   at: set_data (modules/mp3/audio_stream_mp3.cpp:227)
+   GDScript backtrace (most recent call first):
+       [0] _load_audio (res://systems/set_repository.gd:204)
+       [1] load_audio_file (res://systems/set_repository.gd:110)
+       [2] _check_audio_file_loader (res://tests/validate_set_repository.gd:263)
+       [3] _ready (res://tests/validate_set_repository.gd:232)
+ERROR: MP3 decoding failed. Check that your data is a valid MP3 audio stream.
+   at: load_from_buffer (modules/mp3/audio_stream_mp3.cpp:319)
+   GDScript backtrace (most recent call first):
+       [0] _load_audio (res://systems/set_repository.gd:204)
+       [1] load_audio_file (res://systems/set_repository.gd:110)
+       [2] _check_audio_file_loader (res://tests/validate_set_repository.gd:263)
+       [3] _ready (res://tests/validate_set_repository.gd:232)
+[WARNING] SetRepository: audio_missing  data={"path":"user://load_audio_test.mp3"}
+[set_repository_validate] OK: битый mp3 не подменяется AudioStreamWAV (получено: null)
+[set_repository_validate] OK: битый mp3 не даёт звука
+[WARNING] SetRepository: audio_format_unsupported  data={"path":"user://load_audio_test.m4a"}
+[set_repository_validate] OK: m4a -> null (формат не поддержан загрузчиком)
+[set_repository_validate] PASSED: 74 проверок успешны
