@@ -118,6 +118,7 @@ func _ready() -> void:
 	await _check_set_editor_signals()
 	await _check_set_list()
 	await _check_set_list_ready_ran()
+	await _check_set_list_reads_store_on_open()
 	await _check_two_sets_never_share_path()
 	await _check_parental_gate()
 
@@ -1675,6 +1676,56 @@ func _remove_dir_recursive(user_path: String) -> void:
 	for dir_name: String in DirAccess.get_directories_at(base):
 		_remove_dir_recursive("%s%s/" % [user_path, dir_name])
 	DirAccess.remove_absolute(base)
+
+
+## Регрессия K01: список обязан перечитать хранилище при открытии сцены.
+##
+## Что было сломано: `_ready()` заканчивался подпиской на `sets_changed`, а
+## `refresh()` не звал. При двух наборах на диске экран показывал «Пока нет
+## своих наборов», и строка появлялась только после создания ещё одного
+## набора — подписка отрабатывала на изменении, а при открытии список не
+## читался вовсе. Все прочие проверки этого файла список пересобирали вручную
+## (`refresh()` из теста), поэтому регрессия проходила мимо них.
+##
+## Проверка нарочно НЕ зовёт `refresh()` и не трогает сцену после
+## инстанцирования: сцена обязана сама показать то, что лежит в хранилище.
+func _check_set_list_reads_store_on_open() -> void:
+	CustomSetsStore.clear_memory()
+	CustomSetsStore.save_sets()
+	var first := CustomSetsStore.create_set("Открытие-Альфа")
+	var second := CustomSetsStore.create_set("Открытие-Бета")
+	var prepared := CustomSetsStore.get_sets().size()
+	_check(prepared == 2,
+			"подготовка регрессии: в хранилище два набора (получено: %d)" % prepared)
+
+	var scene: PackedScene = load("res://ui/constructor/set_list/set_list.tscn")
+	if scene == null:
+		_fail("set_list.tscn не загружается — регрессию открытия проверить нечем")
+		return
+	var list: Node = scene.instantiate()
+	add_child(list)
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	var open_count := (list as SetList).get_row_count()
+	_check(open_count == 2,
+			"открытие списка при двух наборах строит две строки без внешнего refresh() (получено: %d)"
+			% open_count)
+	var empty_label := list.get_node_or_null("%EmptyLabel") as Label
+	_check(empty_label != null and empty_label.visible == false,
+			"подпись «пока нет своих наборов» скрыта сразу при открытии, если наборы есть")
+	var row := (list as SetList).get_row(0)
+	var name_label: Label = null
+	if row != null:
+		name_label = row.get_node_or_null("%NameLabel") as Label
+	_check(name_label != null and not name_label.text.is_empty(),
+			"первая строка при открытии показывает имя набора (получено: %s)"
+			% ("<nil>" if name_label == null else name_label.text))
+
+	CustomSetsStore.delete_set(str(first.get("id", "")))
+	CustomSetsStore.delete_set(str(second.get("id", "")))
+	list.queue_free()
+	await get_tree().process_frame
 
 
 func _cleanup() -> void:
