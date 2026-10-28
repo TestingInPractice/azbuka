@@ -1,0 +1,43 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[native_file_picker_validate] OK: фильтры картинки: 4 элемента
+[native_file_picker_validate] OK: фильтр картинки содержит *.png
+[native_file_picker_validate] OK: фильтр картинки содержит *.jpg
+[native_file_picker_validate] OK: фильтр картинки содержит *.jpeg
+[native_file_picker_validate] OK: фильтр картинки содержит *.webp
+[native_file_picker_validate] OK: фильтры звука: 3 элемента
+[native_file_picker_validate] OK: фильтр звука содержит *.wav
+[native_file_picker_validate] OK: фильтр звука содержит *.ogg
+[native_file_picker_validate] OK: фильтр звука содержит *.mp3
+[native_file_picker_validate] OK: неизвестный вид -> пустые фильтры
+[native_file_picker_validate] OK: png -> image/png
+[native_file_picker_validate] OK: jpg -> image/jpeg
+[native_file_picker_validate] OK: jpeg -> image/jpeg
+[native_file_picker_validate] OK: webp -> image/webp
+[native_file_picker_validate] OK: wav -> audio/wav
+[native_file_picker_validate] OK: ogg -> audio/ogg
+[native_file_picker_validate] OK: mp3 -> audio/mpeg
+[native_file_picker_validate] OK: регистр и точка игнорируются
+[native_file_picker_validate] OK: m4a -> пустой mime
+[native_file_picker_validate] OK: неподдерживаемое расширение -> пустой mime
+[native_file_picker_validate] OK: backend_for(true) == web
+[native_file_picker_validate] OK: backend_for(false) == native
+[native_file_picker_validate] OK: тестовый файл создан
+[native_file_picker_validate] OK: read_file_with_limit успешен для png
+[native_file_picker_validate] OK: успешный результат без ошибки
+[native_file_picker_validate] OK: имя файла из пути
+[native_file_picker_validate] OK: mime по расширению
+[native_file_picker_validate] OK: байты прочитаны полностью
+[native_file_picker_validate] OK: отсутствующий файл отклонён
+[native_file_picker_validate] OK: код ошибки read_failed
+[native_file_picker_validate] OK: тестовый m4a создан
+[native_file_picker_validate] OK: .m4a отклонён
+[native_file_picker_validate] OK: код ошибки unsupported_type
+[native_file_picker_validate] OK: тестовый файл для лимита создан
+[native_file_picker_validate] OK: файл больше лимита отклонён
+[native_file_picker_validate] OK: код ошибки too_large
+[native_file_picker_validate] OK: пустой вид отклонён
+[native_file_picker_validate] OK: пустой вид -> bad_kind
+[native_file_picker_validate] OK: неизвестный вид отклонён
+[native_file_picker_validate] OK: неизвестный вид -> bad_kind
+[native_file_picker_validate] PASSED: все проверки успешны

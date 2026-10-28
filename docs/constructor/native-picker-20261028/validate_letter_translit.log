@@ -1,0 +1,20 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[letter_translit_validate] OK: А -> a
+[letter_translit_validate] OK: а -> a (регистр не важен)
+[letter_translit_validate] OK: Ъ -> q
+[letter_translit_validate] OK: Ы -> y
+[letter_translit_validate] OK: Ь -> soft
+[letter_translit_validate] OK: Е -> e
+[letter_translit_validate] OK: Э -> eh (не e, как у Е)
+[letter_translit_validate] OK: Й -> j (не y, как у Ы)
+[letter_translit_validate] OK: Я -> ya
+[letter_translit_validate] OK: Ю -> yu
+[letter_translit_validate] OK: Ё -> yo
+[letter_translit_validate] OK: Ж -> zh
+[letter_translit_validate] OK: небуквенный символ -> _
+[letter_translit_validate] OK: пустая строка -> _
+[letter_translit_validate] OK: две буквы -> _
+[letter_translit_validate] OK: Ж -> валидное имя файла
+[letter_translit_validate] OK: уникальных имён ровно 33 (получено: 33)
+[letter_translit_validate] PASSED: все проверки успешны

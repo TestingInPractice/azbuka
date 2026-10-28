@@ -332,7 +332,7 @@ func _on_image_requested(letter: String) -> void:
 	if not _has_slot(letter):
 		return
 	_slot(letter).show_message("выберите файл…")
-	var picked := await WebFilePicker.pick("image")
+	var picked := await FilePicker.pick("image")
 	if not bool(picked.get("ok", false)):
 		var error := str(picked.get("error", ""))
 		GameLogger.info("SetEditor", "image_pick_failed",
@@ -376,7 +376,7 @@ func _on_audio_requested(letter: String) -> void:
 			_stop_recording_for(letter)
 		return
 	slot.show_message("выберите файл…")
-	var picked := await WebFilePicker.pick("audio")
+	var picked := await FilePicker.pick("audio")
 	if not bool(picked.get("ok", false)):
 		var error := str(picked.get("error", ""))
 		GameLogger.info("SetEditor", "audio_pick_failed",
