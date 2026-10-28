@@ -105,29 +105,29 @@ static func pick(kind: String) -> Dictionary:
 		dialog.title = "Выберите картинку"
 	else:
 		dialog.title = "Выберите звук"
-	var selected_path := ""
-	var cancelled := false
+	# Результат складываем в Dictionary: GDScript захватывает локальные
+	# переменные лямбды по значению, и запись в обычную строку из колбэка
+	# снаружи не видна. С ней цикл ожидания ниже не завершился бы никогда,
+	# а родитель после выбора файла не получил бы ничего.
+	var outcome := {"path": "", "cancelled": false}
 	dialog.file_selected.connect(func(path: String) -> void:
-		selected_path = path
+		outcome["path"] = path
 	)
 	dialog.canceled.connect(func() -> void:
-		cancelled = true
+		outcome["cancelled"] = true
 	)
 	dialog.close_requested.connect(func() -> void:
-		cancelled = true
+		outcome["cancelled"] = true
 	)
 	tree.root.add_child(dialog)
 	dialog.popup_centered_ratio(0.8)
-	# Ждём сигналы, а не dialog.visible: у нативного диалога окном владеет ОС,
-	# и цикл по visible мог завершиться сразу после popup, вернув cancelled
-	# без всякого выбора файла.
-	while not cancelled and selected_path.is_empty():
+	while str(outcome["path"]).is_empty() and not bool(outcome["cancelled"]):
 		await tree.process_frame
 	dialog.hide()
 	dialog.queue_free()
-	if cancelled or selected_path.is_empty():
+	if bool(outcome["cancelled"]) or str(outcome["path"]).is_empty():
 		return _read_error("cancelled")
-	return read_file(selected_path, kind)
+	return read_file(str(outcome["path"]), kind)
 
 
 static func _read_error(code: String) -> Dictionary:

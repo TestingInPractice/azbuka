@@ -24,6 +24,8 @@ func _ready() -> void:
 	await _check_read_file_m4a_unsupported()
 	await _check_read_file_oversized()
 	await _check_read_file_bad_kind()
+	await _check_pick_resumes_on_selection()
+	await _check_pick_returns_cancelled()
 	_cleanup_scratch()
 
 	_finish()
@@ -189,6 +191,68 @@ func _check_read_file_bad_kind() -> void:
 	var unknown := NativeFilePicker.read_file(path, "video")
 	_check(not bool(unknown.get("ok", true)), "неизвестный вид отклонён")
 	_check(str(unknown.get("error", "")) == "bad_kind", "неизвестный вид -> bad_kind")
+
+
+## Выбор файла проверяем без человека: диалог появляется в дереве, эмулируем
+## его сигнал и убеждаемся, что pick() вернул байты. Ровно этот путь ломался,
+## когда результат колбэка складывали в локальную строку: лямбда в GDScript
+## захватывает её по значению, и pick() висел вечно.
+func _check_pick_resumes_on_selection() -> void:
+	var bytes := PackedByteArray([137, 80, 78, 71, 13, 10, 26, 10])
+	var path := _write_test_file("pick.png", bytes)
+	_check(not path.is_empty(), "файл для проверки pick создан")
+	var state := {"done": false, "result": {}}
+	_run_pick(state)
+	var emitted := false
+	for i in range(0, 300):
+		await get_tree().process_frame
+		var dialog := _find_dialog()
+		if dialog != null and not emitted:
+			dialog.file_selected.emit(path)
+			emitted = true
+		if bool(state["done"]):
+			break
+	_check(emitted, "диалог появился в дереве")
+	_check(bool(state["done"]), "pick() завершился после сигнала выбора")
+	var result: Dictionary = state["result"]
+	_check(bool(result.get("ok", false)), "pick() вернул ok")
+	var got: PackedByteArray = result.get("bytes", PackedByteArray())
+	_check(got.size() == bytes.size(), "pick() вернул байты файла")
+	_check(str(result.get("mime", "")) == "image/png", "pick() вернул mime")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_check(_find_dialog() == null, "диалог удалён из дерева")
+
+
+func _check_pick_returns_cancelled() -> void:
+	var state := {"done": false, "result": {}}
+	_run_pick(state)
+	var emitted := false
+	for i in range(0, 300):
+		await get_tree().process_frame
+		var dialog := _find_dialog()
+		if dialog != null and not emitted:
+			dialog.canceled.emit()
+			emitted = true
+		if bool(state["done"]):
+			break
+	_check(emitted, "диалог для отмены появился в дереве")
+	_check(bool(state["done"]), "pick() завершился после отмены")
+	var result: Dictionary = state["result"]
+	_check(not bool(result.get("ok", true)), "отмена не даёт ok")
+	_check(str(result.get("error", "")) == "cancelled", "отмена -> cancelled")
+
+
+func _run_pick(state: Dictionary) -> void:
+	state["result"] = await NativeFilePicker.pick("image")
+	state["done"] = true
+
+
+func _find_dialog() -> FileDialog:
+	for child in get_tree().root.get_children():
+		if child is FileDialog:
+			return child as FileDialog
+	return null
 
 
 func _check(ok: bool, msg: String) -> void:
