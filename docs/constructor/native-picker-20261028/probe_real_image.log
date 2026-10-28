@@ -1,0 +1,110 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[probe] set_id=c_e9f9d3
+[INFO] SetEditor: set_opened  data={"set_id":"c_e9f9d3"}
+WARNING: Not a PNG file
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] save_image (res://systems/image_saver.gd:60)
+         [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+         [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+[INFO] ImageSaver: image_saved  data={"height":600,"path":"user://custom_sets/c_e9f9d3/img_a.webp","width":800}
+[probe] internet_jpg bytes=96207 applied={ "ok": true, "error": "" } meta=custom_sets/c_e9f9d3/img_a.webp exists=true dims=(800, 600)
+WARNING: Not a PNG file
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] save_image (res://systems/image_saver.gd:60)
+         [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+         [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_e9f9d3/img_a.webp","width":767}
+[probe] desktop_jpg bytes=192740 applied={ "ok": true, "error": "" } meta=custom_sets/c_e9f9d3/img_a.webp exists=true dims=(767, 1024)
+WARNING: Not a PNG file
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] save_image (res://systems/image_saver.gd:60)
+         [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+         [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:104)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _ready (res://tests/probe_real_image.gd:28)
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_e9f9d3/img_a.webp","width":1024}
+[probe] desktop_webp bytes=322702 applied={ "ok": true, "error": "" } meta=custom_sets/c_e9f9d3/img_a.webp exists=true dims=(1024, 1024)
+[INFO] ImageSaver: image_saved  data={"height":211,"path":"user://custom_sets/c_e9f9d3/img_a.webp","width":1024}
+[probe] desktop_png bytes=32921 applied={ "ok": true, "error": "" } meta=custom_sets/c_e9f9d3/img_a.webp exists=true dims=(1024, 211)

@@ -333,12 +333,18 @@ func _on_image_requested(letter: String) -> void:
 		return
 	_slot(letter).show_message("выберите файл…")
 	var picked := await FilePicker.pick("image")
+	# Диалог живёт дольше узла: пока родитель выбирал файл, он мог уйти из
+	# редактора. Тогда слот уже освобождён и обращаться к нему нельзя.
+	if not is_instance_valid(self) or not _has_slot(letter):
+		return
 	if not bool(picked.get("ok", false)):
 		var error := str(picked.get("error", ""))
 		GameLogger.info("SetEditor", "image_pick_failed",
 				{"letter": letter, "error": error})
 		_slot(letter).show_message(_pick_message("image", error))
 		return
+	GameLogger.info("SetEditor", "image_picked",
+			{"letter": letter, "bytes": (picked.get("bytes", PackedByteArray()) as PackedByteArray).size()})
 	_slot(letter).set_busy(true)
 	apply_image(letter, picked.get("bytes", PackedByteArray()))
 	_slot(letter).set_busy(false)
@@ -377,6 +383,9 @@ func _on_audio_requested(letter: String) -> void:
 		return
 	slot.show_message("выберите файл…")
 	var picked := await FilePicker.pick("audio")
+	# Пока диалог был открыт, редактор могли закрыть: слот уже освобождён.
+	if not is_instance_valid(self) or not _has_slot(letter):
+		return
 	if not bool(picked.get("ok", false)):
 		var error := str(picked.get("error", ""))
 		GameLogger.info("SetEditor", "audio_pick_failed",

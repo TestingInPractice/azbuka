@@ -72,17 +72,17 @@ Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
 [constructor_ui_validate] OK: слот для буквы Я создан
 [constructor_ui_validate] OK: слот для пустой буквы не создаётся
 [constructor_ui_validate] OK: набор для редактора создан
-[INFO] SetEditor: set_opened  data={"set_id":"c_7409b6"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_56a2e3"}
 [constructor_ui_validate] OK: open_set() запомнил набор
 [constructor_ui_validate] OK: новый набор: слово пустое
 [constructor_ui_validate] OK: новый набор: картинки нет
 [constructor_ui_validate] OK: save_word() принял слово
 [constructor_ui_validate] OK: слово дошло до хранилища
 [constructor_ui_validate] OK: запись без медиа неполная
-[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_7409b6/img_a.webp","width":8}
+[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_56a2e3/img_a.webp","width":8}
 [constructor_ui_validate] OK: apply_image() сохранил картинку (ошибка: )
 [constructor_ui_validate] OK: путь картинки записан в метаданные
-[constructor_ui_validate] OK: в метаданных путь относительный (получено: custom_sets/c_7409b6/img_a.webp)
+[constructor_ui_validate] OK: в метаданных путь относительный (получено: custom_sets/c_56a2e3/img_a.webp)
 [constructor_ui_validate] OK: файл картинки лежит на диске
 [constructor_ui_validate] OK: слот показал картинку
 [constructor_ui_validate] OK: картинка без звука — запись всё ещё неполная
@@ -153,14 +153,14 @@ ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
 [constructor_ui_validate] OK: apply_image() отверг битые байты
 [constructor_ui_validate] OK: после неудачной замены старая картинка на месте
 [constructor_ui_validate] OK: apply_audio() сохранил звук (ошибка: )
-[constructor_ui_validate] OK: путь звука относительный (получено: custom_sets/c_7409b6/aud_a.wav)
-[constructor_ui_validate] OK: запись сохранена как .wav (получено: custom_sets/c_7409b6/aud_a.wav)
+[constructor_ui_validate] OK: путь звука относительный (получено: custom_sets/c_56a2e3/aud_a.wav)
+[constructor_ui_validate] OK: запись сохранена как .wav (получено: custom_sets/c_56a2e3/aud_a.wav)
 [constructor_ui_validate] OK: WAV начинается с RIFF: это get_wav_bytes(), а не get_data()
 [constructor_ui_validate] OK: слот показал звук
 [constructor_ui_validate] OK: слово, картинка и звук на месте — запись полная
 [constructor_ui_validate] OK: refresh() не падает и держит слоты в согласии с хранилищем
 [constructor_ui_validate] OK: refresh() вернул в поле имени название набора
-[constructor_ui_validate] OK: загруженный mp3 не переименован в .wav (получено: custom_sets/c_7409b6/aud_v.mp3)
+[constructor_ui_validate] OK: загруженный mp3 не переименован в .wav (получено: custom_sets/c_56a2e3/aud_v.mp3)
 [constructor_ui_validate] OK: save_name() принял имя
 [constructor_ui_validate] OK: новое имя в хранилище
 [constructor_ui_validate] OK: пустое имя отвергнуто
@@ -169,20 +169,20 @@ ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
 [constructor_ui_validate] OK: после очистки звука нет
 [constructor_ui_validate] OK: слово пережило очистку медиа
 [constructor_ui_validate] OK: после очистки запись снова неполная
-[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_7409b6/img_b.webp","width":8}
+[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_56a2e3/img_b.webp","width":8}
 [constructor_ui_validate] OK: буква без звука не засчитана как заполненная
 [constructor_ui_validate] OK: счётчик показывает одну заполненную букву
-[INFO] SetEditor: set_opened  data={"set_id":"c_7409b6"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_56a2e3"}
 [constructor_ui_validate] OK: после переоткрытия слово на месте
 [constructor_ui_validate] OK: после переоткрытия картинка на месте
-[INFO] SetEditor: set_saved  data={"set_id":"c_7409b6"}
-[constructor_ui_validate] OK: SaveButton эмитит set_saved с id (получено: ["c_7409b6"])
+[INFO] SetEditor: set_saved  data={"set_id":"c_56a2e3"}
+[constructor_ui_validate] OK: SaveButton эмитит set_saved с id (получено: ["c_56a2e3"])
 [constructor_ui_validate] OK: в set_editor.tscn есть узел BackButton
 [constructor_ui_validate] OK: SetEditor._ready() подключил BackButton (подключений: 1)
 [constructor_ui_validate] OK: у BackButton редактора есть accessibility_name
-[INFO] SetEditor: close_requested  data={"set_id":"c_7409b6"}
+[INFO] SetEditor: close_requested  data={"set_id":"c_56a2e3"}
 [constructor_ui_validate] OK: BackButton редактора эмитит close_requested ровно один раз (получено: ["close"])
-[constructor_ui_validate] OK: нажатие «Назад» не эмитит set_saved заново (получено: ["c_7409b6"])
+[constructor_ui_validate] OK: нажатие «Назад» не эмитит set_saved заново (получено: ["c_56a2e3"])
 [constructor_ui_validate] OK: второй экземпляр set_editor.tscn тоже инстанцируется
 ERROR: String formatting error: not all arguments converted during string formatting.
    at: validated_evaluate (core/variant/variant_op.h:829)
@@ -211,13 +211,13 @@ ERROR: String formatting error: not all arguments converted during string format
 [constructor_ui_validate] OK: 33 разных узла слота, ни один не переиспользован
 [constructor_ui_validate] OK: все 132 кнопки слотов подключены и с accessibility_name (нарушений: 0)
 [constructor_ui_validate] OK: все 5 намерений каждого слота приходят в редактор (нарушений: 0)
-[INFO] SetEditor: set_opened  data={"set_id":"c_fabee8"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_7a71e7"}
 [constructor_ui_validate] OK: после open_set() каждая строка называет свою букву и находится по ней (нарушений: 0: [])
 [constructor_ui_validate] OK: порядок строк сетки совпадает с алфавитом и после open_set()
 [constructor_ui_validate] set_editor collection: OK
 [constructor_ui_validate] OK: набор для проверки сигналов создан
-[constructor_ui_validate] OK: create_set() создал каталог набора до первой записи: user://custom_sets/c_9f0156/
-[INFO] SetEditor: set_opened  data={"set_id":"c_9f0156"}
+[constructor_ui_validate] OK: create_set() создал каталог набора до первой записи: user://custom_sets/c_a1c7ce/
+[INFO] SetEditor: set_opened  data={"set_id":"c_a1c7ce"}
 [constructor_ui_validate] OK: отменённый выбор картинки не записал путь в метаданные
 [constructor_ui_validate] OK: отмена картинки не оставила слот «с картинкой»
 [constructor_ui_validate] OK: отмена картинки не тронула слово
@@ -239,22 +239,22 @@ ERROR: String formatting error: not all arguments converted during string format
 [INFO] LetterSlot: word_edited  data={"letter":"А","word":"Апельсин"}
 [constructor_ui_validate] OK: правка поля слова дошла до хранилища через word_edited
 [constructor_ui_validate] OK: пустое слово не затёрло прежнее в хранилище
-[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_9f0156/img_a.webp","width":8}
+[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_a1c7ce/img_a.webp","width":8}
 [constructor_ui_validate] OK: медиа на месте перед очисткой с кнопки
 [constructor_ui_validate] OK: clear_requested с кнопки очистил медиа
 [constructor_ui_validate] OK: очистка с кнопки сохранила слово
 [constructor_ui_validate] OK: каталог набора снесён для проверки ошибки записи
-ERROR: Can't save WebP at path: 'user://custom_sets/c_9f0156/img_g.webp'.
+ERROR: Can't save WebP at path: 'user://custom_sets/c_a1c7ce/img_g.webp'.
    at: save_image (modules/webp/resource_saver_webp.cpp:56)
    GDScript backtrace (most recent call first):
        [0] save_image (res://systems/image_saver.gd:70)
        [1] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
        [2] _check_set_editor_signals (res://tests/validate_constructor_ui.gd:1062)
        [3] _settle (res://tests/validate_constructor_ui.gd:1649)
-[WARNING] SetEditor: image_save_failed  data={"error":"write_failed: Не удалось записать user://custom_sets/c_9f0156/img_g.webp (err=7)","letter":"Г"}
+[WARNING] SetEditor: image_save_failed  data={"error":"write_failed: Не удалось записать user://custom_sets/c_a1c7ce/img_g.webp (err=7)","letter":"Г"}
 [constructor_ui_validate] OK: apply_image() честно вернул отказ
-[constructor_ui_validate] OK: ошибка картинки названа write_failed (получено: write_failed: Не удалось записать user://custom_sets/c_9f0156/img_g.webp (err=7))
-[constructor_ui_validate] OK: ошибка картинки несёт текст для родителя, а не только код: write_failed: Не удалось записать user://custom_sets/c_9f0156/img_g.webp (err=7)
+[constructor_ui_validate] OK: ошибка картинки названа write_failed (получено: write_failed: Не удалось записать user://custom_sets/c_a1c7ce/img_g.webp (err=7))
+[constructor_ui_validate] OK: ошибка картинки несёт текст для родителя, а не только код: write_failed: Не удалось записать user://custom_sets/c_a1c7ce/img_g.webp (err=7)
 [WARNING] SetEditor: audio_write_failed  data={"letter":"Г"}
 [constructor_ui_validate] OK: apply_audio() честно вернул отказ
 [constructor_ui_validate] OK: ДЕФЕКТ: ошибка звука — голый код без текста (получено: write_failed)
@@ -268,7 +268,7 @@ ERROR: Can't save WebP at path: 'user://custom_sets/c_9f0156/img_g.webp'.
 [constructor_ui_validate] OK: apply_audio() без открытого набора вернул no_set, а не писал в корень
 [constructor_ui_validate] OK: в корне user://custom_sets/ не осталось ни одного медиафайла (найдено: 0)
 [constructor_ui_validate] OK: apply_image() проверяет набор раньше буквы (no_set, не bad_letter)
-[INFO] SetEditor: set_opened  data={"set_id":"c_9f0156"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_a1c7ce"}
 [constructor_ui_validate] OK: apply_image() для чужой буквы вернул bad_letter
 [constructor_ui_validate] OK: apply_audio() для чужой буквы вернул bad_letter
 [constructor_ui_validate] OK: apply_audio() с пустыми байтами вернул no_bytes
@@ -288,9 +288,9 @@ ERROR: Can't save WebP at path: 'user://custom_sets/c_9f0156/img_g.webp'.
 [INFO] SetList: refreshed  data={"rows":2}
 [INFO] SetList: refreshed  data={"rows":2}
 [constructor_ui_validate] OK: два набора -> две строки (получено: 2)
-[INFO] SetEditor: set_opened  data={"set_id":"c_a461ac"}
-[INFO] SetList: editor_opened  data={"set_id":"c_a461ac"}
-[constructor_ui_validate] OK: строка «Альфа» открыла свой набор (получено: ["c_a461ac"])
+[INFO] SetEditor: set_opened  data={"set_id":"c_d6c780"}
+[INFO] SetList: editor_opened  data={"set_id":"c_d6c780"}
+[constructor_ui_validate] OK: строка «Альфа» открыла свой набор (получено: ["c_d6c780"])
 [INFO] SetList: refreshed  data={"rows":1}
 [INFO] SetList: refreshed  data={"rows":1}
 [constructor_ui_validate] OK: после удаления осталась одна строка
@@ -301,12 +301,12 @@ ERROR: Can't save WebP at path: 'user://custom_sets/c_9f0156/img_g.webp'.
 [constructor_ui_validate] OK: после удаления всех список пуст
 [constructor_ui_validate] OK: у SetList есть и встроенный редактор, и список в дереве
 [INFO] SetList: refreshed  data={"rows":1}
-[INFO] SetEditor: set_opened  data={"set_id":"c_12d941"}
-[INFO] SetList: editor_opened  data={"set_id":"c_12d941"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_6891fa"}
+[INFO] SetList: editor_opened  data={"set_id":"c_6891fa"}
 [constructor_ui_validate] OK: после «Создать набор» виден редактор, а список скрыт
 [constructor_ui_validate] OK: пока открыт редактор, кнопка «Назад» списка спрятана (один путь назад)
 [constructor_ui_validate] OK: у вложенного в SetList редактора есть свой узел BackButton
-[INFO] SetEditor: close_requested  data={"set_id":"c_12d941"}
+[INFO] SetEditor: close_requested  data={"set_id":"c_6891fa"}
 [constructor_ui_validate] OK: close_requested вернул SetList к списку и скрыл редактор
 [constructor_ui_validate] OK: после возврата кнопка «Назад» списка снова на месте
 [constructor_ui_validate] OK: после возврата кнопка снова «Назад» (получено: Назад)
@@ -348,11 +348,11 @@ ERROR: Can't save WebP at path: 'user://custom_sets/c_9f0156/img_g.webp'.
 [constructor_ui_validate] OK: после удаления список пуст
 [constructor_ui_validate] OK: подпись пустого списка вернулась
 [INFO] SetList: refreshed  data={"rows":1}
-[INFO] SetEditor: set_opened  data={"set_id":"c_9c4421"}
-[INFO] SetList: editor_opened  data={"set_id":"c_9c4421"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_8946c7"}
+[INFO] SetList: editor_opened  data={"set_id":"c_8946c7"}
 [constructor_ui_validate] OK: NewButton создал набор и строку
 [constructor_ui_validate] OK: NewButton эмитит open_editor (получено: 1)
-[constructor_ui_validate] OK: open_editor ушёл с id только что созданного набора (получено: ["c_9c4421"])
+[constructor_ui_validate] OK: open_editor ушёл с id только что созданного набора (получено: ["c_8946c7"])
 [INFO] SetList: refreshed  data={"rows":0}
 [constructor_ui_validate] set_list _ready(): OK
 [constructor_ui_validate] OK: подготовка регрессии: в хранилище два набора (получено: 2)
@@ -366,10 +366,10 @@ ERROR: Can't save WebP at path: 'user://custom_sets/c_9f0156/img_g.webp'.
 [INFO] SetList: refreshed  data={"rows":1}
 [constructor_ui_validate] OK: подготовка счётчиков: строка набора есть
 [constructor_ui_validate] OK: список считает только полные записи (получено: заполнено 2 из 33)
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_А.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Б.webp"}
-[INFO] SetEditor: set_opened  data={"set_id":"c_a464fe"}
-[INFO] SetList: editor_opened  data={"set_id":"c_a464fe"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_А.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Б.webp"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_c87544"}
+[INFO] SetList: editor_opened  data={"set_id":"c_c87544"}
 [constructor_ui_validate] OK: строка открыла редактор набора
 [constructor_ui_validate] OK: редактор и список показывают один счётчик (список: заполнено 2 из 33, редактор: заполнено 2 из 33)
 [INFO] SetList: refreshed  data={"rows":1}
@@ -406,52 +406,52 @@ ERROR: Can't save WebP at path: 'user://custom_sets/c_9f0156/img_g.webp'.
 [INFO] SetList: refreshed  data={"rows":1}
 [INFO] SetList: refreshed  data={"rows":1}
 [INFO] SetList: refreshed  data={"rows":1}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_А.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Б.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_В.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Г.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Д.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Е.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Ё.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Ж.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_З.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_И.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Й.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_К.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Л.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_М.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Н.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_О.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_П.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Р.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_С.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Т.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_У.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Ф.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Х.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Ц.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Ч.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Ш.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Щ.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Ъ.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Ы.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Ь.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Э.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Ю.webp"}
-[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_a464fe/img_Я.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_А.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Б.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_В.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Г.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Д.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Е.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Ё.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Ж.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_З.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_И.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Й.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_К.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Л.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_М.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Н.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_О.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_П.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Р.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_С.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Т.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_У.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Ф.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Х.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Ц.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Ч.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Ш.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Щ.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Ъ.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Ы.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Ь.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Э.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Ю.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_c87544/img_Я.webp"}
 [constructor_ui_validate] OK: полный набор: список пишет «набор готов к играм» (получено: набор готов к играм)
 [constructor_ui_validate] OK: полный набор: редактор пишет «набор готов к играм» (получено: набор готов к играм)
 [INFO] SetList: refreshed  data={"rows":0}
 [constructor_ui_validate] OK: подготовка предпросмотра: ogg-файл прочитан (6879 байт)
-[INFO] SetEditor: set_opened  data={"set_id":"c_b86b88"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_38346e"}
 [constructor_ui_validate] OK: предпросмотр: слот буквы «А» есть
 [INFO] LetterSlot: play_requested  data={"letter":"А"}
 [constructor_ui_validate] OK: предпросмотр играет ogg, а не WAV из чужих байтов (получено: AudioStreamOggVorbis)
-[INFO] SetEditor: set_opened  data={"set_id":"c_b86b88"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_38346e"}
 [constructor_ui_validate] OK: предпросмотр: слот буквы «Б» есть
 [INFO] LetterSlot: play_requested  data={"letter":"Б"}
-[WARNING] SetRepository: audio_format_unsupported  data={"path":"user://custom_sets/c_b86b88/aud_b.m4a"}
-[WARNING] SetEditor: play_unsupported  data={"letter":"Б","path":"user://custom_sets/c_b86b88/aud_b.m4a"}
+[WARNING] SetRepository: audio_format_unsupported  data={"path":"user://custom_sets/c_38346e/aud_b.m4a"}
+[WARNING] SetEditor: play_unsupported  data={"letter":"Б","path":"user://custom_sets/c_38346e/aud_b.m4a"}
 [constructor_ui_validate] OK: m4a не подменяется WAV-обёрткой (получено: AudioStreamOggVorbis)
 [constructor_ui_validate] OK: два набора получили разные id
 [constructor_ui_validate] OK: у наборов разные каталоги
@@ -481,72 +481,72 @@ ERROR: Can't save WebP at path: 'user://custom_sets/c_9f0156/img_g.webp'.
 [constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [5, 6])
 [constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [5, 6])
 [constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
-[constructor_ui_validate] OK: все три ответа различны (получено: ["11", "21", "12"])
+[constructor_ui_validate] OK: все три ответа различны (получено: ["21", "11", "9"])
 [constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 11 (найдено: 1)
 [INFO] ParentalGate: failed  data={"attempt":21}
 [constructor_ui_validate] OK: неверный ответ 1 не открыл конструктор (вызовов: 0)
-[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 4 + 2?)
-[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [4, 2])
-[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [4, 2])
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 5 + 6?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [5, 6])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [5, 6])
 [constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
-[constructor_ui_validate] OK: все три ответа различны (получено: ["8", "5", "6"])
-[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 6 (найдено: 1)
-[INFO] ParentalGate: failed  data={"attempt":8}
+[constructor_ui_validate] OK: все три ответа различны (получено: ["11", "13", "10"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 11 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":13}
 [constructor_ui_validate] OK: неверный ответ 2 не открыл конструктор (вызовов: 0)
-[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 4 + 3?)
-[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [4, 3])
-[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [4, 3])
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 6 + 8?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [6, 8])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [6, 8])
 [constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
-[constructor_ui_validate] OK: все три ответа различны (получено: ["7", "5", "8"])
-[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 7 (найдено: 1)
-[INFO] ParentalGate: failed  data={"attempt":5}
+[constructor_ui_validate] OK: все три ответа различны (получено: ["15", "22", "14"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 14 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":15}
 [constructor_ui_validate] OK: неверный ответ 3 не открыл конструктор (вызовов: 0)
-[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 8 + 7?)
-[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [8, 7])
-[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [8, 7])
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 8 + 9?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [8, 9])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [8, 9])
 [constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
-[constructor_ui_validate] OK: все три ответа различны (получено: ["15", "23", "27"])
-[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 15 (найдено: 1)
-[INFO] ParentalGate: failed  data={"attempt":23}
+[constructor_ui_validate] OK: все три ответа различны (получено: ["25", "17", "18"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 17 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":25}
 [constructor_ui_validate] OK: неверный ответ 4 не открыл конструктор (вызовов: 0)
-[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 6 + 4?)
-[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [6, 4])
-[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [6, 4])
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 9 + 8?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [9, 8])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [9, 8])
 [constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
-[constructor_ui_validate] OK: все три ответа различны (получено: ["10", "22", "18"])
-[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 10 (найдено: 1)
-[INFO] ParentalGate: failed  data={"attempt":22}
+[constructor_ui_validate] OK: все три ответа различны (получено: ["17", "27", "29"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 17 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":27}
 [constructor_ui_validate] OK: неверный ответ 5 не открыл конструктор (вызовов: 0)
-[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 8 + 2?)
-[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [8, 2])
-[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [8, 2])
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 2 + 4?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [2, 4])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [2, 4])
 [constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
-[constructor_ui_validate] OK: все три ответа различны (получено: ["20", "11", "10"])
-[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 10 (найдено: 1)
-[INFO] ParentalGate: failed  data={"attempt":20}
+[constructor_ui_validate] OK: все три ответа различны (получено: ["7", "6", "16"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 6 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":7}
 [constructor_ui_validate] OK: неверный ответ 6 не открыл конструктор (вызовов: 0)
-[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 4 + 9?)
-[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [4, 9])
-[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [4, 9])
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 3 + 3?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [3, 3])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [3, 3])
 [constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
-[constructor_ui_validate] OK: все три ответа различны (получено: ["13", "14", "15"])
-[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 13 (найдено: 1)
+[constructor_ui_validate] OK: все три ответа различны (получено: ["14", "16", "6"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 6 (найдено: 1)
 [INFO] ParentalGate: failed  data={"attempt":14}
 [constructor_ui_validate] OK: неверный ответ 7 не открыл конструктор (вызовов: 0)
-[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 7 + 4?)
-[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [7, 4])
-[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [7, 4])
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 7 + 7?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [7, 7])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [7, 7])
 [constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
-[constructor_ui_validate] OK: все три ответа различны (получено: ["12", "19", "11"])
-[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 11 (найдено: 1)
-[INFO] ParentalGate: failed  data={"attempt":12}
+[constructor_ui_validate] OK: все три ответа различны (получено: ["22", "14", "13"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 14 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":22}
 [constructor_ui_validate] OK: неверный ответ 8 не открыл конструктор (вызовов: 0)
 [constructor_ui_validate] OK: все 8 неверных ответов нажаты (нажато: 8)
 [constructor_ui_validate] OK: на каждом из 8 примеров ключ сходился с НАДПИСЬЮ (совпало: 8)
-[constructor_ui_validate] OK: после ошибки показывается НОВЫЙ пример (уникальных надписей: 8 из 9)
+[constructor_ui_validate] OK: после ошибки показывается НОВЫЙ пример (уникальных надписей: 7 из 9)
 [constructor_ui_validate] OK: Защита пережила 8 неверных ответов и не закрылась сама
 [constructor_ui_validate] OK: Защита жива к моменту верного ответа
-[constructor_ui_validate] OK: верный ответ 8 нажат на последнем примере
+[constructor_ui_validate] OK: верный ответ 12 нажат на последнем примере
 [INFO] ParentalGate: passed 
 [INFO] ParentalGate: passed 
 [constructor_ui_validate] OK: верный ответ вызвал open_constructor() РОВНО ОДИН раз, двойное нажатие не дало второго (вызовов: 1)
