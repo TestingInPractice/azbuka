@@ -1,0 +1,11 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PROBE start sets=0
+[INFO] SetList: refreshed  data={"rows":2}
+PROBE rows_on_open=2
+PROBE row0_name=Альфа
+[INFO] SetList: refreshed  data={"rows":3}
+PROBE rows_after_create=3
+[INFO] SetList: refreshed  data={"rows":2}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":0}
