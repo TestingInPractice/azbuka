@@ -1,0 +1,596 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[constructor_ui_validate] OK: describe_state без медиа
+[constructor_ui_validate] OK: describe_state только картинка
+[constructor_ui_validate] OK: describe_state только звук
+[constructor_ui_validate] OK: describe_state всё есть
+[constructor_ui_validate] OK: letter_slot.tscn привязан к классу LetterSlot
+[constructor_ui_validate] OK: setup() запомнил букву
+[constructor_ui_validate] OK: setup() запомнил слово
+[constructor_ui_validate] OK: has_image() == false без картинки
+[constructor_ui_validate] OK: has_audio() == false без звука
+[constructor_ui_validate] OK: кнопка картинки активна на пустом слоте
+[constructor_ui_validate] OK: прослушать нельзя, пока нечего слушать
+[constructor_ui_validate] OK: очистить нельзя, пока пусто
+[constructor_ui_validate] OK: подпись состояния соответствует describe_state
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_1/img_b.webp"}
+[constructor_ui_validate] OK: has_image() == true с картинкой
+[constructor_ui_validate] OK: has_audio() == true со звуком
+[constructor_ui_validate] OK: прослушать разблокировано
+[constructor_ui_validate] OK: очистить разблокировано
+[constructor_ui_validate] OK: поле слова обновилось
+[constructor_ui_validate] OK: во время записи кнопка звука активна — только ею можно остановиться
+[constructor_ui_validate] OK: во время записи кнопка звука подписана «Стоп» (получено: Стоп)
+[constructor_ui_validate] OK: подпись показывает запись
+[constructor_ui_validate] OK: после записи кнопка звука разблокирована
+[constructor_ui_validate] OK: после записи кнопка снова подписана «Записать» (получено: Записать)
+[INFO] LetterSlot: image_requested  data={"letter":"Б"}
+[INFO] LetterSlot: audio_requested  data={"letter":"Б"}
+[INFO] LetterSlot: play_requested  data={"letter":"Б"}
+[INFO] LetterSlot: clear_requested  data={"letter":"Б"}
+[constructor_ui_validate] OK: все четыре сигнала пришли с буквой Б (получено: ["img:Б", "aud:Б", "play:Б", "clr:Б"])
+[constructor_ui_validate] OK: setup() не эмитит word_edited (получено: [])
+[constructor_ui_validate] OK: присваивание того же значения поля не эмитит (дедупликация движка) (получено: [])
+[INFO] LetterSlot: word_edited  data={"letter":"В","word":"Волкодав"}
+[constructor_ui_validate] OK: правка слова эмитит букву и новое слово (получено: ["В=Волкодав"])
+[constructor_ui_validate] OK: get_word() отражает правку
+[constructor_ui_validate] OK: пустое слово не эмитит (получено: ["В=Волкодав"])
+[constructor_ui_validate] letter_slot: OK
+[constructor_ui_validate] OK: _ready() отработал: _apply_theme() задал стиль панели
+[constructor_ui_validate] OK: _ready() подписался на theme_changed
+[constructor_ui_validate] OK: _ready() подключил text_changed поля слова
+[constructor_ui_validate] OK: все четыре кнопки подключены в _ready() (подключено: 4)
+[constructor_ui_validate] OK: set_busy(true) блокирует все четыре действия (заблокировано: 4)
+[constructor_ui_validate] OK: set_busy(false) разблокировал картинку
+[constructor_ui_validate] OK: set_busy(false) разблокировал запись
+[constructor_ui_validate] OK: после снятия блокировки прослушать снова недоступно на пустом слоте
+[constructor_ui_validate] OK: после снятия блокировки очистить снова недоступно на пустом слоте
+[constructor_ui_validate] OK: setup() обновил подпись буквы на экране
+[constructor_ui_validate] OK: тестовая картинка записана в user://
+[constructor_ui_validate] OK: настоящая картинка попала в миниатюру
+[constructor_ui_validate] OK: setup() с существующим файлом включает has_image()
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://constructor_ui_test/missing.png"}
+[constructor_ui_validate] OK: битая картинка даёт плейсхолдер, а не падение
+[constructor_ui_validate] OK: битая картинка не снимает has_image(): файл-то в наборе есть
+[constructor_ui_validate] OK: тема переключилась по сигналу
+[constructor_ui_validate] OK: theme_changed доехал до слота: подпись перекрашена под новую тему
+[constructor_ui_validate] OK: цвет подписи действительно изменился
+[constructor_ui_validate] OK: тема возвращена обратно
+[constructor_ui_validate] letter_slot _ready(): OK
+[constructor_ui_validate] OK: каждая буква живёт в каталоге своего набора (нарушений: 0)
+[constructor_ui_validate] OK: ни один путь не попал в корень user:// (нарушений: 0)
+[constructor_ui_validate] OK: у 5 букв 5 разных файлов (получено 5)
+[constructor_ui_validate] OK: путь в проверках плана — это set_dir + image_file_name, а не ручная строка
+[constructor_ui_validate] letter_slot media paths: OK
+[constructor_ui_validate] OK: readiness_label на пустом наборе
+[constructor_ui_validate] OK: readiness_label на готовом наборе
+[constructor_ui_validate] OK: set_editor.tscn привязан к классу SetEditor
+[constructor_ui_validate] OK: слот для буквы А создан
+[constructor_ui_validate] OK: слот для буквы Ъ создан
+[constructor_ui_validate] OK: слот для буквы Ы создан
+[constructor_ui_validate] OK: слот для буквы Ь создан
+[constructor_ui_validate] OK: слот для буквы Я создан
+[constructor_ui_validate] OK: слот для пустой буквы не создаётся
+[constructor_ui_validate] OK: набор для редактора создан
+[INFO] SetEditor: set_opened  data={"set_id":"c_084a11"}
+[constructor_ui_validate] OK: open_set() запомнил набор
+[constructor_ui_validate] OK: новый набор: слово пустое
+[constructor_ui_validate] OK: новый набор: картинки нет
+[constructor_ui_validate] OK: save_word() принял слово
+[constructor_ui_validate] OK: слово дошло до хранилища
+[constructor_ui_validate] OK: запись без медиа неполная
+[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_084a11/img_a.webp","width":8}
+[constructor_ui_validate] OK: apply_image() сохранил картинку (ошибка: )
+[constructor_ui_validate] OK: путь картинки записан в метаданные
+[constructor_ui_validate] OK: в метаданных путь относительный (получено: custom_sets/c_084a11/img_a.webp)
+[constructor_ui_validate] OK: файл картинки лежит на диске
+[constructor_ui_validate] OK: слот показал картинку
+[constructor_ui_validate] OK: картинка без звука — запись всё ещё неполная
+WARNING: read beyond end of data
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] save_image (res://systems/image_saver.gd:60)
+         [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+         [3] _check_set_editor (res://tests/validate_constructor_ui.gd:544)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _check_set_editor (res://tests/validate_constructor_ui.gd:544)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _check_set_editor (res://tests/validate_constructor_ui.gd:544)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _check_set_editor (res://tests/validate_constructor_ui.gd:544)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:104)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _check_set_editor (res://tests/validate_constructor_ui.gd:544)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _check_set_editor (res://tests/validate_constructor_ui.gd:544)
+ERROR: Method/function failed. Returning: ERR_FILE_CORRUPT
+   at: webp_load_image_from_buffer (modules/webp/webp_common.cpp:158)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _check_set_editor (res://tests/validate_constructor_ui.gd:544)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _webp_mem_loader_func (modules/webp/image_loader_webp.cpp:42)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _check_set_editor (res://tests/validate_constructor_ui.gd:544)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [3] _check_set_editor (res://tests/validate_constructor_ui.gd:544)
+[WARNING] SetEditor: image_save_failed  data={"error":"decode_failed: Не удалось прочитать картинку","letter":"А"}
+[constructor_ui_validate] OK: apply_image() отверг битые байты
+[constructor_ui_validate] OK: после неудачной замены старая картинка на месте
+[constructor_ui_validate] OK: apply_audio() сохранил звук (ошибка: )
+[constructor_ui_validate] OK: путь звука относительный (получено: custom_sets/c_084a11/aud_a.wav)
+[constructor_ui_validate] OK: запись сохранена как .wav (получено: custom_sets/c_084a11/aud_a.wav)
+[constructor_ui_validate] OK: WAV начинается с RIFF: это get_wav_bytes(), а не get_data()
+[constructor_ui_validate] OK: слот показал звук
+[constructor_ui_validate] OK: слово, картинка и звук на месте — запись полная
+[constructor_ui_validate] OK: refresh() не падает и держит слоты в согласии с хранилищем
+[constructor_ui_validate] OK: refresh() вернул в поле имени название набора
+[constructor_ui_validate] OK: загруженный mp3 не переименован в .wav (получено: custom_sets/c_084a11/aud_v.mp3)
+[constructor_ui_validate] OK: save_name() принял имя
+[constructor_ui_validate] OK: новое имя в хранилище
+[constructor_ui_validate] OK: пустое имя отвергнуто
+[constructor_ui_validate] OK: clear_letter_media() отработал
+[constructor_ui_validate] OK: после очистки картинки нет
+[constructor_ui_validate] OK: после очистки звука нет
+[constructor_ui_validate] OK: слово пережило очистку медиа
+[constructor_ui_validate] OK: после очистки запись снова неполная
+[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_084a11/img_b.webp","width":8}
+[constructor_ui_validate] OK: буква без звука не засчитана как заполненная
+[constructor_ui_validate] OK: счётчик показывает одну заполненную букву
+[INFO] SetEditor: set_opened  data={"set_id":"c_084a11"}
+[constructor_ui_validate] OK: после переоткрытия слово на месте
+[constructor_ui_validate] OK: после переоткрытия картинка на месте
+[INFO] SetEditor: set_saved  data={"set_id":"c_084a11"}
+[constructor_ui_validate] OK: SaveButton эмитит set_saved с id (получено: ["c_084a11"])
+[constructor_ui_validate] OK: в set_editor.tscn есть узел BackButton
+[constructor_ui_validate] OK: SetEditor._ready() подключил BackButton (подключений: 1)
+[constructor_ui_validate] OK: у BackButton редактора есть accessibility_name
+[INFO] SetEditor: close_requested  data={"set_id":"c_084a11"}
+[constructor_ui_validate] OK: BackButton редактора эмитит close_requested ровно один раз (получено: ["close"])
+[constructor_ui_validate] OK: нажатие «Назад» не эмитит set_saved заново (получено: ["c_084a11"])
+[constructor_ui_validate] OK: второй экземпляр set_editor.tscn тоже инстанцируется
+ERROR: String formatting error: not all arguments converted during string formatting.
+   at: validated_evaluate (core/variant/variant_op.h:829)
+   GDScript backtrace (most recent call first):
+       [0] _check_set_editor_ready_ran (res://tests/validate_constructor_ui.gd:800)
+[constructor_ui_validate] OK: set_editor._ready() подписался на theme_changed вместе с 33 слотами 
+[constructor_ui_validate] OK: set_editor._ready() подключил SaveButton
+[constructor_ui_validate] OK: set_editor._ready() подключил text_submitted поля имени
+[constructor_ui_validate] OK: set_editor._apply_theme() покрасил кнопку
+[constructor_ui_validate] OK: _build_slots() создал 33 слота (получено: 33)
+[constructor_ui_validate] OK: без открытого набора счётчик показывает 0 из 33
+[constructor_ui_validate] OK: без открытого набора поле имени пустое
+[constructor_ui_validate] set_editor _ready(): OK
+[constructor_ui_validate] OK: в SetEditor.LETTERS 33 буквы (получено: 33)
+[constructor_ui_validate] OK: в LETTERS нет повторов (уникальных: 33)
+[constructor_ui_validate] OK: LETTERS совпадает с алфавитом хранилища, включая Ё
+[constructor_ui_validate] OK: в LETTERS есть Ё, Ъ, Ы и Ь — те, что чаще всего теряют
+[constructor_ui_validate] OK: слот есть для каждой из 33 букв (нет: [])
+[constructor_ui_validate] OK: слот не создаётся для буквы вне алфавита
+[constructor_ui_validate] OK: в сетке ровно 33 строки (получено: 33)
+[constructor_ui_validate] OK: каждая строка сетки — LetterSlot: []
+[constructor_ui_validate] OK: строка N в сетке — это ровно get_slot(LETTERS[N]) (расхождений: 0: [])
+[constructor_ui_validate] OK: колонки сетки подобраны под ширину экрана (колонок: 1, для ширины 64 ожидалось 1)
+[constructor_ui_validate] OK: телефон (1080 design px) -> 1 колонка
+[constructor_ui_validate] OK: шириный десктоп (4889 design px) -> 3 колонки
+[constructor_ui_validate] OK: 33 разных узла слота, ни один не переиспользован
+[constructor_ui_validate] OK: все 132 кнопки слотов подключены и с accessibility_name (нарушений: 0)
+[constructor_ui_validate] OK: все 5 намерений каждого слота приходят в редактор (нарушений: 0)
+[INFO] SetEditor: set_opened  data={"set_id":"c_2c12ef"}
+[constructor_ui_validate] OK: после open_set() каждая строка называет свою букву и находится по ней (нарушений: 0: [])
+[constructor_ui_validate] OK: порядок строк сетки совпадает с алфавитом и после open_set()
+[constructor_ui_validate] set_editor collection: OK
+[constructor_ui_validate] OK: набор для проверки сигналов создан
+[constructor_ui_validate] OK: create_set() создал каталог набора до первой записи: user://custom_sets/c_0b6fa5/
+[INFO] SetEditor: set_opened  data={"set_id":"c_0b6fa5"}
+[constructor_ui_validate] OK: отменённый выбор картинки не записал путь в метаданные
+[constructor_ui_validate] OK: отмена картинки не оставила слот «с картинкой»
+[constructor_ui_validate] OK: отмена картинки не тронула слово
+[constructor_ui_validate] OK: отмена картинки не оставила слот заблокированным
+[INFO] VoiceRecord: mic_prepared  data={"ok":true}
+[INFO] VoiceRecord: record_start 
+[INFO] SetEditor: recording_started  data={"letter":"А"}
+[constructor_ui_validate] OK: началась запись: слот показывает «запись…» (получено: запись…)
+[constructor_ui_validate] OK: во время записи кнопка звука активна — ею останавливают
+[constructor_ui_validate] OK: во время записи кнопка звука подписана «Стоп» (получено: Стоп)
+[constructor_ui_validate] OK: вторая запись не стартовала, пока идёт первая
+[INFO] SetEditor: recording_empty  data={"letter":"А"}
+[constructor_ui_validate] OK: пустая запись не записала аудио в метаданные
+[constructor_ui_validate] OK: после записи слот вернулся в исходное состояние
+[constructor_ui_validate] OK: после записи кнопка звука снова активна
+[constructor_ui_validate] OK: после записи кнопка снова подписана «Записать» (получено: Записать)
+[INFO] SetEditor: play_missing  data={"letter":"А"}
+[constructor_ui_validate] OK: прослушивание без файла не тронуло запись
+[INFO] LetterSlot: word_edited  data={"letter":"А","word":"Апельсин"}
+[constructor_ui_validate] OK: правка поля слова дошла до хранилища через word_edited
+[constructor_ui_validate] OK: пустое слово не затёрло прежнее в хранилище
+[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_0b6fa5/img_a.webp","width":8}
+[constructor_ui_validate] OK: медиа на месте перед очисткой с кнопки
+[constructor_ui_validate] OK: clear_requested с кнопки очистил медиа
+[constructor_ui_validate] OK: очистка с кнопки сохранила слово
+[constructor_ui_validate] OK: каталог набора снесён для проверки ошибки записи
+ERROR: Can't save WebP at path: 'user://custom_sets/c_0b6fa5/img_g.webp'.
+   at: save_image (modules/webp/resource_saver_webp.cpp:56)
+   GDScript backtrace (most recent call first):
+       [0] save_image (res://systems/image_saver.gd:70)
+       [1] apply_image (res://ui/constructor/set_editor/set_editor.gd:137)
+       [2] _check_set_editor_signals (res://tests/validate_constructor_ui.gd:1062)
+       [3] _settle (res://tests/validate_constructor_ui.gd:1649)
+[WARNING] SetEditor: image_save_failed  data={"error":"write_failed: Не удалось записать user://custom_sets/c_0b6fa5/img_g.webp (err=7)","letter":"Г"}
+[constructor_ui_validate] OK: apply_image() честно вернул отказ
+[constructor_ui_validate] OK: ошибка картинки названа write_failed (получено: write_failed: Не удалось записать user://custom_sets/c_0b6fa5/img_g.webp (err=7))
+[constructor_ui_validate] OK: ошибка картинки несёт текст для родителя, а не только код: write_failed: Не удалось записать user://custom_sets/c_0b6fa5/img_g.webp (err=7)
+[WARNING] SetEditor: audio_write_failed  data={"letter":"Г"}
+[constructor_ui_validate] OK: apply_audio() честно вернул отказ
+[constructor_ui_validate] OK: ДЕФЕКТ: ошибка звука — голый код без текста (получено: write_failed)
+[constructor_ui_validate] OK: программное заполнение поля имени не переименовало набор
+[constructor_ui_validate] OK: text_submitted переименовал набор
+[constructor_ui_validate] OK: после отказа в поле имени снова настоящее название (получено: Переименовано)
+[INFO] SetEditor: set_opened  data={"set_id":""}
+[constructor_ui_validate] OK: open_set("") сбросил id набора
+[constructor_ui_validate] OK: save_name() без открытого набора отказал
+[constructor_ui_validate] OK: apply_image() без открытого набора вернул no_set, а не писал в корень
+[constructor_ui_validate] OK: apply_audio() без открытого набора вернул no_set, а не писал в корень
+[constructor_ui_validate] OK: в корне user://custom_sets/ не осталось ни одного медиафайла (найдено: 0)
+[constructor_ui_validate] OK: apply_image() проверяет набор раньше буквы (no_set, не bad_letter)
+[INFO] SetEditor: set_opened  data={"set_id":"c_0b6fa5"}
+[constructor_ui_validate] OK: apply_image() для чужой буквы вернул bad_letter
+[constructor_ui_validate] OK: apply_audio() для чужой буквы вернул bad_letter
+[constructor_ui_validate] OK: apply_audio() с пустыми байтами вернул no_bytes
+[INFO] SetEditor: set_opened  data={"set_id":""}
+[constructor_ui_validate] OK: open_set("") не удаляет слоты, а обнуляет их
+[constructor_ui_validate] OK: после open_set("") слот пуст: ни слова, ни медиа
+[constructor_ui_validate] OK: open_set("") очистил поле имени
+[constructor_ui_validate] OK: после open_set("") счётчик снова 0 из 33
+[constructor_ui_validate] set_editor signals: OK
+[INFO] SetList: refreshed  data={"rows":0}
+[constructor_ui_validate] OK: set_list.tscn привязан к классу SetList
+[INFO] SetList: refreshed  data={"rows":0}
+[INFO] SetList: refreshed  data={"rows":0}
+[constructor_ui_validate] OK: пустое хранилище -> 0 строк
+[constructor_ui_validate] OK: создать набор можно и в пустом списке
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":2}
+[INFO] SetList: refreshed  data={"rows":2}
+[constructor_ui_validate] OK: два набора -> две строки (получено: 2)
+[INFO] SetEditor: set_opened  data={"set_id":"c_29e2ec"}
+[INFO] SetList: editor_opened  data={"set_id":"c_29e2ec"}
+[constructor_ui_validate] OK: строка «Альфа» открыла свой набор (получено: ["c_29e2ec"])
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[constructor_ui_validate] OK: после удаления осталась одна строка
+[constructor_ui_validate] OK: оставшаяся строка — «Альфа»
+[constructor_ui_validate] OK: удалённой строки нет
+[INFO] SetList: refreshed  data={"rows":0}
+[INFO] SetList: refreshed  data={"rows":0}
+[constructor_ui_validate] OK: после удаления всех список пуст
+[constructor_ui_validate] OK: у SetList есть и встроенный редактор, и список в дереве
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetEditor: set_opened  data={"set_id":"c_dc3bc8"}
+[INFO] SetList: editor_opened  data={"set_id":"c_dc3bc8"}
+[constructor_ui_validate] OK: после «Создать набор» виден редактор, а список скрыт
+[constructor_ui_validate] OK: пока открыт редактор, кнопка «Назад» списка спрятана (один путь назад)
+[constructor_ui_validate] OK: у вложенного в SetList редактора есть свой узел BackButton
+[INFO] SetEditor: close_requested  data={"set_id":"c_dc3bc8"}
+[constructor_ui_validate] OK: close_requested вернул SetList к списку и скрыл редактор
+[constructor_ui_validate] OK: после возврата кнопка «Назад» списка снова на месте
+[constructor_ui_validate] OK: после возврата кнопка снова «Назад» (получено: Назад)
+[constructor_ui_validate] OK: редактор эмитил close_requested ровно один раз (получено: ["c"])
+[constructor_ui_validate] OK: набор, созданный кнопкой, остался в списке
+[INFO] SetList: refreshed  data={"rows":0}
+[INFO] SetList: refreshed  data={"rows":0}
+[constructor_ui_validate] OK: после уборки хранилище снова пусто
+[constructor_ui_validate] set_editor + set_list: OK
+[INFO] SetList: refreshed  data={"rows":0}
+[constructor_ui_validate] OK: второй экземпляр set_list.tscn тоже инстанцируется
+[constructor_ui_validate] OK: set_list._ready() подписался на theme_changed
+[constructor_ui_validate] OK: инстанцирование списка добавило подписку на тему
+[constructor_ui_validate] OK: set_list._ready() подписался на sets_changed хранилища
+[constructor_ui_validate] OK: set_list._ready() подключил NewButton
+[constructor_ui_validate] OK: set_list._apply_theme() покрасил кнопку
+[constructor_ui_validate] OK: set_list: узел Scroll отсутствует
+[constructor_ui_validate] OK: Scroll — VBoxContainer, как в плане
+[constructor_ui_validate] OK: Scroll лежит внутри ScrollContainer
+[constructor_ui_validate] OK: Scroll растягивается по вертикали (size_flags_vertical=3)
+[constructor_ui_validate] OK: на пустом хранилище подпись «пока нет своих наборов» видима
+[constructor_ui_validate] OK: get_row() вне диапазона возвращает null, а не падает
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[constructor_ui_validate] OK: подпись пустого списка спряталась, когда набор появился
+[constructor_ui_validate] OK: один набор -> одна строка
+[constructor_ui_validate] OK: строка списка — SetListRow
+[constructor_ui_validate] OK: SetListRow._ready() подключил OpenButton
+[constructor_ui_validate] OK: SetListRow._ready() подключил DeleteButton
+[constructor_ui_validate] OK: SetListRow._apply_theme() покрасил кнопки
+[constructor_ui_validate] OK: SetListRow.setup() показал имя набора
+[constructor_ui_validate] OK: пустой набор подписан как «заполнено 0 из 33»
+[constructor_ui_validate] OK: строка подключена к списку одним обработчиком
+[constructor_ui_validate] OK: удаление строки подключено к списку одним обработчиком
+[constructor_ui_validate] OK: полный набор подписан как готовый к играм
+[INFO] SetList: refreshed  data={"rows":0}
+[constructor_ui_validate] OK: delete_requested с кнопки строки удалил набор
+[constructor_ui_validate] OK: удаление эмитит sets_changed
+[constructor_ui_validate] OK: после удаления список пуст
+[constructor_ui_validate] OK: подпись пустого списка вернулась
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetEditor: set_opened  data={"set_id":"c_e17b66"}
+[INFO] SetList: editor_opened  data={"set_id":"c_e17b66"}
+[constructor_ui_validate] OK: NewButton создал набор и строку
+[constructor_ui_validate] OK: NewButton эмитит open_editor (получено: 1)
+[constructor_ui_validate] OK: open_editor ушёл с id только что созданного набора (получено: ["c_e17b66"])
+[INFO] SetList: refreshed  data={"rows":0}
+[constructor_ui_validate] set_list _ready(): OK
+[constructor_ui_validate] OK: подготовка регрессии: в хранилище два набора (получено: 2)
+[INFO] SetList: refreshed  data={"rows":2}
+[constructor_ui_validate] OK: открытие списка при двух наборах строит две строки без внешнего refresh() (получено: 2)
+[constructor_ui_validate] OK: подпись «пока нет своих наборов» скрыта сразу при открытии, если наборы есть
+[constructor_ui_validate] OK: первая строка при открытии показывает имя набора (получено: Открытие-Альфа)
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":0}
+[constructor_ui_validate] OK: подготовка счётчиков: две полные записи из трёх (получено: 2)
+[INFO] SetList: refreshed  data={"rows":1}
+[constructor_ui_validate] OK: подготовка счётчиков: строка набора есть
+[constructor_ui_validate] OK: список считает только полные записи (получено: заполнено 2 из 33)
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_А.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Б.webp"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_7c37e5"}
+[INFO] SetList: editor_opened  data={"set_id":"c_7c37e5"}
+[constructor_ui_validate] OK: строка открыла редактор набора
+[constructor_ui_validate] OK: редактор и список показывают один счётчик (список: заполнено 2 из 33, редактор: заполнено 2 из 33)
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[INFO] SetList: refreshed  data={"rows":1}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_А.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Б.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_В.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Г.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Д.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Е.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Ё.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Ж.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_З.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_И.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Й.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_К.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Л.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_М.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Н.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_О.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_П.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Р.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_С.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Т.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_У.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Ф.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Х.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Ц.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Ч.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Ш.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Щ.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Ъ.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Ы.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Ь.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Э.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Ю.webp"}
+[WARNING] LetterSlot: thumbnail_missing  data={"path":"user://custom_sets/c_7c37e5/img_Я.webp"}
+[constructor_ui_validate] OK: полный набор: список пишет «набор готов к играм» (получено: набор готов к играм)
+[constructor_ui_validate] OK: полный набор: редактор пишет «набор готов к играм» (получено: набор готов к играм)
+[INFO] SetList: refreshed  data={"rows":0}
+[constructor_ui_validate] OK: подготовка предпросмотра: ogg-файл прочитан (6879 байт)
+[INFO] SetEditor: set_opened  data={"set_id":"c_4706d9"}
+[constructor_ui_validate] OK: предпросмотр: слот буквы «А» есть
+[INFO] LetterSlot: play_requested  data={"letter":"А"}
+[constructor_ui_validate] OK: предпросмотр играет ogg, а не WAV из чужих байтов (получено: AudioStreamOggVorbis)
+[INFO] SetEditor: set_opened  data={"set_id":"c_4706d9"}
+[constructor_ui_validate] OK: предпросмотр: слот буквы «Б» есть
+[INFO] LetterSlot: play_requested  data={"letter":"Б"}
+[WARNING] SetRepository: audio_format_unsupported  data={"path":"user://custom_sets/c_4706d9/aud_b.m4a"}
+[WARNING] SetEditor: play_unsupported  data={"letter":"Б","path":"user://custom_sets/c_4706d9/aud_b.m4a"}
+[constructor_ui_validate] OK: m4a не подменяется WAV-обёрткой (получено: AudioStreamOggVorbis)
+[constructor_ui_validate] OK: два набора получили разные id
+[constructor_ui_validate] OK: у наборов разные каталоги
+[constructor_ui_validate] OK: 66 букво-файлов у двух наборов дают 66 разных путей (получено: 66)
+[constructor_ui_validate] OK: ни один путь не разделяется наборами: []
+[constructor_ui_validate] OK: каждый файл лежит в каталоге своего набора (нарушений: 0)
+[constructor_ui_validate] OK: ни один путь не попал в корень user:// (нарушений: 0)
+[constructor_ui_validate] OK: 66 аудиофайлов дают 66 разных путей (получено: 66)
+[constructor_ui_validate] OK: аудиопути наборов не делятся: []
+[constructor_ui_validate] two sets paths: OK
+[constructor_ui_validate] OK: в настройках есть кнопка «Свои наборы» (%MySetsButton)
+[constructor_ui_validate] OK: Settings._ready() отработал: theme_changed подписан на сам экран настроек
+[constructor_ui_validate] OK: кнопка «Свои наборы» подписана на pressed (связей: 1)
+[INFO] ParentalGate: opened 
+[constructor_ui_validate] OK: нажатие «Свои наборы» подняло Родительскую Защиту
+[constructor_ui_validate] OK: защита НЕ пропустила в конструктор без ответа (вызовов: 0)
+[constructor_ui_validate] OK: поднят именно parental_gate.gd, а не одноимённый дубль
+[constructor_ui_validate] OK: Защита — оверлей CanvasLayer, а не обычная Control
+[constructor_ui_validate] OK: Защита лежит поверх прочих слоёв (layer=100, минимум 100)
+[constructor_ui_validate] OK: Защита — потомок корня, поэтому не умрёт вместе с экраном настроек
+[constructor_ui_validate] OK: Защита жива в дереве сразу после открытия
+[constructor_ui_validate] OK: у открытой Защиты задан _on_success_callback
+[constructor_ui_validate] OK: колбэк Защиты ведёт на ЭКРАН настроек, а не на что-то постороннее
+[constructor_ui_validate] OK: колбэк Защиты — именно open_constructor (получено: open_constructor)
+[constructor_ui_validate] OK: боевой open_constructor() ведёт на существующую сцену res://ui/constructor/set_list/set_list.tscn
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 7 + 4?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [7, 4])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [7, 4])
+[constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
+[constructor_ui_validate] OK: все три ответа различны (получено: ["11", "9", "21"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 11 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":9}
+[constructor_ui_validate] OK: неверный ответ 1 не открыл конструктор (вызовов: 0)
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 8 + 8?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [8, 8])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [8, 8])
+[constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
+[constructor_ui_validate] OK: все три ответа различны (получено: ["16", "15", "26"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 16 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":15}
+[constructor_ui_validate] OK: неверный ответ 2 не открыл конструктор (вызовов: 0)
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 3 + 7?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [3, 7])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [3, 7])
+[constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
+[constructor_ui_validate] OK: все три ответа различны (получено: ["10", "8", "20"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 10 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":8}
+[constructor_ui_validate] OK: неверный ответ 3 не открыл конструктор (вызовов: 0)
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 4 + 3?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [4, 3])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [4, 3])
+[constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
+[constructor_ui_validate] OK: все три ответа различны (получено: ["9", "7", "19"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 7 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":9}
+[constructor_ui_validate] OK: неверный ответ 4 не открыл конструктор (вызовов: 0)
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 7 + 7?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [7, 7])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [7, 7])
+[constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
+[constructor_ui_validate] OK: все три ответа различны (получено: ["16", "12", "14"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 14 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":16}
+[constructor_ui_validate] OK: неверный ответ 5 не открыл конструктор (вызовов: 0)
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 5 + 8?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [5, 8])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [5, 8])
+[constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
+[constructor_ui_validate] OK: все три ответа различны (получено: ["25", "14", "13"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 13 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":25}
+[constructor_ui_validate] OK: неверный ответ 6 не открыл конструктор (вызовов: 0)
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 6 + 5?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [6, 5])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [6, 5])
+[constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
+[constructor_ui_validate] OK: все три ответа различны (получено: ["13", "19", "11"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 11 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":13}
+[constructor_ui_validate] OK: неверный ответ 7 не открыл конструктор (вызовов: 0)
+[constructor_ui_validate] OK: вопрос задан в формате «Сколько будет a + b?» (получено: Сколько будет 6 + 4?)
+[constructor_ui_validate] OK: из надписи читаются ровно два слагаемых (получено: [6, 4])
+[constructor_ui_validate] OK: слагаемые в заявленном диапазоне 2..9 (получено: [6, 4])
+[constructor_ui_validate] OK: у примера ровно три кнопки ответа (получено: 3)
+[constructor_ui_validate] OK: все три ответа различны (получено: ["20", "10", "18"])
+[constructor_ui_validate] OK: верный ответ ровно один, и он равен сумме из надписи 10 (найдено: 1)
+[INFO] ParentalGate: failed  data={"attempt":20}
+[constructor_ui_validate] OK: неверный ответ 8 не открыл конструктор (вызовов: 0)
+[constructor_ui_validate] OK: все 8 неверных ответов нажаты (нажато: 8)
+[constructor_ui_validate] OK: на каждом из 8 примеров ключ сходился с НАДПИСЬЮ (совпало: 8)
+[constructor_ui_validate] OK: после ошибки показывается НОВЫЙ пример (уникальных надписей: 8 из 9)
+[constructor_ui_validate] OK: Защита пережила 8 неверных ответов и не закрылась сама
+[constructor_ui_validate] OK: Защита жива к моменту верного ответа
+[constructor_ui_validate] OK: верный ответ 7 нажат на последнем примере
+[INFO] ParentalGate: passed 
+[INFO] ParentalGate: passed 
+[constructor_ui_validate] OK: верный ответ вызвал open_constructor() РОВНО ОДИН раз, двойное нажатие не дало второго (вызовов: 1)
+[constructor_ui_validate] OK: после верного ответа оверлей Защиты убран из корня
+[constructor_ui_validate] OK: узел Защиты освобождён, а не просто скрыт
+[INFO] ParentalGate: opened 
+[constructor_ui_validate] OK: Защита снова открывается после предыдущей
+[constructor_ui_validate] OK: у Защиты есть кнопка «Закрыть»
+[INFO] ParentalGate: cancelled 
+[constructor_ui_validate] OK: «Закрыть» НЕ вызывает open_constructor() (вызовов: 1)
+[constructor_ui_validate] OK: «Закрыть» убирает оверлей Защиты
+[INFO] ParentalGate: opened 
+[constructor_ui_validate] OK: цикл 1: нажатие открыло Защиту
+[constructor_ui_validate] OK: цикл 1: одновременно висит ровно один оверлей (найдено: 1)
+[constructor_ui_validate] OK: цикл 1: это НОВЫЙ узел, а не переиспользованный
+[INFO] ParentalGate: passed 
+[constructor_ui_validate] OK: цикл 1: после ответа оверлея не осталось
+[INFO] ParentalGate: opened 
+[constructor_ui_validate] OK: цикл 2: нажатие открыло Защиту
+[constructor_ui_validate] OK: цикл 2: одновременно висит ровно один оверлей (найдено: 1)
+[constructor_ui_validate] OK: цикл 2: это НОВЫЙ узел, а не переиспользованный
+[INFO] ParentalGate: passed 
+[constructor_ui_validate] OK: цикл 2: после ответа оверлея не осталось
+[INFO] ParentalGate: opened 
+[constructor_ui_validate] OK: цикл 3: нажатие открыло Защиту
+[constructor_ui_validate] OK: цикл 3: одновременно висит ровно один оверлей (найдено: 1)
+[constructor_ui_validate] OK: цикл 3: это НОВЫЙ узел, а не переиспользованный
+[INFO] ParentalGate: passed 
+[constructor_ui_validate] OK: цикл 3: после ответа оверлея не осталось
+[INFO] ParentalGate: opened 
+[constructor_ui_validate] OK: цикл 4: нажатие открыло Защиту
+[constructor_ui_validate] OK: цикл 4: одновременно висит ровно один оверлей (найдено: 1)
+[constructor_ui_validate] OK: цикл 4: это НОВЫЙ узел, а не переиспользованный
+[INFO] ParentalGate: passed 
+[constructor_ui_validate] OK: цикл 4: после ответа оверлея не осталось
+[constructor_ui_validate] OK: проведены все 4 полных цикла (проведено: 4)
+[constructor_ui_validate] OK: 4 цикла дали ровно 4 вызова open_constructor() (4)
+[constructor_ui_validate] OK: в корне не осталось ни одного оверлея Защиты
+[constructor_ui_validate] OK: после освобождения экрана настроек оверлеев не осталось
+[constructor_ui_validate] OK: блок Защиты выполнил не меньше 55 проверок (выполнил: 103)
+[constructor_ui_validate] parental gate: OK (104 проверок)
+[constructor_ui_validate] Task 9: 297 новых проверок, всего 347
+[constructor_ui_validate] PASSED: 347 проверок успешны
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2663)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)

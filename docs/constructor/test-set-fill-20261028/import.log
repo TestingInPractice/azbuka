@@ -1,0 +1,2206 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Инициализация проекта (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Сканирование структуры файлов…[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Загрузка глобальных имен классов…[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Проверка GDExtensions…[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Создание скриптов автозагрузки…[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Инициализация плагинов…[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Начало сканирование файлов…[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Регистрация глобальных классов… (51 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   5% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   9% ] [90m[1mupdate_scripts_classes[22m | AudioTranscoder[39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  13% ] [90m[1mupdate_scripts_classes[22m | FilePicker[39m[0m
+[  15% ] [90m[1mupdate_scripts_classes[22m | ImageSaver[39m[0m
+[  17% ] [90m[1mupdate_scripts_classes[22m | LetterTranslit[39m[0m
+[  19% ] [90m[1mupdate_scripts_classes[22m | NativeFilePicker[39m[0m
+[  21% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  23% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  26% ] [90m[1mupdate_scripts_classes[22m | WebFilePicker[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  30% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  32% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  34% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  36% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  38% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  63% ] [90m[1mupdate_scripts_classes[22m | TestSetFiles[39m[0m
+[  65% ] [90m[1mupdate_scripts_classes[22m | TestSetFiller[39m[0m
+[  67% ] [90m[1mupdate_scripts_classes[22m | TestSetLetterWriter[39m[0m
+[  69% ] [90m[1mupdate_scripts_classes[22m | LetterSlot[39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | SetEditor[39m[0m
+[  73% ] [90m[1mupdate_scripts_classes[22m | SetList[39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | SetListRow[39m[0m
+[  76% ] [90m[1mupdate_scripts_classes[22m | DonateOverlay[39m[0m
+[  78% ] [90m[1mupdate_scripts_classes[22m | FeedbackScreen[39m[0m
+[  80% ] [90m[1mupdate_scripts_classes[22m | AzbukaGame[39m[0m
+[  82% ] [90m[1mupdate_scripts_classes[22m | KisaCat[39m[0m
+[  84% ] [90m[1mupdate_scripts_classes[22m | LetterCard[39m[0m
+[  86% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  94% ] [90m[1mupdate_scripts_classes[22m | ParentalGate[39m[0m
+[  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Сканирование действий… (708 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | menu_theme.ogg[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | hint_find_letter.wav[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | prompt_correct.wav[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | prompt_forward.wav[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | ё_letter_new.ogg[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | ё_letter_tts.wav[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | ё_sound_new.ogg[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | ёж_new.ogg[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | ёж_tts.wav[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | ёлка_new.ogg[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | ёлка_tts.wav[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | ёлочная игрушка_new.ogg[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | ёлочная игрушка_tts.wav[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | ёрш_new.ogg[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | ёрш_tts.wav[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | ёршик_new.ogg[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | ёршик_tts.wav[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | а_letter_new.ogg[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | а_letter_tts.wav[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | а_sound_new.ogg[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | абрикос_new.ogg[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | абрикос_tts.wav[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | автобус_new.ogg[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | автобус_tts.wav[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | аист_new.ogg[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | аист_tts.wav[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | ананас_new.ogg[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | ананас_tts.wav[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | арбуз_new.ogg[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | арбуз_tts.wav[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | б_letter_new.ogg[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | б_letter_tts.wav[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | б_sound_new.ogg[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | банан_new.ogg[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | банан_tts.wav[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | барабан_new.ogg[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | барабан_tts.wav[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | белка_new.ogg[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | белка_tts.wav[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | ботинок_new.ogg[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | ботинок_tts.wav[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | бочка_new.ogg[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | бочка_tts.wav[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | в_letter_new.ogg[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | в_letter_tts.wav[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | в_sound_new.ogg[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | варежки_new.ogg[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | варежки_tts.wav[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | ведро_new.ogg[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | ведро_tts.wav[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | вода_new.ogg[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | вода_tts.wav[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | волк_new.ogg[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | волк_tts.wav[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | ворона_new.ogg[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | ворона_tts.wav[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | г_letter_new.ogg[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | г_letter_tts.wav[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | г_sound_new.ogg[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | галстук_new.ogg[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | галстук_tts.wav[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | глобус_new.ogg[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | глобус_tts.wav[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | гора_new.ogg[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | гора_tts.wav[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | гриб_new.ogg[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | гриб_tts.wav[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | гусь_new.ogg[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | гусь_tts.wav[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | д_letter_new.ogg[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | д_letter_tts.wav[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | д_sound_new.ogg[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | дверь_new.ogg[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | дверь_tts.wav[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | дельфин_new.ogg[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | дельфин_tts.wav[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | дерево_new.ogg[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | дерево_tts.wav[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | диван_new.ogg[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | диван_tts.wav[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | дом_new.ogg[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | дом_tts.wav[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | дым_new.ogg[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | дым_tts.wav[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | дятел_new.ogg[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | дятел_tts.wav[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | е_letter_new.ogg[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | е_letter_tts.wav[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | е_sound_new.ogg[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | еда_new.ogg[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | еда_tts.wav[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | ежевика_new.ogg[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | ежевика_tts.wav[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | ежиха_new.ogg[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | ежиха_tts.wav[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | ель_new.ogg[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | ель_tts.wav[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | енот_new.ogg[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | енот_tts.wav[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | ж_letter_new.ogg[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | ж_letter_tts.wav[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | ж_sound_new.ogg[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | жёлудь_new.ogg[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | жёлудь_tts.wav[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | жемчуг_new.ogg[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | жемчуг_tts.wav[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | жираф_new.ogg[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | жираф_tts.wav[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | жук_new.ogg[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | жук_tts.wav[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | журнал_new.ogg[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | журнал_tts.wav[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | з_letter_new.ogg[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | з_letter_tts.wav[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | з_sound_new.ogg[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | заяц_new.ogg[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | заяц_tts.wav[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | звезда_new.ogg[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | звезда_tts.wav[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | зебра_new.ogg[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | зебра_tts.wav[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | земляника_new.ogg[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | земляника_tts.wav[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | зонт_new.ogg[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | зонт_tts.wav[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | и_letter_new.ogg[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | и_letter_tts.wav[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | и_sound_new.ogg[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | игла_new.ogg[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | игла_tts.wav[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | игрушка_new.ogg[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | игрушка_tts.wav[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | избушка_new.ogg[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | избушка_tts.wav[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | индюк_new.ogg[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | индюк_tts.wav[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | ирис_new.ogg[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | ирис_tts.wav[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | й_letter_new.ogg[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | й_letter_tts.wav[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | й_sound_new.ogg[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | йети_new.ogg[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | йети_tts.wav[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | йогурт_new.ogg[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | йогурт_tts.wav[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | йод_new.ogg[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | йод_tts.wav[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | к_letter_new.ogg[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | к_letter_tts.wav[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | к_sound_new.ogg[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | капуста_new.ogg[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | капуста_tts.wav[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | карандаш_new.ogg[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | карандаш_tts.wav[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | кенгуру_new.ogg[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | кенгуру_tts.wav[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | конь_new.ogg[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | конь_tts.wav[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | кот_new.ogg[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | кот_tts.wav[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | курица_new.ogg[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | курица_tts.wav[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | л_letter_new.ogg[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | л_letter_tts.wav[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | л_sound_new.ogg[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | ласточка_new.ogg[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | ласточка_tts.wav[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | лимон_new.ogg[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | лимон_tts.wav[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | лиса_new.ogg[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | лиса_tts.wav[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | луна_new.ogg[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | луна_tts.wav[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | лягушка_new.ogg[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | лягушка_tts.wav[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | м_letter_new.ogg[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | м_letter_tts.wav[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | м_sound_new.ogg[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | макароны_new.ogg[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | макароны_tts.wav[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | машина_new.ogg[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | машина_tts.wav[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | медведь_new.ogg[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | медведь_tts.wav[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | морковь_new.ogg[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | морковь_tts.wav[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | муха_new.ogg[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | муха_tts.wav[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | мыло_new.ogg[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | мыло_tts.wav[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | мышь_new.ogg[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | мышь_tts.wav[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | мяч_new.ogg[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | мяч_tts.wav[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | н_letter_new.ogg[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | н_letter_tts.wav[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | н_sound_new.ogg[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | небо_new.ogg[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | небо_tts.wav[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | нитка_new.ogg[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | нитка_tts.wav[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | ножницы_new.ogg[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | ножницы_tts.wav[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | нос_new.ogg[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | нос_tts.wav[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | носок_new.ogg[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | носок_tts.wav[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | о_letter_new.ogg[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | о_letter_tts.wav[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | о_sound_new.ogg[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | обезьяна_new.ogg[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | обезьяна_tts.wav[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | объявление_new.ogg[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | объявление_tts.wav[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | объятие_new.ogg[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | объятие_tts.wav[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | огурец_new.ogg[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | огурец_tts.wav[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | окно_new.ogg[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | окно_tts.wav[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | олень_new.ogg[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | олень_tts.wav[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | осьминог_new.ogg[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | осьминог_tts.wav[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | очки_new.ogg[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | очки_tts.wav[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | п_letter_new.ogg[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | п_letter_tts.wav[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | п_sound_new.ogg[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | паровоз_new.ogg[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | паровоз_tts.wav[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | петух_new.ogg[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | петух_tts.wav[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | пингвин_new.ogg[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | пингвин_tts.wav[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | подарок_new.ogg[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | подарок_tts.wav[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | подъёмник_new.ogg[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | подъёмник_tts.wav[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | подъезд_new.ogg[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | подъезд_tts.wav[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | пчела_new.ogg[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | пчела_tts.wav[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | р_letter_new.ogg[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | р_letter_tts.wav[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | р_sound_new.ogg[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | радуга_new.ogg[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | радуга_tts.wav[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | ракета_new.ogg[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | ракета_tts.wav[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | робот_new.ogg[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | робот_tts.wav[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | рот_new.ogg[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | рот_tts.wav[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | ручей_new.ogg[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | ручей_tts.wav[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | рысь_new.ogg[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | рысь_tts.wav[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | с_letter_new.ogg[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | с_letter_tts.wav[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | с_sound_new.ogg[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | самолёт_new.ogg[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | самолёт_tts.wav[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | светофор_new.ogg[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | светофор_tts.wav[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | скворец_new.ogg[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | скворец_tts.wav[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | слон_new.ogg[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | слон_tts.wav[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | сок_new.ogg[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | сок_tts.wav[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | съёмка_new.ogg[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | съёмка_tts.wav[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | сыр_new.ogg[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | сыр_tts.wav[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | т_letter_new.ogg[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | т_letter_tts.wav[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | т_sound_new.ogg[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | тарелка_new.ogg[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | тарелка_tts.wav[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | телефон_new.ogg[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | телефон_tts.wav[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | торт_new.ogg[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | торт_tts.wav[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | трактор_new.ogg[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | трактор_tts.wav[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | тыква_new.ogg[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | тыква_tts.wav[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | тюлень_new.ogg[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | тюлень_tts.wav[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | у_letter_new.ogg[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | у_letter_tts.wav[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | у_sound_new.ogg[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | улей_new.ogg[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | улей_tts.wav[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | улитка_new.ogg[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | улитка_tts.wav[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | усы_new.ogg[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | усы_tts.wav[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | утка_new.ogg[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | утка_tts.wav[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | утюг_new.ogg[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | утюг_tts.wav[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | ф_letter_new.ogg[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | ф_letter_tts.wav[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | ф_sound_new.ogg[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | фартук_new.ogg[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | фартук_tts.wav[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | филин_new.ogg[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | филин_tts.wav[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | флаг_new.ogg[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | флаг_tts.wav[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | фламинго_new.ogg[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | фламинго_tts.wav[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | фонтан_new.ogg[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | фонтан_tts.wav[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | х_letter_new.ogg[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | х_letter_tts.wav[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | х_sound_new.ogg[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | халат_new.ogg[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | халат_tts.wav[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | халва_new.ogg[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | халва_tts.wav[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | хвост_new.ogg[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | хвост_tts.wav[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | хлеб_new.ogg[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | хлеб_tts.wav[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | хомяк_new.ogg[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | хомяк_tts.wav[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | ц_letter_new.ogg[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | ц_letter_tts.wav[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | ц_sound_new.ogg[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | цапля_new.ogg[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | цапля_tts.wav[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | цветок_new.ogg[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | цветок_tts.wav[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | цепочка_new.ogg[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | цепочка_tts.wav[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | цирк_new.ogg[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | цирк_tts.wav[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | цыплёнок_new.ogg[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | цыплёнок_tts.wav[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | ч_letter_new.ogg[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | ч_letter_tts.wav[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | ч_sound_new.ogg[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | чай_new.ogg[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | чай_tts.wav[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | чайка_new.ogg[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | чайка_tts.wav[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | чайник_new.ogg[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | чайник_tts.wav[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | часы_new.ogg[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | часы_tts.wav[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | чемодан_new.ogg[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | чемодан_tts.wav[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | червяк_new.ogg[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | червяк_tts.wav[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | черепаха_new.ogg[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | черепаха_tts.wav[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | ш_letter_new.ogg[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | ш_letter_tts.wav[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | ш_sound_new.ogg[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | шапка_new.ogg[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | шапка_tts.wav[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | шар_new.ogg[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | шар_tts.wav[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | шарф_new.ogg[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | шарф_tts.wav[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | шишка_new.ogg[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | шишка_tts.wav[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | шоколад_new.ogg[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | шоколад_tts.wav[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | щ_letter_new.ogg[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | щ_letter_tts.wav[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | щ_sound_new.ogg[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | щётка_new.ogg[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | щётка_tts.wav[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | щенок_new.ogg[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | щенок_tts.wav[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | щи_new.ogg[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | щи_tts.wav[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | щит_new.ogg[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | щит_tts.wav[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | щука_new.ogg[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | щука_tts.wav[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | ъ_letter_new.ogg[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | ъ_letter_tts.wav[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | ы_letter_new.ogg[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | ы_letter_tts.wav[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | ы_sound_new.ogg[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | ь_letter_new.ogg[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | ь_letter_tts.wav[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | э_letter_new.ogg[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | э_letter_tts.wav[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | э_sound_new.ogg[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | экран_new.ogg[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | экран_tts.wav[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | электричка_new.ogg[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | электричка_tts.wav[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | эму_new.ogg[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | эму_tts.wav[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | эскалатор_new.ogg[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | эскалатор_tts.wav[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | эскимо_new.ogg[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | эскимо_tts.wav[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | ю_letter_new.ogg[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | ю_letter_tts.wav[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | ю_sound_new.ogg[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | юбка_new.ogg[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | юбка_tts.wav[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | юг_new.ogg[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | юг_tts.wav[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | юла_new.ogg[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | юла_tts.wav[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | юпитер_new.ogg[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | юпитер_tts.wav[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | юрта_new.ogg[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | юрта_tts.wav[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | я_letter_new.ogg[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | я_letter_tts.wav[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | я_sound_new.ogg[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | яблоко_new.ogg[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | яблоко_tts.wav[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | ягода_new.ogg[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | ягода_tts.wav[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | якорь_new.ogg[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | якорь_tts.wav[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | яхта_new.ogg[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | яхта_tts.wav[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | ящерица_new.ogg[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | ящерица_tts.wav[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | NotoSans-Regular.ttf[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | gear.svg[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | icon-144.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | icon-180.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | icon-512.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | Acorn.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | Airplane.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | Anchor.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | Apricot.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | Apron.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | Balloon.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | Barrel.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | Bear.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | Bee.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | Beehive.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | Berry.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | Blackberry.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | Boot.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | Bottle_Brush.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | Brush.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | Bucket.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | Cabbage.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | Car.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | Carrot.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | Chain.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | Cheese.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | Chocolate.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | Christmas_Toy.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | Circus.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | Clock.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | Crab.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | Crow.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | Cucumber.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | Deer.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | Dolphin.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | Door.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | Drum.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | Electric_Train.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | Elephant.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | Emu.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | Entrance.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | Escalator.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | Filming.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | Fir_Tree.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | Flag.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | Flamingo.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | Flower.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | Fly.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | Food.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | Fox.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | Frog.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | Giraffe.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | Glasses.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | Globe.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | Halva.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | Hamster.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | Hedgehog.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | Hen.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | Heron.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | Hug.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | Hut.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | Iodine.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | Iris.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | Iron.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | Jar.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | Jupiter.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | Kangaroo.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | Lemon.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | Lift.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | Lizard.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | Locomotive.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | Lynx.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | Magazine.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | Mittens.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | Monkey.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | Mountain.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | Mouse.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | Mushroom.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | Needle.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | Octopus.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | Owl.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | Pasta.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | Pearl.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | Pencil.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | Penguin.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | Phone.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | Pike.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | Pineapple.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | Pinecone.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | Plate.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | Popsicle.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | Pumpkin.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | Raccoon.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | Robe.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | Robot.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | Rocket.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | Rooster.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | Ruff.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | Scarf.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | Scissors.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | Seagull.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | Seal.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | Shchi.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | Shield.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | Skirt.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | Sky.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | Smoke.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | Snail.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | Sock.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | Sofa.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | South.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | Squirrel.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | Star.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | Starling.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | Stork.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | Strawberry.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | Stream.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | Suitcase.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | Swallow.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | Tail.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | Teapot.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | Thread.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | Tie.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | Tractor.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | Traffic_Light.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | Tree.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | Turkey.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | Turtle.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | Umbrella.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | Watermelon.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | Whiskers.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | Wolf.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | Woodpecker.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | Worm.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | Yacht.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | Yeti.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | Yoga.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | Yurt.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | Zebra.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | v00.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | v01.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | v02.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | v03.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | v04.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | v05.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | v06.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | v07.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | v08.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | v09.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | v10.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | v11.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | v12.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | v13.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | v14.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | v15.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | v16.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | v17.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | v18.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | v19.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | v20.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | v21.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | v22.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | v23.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | v24.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | v25.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | v26.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | v27.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | v28.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | v29.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | v30.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | idle_0.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | idle_1.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | walk_0.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | walk_1.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | kisa_anim_preview.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | kisa_frames_sheet.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | kisa_walk_cycle_new.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | sprite_kv1_rgba.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | sprite_kv2_rgba.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m |  fone.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | announcement.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | Apple.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | arbuz.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | Arrived.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | avtobus.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | Ball.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | Banana.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | Beetle.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | Bread.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | Bus.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | Cake.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | Cat.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | chayka.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | cherepaha.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | Chicken.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | Christmas_Tree.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | cvetok.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | cyplenok.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | Duck.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | ekskavator.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | enot.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | eskimo.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | filin.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | flamingo.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | fone2.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | fone4.jpg[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | Fountain.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | Gift.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | Goose.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | grib.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | gus.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | Hare.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | Hat.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | Hedgehog.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | hleb.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | homyak.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | Horse.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | House.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | igla.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | igrushka.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | iriska.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | Juice.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | kit.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | kot.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | lisa.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | los.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | luna.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | malina.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | medved.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | Moon2.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | Moon.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | Mouth.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | myach.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | Nose.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | nosorog.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | okno.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | okun.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | pie.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | pingvin.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | podjezd.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | Puppy.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | QR_sbp.jpg[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | raduga.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | ryba.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | Screen.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | shapka.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | shchenok.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | shenok.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | slon.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | Soap.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | sova.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | Spinning_Top.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | start_screen.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | syr.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | Tea.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | tigr.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | Toy.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | ulitka.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | utka.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | voda.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | volk.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | Water.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | Window.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | yabloko.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | yogurt.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | yozh.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | yula.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | zebra.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | zhiraf.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | index.144x144.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | index.180x180.png[39m[0m
+[  99% ] [90m[1m_update_scan_actions[22m | index.512x512.png[39m[0m
+[  99% ] [90m[1m_update_scan_actions[22m | index.apple-touch-icon.png[39m[0m
+[  99% ] [90m[1m_update_scan_actions[22m | index.icon.png[39m[0m
+[  99% ] [90m[1m_update_scan_actions[22m | index.png[39m[0m
+[  99% ] [90m[1m_update_scan_actions[22m | 01-set-list.png[39m[0m
+[  99% ] [90m[1m_update_scan_actions[22m | 02-set-editor.png[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started Импорт или повторный импорт ассетов (708 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   0% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   0% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   0% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   0% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   0% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   0% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   0% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   1% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   1% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   1% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   1% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   1% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   1% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   1% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   2% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   2% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   2% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   2% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   2% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   2% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   2% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   3% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   3% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   3% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   3% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   3% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   3% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   3% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   4% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   4% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   4% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   4% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   4% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   4% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   4% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   5% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   5% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   5% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   5% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   5% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   5% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   5% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   6% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   6% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   6% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   6% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   6% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   6% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   6% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   7% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   7% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   7% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   7% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   7% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   7% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   7% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   8% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   8% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   8% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   8% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   8% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   8% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   8% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   9% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   9% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   9% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   9% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   9% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   9% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   9% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  10% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  10% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  10% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  10% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  10% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  10% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  10% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  11% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  11% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  11% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  11% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  11% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  11% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  11% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  11% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  12% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  12% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  12% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  12% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  12% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  12% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  12% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  13% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  13% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  13% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  13% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  13% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  13% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  13% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  14% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  14% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  14% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  14% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  14% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  14% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  14% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  15% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  15% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  15% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  15% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  15% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  15% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  15% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  16% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  16% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  16% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  16% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  16% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  16% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  16% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  17% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  17% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  17% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  17% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  17% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  17% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  17% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  18% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  18% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  18% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  18% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  18% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  18% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  18% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  19% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  19% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  19% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  19% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  19% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  19% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  19% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  20% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  20% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  20% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  20% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  20% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  20% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  20% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  21% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  21% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  21% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  21% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  21% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  21% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  21% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  22% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  22% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  22% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  22% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  22% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  22% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  22% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  22% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  23% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  23% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  23% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  23% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  23% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  23% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  23% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  24% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  24% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  24% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  24% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  24% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  24% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  24% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  25% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  25% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  25% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  25% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  25% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  25% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  25% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  26% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  26% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  26% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  26% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  26% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  26% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  26% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  27% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  27% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  27% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  27% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  27% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  27% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  27% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  28% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  28% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  28% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  28% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  28% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  28% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  28% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  29% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  29% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  29% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  29% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  29% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  29% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  29% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  30% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  30% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  30% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  30% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  30% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  30% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  30% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  31% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  31% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  31% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  31% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  31% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  31% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  31% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  32% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  32% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  32% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  32% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  32% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  32% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  32% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  33% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  33% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  33% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  33% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  33% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  33% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  33% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  33% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  34% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  34% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  34% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  34% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  34% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  34% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  34% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  35% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  35% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  35% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  35% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  35% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  35% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  35% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  36% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  36% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  36% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  36% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  36% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  36% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  36% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  37% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  37% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  37% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  37% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  37% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  37% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  37% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  38% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  38% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  38% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  38% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  38% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  38% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  38% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  39% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  39% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  39% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  39% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  39% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  39% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  39% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  40% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  40% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  40% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  40% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  40% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  40% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  40% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  41% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  41% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  41% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  41% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  41% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  41% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  41% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  42% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  42% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  42% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  42% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  42% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  42% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  42% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  43% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  43% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  43% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  43% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  43% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  43% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  43% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  44% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  44% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  44% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  44% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  44% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  44% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  44% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  44% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  45% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  45% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  45% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  45% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  45% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  45% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  45% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  46% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  46% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  46% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  46% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  46% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  46% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  46% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  47% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  47% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  47% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  47% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  47% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  47% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  47% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  48% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  48% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  48% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  48% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  48% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  48% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  48% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  49% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  49% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  49% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  49% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  49% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  49% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  49% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  50% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  50% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  50% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  50% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  50% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  50% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  50% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  51% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  51% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  51% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  51% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  51% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  51% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  51% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  52% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  52% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  52% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  52% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  52% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  52% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  52% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  53% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  53% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  53% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  53% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  53% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  53% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  53% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  54% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  54% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  54% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  54% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  54% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  54% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  54% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  55% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  55% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  55% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  55% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  55% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  55% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  55% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  55% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  56% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  56% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  56% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  56% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  56% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  56% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  56% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  57% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  57% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  57% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  57% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  57% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  57% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  57% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  58% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  58% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  58% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  58% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  58% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  58% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  58% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  59% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  59% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  59% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  59% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  59% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  59% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  59% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  60% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  60% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  60% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  60% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  60% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  60% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  60% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  61% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  61% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  61% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  61% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  61% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  61% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  61% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  62% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  62% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  62% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  62% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  62% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  62% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  62% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  63% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  63% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  63% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  63% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  63% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  63% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  63% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  64% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  64% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  64% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  64% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  64% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  64% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  64% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  65% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  65% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  65% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  65% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  65% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  65% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  65% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  66% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  66% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  66% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  66% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  66% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  66% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  66% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  66% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  67% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  67% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  67% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  67% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  67% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  67% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  67% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  68% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  68% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  68% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  68% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  68% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  68% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  68% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  69% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  69% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  69% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  69% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  69% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  69% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  69% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  70% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  70% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  70% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  70% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  70% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  70% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  70% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  71% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  71% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  71% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  71% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  71% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  71% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  71% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  72% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  72% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  72% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  72% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  72% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  72% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  72% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  73% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  73% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  73% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  73% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  73% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  73% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  73% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  74% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  74% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  74% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  74% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  74% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  74% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  74% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  75% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  75% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  75% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  75% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  75% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  75% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  75% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  76% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  76% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  76% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  76% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  76% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  76% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  76% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  77% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  77% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  77% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  77% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  77% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  77% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  77% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  77% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  78% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  78% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  78% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  78% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  78% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  78% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  78% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  79% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  79% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  79% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  79% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  79% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  79% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  79% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  80% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  80% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  80% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  80% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  80% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  80% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  80% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  81% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  81% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  81% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  81% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  81% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  81% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  81% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  82% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  82% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  82% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  82% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  82% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  82% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  82% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  83% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  83% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  83% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  83% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  83% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  83% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  83% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  84% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  84% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  84% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  84% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  84% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  84% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  84% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  85% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  85% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  85% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  85% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  85% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  85% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  85% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  86% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  86% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  86% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  86% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  86% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  86% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  86% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  87% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  87% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  87% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  87% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  87% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  87% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  87% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  88% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  88% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  88% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  88% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  88% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  88% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  88% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  88% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  89% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  89% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  89% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  89% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  89% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  89% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  89% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  90% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  90% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  90% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  90% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  90% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  90% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  90% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  91% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  91% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  91% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  91% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  91% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  91% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  91% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  92% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  92% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  92% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  92% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  92% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  92% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  92% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  93% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  93% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  93% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  93% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  93% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  93% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  93% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  94% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  94% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  94% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  94% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  94% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  94% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  94% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  95% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  95% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  95% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  95% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  95% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  95% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  95% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  96% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  96% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  96% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  96% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  96% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  96% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  96% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  97% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  97% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  97% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  97% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  97% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  97% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  97% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  98% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  98% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  98% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  98% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  98% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  98% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  98% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  99% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  99% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  99% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  99% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  99% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[  99% ] [90m[1mreimport[22m | Подготовка файлов к повторному импорту…[39m[0m
+[   0% ] [90m[1mreimport[22m | Выполнение предимпортных операций…[39m[0m
+[   0% ] [90m[1mreimport[22m | NotoSans-Regular.ttf[39m[0m
+[   0% ] [90m[1mreimport[22m | NotoSans-Regular.ttf[39m[0m
+[   0% ] [90m[1mreimport[22m | щ_letter_new.ogg[39m[0m
+[   0% ] [90m[1mreimport[22m | носок_new.ogg[39m[0m
+[   0% ] [90m[1mreimport[22m | нос_new.ogg[39m[0m
+[   0% ] [90m[1mreimport[22m | щ_sound_new.ogg[39m[0m
+[   0% ] [90m[1mreimport[22m | ножницы_new.ogg[39m[0m
+[   0% ] [90m[1mreimport[22m | щётка_new.ogg[39m[0m
+[   1% ] [90m[1mreimport[22m | нитка_new.ogg[39m[0m
+[   1% ] [90m[1mreimport[22m | небо_new.ogg[39m[0m
+[   1% ] [90m[1mreimport[22m | н_sound_new.ogg[39m[0m
+[   1% ] [90m[1mreimport[22m | щенок_new.ogg[39m[0m
+[   1% ] [90m[1mreimport[22m | н_letter_new.ogg[39m[0m
+[   1% ] [90m[1mreimport[22m | мяч_new.ogg[39m[0m
+[   1% ] [90m[1mreimport[22m | щи_new.ogg[39m[0m
+[   2% ] [90m[1mreimport[22m | мышь_new.ogg[39m[0m
+[   2% ] [90m[1mreimport[22m | мыло_new.ogg[39m[0m
+[   2% ] [90m[1mreimport[22m | щит_new.ogg[39m[0m
+[   2% ] [90m[1mreimport[22m | муха_new.ogg[39m[0m
+[   2% ] [90m[1mreimport[22m | п_sound_new.ogg[39m[0m
+[   2% ] [90m[1mreimport[22m | шапка_new.ogg[39m[0m
+[   2% ] [90m[1mreimport[22m | п_letter_new.ogg[39m[0m
+[   3% ] [90m[1mreimport[22m | очки_new.ogg[39m[0m
+[   3% ] [90m[1mreimport[22m | шар_new.ogg[39m[0m
+[   3% ] [90m[1mreimport[22m | осьминог_new.ogg[39m[0m
+[   3% ] [90m[1mreimport[22m | олень_new.ogg[39m[0m
+[   3% ] [90m[1mreimport[22m | шарф_new.ogg[39m[0m
+[   3% ] [90m[1mreimport[22m | окно_new.ogg[39m[0m
+[   3% ] [90m[1mreimport[22m | огурец_new.ogg[39m[0m
+[   4% ] [90m[1mreimport[22m | шишка_new.ogg[39m[0m
+[   4% ] [90m[1mreimport[22m | объятие_new.ogg[39m[0m
+[   4% ] [90m[1mreimport[22m | объявление_new.ogg[39m[0m
+[   4% ] [90m[1mreimport[22m | шоколад_new.ogg[39m[0m
+[   4% ] [90m[1mreimport[22m | обезьяна_new.ogg[39m[0m
+[   4% ] [90m[1mreimport[22m | о_sound_new.ogg[39m[0m
+[   4% ] [90m[1mreimport[22m | о_letter_new.ogg[39m[0m
+[   5% ] [90m[1mreimport[22m | л_letter_new.ogg[39m[0m
+[   5% ] [90m[1mreimport[22m | курица_new.ogg[39m[0m
+[   5% ] [90m[1mreimport[22m | э_sound_new.ogg[39m[0m
+[   5% ] [90m[1mreimport[22m | кот_new.ogg[39m[0m
+[   5% ] [90m[1mreimport[22m | экран_new.ogg[39m[0m
+[   5% ] [90m[1mreimport[22m | конь_new.ogg[39m[0m
+[   5% ] [90m[1mreimport[22m | кенгуру_new.ogg[39m[0m
+[   6% ] [90m[1mreimport[22m | электричка_new.ogg[39m[0m
+[   6% ] [90m[1mreimport[22m | карандаш_new.ogg[39m[0m
+[   6% ] [90m[1mreimport[22m | капуста_new.ogg[39m[0m
+[   6% ] [90m[1mreimport[22m | к_sound_new.ogg[39m[0m
+[   6% ] [90m[1mreimport[22m | эму_new.ogg[39m[0m
+[   6% ] [90m[1mreimport[22m | к_letter_new.ogg[39m[0m
+[   6% ] [90m[1mreimport[22m | йод_new.ogg[39m[0m
+[   7% ] [90m[1mreimport[22m | эскалатор_new.ogg[39m[0m
+[   7% ] [90m[1mreimport[22m | йогурт_new.ogg[39m[0m
+[   7% ] [90m[1mreimport[22m | йети_new.ogg[39m[0m
+[   7% ] [90m[1mreimport[22m | морковь_new.ogg[39m[0m
+[   7% ] [90m[1mreimport[22m | щука_new.ogg[39m[0m
+[   7% ] [90m[1mreimport[22m | медведь_new.ogg[39m[0m
+[   7% ] [90m[1mreimport[22m | машина_new.ogg[39m[0m
+[   8% ] [90m[1mreimport[22m | ъ_letter_new.ogg[39m[0m
+[   8% ] [90m[1mreimport[22m | макароны_new.ogg[39m[0m
+[   8% ] [90m[1mreimport[22m | м_sound_new.ogg[39m[0m
+[   8% ] [90m[1mreimport[22m | м_letter_new.ogg[39m[0m
+[   8% ] [90m[1mreimport[22m | ы_letter_new.ogg[39m[0m
+[   8% ] [90m[1mreimport[22m | лягушка_new.ogg[39m[0m
+[   8% ] [90m[1mreimport[22m | луна_new.ogg[39m[0m
+[   9% ] [90m[1mreimport[22m | ы_sound_new.ogg[39m[0m
+[   9% ] [90m[1mreimport[22m | лиса_new.ogg[39m[0m
+[   9% ] [90m[1mreimport[22m | ь_letter_new.ogg[39m[0m
+[   9% ] [90m[1mreimport[22m | лимон_new.ogg[39m[0m
+[   9% ] [90m[1mreimport[22m | ласточка_new.ogg[39m[0m
+[   9% ] [90m[1mreimport[22m | л_sound_new.ogg[39m[0m
+[   9% ] [90m[1mreimport[22m | э_letter_new.ogg[39m[0m
+[  10% ] [90m[1mreimport[22m | улитка_new.ogg[39m[0m
+[  10% ] [90m[1mreimport[22m | ц_sound_new.ogg[39m[0m
+[  10% ] [90m[1mreimport[22m | улей_new.ogg[39m[0m
+[  10% ] [90m[1mreimport[22m | у_sound_new.ogg[39m[0m
+[  10% ] [90m[1mreimport[22m | цапля_new.ogg[39m[0m
+[  10% ] [90m[1mreimport[22m | у_letter_new.ogg[39m[0m
+[  10% ] [90m[1mreimport[22m | тюлень_new.ogg[39m[0m
+[  11% ] [90m[1mreimport[22m | цветок_new.ogg[39m[0m
+[  11% ] [90m[1mreimport[22m | тыква_new.ogg[39m[0m
+[  11% ] [90m[1mreimport[22m | трактор_new.ogg[39m[0m
+[  11% ] [90m[1mreimport[22m | цепочка_new.ogg[39m[0m
+[  11% ] [90m[1mreimport[22m | торт_new.ogg[39m[0m
+[  11% ] [90m[1mreimport[22m | телефон_new.ogg[39m[0m
+[  11% ] [90m[1mreimport[22m | цирк_new.ogg[39m[0m
+[  11% ] [90m[1mreimport[22m | тарелка_new.ogg[39m[0m
+[  12% ] [90m[1mreimport[22m | т_sound_new.ogg[39m[0m
+[  12% ] [90m[1mreimport[22m | т_letter_new.ogg[39m[0m
+[  12% ] [90m[1mreimport[22m | халат_new.ogg[39m[0m
+[  12% ] [90m[1mreimport[22m | х_sound_new.ogg[39m[0m
+[  12% ] [90m[1mreimport[22m | х_letter_new.ogg[39m[0m
+[  12% ] [90m[1mreimport[22m | халва_new.ogg[39m[0m
+[  12% ] [90m[1mreimport[22m | фонтан_new.ogg[39m[0m
+[  13% ] [90m[1mreimport[22m | фламинго_new.ogg[39m[0m
+[  13% ] [90m[1mreimport[22m | хвост_new.ogg[39m[0m
+[  13% ] [90m[1mreimport[22m | флаг_new.ogg[39m[0m
+[  13% ] [90m[1mreimport[22m | филин_new.ogg[39m[0m
+[  13% ] [90m[1mreimport[22m | хлеб_new.ogg[39m[0m
+[  13% ] [90m[1mreimport[22m | фартук_new.ogg[39m[0m
+[  13% ] [90m[1mreimport[22m | ф_sound_new.ogg[39m[0m
+[  14% ] [90m[1mreimport[22m | ф_letter_new.ogg[39m[0m
+[  14% ] [90m[1mreimport[22m | хомяк_new.ogg[39m[0m
+[  14% ] [90m[1mreimport[22m | утюг_new.ogg[39m[0m
+[  14% ] [90m[1mreimport[22m | утка_new.ogg[39m[0m
+[  14% ] [90m[1mreimport[22m | ц_letter_new.ogg[39m[0m
+[  14% ] [90m[1mreimport[22m | усы_new.ogg[39m[0m
+[  14% ] [90m[1mreimport[22m | часы_new.ogg[39m[0m
+[  15% ] [90m[1mreimport[22m | робот_new.ogg[39m[0m
+[  15% ] [90m[1mreimport[22m | ракета_new.ogg[39m[0m
+[  15% ] [90m[1mreimport[22m | чемодан_new.ogg[39m[0m
+[  15% ] [90m[1mreimport[22m | радуга_new.ogg[39m[0m
+[  15% ] [90m[1mreimport[22m | р_sound_new.ogg[39m[0m
+[  15% ] [90m[1mreimport[22m | р_letter_new.ogg[39m[0m
+[  15% ] [90m[1mreimport[22m | червяк_new.ogg[39m[0m
+[  16% ] [90m[1mreimport[22m | пчела_new.ogg[39m[0m
+[  16% ] [90m[1mreimport[22m | подъезд_new.ogg[39m[0m
+[  16% ] [90m[1mreimport[22m | черепаха_new.ogg[39m[0m
+[  16% ] [90m[1mreimport[22m | подъёмник_new.ogg[39m[0m
+[  16% ] [90m[1mreimport[22m | подарок_new.ogg[39m[0m
+[  16% ] [90m[1mreimport[22m | ш_letter_new.ogg[39m[0m
+[  16% ] [90m[1mreimport[22m | пингвин_new.ogg[39m[0m
+[  17% ] [90m[1mreimport[22m | петух_new.ogg[39m[0m
+[  17% ] [90m[1mreimport[22m | ш_sound_new.ogg[39m[0m
+[  17% ] [90m[1mreimport[22m | паровоз_new.ogg[39m[0m
+[  17% ] [90m[1mreimport[22m | цыплёнок_new.ogg[39m[0m
+[  17% ] [90m[1mreimport[22m | сыр_new.ogg[39m[0m
+[  17% ] [90m[1mreimport[22m | съёмка_new.ogg[39m[0m
+[  17% ] [90m[1mreimport[22m | ч_letter_new.ogg[39m[0m
+[  18% ] [90m[1mreimport[22m | сок_new.ogg[39m[0m
+[  18% ] [90m[1mreimport[22m | слон_new.ogg[39m[0m
+[  18% ] [90m[1mreimport[22m | ч_sound_new.ogg[39m[0m
+[  18% ] [90m[1mreimport[22m | скворец_new.ogg[39m[0m
+[  18% ] [90m[1mreimport[22m | чай_new.ogg[39m[0m
+[  18% ] [90m[1mreimport[22m | светофор_new.ogg[39m[0m
+[  18% ] [90m[1mreimport[22m | самолёт_new.ogg[39m[0m
+[  19% ] [90m[1mreimport[22m | с_sound_new.ogg[39m[0m
+[  19% ] [90m[1mreimport[22m | чайка_new.ogg[39m[0m
+[  19% ] [90m[1mreimport[22m | с_letter_new.ogg[39m[0m
+[  19% ] [90m[1mreimport[22m | рысь_new.ogg[39m[0m
+[  19% ] [90m[1mreimport[22m | чайник_new.ogg[39m[0m
+[  19% ] [90m[1mreimport[22m | ручей_new.ogg[39m[0m
+[  19% ] [90m[1mreimport[22m | рот_new.ogg[39m[0m
+[  20% ] [90m[1mreimport[22m | ворона_new.ogg[39m[0m
+[  20% ] [90m[1mreimport[22m | г_letter_new.ogg[39m[0m
+[  20% ] [90m[1mreimport[22m | г_sound_new.ogg[39m[0m
+[  20% ] [90m[1mreimport[22m | галстук_new.ogg[39m[0m
+[  20% ] [90m[1mreimport[22m | глобус_new.ogg[39m[0m
+[  20% ] [90m[1mreimport[22m | гора_new.ogg[39m[0m
+[  20% ] [90m[1mreimport[22m | гриб_new.ogg[39m[0m
+[  21% ] [90m[1mreimport[22m | гусь_new.ogg[39m[0m
+[  21% ] [90m[1mreimport[22m | д_letter_new.ogg[39m[0m
+[  21% ] [90m[1mreimport[22m | д_sound_new.ogg[39m[0m
+[  21% ] [90m[1mreimport[22m | дверь_new.ogg[39m[0m
+[  21% ] [90m[1mreimport[22m | дельфин_new.ogg[39m[0m
+[  21% ] [90m[1mreimport[22m | дерево_new.ogg[39m[0m
+[  21% ] [90m[1mreimport[22m | диван_new.ogg[39m[0m
+[  22% ] [90m[1mreimport[22m | дом_new.ogg[39m[0m
+[  22% ] [90m[1mreimport[22m | дым_new.ogg[39m[0m
+[  22% ] [90m[1mreimport[22m | ящерица_new.ogg[39m[0m
+[  22% ] [90m[1mreimport[22m | дятел_new.ogg[39m[0m
+[  22% ] [90m[1mreimport[22m | е_letter_new.ogg[39m[0m
+[  22% ] [90m[1mreimport[22m | яхта_new.ogg[39m[0m
+[  22% ] [90m[1mreimport[22m | е_sound_new.ogg[39m[0m
+[  22% ] [90m[1mreimport[22m | еда_new.ogg[39m[0m
+[  23% ] [90m[1mreimport[22m | ежевика_new.ogg[39m[0m
+[  23% ] [90m[1mreimport[22m | якорь_new.ogg[39m[0m
+[  23% ] [90m[1mreimport[22m | ежиха_new.ogg[39m[0m
+[  23% ] [90m[1mreimport[22m | ель_new.ogg[39m[0m
+[  23% ] [90m[1mreimport[22m | ягода_new.ogg[39m[0m
+[  23% ] [90m[1mreimport[22m | menu_theme.ogg[39m[0m
+[  23% ] [90m[1mreimport[22m | ё_letter_new.ogg[39m[0m
+[  24% ] [90m[1mreimport[22m | ё_sound_new.ogg[39m[0m
+[  24% ] [90m[1mreimport[22m | ёж_new.ogg[39m[0m
+[  24% ] [90m[1mreimport[22m | ёлка_new.ogg[39m[0m
+[  24% ] [90m[1mreimport[22m | ёлочная игрушка_new.ogg[39m[0m
+[  24% ] [90m[1mreimport[22m | ёрш_new.ogg[39m[0m
+[  24% ] [90m[1mreimport[22m | ёршик_new.ogg[39m[0m
+[  24% ] [90m[1mreimport[22m | а_letter_new.ogg[39m[0m
+[  25% ] [90m[1mreimport[22m | а_sound_new.ogg[39m[0m
+[  25% ] [90m[1mreimport[22m | абрикос_new.ogg[39m[0m
+[  25% ] [90m[1mreimport[22m | автобус_new.ogg[39m[0m
+[  25% ] [90m[1mreimport[22m | аист_new.ogg[39m[0m
+[  25% ] [90m[1mreimport[22m | ананас_new.ogg[39m[0m
+[  25% ] [90m[1mreimport[22m | арбуз_new.ogg[39m[0m
+[  25% ] [90m[1mreimport[22m | б_letter_new.ogg[39m[0m
+[  26% ] [90m[1mreimport[22m | б_sound_new.ogg[39m[0m
+[  26% ] [90m[1mreimport[22m | банан_new.ogg[39m[0m
+[  26% ] [90m[1mreimport[22m | барабан_new.ogg[39m[0m
+[  26% ] [90m[1mreimport[22m | белка_new.ogg[39m[0m
+[  26% ] [90m[1mreimport[22m | ботинок_new.ogg[39m[0m
+[  26% ] [90m[1mreimport[22m | бочка_new.ogg[39m[0m
+[  26% ] [90m[1mreimport[22m | в_letter_new.ogg[39m[0m
+[  27% ] [90m[1mreimport[22m | в_sound_new.ogg[39m[0m
+[  27% ] [90m[1mreimport[22m | варежки_new.ogg[39m[0m
+[  27% ] [90m[1mreimport[22m | ведро_new.ogg[39m[0m
+[  27% ] [90m[1mreimport[22m | вода_new.ogg[39m[0m
+[  27% ] [90m[1mreimport[22m | волк_new.ogg[39m[0m
+[  27% ] [90m[1mreimport[22m | журнал_new.ogg[39m[0m
+[  27% ] [90m[1mreimport[22m | юрта_new.ogg[39m[0m
+[  28% ] [90m[1mreimport[22m | з_letter_new.ogg[39m[0m
+[  28% ] [90m[1mreimport[22m | з_sound_new.ogg[39m[0m
+[  28% ] [90m[1mreimport[22m | заяц_new.ogg[39m[0m
+[  28% ] [90m[1mreimport[22m | юпитер_new.ogg[39m[0m
+[  28% ] [90m[1mreimport[22m | звезда_new.ogg[39m[0m
+[  28% ] [90m[1mreimport[22m | зебра_new.ogg[39m[0m
+[  28% ] [90m[1mreimport[22m | юла_new.ogg[39m[0m
+[  29% ] [90m[1mreimport[22m | земляника_new.ogg[39m[0m
+[  29% ] [90m[1mreimport[22m | зонт_new.ogg[39m[0m
+[  29% ] [90m[1mreimport[22m | юг_new.ogg[39m[0m
+[  29% ] [90m[1mreimport[22m | и_letter_new.ogg[39m[0m
+[  29% ] [90m[1mreimport[22m | и_sound_new.ogg[39m[0m
+[  29% ] [90m[1mreimport[22m | игла_new.ogg[39m[0m
+[  29% ] [90m[1mreimport[22m | юбка_new.ogg[39m[0m
+[  30% ] [90m[1mreimport[22m | игрушка_new.ogg[39m[0m
+[  30% ] [90m[1mreimport[22m | ю_sound_new.ogg[39m[0m
+[  30% ] [90m[1mreimport[22m | избушка_new.ogg[39m[0m
+[  30% ] [90m[1mreimport[22m | индюк_new.ogg[39m[0m
+[  30% ] [90m[1mreimport[22m | ю_letter_new.ogg[39m[0m
+[  30% ] [90m[1mreimport[22m | ирис_new.ogg[39m[0m
+[  30% ] [90m[1mreimport[22m | й_letter_new.ogg[39m[0m
+[  31% ] [90m[1mreimport[22m | эскимо_new.ogg[39m[0m
+[  31% ] [90m[1mreimport[22m | й_sound_new.ogg[39m[0m
+[  31% ] [90m[1mreimport[22m | ж_letter_new.ogg[39m[0m
+[  31% ] [90m[1mreimport[22m | ж_sound_new.ogg[39m[0m
+[  31% ] [90m[1mreimport[22m | жемчуг_new.ogg[39m[0m
+[  31% ] [90m[1mreimport[22m | я_letter_new.ogg[39m[0m
+[  31% ] [90m[1mreimport[22m | я_sound_new.ogg[39m[0m
+[  32% ] [90m[1mreimport[22m | жук_new.ogg[39m[0m
+[  32% ] [90m[1mreimport[22m | жёлудь_new.ogg[39m[0m
+[  32% ] [90m[1mreimport[22m | жираф_new.ogg[39m[0m
+[  32% ] [90m[1mreimport[22m | яблоко_new.ogg[39m[0m
+[  32% ] [90m[1mreimport[22m | NotoSans-Regular.ttf[39m[0m
+[  32% ] [90m[1mreimport[22m | щ_letter_new.ogg[39m[0m
+[  32% ] [90m[1mreimport[22m | носок_new.ogg[39m[0m
+[  33% ] [90m[1mreimport[22m | нос_new.ogg[39m[0m
+[  33% ] [90m[1mreimport[22m | щ_sound_new.ogg[39m[0m
+[  33% ] [90m[1mreimport[22m | ножницы_new.ogg[39m[0m
+[  33% ] [90m[1mreimport[22m | щётка_new.ogg[39m[0m
+[  33% ] [90m[1mreimport[22m | нитка_new.ogg[39m[0m
+[  33% ] [90m[1mreimport[22m | небо_new.ogg[39m[0m
+[  33% ] [90m[1mreimport[22m | н_sound_new.ogg[39m[0m
+[  33% ] [90m[1mreimport[22m | щенок_new.ogg[39m[0m
+[  34% ] [90m[1mreimport[22m | н_letter_new.ogg[39m[0m
+[  34% ] [90m[1mreimport[22m | мяч_new.ogg[39m[0m
+[  34% ] [90m[1mreimport[22m | щи_new.ogg[39m[0m
+[  34% ] [90m[1mreimport[22m | мышь_new.ogg[39m[0m
+[  34% ] [90m[1mreimport[22m | мыло_new.ogg[39m[0m
+[  34% ] [90m[1mreimport[22m | щит_new.ogg[39m[0m
+[  34% ] [90m[1mreimport[22m | муха_new.ogg[39m[0m
+[  35% ] [90m[1mreimport[22m | п_sound_new.ogg[39m[0m
+[  35% ] [90m[1mreimport[22m | шапка_new.ogg[39m[0m
+[  35% ] [90m[1mreimport[22m | п_letter_new.ogg[39m[0m
+[  35% ] [90m[1mreimport[22m | очки_new.ogg[39m[0m
+[  35% ] [90m[1mreimport[22m | шар_new.ogg[39m[0m
+[  35% ] [90m[1mreimport[22m | осьминог_new.ogg[39m[0m
+[  35% ] [90m[1mreimport[22m | олень_new.ogg[39m[0m
+[  36% ] [90m[1mreimport[22m | шарф_new.ogg[39m[0m
+[  36% ] [90m[1mreimport[22m | окно_new.ogg[39m[0m
+[  36% ] [90m[1mreimport[22m | огурец_new.ogg[39m[0m
+[  36% ] [90m[1mreimport[22m | шишка_new.ogg[39m[0m
+[  36% ] [90m[1mreimport[22m | объятие_new.ogg[39m[0m
+[  36% ] [90m[1mreimport[22m | объявление_new.ogg[39m[0m
+[  36% ] [90m[1mreimport[22m | шоколад_new.ogg[39m[0m
+[  37% ] [90m[1mreimport[22m | обезьяна_new.ogg[39m[0m
+[  37% ] [90m[1mreimport[22m | о_sound_new.ogg[39m[0m
+[  37% ] [90m[1mreimport[22m | о_letter_new.ogg[39m[0m
+[  37% ] [90m[1mreimport[22m | л_letter_new.ogg[39m[0m
+[  37% ] [90m[1mreimport[22m | курица_new.ogg[39m[0m
+[  37% ] [90m[1mreimport[22m | э_sound_new.ogg[39m[0m
+[  37% ] [90m[1mreimport[22m | кот_new.ogg[39m[0m
+[  38% ] [90m[1mreimport[22m | экран_new.ogg[39m[0m
+[  38% ] [90m[1mreimport[22m | конь_new.ogg[39m[0m
+[  38% ] [90m[1mreimport[22m | кенгуру_new.ogg[39m[0m
+[  38% ] [90m[1mreimport[22m | электричка_new.ogg[39m[0m
+[  38% ] [90m[1mreimport[22m | карандаш_new.ogg[39m[0m
+[  38% ] [90m[1mreimport[22m | капуста_new.ogg[39m[0m
+[  38% ] [90m[1mreimport[22m | к_sound_new.ogg[39m[0m
+[  39% ] [90m[1mreimport[22m | эму_new.ogg[39m[0m
+[  39% ] [90m[1mreimport[22m | к_letter_new.ogg[39m[0m
+[  39% ] [90m[1mreimport[22m | йод_new.ogg[39m[0m
+[  39% ] [90m[1mreimport[22m | эскалатор_new.ogg[39m[0m
+[  39% ] [90m[1mreimport[22m | йогурт_new.ogg[39m[0m
+[  39% ] [90m[1mreimport[22m | йети_new.ogg[39m[0m
+[  39% ] [90m[1mreimport[22m | морковь_new.ogg[39m[0m
+[  40% ] [90m[1mreimport[22m | щука_new.ogg[39m[0m
+[  40% ] [90m[1mreimport[22m | медведь_new.ogg[39m[0m
+[  40% ] [90m[1mreimport[22m | машина_new.ogg[39m[0m
+[  40% ] [90m[1mreimport[22m | ъ_letter_new.ogg[39m[0m
+[  40% ] [90m[1mreimport[22m | макароны_new.ogg[39m[0m
+[  40% ] [90m[1mreimport[22m | м_sound_new.ogg[39m[0m
+[  40% ] [90m[1mreimport[22m | м_letter_new.ogg[39m[0m
+[  41% ] [90m[1mreimport[22m | ы_letter_new.ogg[39m[0m
+[  41% ] [90m[1mreimport[22m | лягушка_new.ogg[39m[0m
+[  41% ] [90m[1mreimport[22m | луна_new.ogg[39m[0m
+[  41% ] [90m[1mreimport[22m | ы_sound_new.ogg[39m[0m
+[  41% ] [90m[1mreimport[22m | лиса_new.ogg[39m[0m
+[  41% ] [90m[1mreimport[22m | ь_letter_new.ogg[39m[0m
+[  41% ] [90m[1mreimport[22m | лимон_new.ogg[39m[0m
+[  42% ] [90m[1mreimport[22m | ласточка_new.ogg[39m[0m
+[  42% ] [90m[1mreimport[22m | л_sound_new.ogg[39m[0m
+[  42% ] [90m[1mreimport[22m | э_letter_new.ogg[39m[0m
+[  42% ] [90m[1mreimport[22m | улитка_new.ogg[39m[0m
+[  42% ] [90m[1mreimport[22m | ц_sound_new.ogg[39m[0m
+[  42% ] [90m[1mreimport[22m | улей_new.ogg[39m[0m
+[  42% ] [90m[1mreimport[22m | у_sound_new.ogg[39m[0m
+[  43% ] [90m[1mreimport[22m | цапля_new.ogg[39m[0m
+[  43% ] [90m[1mreimport[22m | у_letter_new.ogg[39m[0m
+[  43% ] [90m[1mreimport[22m | тюлень_new.ogg[39m[0m
+[  43% ] [90m[1mreimport[22m | цветок_new.ogg[39m[0m
+[  43% ] [90m[1mreimport[22m | тыква_new.ogg[39m[0m
+[  43% ] [90m[1mreimport[22m | трактор_new.ogg[39m[0m
+[  43% ] [90m[1mreimport[22m | цепочка_new.ogg[39m[0m
+[  44% ] [90m[1mreimport[22m | торт_new.ogg[39m[0m
+[  44% ] [90m[1mreimport[22m | телефон_new.ogg[39m[0m
+[  44% ] [90m[1mreimport[22m | цирк_new.ogg[39m[0m
+[  44% ] [90m[1mreimport[22m | тарелка_new.ogg[39m[0m
+[  44% ] [90m[1mreimport[22m | т_sound_new.ogg[39m[0m
+[  44% ] [90m[1mreimport[22m | т_letter_new.ogg[39m[0m
+[  44% ] [90m[1mreimport[22m | халат_new.ogg[39m[0m
+[  44% ] [90m[1mreimport[22m | х_sound_new.ogg[39m[0m
+[  45% ] [90m[1mreimport[22m | х_letter_new.ogg[39m[0m
+[  45% ] [90m[1mreimport[22m | халва_new.ogg[39m[0m
+[  45% ] [90m[1mreimport[22m | фонтан_new.ogg[39m[0m
+[  45% ] [90m[1mreimport[22m | фламинго_new.ogg[39m[0m
+[  45% ] [90m[1mreimport[22m | хвост_new.ogg[39m[0m
+[  45% ] [90m[1mreimport[22m | флаг_new.ogg[39m[0m
+[  45% ] [90m[1mreimport[22m | филин_new.ogg[39m[0m
+[  46% ] [90m[1mreimport[22m | хлеб_new.ogg[39m[0m
+[  46% ] [90m[1mreimport[22m | фартук_new.ogg[39m[0m
+[  46% ] [90m[1mreimport[22m | ф_sound_new.ogg[39m[0m
+[  46% ] [90m[1mreimport[22m | ф_letter_new.ogg[39m[0m
+[  46% ] [90m[1mreimport[22m | хомяк_new.ogg[39m[0m
+[  46% ] [90m[1mreimport[22m | утюг_new.ogg[39m[0m
+[  46% ] [90m[1mreimport[22m | утка_new.ogg[39m[0m
+[  47% ] [90m[1mreimport[22m | ц_letter_new.ogg[39m[0m
+[  47% ] [90m[1mreimport[22m | усы_new.ogg[39m[0m
+[  47% ] [90m[1mreimport[22m | часы_new.ogg[39m[0m
+[  47% ] [90m[1mreimport[22m | робот_new.ogg[39m[0m
+[  47% ] [90m[1mreimport[22m | ракета_new.ogg[39m[0m
+[  47% ] [90m[1mreimport[22m | чемодан_new.ogg[39m[0m
+[  47% ] [90m[1mreimport[22m | радуга_new.ogg[39m[0m
+[  48% ] [90m[1mreimport[22m | р_sound_new.ogg[39m[0m
+[  48% ] [90m[1mreimport[22m | р_letter_new.ogg[39m[0m
+[  48% ] [90m[1mreimport[22m | червяк_new.ogg[39m[0m
+[  48% ] [90m[1mreimport[22m | пчела_new.ogg[39m[0m
+[  48% ] [90m[1mreimport[22m | подъезд_new.ogg[39m[0m
+[  48% ] [90m[1mreimport[22m | черепаха_new.ogg[39m[0m
+[  48% ] [90m[1mreimport[22m | подъёмник_new.ogg[39m[0m
+[  49% ] [90m[1mreimport[22m | подарок_new.ogg[39m[0m
+[  49% ] [90m[1mreimport[22m | ш_letter_new.ogg[39m[0m
+[  49% ] [90m[1mreimport[22m | пингвин_new.ogg[39m[0m
+[  49% ] [90m[1mreimport[22m | петух_new.ogg[39m[0m
+[  49% ] [90m[1mreimport[22m | ш_sound_new.ogg[39m[0m
+[  49% ] [90m[1mreimport[22m | паровоз_new.ogg[39m[0m
+[  49% ] [90m[1mreimport[22m | цыплёнок_new.ogg[39m[0m
+[  50% ] [90m[1mreimport[22m | сыр_new.ogg[39m[0m
+[  50% ] [90m[1mreimport[22m | съёмка_new.ogg[39m[0m
+[  50% ] [90m[1mreimport[22m | ч_letter_new.ogg[39m[0m
+[  50% ] [90m[1mreimport[22m | сок_new.ogg[39m[0m
+[  50% ] [90m[1mreimport[22m | слон_new.ogg[39m[0m
+[  50% ] [90m[1mreimport[22m | ч_sound_new.ogg[39m[0m
+[  50% ] [90m[1mreimport[22m | скворец_new.ogg[39m[0m
+[  51% ] [90m[1mreimport[22m | чай_new.ogg[39m[0m
+[  51% ] [90m[1mreimport[22m | светофор_new.ogg[39m[0m
+[  51% ] [90m[1mreimport[22m | самолёт_new.ogg[39m[0m
+[  51% ] [90m[1mreimport[22m | с_sound_new.ogg[39m[0m
+[  51% ] [90m[1mreimport[22m | чайка_new.ogg[39m[0m
+[  51% ] [90m[1mreimport[22m | с_letter_new.ogg[39m[0m
+[  51% ] [90m[1mreimport[22m | рысь_new.ogg[39m[0m
+[  52% ] [90m[1mreimport[22m | чайник_new.ogg[39m[0m
+[  52% ] [90m[1mreimport[22m | ручей_new.ogg[39m[0m
+[  52% ] [90m[1mreimport[22m | рот_new.ogg[39m[0m
+[  52% ] [90m[1mreimport[22m | ворона_new.ogg[39m[0m
+[  52% ] [90m[1mreimport[22m | г_letter_new.ogg[39m[0m
+[  52% ] [90m[1mreimport[22m | г_sound_new.ogg[39m[0m
+[  52% ] [90m[1mreimport[22m | галстук_new.ogg[39m[0m
+[  53% ] [90m[1mreimport[22m | глобус_new.ogg[39m[0m
+[  53% ] [90m[1mreimport[22m | гора_new.ogg[39m[0m
+[  53% ] [90m[1mreimport[22m | гриб_new.ogg[39m[0m
+[  53% ] [90m[1mreimport[22m | гусь_new.ogg[39m[0m
+[  53% ] [90m[1mreimport[22m | д_letter_new.ogg[39m[0m
+[  53% ] [90m[1mreimport[22m | д_sound_new.ogg[39m[0m
+[  53% ] [90m[1mreimport[22m | дверь_new.ogg[39m[0m
+[  54% ] [90m[1mreimport[22m | дельфин_new.ogg[39m[0m
+[  54% ] [90m[1mreimport[22m | дерево_new.ogg[39m[0m
+[  54% ] [90m[1mreimport[22m | диван_new.ogg[39m[0m
+[  54% ] [90m[1mreimport[22m | дом_new.ogg[39m[0m
+[  54% ] [90m[1mreimport[22m | дым_new.ogg[39m[0m
+[  54% ] [90m[1mreimport[22m | ящерица_new.ogg[39m[0m
+[  54% ] [90m[1mreimport[22m | дятел_new.ogg[39m[0m
+[  55% ] [90m[1mreimport[22m | е_letter_new.ogg[39m[0m
+[  55% ] [90m[1mreimport[22m | яхта_new.ogg[39m[0m
+[  55% ] [90m[1mreimport[22m | е_sound_new.ogg[39m[0m
+[  55% ] [90m[1mreimport[22m | еда_new.ogg[39m[0m
+[  55% ] [90m[1mreimport[22m | ежевика_new.ogg[39m[0m
+[  55% ] [90m[1mreimport[22m | якорь_new.ogg[39m[0m
+[  55% ] [90m[1mreimport[22m | ежиха_new.ogg[39m[0m
+[  55% ] [90m[1mreimport[22m | ель_new.ogg[39m[0m
+[  56% ] [90m[1mreimport[22m | ягода_new.ogg[39m[0m
+[  56% ] [90m[1mreimport[22m | menu_theme.ogg[39m[0m
+[  56% ] [90m[1mreimport[22m | ё_letter_new.ogg[39m[0m
+[  56% ] [90m[1mreimport[22m | ё_sound_new.ogg[39m[0m
+[  56% ] [90m[1mreimport[22m | ёж_new.ogg[39m[0m
+[  56% ] [90m[1mreimport[22m | ёлка_new.ogg[39m[0m
+[  56% ] [90m[1mreimport[22m | ёлочная игрушка_new.ogg[39m[0m
+[  57% ] [90m[1mreimport[22m | ёрш_new.ogg[39m[0m
+[  57% ] [90m[1mreimport[22m | ёршик_new.ogg[39m[0m
+[  57% ] [90m[1mreimport[22m | а_letter_new.ogg[39m[0m
+[  57% ] [90m[1mreimport[22m | а_sound_new.ogg[39m[0m
+[  57% ] [90m[1mreimport[22m | абрикос_new.ogg[39m[0m
+[  57% ] [90m[1mreimport[22m | автобус_new.ogg[39m[0m
+[  57% ] [90m[1mreimport[22m | аист_new.ogg[39m[0m
+[  58% ] [90m[1mreimport[22m | ананас_new.ogg[39m[0m
+[  58% ] [90m[1mreimport[22m | арбуз_new.ogg[39m[0m
+[  58% ] [90m[1mreimport[22m | б_letter_new.ogg[39m[0m
+[  58% ] [90m[1mreimport[22m | б_sound_new.ogg[39m[0m
+[  58% ] [90m[1mreimport[22m | банан_new.ogg[39m[0m
+[  58% ] [90m[1mreimport[22m | барабан_new.ogg[39m[0m
+[  58% ] [90m[1mreimport[22m | белка_new.ogg[39m[0m
+[  59% ] [90m[1mreimport[22m | ботинок_new.ogg[39m[0m
+[  59% ] [90m[1mreimport[22m | бочка_new.ogg[39m[0m
+[  59% ] [90m[1mreimport[22m | в_letter_new.ogg[39m[0m
+[  59% ] [90m[1mreimport[22m | в_sound_new.ogg[39m[0m
+[  59% ] [90m[1mreimport[22m | варежки_new.ogg[39m[0m
+[  59% ] [90m[1mreimport[22m | ведро_new.ogg[39m[0m
+[  59% ] [90m[1mreimport[22m | вода_new.ogg[39m[0m
+[  60% ] [90m[1mreimport[22m | волк_new.ogg[39m[0m
+[  60% ] [90m[1mreimport[22m | журнал_new.ogg[39m[0m
+[  60% ] [90m[1mreimport[22m | юрта_new.ogg[39m[0m
+[  60% ] [90m[1mreimport[22m | з_letter_new.ogg[39m[0m
+[  60% ] [90m[1mreimport[22m | з_sound_new.ogg[39m[0m
+[  60% ] [90m[1mreimport[22m | заяц_new.ogg[39m[0m
+[  60% ] [90m[1mreimport[22m | юпитер_new.ogg[39m[0m
+[  61% ] [90m[1mreimport[22m | звезда_new.ogg[39m[0m
+[  61% ] [90m[1mreimport[22m | зебра_new.ogg[39m[0m
+[  61% ] [90m[1mreimport[22m | юла_new.ogg[39m[0m
+[  61% ] [90m[1mreimport[22m | земляника_new.ogg[39m[0m
+[  61% ] [90m[1mreimport[22m | зонт_new.ogg[39m[0m
+[  61% ] [90m[1mreimport[22m | юг_new.ogg[39m[0m
+[  61% ] [90m[1mreimport[22m | и_letter_new.ogg[39m[0m
+[  62% ] [90m[1mreimport[22m | и_sound_new.ogg[39m[0m
+[  62% ] [90m[1mreimport[22m | игла_new.ogg[39m[0m
+[  62% ] [90m[1mreimport[22m | юбка_new.ogg[39m[0m
+[  62% ] [90m[1mreimport[22m | игрушка_new.ogg[39m[0m
+[  62% ] [90m[1mreimport[22m | ю_sound_new.ogg[39m[0m
+[  62% ] [90m[1mreimport[22m | избушка_new.ogg[39m[0m
+[  62% ] [90m[1mreimport[22m | индюк_new.ogg[39m[0m
+[  63% ] [90m[1mreimport[22m | ю_letter_new.ogg[39m[0m
+[  63% ] [90m[1mreimport[22m | ирис_new.ogg[39m[0m
+[  63% ] [90m[1mreimport[22m | й_letter_new.ogg[39m[0m
+[  63% ] [90m[1mreimport[22m | эскимо_new.ogg[39m[0m
+[  63% ] [90m[1mreimport[22m | й_sound_new.ogg[39m[0m
+[  63% ] [90m[1mreimport[22m | ж_letter_new.ogg[39m[0m
+[  63% ] [90m[1mreimport[22m | ж_sound_new.ogg[39m[0m
+[  64% ] [90m[1mreimport[22m | жемчуг_new.ogg[39m[0m
+[  64% ] [90m[1mreimport[22m | я_letter_new.ogg[39m[0m
+[  64% ] [90m[1mreimport[22m | я_sound_new.ogg[39m[0m
+[  64% ] [90m[1mreimport[22m | жук_new.ogg[39m[0m
+[  64% ] [90m[1mreimport[22m | жёлудь_new.ogg[39m[0m
+[  64% ] [90m[1mreimport[22m | жираф_new.ogg[39m[0m
+[  64% ] [90m[1mreimport[22m | яблоко_new.ogg[39m[0m
+[  65% ] [90m[1mreimport[22m | енот_new.ogg[39m[0m
+[  65% ] [90m[1mreimport[22m | Frog.png[39m[0m
+[  65% ] [90m[1mreimport[22m | Thread.png[39m[0m
+[  65% ] [90m[1mreimport[22m | Fox.png[39m[0m
+[  65% ] [90m[1mreimport[22m | Pumpkin.png[39m[0m
+[  65% ] [90m[1mreimport[22m | Giraffe.png[39m[0m
+[  65% ] [90m[1mreimport[22m | Shchi.png[39m[0m
+[  66% ] [90m[1mreimport[22m | Teapot.png[39m[0m
+[  66% ] [90m[1mreimport[22m | Glasses.png[39m[0m
+[  66% ] [90m[1mreimport[22m | Raccoon.png[39m[0m
+[  66% ] [90m[1mreimport[22m | Globe.png[39m[0m
+[  66% ] [90m[1mreimport[22m | Tail.png[39m[0m
+[  66% ] [90m[1mreimport[22m | Needle.png[39m[0m
+[  66% ] [90m[1mreimport[22m | Halva.png[39m[0m
+[  66% ] [90m[1mreimport[22m | Scissors.png[39m[0m
+[  67% ] [90m[1mreimport[22m | Swallow.png[39m[0m
+[  67% ] [90m[1mreimport[22m | Hamster.png[39m[0m
+[  67% ] [90m[1mreimport[22m | Pike.png[39m[0m
+[  67% ] [90m[1mreimport[22m | Hedgehog.png[39m[0m
+[  67% ] [90m[1mreimport[22m | Emu.png[39m[0m
+[  67% ] [90m[1mreimport[22m | Turtle.png[39m[0m
+[  67% ] [90m[1mreimport[22m | Entrance.png[39m[0m
+[  68% ] [90m[1mreimport[22m | Escalator.png[39m[0m
+[  68% ] [90m[1mreimport[22m | Plate.png[39m[0m
+[  68% ] [90m[1mreimport[22m | Turkey.png[39m[0m
+[  68% ] [90m[1mreimport[22m | Filming.png[39m[0m
+[  68% ] [90m[1mreimport[22m | Owl.png[39m[0m
+[  68% ] [90m[1mreimport[22m | Seal.png[39m[0m
+[  68% ] [90m[1mreimport[22m | Tree.png[39m[0m
+[  69% ] [90m[1mreimport[22m | Fir_Tree.png[39m[0m
+[  69% ] [90m[1mreimport[22m | Pinecone.png[39m[0m
+[  69% ] [90m[1mreimport[22m | Flag.png[39m[0m
+[  69% ] [90m[1mreimport[22m | Popsicle.png[39m[0m
+[  69% ] [90m[1mreimport[22m | Traffic_Light.png[39m[0m
+[  69% ] [90m[1mreimport[22m | Flamingo.png[39m[0m
+[  69% ] [90m[1mreimport[22m | Flower.png[39m[0m
+[  70% ] [90m[1mreimport[22m | Tractor.png[39m[0m
+[  70% ] [90m[1mreimport[22m | Octopus.png[39m[0m
+[  70% ] [90m[1mreimport[22m | Fly.png[39m[0m
+[  70% ] [90m[1mreimport[22m | Seagull.png[39m[0m
+[  70% ] [90m[1mreimport[22m | Tie.png[39m[0m
+[  70% ] [90m[1mreimport[22m | Food.png[39m[0m
+[  70% ] [90m[1mreimport[22m | Pineapple.png[39m[0m
+[  71% ] [90m[1mreimport[22m | Kangaroo.png[39m[0m
+[  71% ] [90m[1mreimport[22m | Squirrel.png[39m[0m
+[  71% ] [90m[1mreimport[22m | Rocket.png[39m[0m
+[  71% ] [90m[1mreimport[22m | NotoSans-Regular.ttf[39m[0m
+[  71% ] [90m[1mreimport[22m | щ_letter_new.ogg[39m[0m
+[  71% ] [90m[1mreimport[22m | носок_new.ogg[39m[0m
+[  71% ] [90m[1mreimport[22m | нос_new.ogg[39m[0m
+[  72% ] [90m[1mreimport[22m | щ_sound_new.ogg[39m[0m
+[  72% ] [90m[1mreimport[22m | ножницы_new.ogg[39m[0m
+[  72% ] [90m[1mreimport[22m | щётка_new.ogg[39m[0m
+[  72% ] [90m[1mreimport[22m | нитка_new.ogg[39m[0m
+[  72% ] [90m[1mreimport[22m | небо_new.ogg[39m[0m
+[  72% ] [90m[1mreimport[22m | н_sound_new.ogg[39m[0m
+[  72% ] [90m[1mreimport[22m | щенок_new.ogg[39m[0m
+[  73% ] [90m[1mreimport[22m | н_letter_new.ogg[39m[0m
+[  73% ] [90m[1mreimport[22m | мяч_new.ogg[39m[0m
+[  73% ] [90m[1mreimport[22m | щи_new.ogg[39m[0m
+[  73% ] [90m[1mreimport[22m | мышь_new.ogg[39m[0m
+[  73% ] [90m[1mreimport[22m | мыло_new.ogg[39m[0m
+[  73% ] [90m[1mreimport[22m | щит_new.ogg[39m[0m
+[  73% ] [90m[1mreimport[22m | муха_new.ogg[39m[0m
+[  74% ] [90m[1mreimport[22m | п_sound_new.ogg[39m[0m
+[  74% ] [90m[1mreimport[22m | шапка_new.ogg[39m[0m
+[  74% ] [90m[1mreimport[22m | п_letter_new.ogg[39m[0m
+[  74% ] [90m[1mreimport[22m | очки_new.ogg[39m[0m
+[  74% ] [90m[1mreimport[22m | шар_new.ogg[39m[0m
+[  74% ] [90m[1mreimport[22m | осьминог_new.ogg[39m[0m
+[  74% ] [90m[1mreimport[22m | олень_new.ogg[39m[0m
+[  75% ] [90m[1mreimport[22m | шарф_new.ogg[39m[0m
+[  75% ] [90m[1mreimport[22m | окно_new.ogg[39m[0m
+[  75% ] [90m[1mreimport[22m | огурец_new.ogg[39m[0m
+[  75% ] [90m[1mreimport[22m | шишка_new.ogg[39m[0m
+[  75% ] [90m[1mreimport[22m | объятие_new.ogg[39m[0m
+[  75% ] [90m[1mreimport[22m | объявление_new.ogg[39m[0m
+[  75% ] [90m[1mreimport[22m | шоколад_new.ogg[39m[0m
+[  76% ] [90m[1mreimport[22m | обезьяна_new.ogg[39m[0m
+[  76% ] [90m[1mreimport[22m | о_sound_new.ogg[39m[0m
+[  76% ] [90m[1mreimport[22m | о_letter_new.ogg[39m[0m
+[  76% ] [90m[1mreimport[22m | л_letter_new.ogg[39m[0m
+[  76% ] [90m[1mreimport[22m | курица_new.ogg[39m[0m
+[  76% ] [90m[1mreimport[22m | э_sound_new.ogg[39m[0m
+[  76% ] [90m[1mreimport[22m | кот_new.ogg[39m[0m
+[  77% ] [90m[1mreimport[22m | экран_new.ogg[39m[0m
+[  77% ] [90m[1mreimport[22m | конь_new.ogg[39m[0m
+[  77% ] [90m[1mreimport[22m | кенгуру_new.ogg[39m[0m
+[  77% ] [90m[1mreimport[22m | электричка_new.ogg[39m[0m
+[  77% ] [90m[1mreimport[22m | карандаш_new.ogg[39m[0m
+[  77% ] [90m[1mreimport[22m | капуста_new.ogg[39m[0m
+[  77% ] [90m[1mreimport[22m | к_sound_new.ogg[39m[0m
+[  77% ] [90m[1mreimport[22m | эму_new.ogg[39m[0m
+[  78% ] [90m[1mreimport[22m | к_letter_new.ogg[39m[0m
+[  78% ] [90m[1mreimport[22m | йод_new.ogg[39m[0m
+[  78% ] [90m[1mreimport[22m | эскалатор_new.ogg[39m[0m
+[  78% ] [90m[1mreimport[22m | йогурт_new.ogg[39m[0m
+[  78% ] [90m[1mreimport[22m | йети_new.ogg[39m[0m
+[  78% ] [90m[1mreimport[22m | морковь_new.ogg[39m[0m
+[  78% ] [90m[1mreimport[22m | щука_new.ogg[39m[0m
+[  79% ] [90m[1mreimport[22m | медведь_new.ogg[39m[0m
+[  79% ] [90m[1mreimport[22m | машина_new.ogg[39m[0m
+[  79% ] [90m[1mreimport[22m | ъ_letter_new.ogg[39m[0m
+[  79% ] [90m[1mreimport[22m | макароны_new.ogg[39m[0m
+[  79% ] [90m[1mreimport[22m | м_sound_new.ogg[39m[0m
+[  79% ] [90m[1mreimport[22m | м_letter_new.ogg[39m[0m
+[  79% ] [90m[1mreimport[22m | ы_letter_new.ogg[39m[0m
+[  80% ] [90m[1mreimport[22m | лягушка_new.ogg[39m[0m
+[  80% ] [90m[1mreimport[22m | луна_new.ogg[39m[0m
+[  80% ] [90m[1mreimport[22m | ы_sound_new.ogg[39m[0m
+[  80% ] [90m[1mreimport[22m | лиса_new.ogg[39m[0m
+[  80% ] [90m[1mreimport[22m | ь_letter_new.ogg[39m[0m
+[  80% ] [90m[1mreimport[22m | лимон_new.ogg[39m[0m
+[  80% ] [90m[1mreimport[22m | ласточка_new.ogg[39m[0m
+[  81% ] [90m[1mreimport[22m | л_sound_new.ogg[39m[0m
+[  81% ] [90m[1mreimport[22m | э_letter_new.ogg[39m[0m
+[  81% ] [90m[1mreimport[22m | улитка_new.ogg[39m[0m
+[  81% ] [90m[1mreimport[22m | ц_sound_new.ogg[39m[0m
+[  81% ] [90m[1mreimport[22m | улей_new.ogg[39m[0m
+[  81% ] [90m[1mreimport[22m | у_sound_new.ogg[39m[0m
+[  81% ] [90m[1mreimport[22m | цапля_new.ogg[39m[0m
+[  82% ] [90m[1mreimport[22m | у_letter_new.ogg[39m[0m
+[  82% ] [90m[1mreimport[22m | тюлень_new.ogg[39m[0m
+[  82% ] [90m[1mreimport[22m | цветок_new.ogg[39m[0m
+[  82% ] [90m[1mreimport[22m | тыква_new.ogg[39m[0m
+[  82% ] [90m[1mreimport[22m | трактор_new.ogg[39m[0m
+[  82% ] [90m[1mreimport[22m | цепочка_new.ogg[39m[0m
+[  82% ] [90m[1mreimport[22m | торт_new.ogg[39m[0m
+[  83% ] [90m[1mreimport[22m | телефон_new.ogg[39m[0m
+[  83% ] [90m[1mreimport[22m | цирк_new.ogg[39m[0m
+[  83% ] [90m[1mreimport[22m | тарелка_new.ogg[39m[0m
+[  83% ] [90m[1mreimport[22m | т_sound_new.ogg[39m[0m
+[  83% ] [90m[1mreimport[22m | т_letter_new.ogg[39m[0m
+[  83% ] [90m[1mreimport[22m | халат_new.ogg[39m[0m
+[  83% ] [90m[1mreimport[22m | х_sound_new.ogg[39m[0m
+[  84% ] [90m[1mreimport[22m | х_letter_new.ogg[39m[0m
+[  84% ] [90m[1mreimport[22m | халва_new.ogg[39m[0m
+[  84% ] [90m[1mreimport[22m | фонтан_new.ogg[39m[0m
+[  84% ] [90m[1mreimport[22m | фламинго_new.ogg[39m[0m
+[  84% ] [90m[1mreimport[22m | хвост_new.ogg[39m[0m
+[  84% ] [90m[1mreimport[22m | флаг_new.ogg[39m[0m
+[  84% ] [90m[1mreimport[22m | филин_new.ogg[39m[0m
+[  85% ] [90m[1mreimport[22m | хлеб_new.ogg[39m[0m
+[  85% ] [90m[1mreimport[22m | фартук_new.ogg[39m[0m
+[  85% ] [90m[1mreimport[22m | ф_sound_new.ogg[39m[0m
+[  85% ] [90m[1mreimport[22m | ф_letter_new.ogg[39m[0m
+[  85% ] [90m[1mreimport[22m | хомяк_new.ogg[39m[0m
+[  85% ] [90m[1mreimport[22m | утюг_new.ogg[39m[0m
+[  85% ] [90m[1mreimport[22m | утка_new.ogg[39m[0m
+[  86% ] [90m[1mreimport[22m | ц_letter_new.ogg[39m[0m
+[  86% ] [90m[1mreimport[22m | усы_new.ogg[39m[0m
+[  86% ] [90m[1mreimport[22m | часы_new.ogg[39m[0m
+[  86% ] [90m[1mreimport[22m | робот_new.ogg[39m[0m
+[  86% ] [90m[1mreimport[22m | ракета_new.ogg[39m[0m
+[  86% ] [90m[1mreimport[22m | чемодан_new.ogg[39m[0m
+[  86% ] [90m[1mreimport[22m | радуга_new.ogg[39m[0m
+[  87% ] [90m[1mreimport[22m | р_sound_new.ogg[39m[0m
+[  87% ] [90m[1mreimport[22m | р_letter_new.ogg[39m[0m
+[  87% ] [90m[1mreimport[22m | червяк_new.ogg[39m[0m
+[  87% ] [90m[1mreimport[22m | пчела_new.ogg[39m[0m
+[  87% ] [90m[1mreimport[22m | подъезд_new.ogg[39m[0m
+[  87% ] [90m[1mreimport[22m | черепаха_new.ogg[39m[0m
+[  87% ] [90m[1mreimport[22m | подъёмник_new.ogg[39m[0m
+[  88% ] [90m[1mreimport[22m | подарок_new.ogg[39m[0m
+[  88% ] [90m[1mreimport[22m | ш_letter_new.ogg[39m[0m
+[  88% ] [90m[1mreimport[22m | пингвин_new.ogg[39m[0m
+[  88% ] [90m[1mreimport[22m | петух_new.ogg[39m[0m
+[  88% ] [90m[1mreimport[22m | ш_sound_new.ogg[39m[0m
+[  88% ] [90m[1mreimport[22m | паровоз_new.ogg[39m[0m
+[  88% ] [90m[1mreimport[22m | цыплёнок_new.ogg[39m[0m
+[  88% ] [90m[1mreimport[22m | сыр_new.ogg[39m[0m
+[  89% ] [90m[1mreimport[22m | съёмка_new.ogg[39m[0m
+[  89% ] [90m[1mreimport[22m | ч_letter_new.ogg[39m[0m
+[  89% ] [90m[1mreimport[22m | сок_new.ogg[39m[0m
+[  89% ] [90m[1mreimport[22m | слон_new.ogg[39m[0m
+[  89% ] [90m[1mreimport[22m | ч_sound_new.ogg[39m[0m
+[  89% ] [90m[1mreimport[22m | скворец_new.ogg[39m[0m
+[  89% ] [90m[1mreimport[22m | чай_new.ogg[39m[0m
+[  90% ] [90m[1mreimport[22m | светофор_new.ogg[39m[0m
+[  90% ] [90m[1mreimport[22m | самолёт_new.ogg[39m[0m
+[  90% ] [90m[1mreimport[22m | с_sound_new.ogg[39m[0m
+[  90% ] [90m[1mreimport[22m | чайка_new.ogg[39m[0m
+[  90% ] [90m[1mreimport[22m | с_letter_new.ogg[39m[0m
+[  90% ] [90m[1mreimport[22m | рысь_new.ogg[39m[0m
+[  90% ] [90m[1mreimport[22m | чайник_new.ogg[39m[0m
+[  91% ] [90m[1mreimport[22m | ручей_new.ogg[39m[0m
+[  91% ] [90m[1mreimport[22m | рот_new.ogg[39m[0m
+[  91% ] [90m[1mreimport[22m | ворона_new.ogg[39m[0m
+[  91% ] [90m[1mreimport[22m | г_letter_new.ogg[39m[0m
+[  91% ] [90m[1mreimport[22m | г_sound_new.ogg[39m[0m
+[  91% ] [90m[1mreimport[22m | галстук_new.ogg[39m[0m
+[  91% ] [90m[1mreimport[22m | глобус_new.ogg[39m[0m
+[  92% ] [90m[1mreimport[22m | гора_new.ogg[39m[0m
+[  92% ] [90m[1mreimport[22m | гриб_new.ogg[39m[0m
+[  92% ] [90m[1mreimport[22m | гусь_new.ogg[39m[0m
+[  92% ] [90m[1mreimport[22m | д_letter_new.ogg[39m[0m
+[  92% ] [90m[1mreimport[22m | д_sound_new.ogg[39m[0m
+[  92% ] [90m[1mreimport[22m | дверь_new.ogg[39m[0m
+[  92% ] [90m[1mreimport[22m | дельфин_new.ogg[39m[0m
+[  93% ] [90m[1mreimport[22m | дерево_new.ogg[39m[0m
+[  93% ] [90m[1mreimport[22m | диван_new.ogg[39m[0m
+[  93% ] [90m[1mreimport[22m | дом_new.ogg[39m[0m
+[  93% ] [90m[1mreimport[22m | дым_new.ogg[39m[0m
+[  93% ] [90m[1mreimport[22m | ящерица_new.ogg[39m[0m
+[  93% ] [90m[1mreimport[22m | дятел_new.ogg[39m[0m
+[  93% ] [90m[1mreimport[22m | е_letter_new.ogg[39m[0m
+[  94% ] [90m[1mreimport[22m | яхта_new.ogg[39m[0m
+[  94% ] [90m[1mreimport[22m | е_sound_new.ogg[39m[0m
+[  94% ] [90m[1mreimport[22m | еда_new.ogg[39m[0m
+[  94% ] [90m[1mreimport[22m | ежевика_new.ogg[39m[0m
+[  94% ] [90m[1mreimport[22m | якорь_new.ogg[39m[0m
+[  94% ] [90m[1mreimport[22m | ежиха_new.ogg[39m[0m
+[  94% ] [90m[1mreimport[22m | ель_new.ogg[39m[0m
+[  95% ] [90m[1mreimport[22m | ягода_new.ogg[39m[0m
+[  95% ] [90m[1mreimport[22m | menu_theme.ogg[39m[0m
+[  95% ] [90m[1mreimport[22m | ё_letter_new.ogg[39m[0m
+[  95% ] [90m[1mreimport[22m | ё_sound_new.ogg[39m[0m
+[  95% ] [90m[1mreimport[22m | ёж_new.ogg[39m[0m
+[  95% ] [90m[1mreimport[22m | ёлка_new.ogg[39m[0m
+[  95% ] [90m[1mreimport[22m | ёлочная игрушка_new.ogg[39m[0m
+[  96% ] [90m[1mreimport[22m | ёрш_new.ogg[39m[0m
+[  96% ] [90m[1mreimport[22m | ёршик_new.ogg[39m[0m
+[  96% ] [90m[1mreimport[22m | а_letter_new.ogg[39m[0m
+[  96% ] [90m[1mreimport[22m | а_sound_new.ogg[39m[0m
+[  96% ] [90m[1mreimport[22m | абрикос_new.ogg[39m[0m
+[  96% ] [90m[1mreimport[22m | автобус_new.ogg[39m[0m
+[  96% ] [90m[1mreimport[22m | аист_new.ogg[39m[0m
+[  97% ] [90m[1mreimport[22m | ананас_new.ogg[39m[0m
+[  97% ] [90m[1mreimport[22m | арбуз_new.ogg[39m[0m
+[  97% ] [90m[1mreimport[22m | б_letter_new.ogg[39m[0m
+[  97% ] [90m[1mreimport[22m | б_sound_new.ogg[39m[0m
+[  97% ] [90m[1mreimport[22m | банан_new.ogg[39m[0m
+[  97% ] [90m[1mreimport[22m | барабан_new.ogg[39m[0m
+[  97% ] [90m[1mreimport[22m | белка_new.ogg[39m[0m
+[  98% ] [90m[1mreimport[22m | ботинок_new.ogg[39m[0m
+[  98% ] [90m[1mreimport[22m | бочка_new.ogg[39m[0m
+[  98% ] [90m[1mreimport[22m | в_letter_new.ogg[39m[0m
+[  98% ] [90m[1mreimport[22m | в_sound_new.ogg[39m[0m
+[  98% ] [90m[1mreimport[22m | варежки_new.ogg[39m[0m
+[  98% ] [90m[1mreimport[22m | ведро_new.ogg[39m[0m
+[  98% ] [90m[1mreimport[22m | вода_new.ogg[39m[0m
+[  99% ] [90m[1mreimport[22m | волк_new.ogg[39m[0m
+[  99% ] [90m[1mreimport[22m | журнал_new.ogg[39m[0m
+[  99% ] [90m[1mreimport[22m | юрта_new.ogg[39m[0m
+[  99% ] [90m[1mreimport[22m | з_letter_new.ogg[39m[0m
+[  99% ] [90m[1mreimport[22m | з_sound_new.ogg[39m[0m
+[  99% ] [90m[1mreimport[22m | заяц_new.ogg[39m[0m
+[  99% ] [90m[1mreimport[22m | Завершение импорта активов…[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started Импорт или повторный импорт ассетов (708 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Выполнение операций после реимпорта…[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Загрузка редактора (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Загрузка макета редактора…[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Загрузка док-панели…[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m

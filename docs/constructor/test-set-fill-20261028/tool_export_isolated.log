@@ -1,0 +1,11 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_39df30/img_a.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_39df30/img_b.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_39df30/img_v.webp","width":1024}
+[fill_test_set] набор: Тестовый набор
+[fill_test_set] id: c_39df30 (создан)
+[fill_test_set] запрошено букв: 3 (А, Б, В)
+[fill_test_set] полностью заполнено: 3
+[fill_test_set] выгружено файлов: 6 в /tmp/azbuka-fill-tool-home/azbuka-export
+[fill_test_set] ИТОГ: успех

@@ -1,0 +1,40 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_a.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_b.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_v.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_g.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_d.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_e.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_yo.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_zh.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_z.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":819,"path":"user://custom_sets/c_32ef86/img_i.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_j.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_k.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_l.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_m.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":683,"path":"user://custom_sets/c_32ef86/img_n.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_o.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":683,"path":"user://custom_sets/c_32ef86/img_p.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":683,"path":"user://custom_sets/c_32ef86/img_r.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_s.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_t.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_u.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_f.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_h.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_ts.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_ch.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_sh.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_sch.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_q.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_y.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_soft.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_eh.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_yu.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_32ef86/img_ya.webp","width":1024}
+[fill_test_set] набор: Тестовый набор
+[fill_test_set] id: c_32ef86 (обновлён)
+[fill_test_set] запрошено букв: 33 (А, Б, В, Г, Д, Е, Ё, Ж, З, И, Й, К, Л, М, Н, О, П, Р, С, Т, У, Ф, Х, Ц, Ч, Ш, Щ, Ъ, Ы, Ь, Э, Ю, Я)
+[fill_test_set] полностью заполнено: 33
+[fill_test_set] ИТОГ: успех

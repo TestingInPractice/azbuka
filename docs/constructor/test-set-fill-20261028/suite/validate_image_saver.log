@@ -1,0 +1,645 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[image_saver_validate] OK: тестовая картинка сохранилась в PNG-буфер
+[INFO] ImageSaver: image_saved  data={"height":64,"path":"user://image_saver_test.webp","width":64}
+[image_saver_validate] OK: save_image принял валидный PNG
+[image_saver_validate] OK: ширина прочитана (получено: 64)
+[image_saver_validate] OK: высота прочитана
+[image_saver_validate] OK: файл появился в user://
+[image_saver_validate] OK: сохранённый файл читается обратно (err=0)
+[image_saver_validate] OK: прочитанная ширина 64
+[image_saver_validate] OK: квадрат остался квадратом
+[image_saver_validate] OK: цвет выжил после сжатия (r=0.90 g=0.30 b=0.10)
+[INFO] ImageSaver: image_saved  data={"height":80,"path":"user://image_saver_test.webp","width":120}
+[image_saver_validate] OK: не-квадратная 120x80 сохранена
+[image_saver_validate] OK: файл не пуст (122 байт)
+[image_saver_validate] OK: сигнатура RIFF (получено: RIFF)
+[image_saver_validate] OK: сигнатура WEBP (получено: WEBP)
+[image_saver_validate] OK: размер в RIFF-заголовке сходится с файлом (файл 122, заголовок 122)
+[image_saver_validate] OK: файл читается обратно штатным Image.load() (err=0)
+[image_saver_validate] OK: размеры после кругосхорота 120x80 (получено: 120x80)
+[image_saver_validate] OK: цвет выжил после WebP-сжатия (r=0.80 g=0.20 b=0.60)
+[INFO] ImageSaver: image_saved  data={"height":32,"path":"user://image_saver_alpha_test.webp","width":32}
+[image_saver_validate] OK: прозрачная картинка сохранена
+[image_saver_validate] OK: прозрачность сохранена (alpha=0.00)
+[image_saver_validate] OK: большая картинка декодирована
+[image_saver_validate] OK: длинная сторона ужата до 1024 (получено: 1024)
+[image_saver_validate] OK: пропорции сохранены (получено: 512)
+[image_saver_validate] OK: декодированное изображение доступно
+[image_saver_validate] OK: маленькая картинка не увеличена
+[image_saver_validate] OK: маленькая высота не увеличена
+[image_saver_validate] OK: MAX_SIDE = 1024 (получено: 1024)
+[image_saver_validate] OK: WEBP_QUALITY в (0, 1] (получено: 0.90)
+[image_saver_validate] OK: 2000x1000 декодирована
+[image_saver_validate] OK: 2000x1000: длинная сторона ≤ MAX_SIDE (получено: 1024x512)
+[image_saver_validate] OK: 2000x1000: ни одна сторона не схлопнулась в ноль (получено: 1024x512)
+[image_saver_validate] OK: 2000x1000: пропорции сохранены (2.0000 против 2.0000)
+[image_saver_validate] OK: 1000x2000 декодирована
+[image_saver_validate] OK: 1000x2000: длинная сторона ≤ MAX_SIDE (получено: 512x1024)
+[image_saver_validate] OK: 1000x2000: ни одна сторона не схлопнулась в ноль (получено: 512x1024)
+[image_saver_validate] OK: 1000x2000: пропорции сохранены (0.5000 против 0.5000)
+[image_saver_validate] OK: 2000x2000 декодирована
+[image_saver_validate] OK: 2000x2000: длинная сторона ≤ MAX_SIDE (получено: 1024x1024)
+[image_saver_validate] OK: 2000x2000: ни одна сторона не схлопнулась в ноль (получено: 1024x1024)
+[image_saver_validate] OK: 2000x2000: пропорции сохранены (1.0000 против 1.0000)
+[image_saver_validate] OK: 1025x1024 декодирована
+[image_saver_validate] OK: 1025x1024: длинная сторона ≤ MAX_SIDE (получено: 1024x1023)
+[image_saver_validate] OK: 1025x1024: ни одна сторона не схлопнулась в ноль (получено: 1024x1023)
+[image_saver_validate] OK: 1025x1024: пропорции сохранены (1.0010 против 1.0010)
+[image_saver_validate] OK: 1024x1024 декодирована
+[image_saver_validate] OK: 1024x1024: длинная сторона ≤ MAX_SIDE (получено: 1024x1024)
+[image_saver_validate] OK: 1024x1024: ни одна сторона не схлопнулась в ноль (получено: 1024x1024)
+[image_saver_validate] OK: 1024x1024: картинка в пределах лимита не тронута (получено: 1024x1024)
+[image_saver_validate] OK: 1023x1023 декодирована
+[image_saver_validate] OK: 1023x1023: длинная сторона ≤ MAX_SIDE (получено: 1023x1023)
+[image_saver_validate] OK: 1023x1023: ни одна сторона не схлопнулась в ноль (получено: 1023x1023)
+[image_saver_validate] OK: 1023x1023: картинка в пределах лимита не тронута (получено: 1023x1023)
+[image_saver_validate] OK: 50x40 декодирована
+[image_saver_validate] OK: 50x40: длинная сторона ≤ MAX_SIDE (получено: 50x40)
+[image_saver_validate] OK: 50x40: ни одна сторона не схлопнулась в ноль (получено: 50x40)
+[image_saver_validate] OK: 50x40: картинка в пределах лимита не тронута (получено: 50x40)
+[image_saver_validate] OK: 1x1 декодирована
+[image_saver_validate] OK: 1x1: длинная сторона ≤ MAX_SIDE (получено: 1x1)
+[image_saver_validate] OK: 1x1: ни одна сторона не схлопнулась в ноль (получено: 1x1)
+[image_saver_validate] OK: 1x1: картинка в пределах лимита не тронута (получено: 1x1)
+[image_saver_validate] OK: пикер принимает 3 формата картинки (получено: 3)
+[image_saver_validate] OK: image/png: MIME отображается в формат
+[image_saver_validate] OK: image/png (png): кодировщик выдал непустой буфер
+[image_saver_validate] OK: image/png (png) декодируется
+[image_saver_validate] OK: image/png (png) декодирован в 48x48 (получено: 48x48)
+[image_saver_validate] OK: image/png (png) отдал объект Image для предпросмотра
+[image_saver_validate] OK: image/jpeg: MIME отображается в формат
+[image_saver_validate] OK: image/jpeg (jpeg): кодировщик выдал непустой буфер
+WARNING: Not a PNG file
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] _check_accepted_formats (res://tests/validate_image_saver.gd:144)
+         [2] _ready (res://tests/validate_image_saver.gd:49)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_accepted_formats (res://tests/validate_image_saver.gd:144)
+       [2] _ready (res://tests/validate_image_saver.gd:49)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_accepted_formats (res://tests/validate_image_saver.gd:144)
+       [2] _ready (res://tests/validate_image_saver.gd:49)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_accepted_formats (res://tests/validate_image_saver.gd:144)
+       [2] _ready (res://tests/validate_image_saver.gd:49)
+[image_saver_validate] OK: image/jpeg (jpeg) декодируется
+[image_saver_validate] OK: image/jpeg (jpeg) декодирован в 48x48 (получено: 48x48)
+[image_saver_validate] OK: image/jpeg (jpeg) отдал объект Image для предпросмотра
+[image_saver_validate] OK: image/webp: MIME отображается в формат
+[image_saver_validate] OK: image/webp (webp): кодировщик выдал непустой буфер
+WARNING: Not a PNG file
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] _check_accepted_formats (res://tests/validate_image_saver.gd:144)
+         [2] _ready (res://tests/validate_image_saver.gd:49)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_accepted_formats (res://tests/validate_image_saver.gd:144)
+       [2] _ready (res://tests/validate_image_saver.gd:49)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_accepted_formats (res://tests/validate_image_saver.gd:144)
+       [2] _ready (res://tests/validate_image_saver.gd:49)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_accepted_formats (res://tests/validate_image_saver.gd:144)
+       [2] _ready (res://tests/validate_image_saver.gd:49)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:104)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_accepted_formats (res://tests/validate_image_saver.gd:144)
+       [2] _ready (res://tests/validate_image_saver.gd:49)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_accepted_formats (res://tests/validate_image_saver.gd:144)
+       [2] _ready (res://tests/validate_image_saver.gd:49)
+[image_saver_validate] OK: image/webp (webp) декодируется
+[image_saver_validate] OK: image/webp (webp) декодирован в 48x48 (получено: 48x48)
+[image_saver_validate] OK: image/webp (webp) отдал объект Image для предпросмотра
+[image_saver_validate] OK: ни один принятый пикером формат не недостижим (3 из 3)
+[image_saver_validate] OK: хранилище просит img_a.webp (получено: img_a.webp)
+[image_saver_validate] OK: путь набора лежит в user://custom_sets/ (получено: user://custom_sets/c_ade43b/img_a.webp)
+[image_saver_validate] OK: путь набора оканчивается именем файла буквы (получено: user://custom_sets/c_ade43b/img_a.webp)
+[image_saver_validate] OK: путь хранилища оканчивается .webp (получено: user://custom_sets/c_ade43b/img_a.webp)
+[image_saver_validate] OK: два набора дают разные пути для одной буквы (user://custom_sets/c_ade43b/img_a.webp против user://custom_sets/c_bbbbbb/img_a.webp)
+[INFO] ImageSaver: image_saved  data={"height":32,"path":"user://custom_sets/c_ade43b/img_a.webp","width":32}
+[image_saver_validate] OK: ImageSaver принимает и пишет ровно тот путь, который даёт хранилище: user://custom_sets/c_ade43b/img_a.webp
+[image_saver_validate] OK: файл по пути хранилища появился: user://custom_sets/c_ade43b/img_a.webp
+WARNING: read beyond end of data
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] save_image (res://systems/image_saver.gd:60)
+         [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:321)
+         [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:321)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:321)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:321)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:104)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:321)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:321)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Method/function failed. Returning: ERR_FILE_CORRUPT
+   at: webp_load_image_from_buffer (modules/webp/webp_common.cpp:158)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:321)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _webp_mem_loader_func (modules/webp/image_loader_webp.cpp:42)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:321)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:321)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+[image_saver_validate] OK: мусорные байты отклонены
+[image_saver_validate] OK: код ошибки decode_failed (получено: decode_failed: Не удалось прочитать картинку)
+WARNING: Not a PNG file
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] save_image (res://systems/image_saver.gd:60)
+         [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:331)
+         [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:331)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:331)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:331)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:104)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:331)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:331)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Method/function failed. Returning: ERR_FILE_CORRUPT
+   at: webp_load_image_from_buffer (modules/webp/webp_common.cpp:158)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:331)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _webp_mem_loader_func (modules/webp/image_loader_webp.cpp:42)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:331)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:331)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+[image_saver_validate] OK: текст отклонён
+WARNING: Not a PNG file
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] save_image (res://systems/image_saver.gd:60)
+         [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:336)
+         [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:336)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:336)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:336)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:104)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:336)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:336)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Method/function failed. Returning: ERR_FILE_CORRUPT
+   at: webp_load_image_from_buffer (modules/webp/webp_common.cpp:158)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:336)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _webp_mem_loader_func (modules/webp/image_loader_webp.cpp:42)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:336)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_rejects_garbage (res://tests/validate_image_saver.gd:336)
+       [3] _ready (res://tests/validate_image_saver.gd:51)
+[image_saver_validate] OK: обрезанный файл отклонён
+[image_saver_validate] OK: пустой массив байтов отклонён
+[image_saver_validate] OK: пустой массив -> decode_failed (получено: decode_failed: Не удалось прочитать картинку)
+[INFO] ImageSaver: image_saved  data={"height":100,"path":"user://image_saver_test.webp","width":300}
+[image_saver_validate] OK: не-квадратная картинка принята
+[image_saver_validate] OK: размеры не-квадратной картинки сохранены
+[image_saver_validate] OK: запись в res:// отклонена
+[image_saver_validate] OK: код ошибки bad_target (получено: bad_target: Сохранять можно только в user://: res://assets/images/constructor_test.webp)
+[image_saver_validate] OK: текст ошибки объясняет, что писать можно только в user://
+[image_saver_validate] OK: расширение не .webp отклонено
+[image_saver_validate] OK: png -> bad_target (получено: bad_target: Ожидается расширение .webp: user://image_saver_test.png)
+[image_saver_validate] OK: png-файл не создан на диске
+ERROR: Can't save WebP at path: 'user://no_such_dir/x.webp'.
+   at: save_image (modules/webp/resource_saver_webp.cpp:56)
+   GDScript backtrace (most recent call first):
+       [0] save_image (res://systems/image_saver.gd:70)
+       [1] _check_bad_target_path (res://tests/validate_image_saver.gd:377)
+       [2] _ready (res://tests/validate_image_saver.gd:54)
+[image_saver_validate] OK: несуществующая папка отклонена
+[image_saver_validate] OK: код ошибки write_failed (получено: write_failed: Не удалось записать user://no_such_dir/x.webp (err=7))
+[image_saver_validate] OK: decode_failed (пустой буфер, user://image_saver_test.webp) отклонён
+[image_saver_validate] OK: decode_failed (пустой буфер, user://image_saver_test.webp): код отказа = decode_failed
+[image_saver_validate] OK: decode_failed (пустой буфер): у отказа есть текст для родителя
+[image_saver_validate] OK: decode_failed (пустой буфер): размеры отказа нулевые
+WARNING: read beyond end of data
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] save_image (res://systems/image_saver.gd:60)
+         [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:411)
+         [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:411)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:411)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:411)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:104)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:411)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:411)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Method/function failed. Returning: ERR_FILE_CORRUPT
+   at: webp_load_image_from_buffer (modules/webp/webp_common.cpp:158)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:411)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _webp_mem_loader_func (modules/webp/image_loader_webp.cpp:42)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:411)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:411)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+[image_saver_validate] OK: decode_failed (мусорные байты, user://image_saver_test.webp) отклонён
+[image_saver_validate] OK: decode_failed (мусорные байты, user://image_saver_test.webp): код отказа = decode_failed
+[image_saver_validate] OK: decode_failed (мусорные байты): у отказа есть текст для родителя
+[image_saver_validate] OK: decode_failed (мусорные байты): размеры отказа нулевые
+[image_saver_validate] OK: bad_target (запись в res://, res://assets/images/constructor_test.webp) отклонён
+[image_saver_validate] OK: bad_target (запись в res://, res://assets/images/constructor_test.webp): код отказа = bad_target
+[image_saver_validate] OK: bad_target (запись в res://): у отказа есть текст для родителя
+[image_saver_validate] OK: bad_target (запись в res://): размеры отказа нулевые
+[image_saver_validate] OK: bad_target (расширение .png, user://image_saver_test.png) отклонён
+[image_saver_validate] OK: bad_target (расширение .png, user://image_saver_test.png): код отказа = bad_target
+[image_saver_validate] OK: bad_target (расширение .png): у отказа есть текст для родителя
+[image_saver_validate] OK: bad_target (расширение .png): размеры отказа нулевые
+ERROR: Can't save WebP at path: 'user://no_such_dir/x.webp'.
+   at: save_image (modules/webp/resource_saver_webp.cpp:56)
+   GDScript backtrace (most recent call first):
+       [0] save_image (res://systems/image_saver.gd:70)
+       [1] _check_error_vocabulary (res://tests/validate_image_saver.gd:411)
+       [2] _ready (res://tests/validate_image_saver.gd:55)
+[image_saver_validate] OK: write_failed (нет папки, user://no_such_dir/x.webp) отклонён
+[image_saver_validate] OK: write_failed (нет папки, user://no_such_dir/x.webp): код отказа = write_failed
+[image_saver_validate] OK: write_failed (нет папки): у отказа есть текст для родителя
+[image_saver_validate] OK: write_failed (нет папки): размеры отказа нулевые
+[image_saver_validate] OK: множество кодов отказа = ["bad_target", "decode_failed", "write_failed"], ожидалось ["bad_target", "decode_failed", "write_failed"]
+WARNING: read beyond end of data
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] _check_error_vocabulary (res://tests/validate_image_saver.gd:434)
+         [2] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_error_vocabulary (res://tests/validate_image_saver.gd:434)
+       [2] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_error_vocabulary (res://tests/validate_image_saver.gd:434)
+       [2] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_error_vocabulary (res://tests/validate_image_saver.gd:434)
+       [2] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:104)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_error_vocabulary (res://tests/validate_image_saver.gd:434)
+       [2] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_error_vocabulary (res://tests/validate_image_saver.gd:434)
+       [2] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Method/function failed. Returning: ERR_FILE_CORRUPT
+   at: webp_load_image_from_buffer (modules/webp/webp_common.cpp:158)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_error_vocabulary (res://tests/validate_image_saver.gd:434)
+       [2] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _webp_mem_loader_func (modules/webp/image_loader_webp.cpp:42)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_error_vocabulary (res://tests/validate_image_saver.gd:434)
+       [2] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] _check_error_vocabulary (res://tests/validate_image_saver.gd:434)
+       [2] _ready (res://tests/validate_image_saver.gd:55)
+WARNING: read beyond end of data
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] save_image (res://systems/image_saver.gd:60)
+         [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:435)
+         [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:435)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:435)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:435)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:104)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:435)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:435)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Method/function failed. Returning: ERR_FILE_CORRUPT
+   at: webp_load_image_from_buffer (modules/webp/webp_common.cpp:158)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:435)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _webp_mem_loader_func (modules/webp/image_loader_webp.cpp:42)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:435)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_error_vocabulary (res://tests/validate_image_saver.gd:435)
+       [3] _ready (res://tests/validate_image_saver.gd:55)
+[image_saver_validate] OK: декодер отдаёт голый код decode_failed (получено: decode_failed)
+[image_saver_validate] OK: save_image наследует код декодера без искажения (decode_failed против decode_failed)
+[image_saver_validate] OK: у отказа декодирования нет картинки для предпросмотра
+[INFO] ImageSaver: image_saved  data={"height":48,"path":"user://image_saver_test.webp","width":48}
+[image_saver_validate] OK: эталонный файл сохранён
+WARNING: read beyond end of data
+     at: check_error (drivers/png/png_driver_common.cpp:55)
+     GDScript backtrace (most recent call first):
+         [0] decode_and_resize (res://systems/image_saver.gd:32)
+         [1] save_image (res://systems/image_saver.gd:60)
+         [2] _check_does_not_touch_existing_on_failure (res://tests/validate_image_saver.gd:454)
+         [3] _ready (res://tests/validate_image_saver.gd:56)
+ERROR: Condition "!success" is true. Returning: ERR_FILE_CORRUPT
+   at: png_to_image (drivers/png/png_driver_common.cpp:68)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_does_not_touch_existing_on_failure (res://tests/validate_image_saver.gd:454)
+       [3] _ready (res://tests/validate_image_saver.gd:56)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: load_mem_png (drivers/png/image_loader_png.cpp:60)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_does_not_touch_existing_on_failure (res://tests/validate_image_saver.gd:454)
+       [3] _ready (res://tests/validate_image_saver.gd:56)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_does_not_touch_existing_on_failure (res://tests/validate_image_saver.gd:454)
+       [3] _ready (res://tests/validate_image_saver.gd:56)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _jpeg_turbo_mem_loader_func (modules/jpg/image_loader_libjpeg_turbo.cpp:104)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_does_not_touch_existing_on_failure (res://tests/validate_image_saver.gd:454)
+       [3] _ready (res://tests/validate_image_saver.gd:56)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_does_not_touch_existing_on_failure (res://tests/validate_image_saver.gd:454)
+       [3] _ready (res://tests/validate_image_saver.gd:56)
+ERROR: Method/function failed. Returning: ERR_FILE_CORRUPT
+   at: webp_load_image_from_buffer (modules/webp/webp_common.cpp:158)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_does_not_touch_existing_on_failure (res://tests/validate_image_saver.gd:454)
+       [3] _ready (res://tests/validate_image_saver.gd:56)
+ERROR: Condition "err" is true. Returning: Ref<Image>()
+   at: _webp_mem_loader_func (modules/webp/image_loader_webp.cpp:42)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_does_not_touch_existing_on_failure (res://tests/validate_image_saver.gd:454)
+       [3] _ready (res://tests/validate_image_saver.gd:56)
+ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
+   at: _load_from_buffer (core/io/image.cpp:4542)
+   GDScript backtrace (most recent call first):
+       [0] decode_and_resize (res://systems/image_saver.gd:32)
+       [1] save_image (res://systems/image_saver.gd:60)
+       [2] _check_does_not_touch_existing_on_failure (res://tests/validate_image_saver.gd:454)
+       [3] _ready (res://tests/validate_image_saver.gd:56)
+[image_saver_validate] OK: неудачное сохранение не затёрло предыдущий файл
+ERROR: Can't save WebP at path: 'user://no_such_dir/x.webp'.
+   at: save_image (modules/webp/resource_saver_webp.cpp:56)
+   GDScript backtrace (most recent call first):
+       [0] save_image (res://systems/image_saver.gd:70)
+       [1] _check_does_not_touch_existing_on_failure (res://tests/validate_image_saver.gd:459)
+       [2] _ready (res://tests/validate_image_saver.gd:56)
+[image_saver_validate] OK: неудачная запись по чужому пути не затёрла эталон
+[image_saver_validate] PASSED: 126 проверок успешны
