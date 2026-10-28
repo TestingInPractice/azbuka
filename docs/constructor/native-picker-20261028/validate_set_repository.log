@@ -63,13 +63,13 @@ Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
 [set_repository_validate] fallback для всех 33 букв: OK
 [set_repository_validate] OK: встроенный набор не затронут откатом
 [set_repository_validate] OK: встроенный набор по-прежнему is_custom=false
-ERROR: Error opening file 'user://custom_sets/c_ba86e6/img_a.webp'.
+ERROR: Error opening file 'user://custom_sets/c_2033fa/img_a.webp'.
    at: load_image (core/io/image_loader.cpp:89)
    GDScript backtrace (most recent call first):
        [0] get_word_texture (res://systems/set_repository.gd:75)
        [1] _ready (res://tests/validate_set_repository.gd:212)
-[WARNING] SetRepository: image_load_failed  data={"err":7,"path":"user://custom_sets/c_ba86e6/img_a.webp"}
-[WARNING] SetRepository: image_missing  data={"letter":"А","path":"user://custom_sets/c_ba86e6/img_a.webp"}
+[WARNING] SetRepository: image_load_failed  data={"err":7,"path":"user://custom_sets/c_2033fa/img_a.webp"}
+[WARNING] SetRepository: image_missing  data={"letter":"А","path":"user://custom_sets/c_2033fa/img_a.webp"}
 [set_repository_validate] OK: удалённый файл картинки -> null, а не падение
 [set_repository_validate] OK: удалённый набор больше не пользовательский
 [set_repository_validate] OK: после удаления набора вернулись встроенные данные

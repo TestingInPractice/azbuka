@@ -7,8 +7,8 @@ Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
 [custom_sets_integration_validate] OK: встроенный набор представлен строковым id (получено: 2)
 [custom_sets_integration_validate] OK: два своих набора -> две кнопки (получено: 2)
 [WARNING] Settings: word_set_released_by_group  data={"set":1}
-[INFO] Settings: custom_set_changed  data={"set_id":"c_ade17b"}
-[custom_sets_integration_validate] OK: выбор своего набора переключил прогресс (получено: c_ade17b, ожидалось c_ade17b)
+[INFO] Settings: custom_set_changed  data={"set_id":"c_609227"}
+[custom_sets_integration_validate] OK: выбор своего набора переключил прогресс (получено: c_609227, ожидалось c_609227)
 [custom_sets_integration_validate] OK: кнопки подписаны именами наборов
 [custom_sets_integration_validate] OK: после удаления набора осталась одна кнопка
 [custom_sets_integration_validate] OK: кнопки встроенных наборов остались на месте
@@ -40,29 +40,29 @@ Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
 [custom_sets_integration_validate] OK: на пустом списке видна подсказка «создайте набор»
 [custom_sets_integration_validate] OK: кнопка «Новый набор» подписана на pressed (связей: 1)
 [INFO] SetList: refreshed  data={"rows":1}
-[INFO] SetEditor: set_opened  data={"set_id":"c_dbf56a"}
-[INFO] SetList: editor_opened  data={"set_id":"c_dbf56a"}
+[INFO] SetEditor: set_opened  data={"set_id":"c_29f59d"}
+[INFO] SetList: editor_opened  data={"set_id":"c_29f59d"}
 [custom_sets_integration_validate] OK: «Новый набор» эмитит open_editor ровно один раз (получено: 1)
-[custom_sets_integration_validate] OK: новый набор получил пользовательский id, а не номер (получено: c_dbf56a)
+[custom_sets_integration_validate] OK: новый набор получил пользовательский id, а не номер (получено: c_29f59d)
 [custom_sets_integration_validate] OK: набор появился в хранилище сразу после нажатия
 [custom_sets_integration_validate] OK: строка набора появилась в списке без ручного refresh (строк: 1)
 [custom_sets_integration_validate] OK: открылся редактор, а список ушёл в фон
 [custom_sets_integration_validate] OK: кнопка списка «Назад» спрятана, пока открыт редактор
-[custom_sets_integration_validate] OK: редактор открыт на созданный набор (получено: c_dbf56a)
+[custom_sets_integration_validate] OK: редактор открыт на созданный набор (получено: c_29f59d)
 [custom_sets_integration_validate] OK: новый набор пуст: счётчик готовности «заполнено 0 из 33»
 [custom_sets_integration_validate] OK: до apply_image() файла картинки нет — иначе проверка ниже прошла бы на старом мусоре
 [INFO] SetList: refreshed  data={"rows":1}
 [custom_sets_integration_validate] OK: save_word() принял слово «Аист»
 [custom_sets_integration_validate] OK: слово доехало до хранилища
 [custom_sets_integration_validate] OK: запись со словом без медиа НЕ считается готовой (иначе игра показала бы пустую карточку)
-[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_dbf56a/img_a.webp","width":8}
+[INFO] ImageSaver: image_saved  data={"height":8,"path":"user://custom_sets/c_29f59d/img_a.webp","width":8}
 [INFO] SetList: refreshed  data={"rows":1}
 [custom_sets_integration_validate] OK: apply_image() отчитался об успехе (получено: )
-[custom_sets_integration_validate] OK: apply_image() записал WebP в каталог набора (получено: user://custom_sets/c_dbf56a/img_a.webp)
+[custom_sets_integration_validate] OK: apply_image() записал WebP в каталог набора (получено: user://custom_sets/c_29f59d/img_a.webp)
 [custom_sets_integration_validate] OK: файл картинки не пустой
 [INFO] SetList: refreshed  data={"rows":1}
 [custom_sets_integration_validate] OK: apply_audio() отчитался об успехе (получено: )
-[custom_sets_integration_validate] OK: apply_audio() записал звук в каталог набора (получено: user://custom_sets/c_dbf56a/aud_a.wav)
+[custom_sets_integration_validate] OK: apply_audio() записал звук в каталог набора (получено: user://custom_sets/c_29f59d/aud_a.wav)
 [custom_sets_integration_validate] OK: файл звука не пустой
 [custom_sets_integration_validate] OK: после слова, картинки и звука запись «А» полная
 [custom_sets_integration_validate] OK: файлы легли в каталог СВОЕГО набора, а не в корень user://
@@ -71,7 +71,7 @@ Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
 [custom_sets_integration_validate] OK: у редактора есть кнопка «Готово»
 [INFO] SetList: refreshed  data={"rows":1}
 [INFO] SetList: refreshed  data={"rows":1}
-[INFO] SetEditor: set_saved  data={"set_id":"c_dbf56a"}
+[INFO] SetEditor: set_saved  data={"set_id":"c_29f59d"}
 [custom_sets_integration_validate] OK: после «Готово» редактор закрылся, список вернулся
 [custom_sets_integration_validate] OK: кнопка «Назад» списка вернулась вместе со списком
 [custom_sets_integration_validate] OK: после «Готово» в списке снова одна строка (строк: 1)
@@ -81,20 +81,20 @@ Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
 [custom_sets_integration_validate] OK: в настройках появилась ровно одна кнопка своего набора (получено: 1)
 [custom_sets_integration_validate] OK: кнопка подписана именем набора, а не его id (получено: Набор родителя)
 [WARNING] Settings: word_set_released_by_group  data={"set":1}
-[INFO] Settings: custom_set_changed  data={"set_id":"c_dbf56a"}
-[custom_sets_integration_validate] OK: выбор кнопки переключил прогресс на свой набор (получено: c_dbf56a)
+[INFO] Settings: custom_set_changed  data={"set_id":"c_29f59d"}
+[custom_sets_integration_validate] OK: выбор кнопки переключил прогресс на свой набор (получено: c_29f59d)
 [custom_sets_integration_validate] OK: репозиторий читает тот же набор, что выбран в прогрессе
 [custom_sets_integration_validate] OK: репозиторий считает набор пользовательским
 [custom_sets_integration_validate] OK: игра получила родительское слово «Аист» (получено: Аист)
 [custom_sets_integration_validate] OK: запись помечена как пользовательская, а не встроенная
-[custom_sets_integration_validate] OK: путь картинки у игры совпал с записанным файлом (получено: user://custom_sets/c_dbf56a/img_a.webp, ждали user://custom_sets/c_dbf56a/img_a.webp)
-[custom_sets_integration_validate] OK: путь звука у игры совпал с записанным файлом (получено: user://custom_sets/c_dbf56a/aud_a.wav, ждали user://custom_sets/c_dbf56a/aud_a.wav)
+[custom_sets_integration_validate] OK: путь картинки у игры совпал с записанным файлом (получено: user://custom_sets/c_29f59d/img_a.webp, ждали user://custom_sets/c_29f59d/img_a.webp)
+[custom_sets_integration_validate] OK: путь звука у игры совпал с записанным файлом (получено: user://custom_sets/c_29f59d/aud_a.wav, ждали user://custom_sets/c_29f59d/aud_a.wav)
 [custom_sets_integration_validate] OK: игра реально загрузила картинку набора, а не заглушку
 [custom_sets_integration_validate] OK: игра реально загрузила звук набора, а не заглушку
 [custom_sets_integration_validate] OK: в наборе для игры ровно одна буква, и это «А» (получено: ["А"])
 [custom_sets_integration_validate] OK: has_letter() отвечает по набору, а не по встроенному алфавиту
 [INFO] SetList: refreshed  data={"rows":2}
-[custom_sets_integration_validate] OK: второй набор получил другой id (получено: c_b8962b)
+[custom_sets_integration_validate] OK: второй набор получил другой id (получено: c_7d6dee)
 [custom_sets_integration_validate] OK: у наборов разные каталоги
 [custom_sets_integration_validate] OK: пустой второй набор не выдаёт запись за пользовательскую
 [custom_sets_integration_validate] OK: слово «Аист» не утекло во второй набор (получено: Авто́бус)
@@ -142,23 +142,19 @@ Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
 [custom_sets_integration_validate] OK: встроенный набор 5 отдаёт те же слова, что и раньше
 [custom_sets_integration_validate] OK: встроенный набор 5 отдаёт те же картинки, что и раньше
 [custom_sets_integration_validate] OK: картинка встроенного набора 5 грузится
-[custom_sets_integration_validate] OK: после перечитывания прогресса выбран тот же набор (получено: c_e86f8e)
+[custom_sets_integration_validate] OK: после перечитывания прогресса выбран тот же набор (получено: c_678d6a)
 [custom_sets_integration_validate] OK: после перечитывания хранилища репозиторий видит тот же набор
 [custom_sets_integration_validate] OK: после перечитывания набор отдаёт обе буквы (получено: 2)
 [custom_sets_integration_validate] OK: после перечитывания слово «А» сохранилось
 [INFO] letter_card: ready  data={"index":0,"letter":"А"}
 [custom_sets_integration_validate] OK: letter_card.tscn поднялся на своём наборе
-[INFO] CollectWordGame: game_entered  data={"games_played":1}
-[INFO] CollectWordGame: word_shown  data={"letter":"Я","letter_count":6,"word":"Я́блоко"}
+[INFO] CollectWordGame: game_entered  data={"games_played":2}
+[INFO] CollectWordGame: word_shown  data={"letter":"Э","letter_count":5,"word":"Экра́н"}
 [custom_sets_integration_validate] OK: collect_word.tscn поднялся на своём наборе
 [custom_sets_integration_validate] OK: find_letter.tscn поднялся на своём наборе
-[INFO] GuessPictureGame: game_entered  data={"games_played":2}
+[INFO] GuessPictureGame: game_entered  data={"games_played":3}
 [INFO] GuessPictureGame: game_start  data={"total_rounds":10}
-[INFO] GuessPictureGame: round_start  data={"answers":["Объявле́ние","Мы́ло","Сок","Луна́"],"correct_word":"Луна́","letter":"Л","round":1}
+[INFO] GuessPictureGame: round_start  data={"answers":["Рот","Кот","Мы́ло","Фонта́н"],"correct_word":"Рот","letter":"Р","round":1}
 [custom_sets_integration_validate] OK: guess_picture.tscn поднялся на своём наборе
 [custom_sets_integration_validate] выполнено проверок: 130
 [custom_sets_integration_validate] PASSED: 130 проверок успешны
-WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
-   at: cleanup (core/object/object.cpp:2663)
-ERROR: 2 resources still in use at exit (run with --verbose for details).
-   at: clear (core/io/resource.cpp:810)

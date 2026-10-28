@@ -65,10 +65,16 @@ static func read_file_with_limit(path: String, kind: String, limit_bytes: int) -
 	var file := FileAccess.open(path, FileAccess.READ)
 	if file == null:
 		return _read_error("read_failed")
-	var bytes := file.get_buffer(file.get_length())
-	file.close()
-	if bytes.size() > limit_bytes:
+	# Размер проверяем до чтения: родитель может выбрать видеофайл на сотни
+	# мегабайт, и get_buffer() успел бы загрузить его в память целиком.
+	var length := file.get_length()
+	if length > limit_bytes:
+		file.close()
 		return _read_error("too_large")
+	var bytes := file.get_buffer(length)
+	file.close()
+	if bytes.is_empty():
+		return _read_error("read_failed")
 	var mime := mime_for_extension(ext_lower)
 	if mime.is_empty():
 		return _read_error("unsupported_type")
@@ -99,8 +105,6 @@ static func pick(kind: String) -> Dictionary:
 		dialog.title = "Выберите картинку"
 	else:
 		dialog.title = "Выберите звук"
-	tree.root.add_child(dialog)
-	dialog.popup_centered_ratio(0.8)
 	var selected_path := ""
 	var cancelled := false
 	dialog.file_selected.connect(func(path: String) -> void:
@@ -109,8 +113,17 @@ static func pick(kind: String) -> Dictionary:
 	dialog.canceled.connect(func() -> void:
 		cancelled = true
 	)
-	while dialog.visible:
+	dialog.close_requested.connect(func() -> void:
+		cancelled = true
+	)
+	tree.root.add_child(dialog)
+	dialog.popup_centered_ratio(0.8)
+	# Ждём сигналы, а не dialog.visible: у нативного диалога окном владеет ОС,
+	# и цикл по visible мог завершиться сразу после popup, вернув cancelled
+	# без всякого выбора файла.
+	while not cancelled and selected_path.is_empty():
 		await tree.process_frame
+	dialog.hide()
 	dialog.queue_free()
 	if cancelled or selected_path.is_empty():
 		return _read_error("cancelled")

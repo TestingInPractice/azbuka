@@ -3,7 +3,7 @@ Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
 [custom_sets_store_validate] OK: load_sets() на пустом хранилище успешен
 [custom_sets_store_validate] OK: хранилище изначально пусто
 [custom_sets_store_validate] OK: create_set вернул запись
-[custom_sets_store_validate] OK: id начинается с c_ (получено: c_7bc7a7)
+[custom_sets_store_validate] OK: id начинается с c_ (получено: c_7dfa3e)
 [custom_sets_store_validate] OK: имя набора сохранено
 [custom_sets_store_validate] OK: новый набор без букв
 [custom_sets_store_validate] OK: счётчик букв = 0
@@ -22,8 +22,8 @@ Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
 [custom_sets_store_validate] OK: слово без картинки и звука неполная
 [custom_sets_store_validate] OK: запись, где пусто всё, отклонена
 [custom_sets_store_validate] OK: отклонённая пустая запись не создана
-[custom_sets_store_validate] OK: префикс user:// срезан (получено: custom_sets/c_7bc7a7/img_d.webp)
-[custom_sets_store_validate] OK: ведущий слэш срезан (получено: custom_sets/c_7bc7a7/aud_d.wav)
+[custom_sets_store_validate] OK: префикс user:// срезан (получено: custom_sets/c_7dfa3e/img_d.webp)
+[custom_sets_store_validate] OK: ведущий слэш срезан (получено: custom_sets/c_7dfa3e/aud_d.wav)
 [custom_sets_store_validate] OK: неизвестный set_id -> {}
 [custom_sets_store_validate] OK: неизвестный набор -> {}
 [custom_sets_store_validate] OK: неизвестная буква -> {}

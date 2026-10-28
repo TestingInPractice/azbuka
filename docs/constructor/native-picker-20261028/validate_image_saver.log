@@ -140,13 +140,13 @@ ERROR: Condition "image.is_null()" is true. Returning: ERR_PARSE_ERROR
 [image_saver_validate] OK: image/webp (webp) отдал объект Image для предпросмотра
 [image_saver_validate] OK: ни один принятый пикером формат не недостижим (3 из 3)
 [image_saver_validate] OK: хранилище просит img_a.webp (получено: img_a.webp)
-[image_saver_validate] OK: путь набора лежит в user://custom_sets/ (получено: user://custom_sets/c_dc9adf/img_a.webp)
-[image_saver_validate] OK: путь набора оканчивается именем файла буквы (получено: user://custom_sets/c_dc9adf/img_a.webp)
-[image_saver_validate] OK: путь хранилища оканчивается .webp (получено: user://custom_sets/c_dc9adf/img_a.webp)
-[image_saver_validate] OK: два набора дают разные пути для одной буквы (user://custom_sets/c_dc9adf/img_a.webp против user://custom_sets/c_bbbbbb/img_a.webp)
-[INFO] ImageSaver: image_saved  data={"height":32,"path":"user://custom_sets/c_dc9adf/img_a.webp","width":32}
-[image_saver_validate] OK: ImageSaver принимает и пишет ровно тот путь, который даёт хранилище: user://custom_sets/c_dc9adf/img_a.webp
-[image_saver_validate] OK: файл по пути хранилища появился: user://custom_sets/c_dc9adf/img_a.webp
+[image_saver_validate] OK: путь набора лежит в user://custom_sets/ (получено: user://custom_sets/c_9e3042/img_a.webp)
+[image_saver_validate] OK: путь набора оканчивается именем файла буквы (получено: user://custom_sets/c_9e3042/img_a.webp)
+[image_saver_validate] OK: путь хранилища оканчивается .webp (получено: user://custom_sets/c_9e3042/img_a.webp)
+[image_saver_validate] OK: два набора дают разные пути для одной буквы (user://custom_sets/c_9e3042/img_a.webp против user://custom_sets/c_bbbbbb/img_a.webp)
+[INFO] ImageSaver: image_saved  data={"height":32,"path":"user://custom_sets/c_9e3042/img_a.webp","width":32}
+[image_saver_validate] OK: ImageSaver принимает и пишет ровно тот путь, который даёт хранилище: user://custom_sets/c_9e3042/img_a.webp
+[image_saver_validate] OK: файл по пути хранилища появился: user://custom_sets/c_9e3042/img_a.webp
 WARNING: read beyond end of data
      at: check_error (drivers/png/png_driver_common.cpp:55)
      GDScript backtrace (most recent call first):
