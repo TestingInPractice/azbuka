@@ -316,6 +316,10 @@ func _pick_message(kind: String, error: String) -> String:
 		return "выбор отменён"
 	if kind == "audio" and error == "unsupported_type":
 		return "формат звука не поддерживается"
+	if kind == "audio" and error == "convert_failed":
+		# m4a с iPhone декодирует браузер; отказ означает битый файл или
+		# отсутствие Web Audio — проще записать в приложении, чем разбираться.
+		return "не удалось перекодировать звук, запишите его здесь"
 	if kind == "image":
 		return "не удалось выбрать картинку"
 	return "не удалось выбрать звук"

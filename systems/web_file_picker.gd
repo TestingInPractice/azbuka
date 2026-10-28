@@ -38,6 +38,11 @@ const IMAGE_MIME_TYPES := [
 ## Инвариант «каждый тип отсюда даёт непустое расширение, и набор расширений
 ## ровно {wav, ogg, mp3, m4a}» проверяет tests/validate_web_file_picker.gd.
 ## Если он падает — не чините таблицу, а приводите её к этому инварианту.
+##
+## Исключение из «проигрывать нечем»: m4a и aac Godot не читает, поэтому pick()
+## перекодирует их в WAV ещё до возврата (AudioTranscoder) и отдаёт mime
+## audio/wav. Наружу m4a выходит только если конвертация не удалась — тогда
+## это честная ошибка convert_failed, а не молчание в плеере.
 const AUDIO_MIME_TYPES := [
 	"audio/wav",
 	"audio/x-wav",
@@ -238,9 +243,20 @@ static func _on_input_changed(args: Array) -> void:
 	# Ссылка на FileReader держится в _reader_ref: JS собирает мусор сам, и
 	# без поля сборщик успеет снять объект до конца async-чтения.
 	_reader_ref = JavaScriptBridge.create_object("FileReader")
-	_reader_ref.onload = _reader_callback_ref
+	# Для m4a data URL остаётся в JS: AudioTranscoder декодирует его там же,
+	# потому что AAC умеет только Web Audio. Через границу едет готовый WAV.
+	_reader_ref.onload = _reader_callback(file)
 	_reader_ref.onerror = _reader_callback_ref
 	_reader_ref.readAsDataURL(file)
+
+
+## Колбэк onload для конкретного файла. Конвертируемый звук заворачивается в
+## stash(): data URL кладётся в window.omoAudio, а не пересылается в Godot.
+static func _reader_callback(file: JavaScriptObject) -> Variant:
+	var mime := str(file.type)
+	if AudioTranscoder.is_convertible(mime):
+		return AudioTranscoder.stash_reader_callback(_reader_callback_ref)
+	return _reader_callback_ref
 
 
 ## Колбэк FileReader. args[0] — ProgressEvent, у него target.result
@@ -267,6 +283,17 @@ static func _on_file_read(args: Array) -> void:
 	if kind.is_empty():
 		_finish_with_error("unsupported_type")
 		return
+	# m4a Godot не читает: браузер декодирует AAC и отдаёт WAV. Конвертация идёт
+	# здесь, а не в редакторе, чтобы apply_audio() всегда получал проигрываемый
+	# формат и расширение совпадало с содержимым файла.
+	if AudioTranscoder.is_convertible(mime):
+		var converted := await AudioTranscoder.convert()
+		if not bool(converted.get("ok", false)):
+			_finish_with_error("convert_failed")
+			return
+		bytes = converted.get("bytes", PackedByteArray())
+		mime = str(converted.get("mime", "audio/wav"))
+		file_name = AudioTranscoder.wav_name(file_name)
 	if bytes.size() > max_bytes_for_kind(kind):
 		_finish_with_error("too_large")
 		return
