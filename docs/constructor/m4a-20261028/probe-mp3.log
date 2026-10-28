@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[mp3_probe] OK: исходный mp3 прочитан: /tmp/azbuka-m4a/real_voice.mp3
+[mp3_probe] OK: mp3 записан в user://
+[mp3_probe] OK: load_audio_file() вернул поток
+[mp3_probe] OK: поток именно AudioStreamMP3 (AudioStreamMP3)
+[mp3_probe] OK: длительность совпадает с ffprobe: 2.091
+[mp3_probe] OK: плеер продолжает играть через 0.7 с
+[mp3_probe] OK: позиция воспроизведения растет: 0.467
+[mp3_probe] OK: микшер работает: 44100 Гц
+[mp3_probe] PASSED
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2663)

@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8"><title>omo m4a bridge probe</title>
+<script src="bridge.js"></script>
+<script>
+window.__result = null;
+window.runProbe = function (dataUrl) {
+  return new Promise(function (resolve) {
+    window.omoAudio._url = dataUrl;
+    window.omoAudio.convert(function (text) {
+      var payload = JSON.parse(text);
+      if (!payload.ok) { window.__result = payload; resolve(payload); return; }
+      var bin = atob(payload.base64);
+      var bytes = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) { bytes[i] = bin.charCodeAt(i); }
+      var header = String.fromCharCode(bytes[0], bytes[1], bytes[2], bytes[3]);
+      var view = new DataView(bytes.buffer);
+      var ctx = new AudioContext();
+      ctx.decodeAudioData(bytes.buffer.slice(0)).then(function (audio) {
+        window.__result = {ok: true, header: header, riffSize: view.getUint32(4, true),
+          sampleRate: payload.sampleRate, duration: payload.duration, wavBytes: bytes.length,
+          decodedDuration: audio.duration, decodedRate: audio.sampleRate,
+          decodedChannels: audio.numberOfChannels};
+        resolve(window.__result);
+      }, function () {
+        window.__result = {ok: false, error: 'wav_not_decodable', header: header};
+        resolve(window.__result);
+      });
+    });
+  });
+};
+</script>
+<p>harness</p>
