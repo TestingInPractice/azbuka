@@ -59,13 +59,17 @@ theme_override_font_sizes/font_size = 40
 text = "Готово"
 accessibility_name = "Готово"
 
-[node name="Slots" type="GridContainer" parent="Margin/Layout"]
-unique_name_in_owner = true
+[node name="ScrollArea" type="ScrollContainer" parent="Margin/Layout"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Slots" type="GridContainer" parent="Margin/Layout/ScrollArea"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/h_separation = 24
 theme_override_constants/v_separation = 24
-columns = 3
+columns = 1
 
 [node name="BackButton" parent="." instance=ExtResource("3_back")]
 unique_name_in_owner = true

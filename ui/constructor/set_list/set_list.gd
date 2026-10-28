@@ -65,7 +65,7 @@ func refresh() -> void:
 		var set_id := str(record.get("id", ""))
 		var row: SetListRow = ROW_SCENE.instantiate()
 		_scroll.add_child(row)
-		var open_count := CustomSetsStore.get_set_letter_count(set_id)
+		var open_count := CustomSetsStore.get_set_complete_count(set_id)
 		row.setup(str(record.get("name", "")), open_count,
 				CustomSetsStore.is_set_complete(set_id))
 		row.pressed.connect(_on_row_pressed.bind(set_id))

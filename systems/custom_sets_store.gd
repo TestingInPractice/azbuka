@@ -240,14 +240,27 @@ func get_set_letters(set_id: String) -> Array[String]:
 	return out
 
 
-## Сколько букв заполнено в наборе.
+## Сколько букв заполнено в наборе (у буквы есть хоть какие-то данные).
 func get_set_letter_count(set_id: String) -> int:
 	return get_set_letters(set_id).size()
 
 
-## Набор полон — все 33 буквы заполнены.
+## Сколько букв заполнено ПОЛНОСТЬЮ: слово, картинка и звук. Именно это число
+## показывают и список, и редактор: буква без звука в играх не заиграет.
+## Раньше список считал любые записи (get_set_letter_count), а редактор —
+## только полные, и один набор выглядел как «2 из 33» снаружи и «0 из 33»
+## внутри.
+func get_set_complete_count(set_id: String) -> int:
+	var filled := 0
+	for letter: String in get_set_letters(set_id):
+		if is_entry_complete(set_id, letter):
+			filled += 1
+	return filled
+
+
+## Набор полон — все 33 буквы заполнены полностью.
 func is_set_complete(set_id: String) -> bool:
-	return get_set_letter_count(set_id) >= FULL_SET_SIZE
+	return get_set_complete_count(set_id) >= FULL_SET_SIZE
 
 
 ## Доступно ли хранилище для записи. Вне web (тесты, десктоп) — всегда true.

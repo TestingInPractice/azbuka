@@ -1,0 +1,12 @@
+validate_custom_sets_store: [custom_sets_store_validate] PASSED: все проверки успешны
+validate_set_repository: [set_repository_validate] PASSED: 66 проверок успешны
+validate_custom_sets_integration: [custom_sets_integration_validate] PASSED: 130 проверок успешны
+validate_constructor_ui: [constructor_ui_validate] PASSED: 335 проверок успешны
+validate_word_sets: FAILED: 4 проверок
+validate_find_letter: [find_letter_validate] PASSED: все проверки успешны
+validate_progress_set_id: [progress_set_id_validate] PASSED: все проверки успешны
+validate_letter_translit: [letter_translit_validate] PASSED: все проверки успешны
+validate_image_saver: [image_saver_validate] PASSED: 126 проверок успешны
+validate_voice_record: [voice_record_validate] PASSED: 53 проверок успешны
+validate_web_file_picker: [web_file_picker_validate] PASSED: все проверки успешны
+validate_ui_changes: [ui_validate] PASSED: все проверки успешны

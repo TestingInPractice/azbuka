@@ -33,6 +33,10 @@ var _word := ""
 var _has_image := false
 var _has_audio := false
 var _recording := false
+## Разовое сообщение поверх подписи состояния: «выбор отменён», «не удалось
+## сохранить картинку» и подобное. Сбрасывается при setup(), снятии записи и
+## любом нажатии кнопки, чтобы устаревшая ошибка не маскировала состояние.
+var _message := ""
 ## Пока true, сигнал word_edited не отправляется: setup() заполняет поле
 ## программно, и без этого флага каждый refresh() пересохранял бы набор.
 var _updating := false
@@ -73,23 +77,40 @@ func setup(letter: String, word: String, image_path: String, audio_path: String)
 	_letter_label.text = letter
 	_word_edit.text = word
 	_updating = false
+	_message = ""
 	_thumbnail.texture = _load_thumbnail(image_path)
 	_refresh()
 
 
-## Показывает или снимает состояние записи. Пока идёт запись, кнопки
-## блокируются: вторая запись поверх первой затёрла бы первую.
+## Показывает разовое сообщение вместо подписи состояния: пикер отменился,
+## файл не сохранился, запись не удалась. Вызывается SetEditor — слот сам
+## ошибок не порождает.
+func show_message(text: String) -> void:
+	_message = text
+	_refresh()
+
+
+## Показывает или снимает состояние записи. Пока идёт запись, «Слушать» и
+## «Очистить» блокируются: вторая запись поверх первой затёрла бы первую.
+## Кнопка звука при этом остаётся активной и превращается в «Стоп» —
+## иначе остановить запись было бы нечем.
 func set_recording(active: bool) -> void:
+	_message = ""
 	_recording = active
 	_refresh()
 
 
-## Блокирует все действия на время сохранения файла.
+## Блокирует все действия на время сохранения файла. Снятие блокировки
+## возвращает кнопкам состояние через _refresh(): во время записи «Слушать»
+## и «Очистить» должны остаться выключенными.
 func set_busy(busy: bool) -> void:
-	_image_button.disabled = busy
-	_audio_button.disabled = busy
-	_play_button.disabled = busy or not _has_audio
-	_clear_button.disabled = busy or not (_has_image or _has_audio)
+	if busy:
+		_image_button.disabled = true
+		_audio_button.disabled = true
+		_play_button.disabled = true
+		_clear_button.disabled = true
+		return
+	_refresh()
 
 
 func get_letter() -> String:
@@ -120,34 +141,46 @@ func _load_thumbnail(image_path: String) -> Texture2D:
 
 
 ## Пересчитывает подписи и доступность кнопок из текущего состояния.
+## Приоритет подписи: запись -> разовое сообщение -> состояние медиа.
 func _refresh() -> void:
 	if _recording:
 		_status_label.text = "запись…"
+	elif not _message.is_empty():
+		_status_label.text = _message
 	else:
 		_status_label.text = describe_state(_has_image, _has_audio)
 	_image_button.disabled = false
-	_audio_button.disabled = _recording
+	_audio_button.disabled = false
+	_audio_button.text = "Стоп" if _recording else "Записать"
 	_play_button.disabled = _recording or not _has_audio
 	_clear_button.disabled = _recording or not (_has_image or _has_audio)
 
 
 func _on_image_pressed() -> void:
+	_message = ""
 	GameLogger.info("LetterSlot", "image_requested", {"letter": _letter})
+	_refresh()
 	image_requested.emit(_letter)
 
 
 func _on_audio_pressed() -> void:
+	_message = ""
 	GameLogger.info("LetterSlot", "audio_requested", {"letter": _letter})
+	_refresh()
 	audio_requested.emit(_letter)
 
 
 func _on_play_pressed() -> void:
+	_message = ""
 	GameLogger.info("LetterSlot", "play_requested", {"letter": _letter})
+	_refresh()
 	play_requested.emit(_letter)
 
 
 func _on_clear_pressed() -> void:
+	_message = ""
 	GameLogger.info("LetterSlot", "clear_requested", {"letter": _letter})
+	_refresh()
 	clear_requested.emit(_letter)
 
 

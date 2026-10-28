@@ -100,6 +100,16 @@ func get_letter_sound(letter: String) -> AudioStream:
 	return _cached_audio(AlphabetData.get_letter_sound_path(letter))
 
 
+## Звук из произвольного файла набора, без привязки к букве и без кэша.
+## Нужен предпросмотру в редакторе: файл ещё не выбран активным набором, но
+## играть его надо тем же загрузчиком, что и остальные звуки, иначе WAV-ветка
+## молча принимает ogg/mp3-байты и предпросмотр звучит тишиной.
+func load_audio_file(path: String) -> AudioStream:
+	if path.is_empty():
+		return null
+	return _load_audio(path)
+
+
 ## Буквы активного набора. Для встроенного — все 33, для пользовательского —
 ## только заполненные родителем.
 func get_active_letters() -> Array[String]:

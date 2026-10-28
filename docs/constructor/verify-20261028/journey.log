@@ -1,0 +1,38 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[journey] OK: подготовка: два набора в хранилище
+[INFO] SetList: refreshed  data={"rows":2}
+[journey] OK: экран «Мои наборы» открылся с двумя строками (получено: 2)
+[journey] OK: подпись «пока нет своих наборов» не показана при непустом хранилище
+[journey] OK: в списке видны имена наборов (получено: ["Детский", "Пустой"])
+[INFO] SetEditor: set_opened  data={"set_id":"c_4af1fa"}
+[INFO] SetList: editor_opened  data={"set_id":"c_4af1fa"}
+[journey] OK: строка открыла редактор, список скрыт
+[journey] OK: редактор открыл именно нажатый набор (получено: c_4af1fa)
+[journey] OK: в редакторе 33 слота букв (получено: 33)
+[journey] OK: сохранённое слово видно в слоте (получено: Арбуз)
+[INFO] SetList: refreshed  data={"rows":2}
+[journey] OK: редактор принял слово «Банан» для буквы Б
+[journey] OK: слово «Банан» записано в набор
+[journey] OK: у редактора есть кнопка «Назад»
+[INFO] SetEditor: close_requested  data={"set_id":"c_4af1fa"}
+[journey] OK: «Назад» вернул к списку
+[journey] OK: после возврата в списке по-прежнему две строки
+[INFO] SetList: refreshed  data={"rows":3}
+[INFO] SetEditor: set_opened  data={"set_id":"c_3b77d1"}
+[INFO] SetList: editor_opened  data={"set_id":"c_3b77d1"}
+[journey] OK: «Создать набор» открыл редактор нового набора (id: c_3b77d1)
+[INFO] SetList: refreshed  data={"rows":3}
+[journey] OK: редактор принял имя «Конструктор»
+[INFO] SetEditor: close_requested  data={"set_id":"c_3b77d1"}
+[journey] OK: после создания в списке три строки (получено: 3)
+[journey] OK: новый набор «Конструктор» виден в списке
+[INFO] SetList: refreshed  data={"rows":3}
+[journey] OK: после перечитывания файла три набора (получено: 3)
+[journey] OK: имя нового набора сохранилось на диске
+[journey] OK: слово «Банан» сохранилось на диске
+[INFO] SetList: refreshed  data={"rows":3}
+[INFO] SetList: refreshed  data={"rows":2}
+[journey] OK: удаление строки уменьшило список (3 -> 2)
+[INFO] SetList: refreshed  data={"rows":0}
+[journey] PASSED: 21 проверок

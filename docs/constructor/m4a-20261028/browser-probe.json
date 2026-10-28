@@ -1,0 +1,14 @@
+{
+ "result": {
+  "ok": true,
+  "header": "RIFF",
+  "riffSize": 201826,
+  "sampleRate": 48000,
+  "duration": 2.1019791666666667,
+  "wavBytes": 201834,
+  "decodedDuration": 2.1019791666666667,
+  "decodedRate": 48000,
+  "decodedChannels": 1
+ },
+ "errors": []
+}
