@@ -1,0 +1,34 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[audio_transcoder_validate] OK: audio/mp4 конвертируется
+[audio_transcoder_validate] OK: audio/x-m4a конвертируется
+[audio_transcoder_validate] OK: audio/m4a конвертируется
+[audio_transcoder_validate] OK: audio/aac конвертируется
+[audio_transcoder_validate] OK: MIME с параметрами и в верхнем регистре конвертируется
+[audio_transcoder_validate] OK: audio/wav не конвертируется
+[audio_transcoder_validate] OK: audio/ogg не конвертируется
+[audio_transcoder_validate] OK: audio/mpeg не конвертируется
+[audio_transcoder_validate] OK: пустой MIME не конвертируется
+[audio_transcoder_validate] OK: картинка не конвертируется
+[audio_transcoder_validate] OK: имя m4a меняет расширение: Запись.wav
+[audio_transcoder_validate] OK: имя без расширения получает .wav
+[audio_transcoder_validate] OK: точки в базисе сохраняются: a.b.wav
+[audio_transcoder_validate] OK: путь отбрасывается, регистр расширения не важен: voice.wav
+[audio_transcoder_validate] OK: скрытое имя не остаётся без базиса: .m4a.wav
+[audio_transcoder_validate] OK: успешный ответ моста разобран
+[audio_transcoder_validate] OK: base64 разобран в байты RIFF: 4
+[audio_transcoder_validate] OK: после конвертации mime ровно audio/wav
+[audio_transcoder_validate] OK: длительность перенесена из ответа
+[audio_transcoder_validate] OK: не JSON: не выдаётся за успех
+[audio_transcoder_validate] OK: не JSON: код ошибки bad_response (получен bad_response)
+[audio_transcoder_validate] OK: JSON без словаря: не выдаётся за успех
+[audio_transcoder_validate] OK: JSON без словаря: код ошибки bad_response (получен bad_response)
+[audio_transcoder_validate] OK: ok=false: не выдаётся за успех
+[audio_transcoder_validate] OK: ok=false: код ошибки decode_failed (получен decode_failed)
+[audio_transcoder_validate] OK: пустой base64: не выдаётся за успех
+[audio_transcoder_validate] OK: пустой base64: код ошибки bad_payload (получен bad_payload)
+[audio_transcoder_validate] OK: у неуспешного разбора нет байтов
+[audio_transcoder_validate] OK: convert() вне web возвращает ошибку
+[audio_transcoder_validate] OK: код ошибки not_web
+[audio_transcoder_validate] OK: мост вне web не устанавливается
+[audio_transcoder_validate] PASSED: все проверки успешны

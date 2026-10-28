@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://native_file_picker_validate"]
+
+[ext_resource type="Script" path="res://tests/validate_native_file_picker.gd" id="1"]
+
+[node name="ValidateNativeFilePicker" type="Node"]
+script = ExtResource("1")

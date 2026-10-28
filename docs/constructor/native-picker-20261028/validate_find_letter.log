@@ -1,0 +1,16 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[INFO] FindLetterGame: series_started  data={"length":10}
+[INFO] FindLetterGame: card_shown  data={"index":1,"letter":"Ю","total":10}
+[find_letter_validate] карточка 1 (Ю): текстура 1254x1254, файл=Spinning_Top.png, placeholder=false
+[find_letter_validate] audio для Ю существует: res://assets/audio/ю_letter_tts.wav
+[INFO] FindLetterGame: card_shown  data={"index":2,"letter":"П","total":10}
+[find_letter_validate] карточка 2 (П): текстура 1536x1024, файл=Gift.png, placeholder=false
+[find_letter_validate] карточка 1: Ю, карточка 2: П — разные
+[INFO] FindLetterGame: word_image_pressed  data={"letter":"П"}
+[find_letter_validate] gui_input клик по картинке обработан
+[find_letter_validate] PASSED: все проверки успешны
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2663)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)
