@@ -282,13 +282,14 @@ func _refresh_slot(letter: String) -> void:
 			_set_path(str(entry.get("audio", ""))))
 
 
-## Считает полные записи и обновляет подпись.
+## Обновляет подпись счётчика. Считает ПОЛНЫЕ записи (слово+картинка+звук) —
+## тем же методом, что и строка списка (SetListRow.setup ← get_set_complete_count).
+## Раньше список считал любые данные, а редактор только полные, и один набор
+## показывал «заполнено 2 из 33» снаружи и «заполнено 0 из 33» внутри: родитель
+## видел свой прогресс пропавшим.
 func _update_readiness() -> void:
-	var filled := 0
-	for letter: String in LETTERS:
-		if CustomSetsStore.is_entry_complete(_set_id, letter):
-			filled += 1
-	_readiness_label.text = readiness_label(filled, LETTERS.size())
+	_readiness_label.text = readiness_label(
+			CustomSetsStore.get_set_complete_count(_set_id), LETTERS.size())
 
 
 func _apply_ok() -> Dictionary:
@@ -426,14 +427,19 @@ func _on_recording_finished(_has_data: bool) -> void:
 
 
 ## Прослушивание: играем файл набора через общий аудиоплеер.
+## Формат различает общий загрузчик SetRepository: раньше здесь собирался
+## AudioStreamWAV из сырых байтов, поэтому ogg- и mp3-файлы (а после конвертации
+## и m4a) молча играли тишину — WAV-контейнер получал чужие байты.
 func _on_play_requested(letter: String) -> void:
 	var entry := CustomSetsStore.get_entry(_set_id, letter)
 	var path := _set_path(str(entry.get("audio", "")))
 	if path.is_empty() or not FileAccess.file_exists(path):
 		GameLogger.info("SetEditor", "play_missing", {"letter": letter})
 		return
-	var stream := AudioStreamWAV.new()
-	stream.data = FileAccess.get_file_as_bytes(path)
+	var stream := SetRepository.load_audio_file(path)
+	if stream == null:
+		GameLogger.warning("SetEditor", "play_unsupported", {"letter": letter, "path": path})
+		return
 	AudioManager.play_stream(stream)
 
 

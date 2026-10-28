@@ -119,6 +119,8 @@ func _ready() -> void:
 	await _check_set_list()
 	await _check_set_list_ready_ran()
 	await _check_set_list_reads_store_on_open()
+	await _check_readiness_counts_agree()
+	await _check_play_preview_uses_real_format()
 	await _check_two_sets_never_share_path()
 	await _check_parental_gate()
 
@@ -1725,6 +1727,168 @@ func _check_set_list_reads_store_on_open() -> void:
 	CustomSetsStore.delete_set(str(first.get("id", "")))
 	CustomSetsStore.delete_set(str(second.get("id", "")))
 	list.queue_free()
+	await get_tree().process_frame
+
+
+## Список и редактор обязаны показывать ОДИН счётчик заполненности. Регрессия:
+## строка списка считала буквы с любыми данными (get_set_letter_count), а
+## редактор — только полные записи (is_entry_complete), и один набор выглядел
+## как «заполнено 2 из 33» снаружи и «заполнено 0 из 33» внутри. Для родителя
+## это потеря работы, а не косметика.
+##
+## Полной считается запись со словом, картинкой и звуком; буква без медиа в
+## играх не заиграет и в счётчик не идёт — поэтому берём две полные записи и
+## одну неполную, и обе подписи обязаны показать 2, а не 3.
+func _check_readiness_counts_agree() -> void:
+	# Отсутствующий метод не должен молча съедать проверки: вызов упал бы с
+	# «Nonexistent function», а счётчик выполненных проверок просто уменьшился
+	# бы — то есть регрессия выглядела бы как «проверок меньше», а не как провал.
+	if not CustomSetsStore.has_method("get_set_complete_count"):
+		_fail("в CustomSetsStore нет get_set_complete_count — общего счётчика нет")
+		return
+	CustomSetsStore.clear_memory()
+	CustomSetsStore.save_sets()
+	var created := CustomSetsStore.create_set("Счётчики")
+	var set_id := str(created.get("id", ""))
+	for letter: String in ["А", "Б"]:
+		CustomSetsStore.set_entry(set_id, letter, "Слово",
+				"custom_sets/%s/img_%s.webp" % [set_id, letter],
+				"custom_sets/%s/aud_%s.wav" % [set_id, letter])
+	CustomSetsStore.set_entry(set_id, "В", "Слово", "", "")
+	_check(CustomSetsStore.get_set_complete_count(set_id) == 2,
+			"подготовка счётчиков: две полные записи из трёх (получено: %d)"
+			% CustomSetsStore.get_set_complete_count(set_id))
+
+	var scene: PackedScene = load("res://ui/constructor/set_list/set_list.tscn")
+	if scene == null:
+		_fail("set_list.tscn не загружается — счётчики проверить нечем")
+		return
+	var list: Node = scene.instantiate()
+	add_child(list)
+	await get_tree().process_frame
+
+	var row := (list as SetList).get_row(0)
+	_check(row != null, "подготовка счётчиков: строка набора есть")
+	if row == null:
+		CustomSetsStore.delete_set(set_id)
+		list.queue_free()
+		await get_tree().process_frame
+		return
+	var row_label := row.get_node_or_null("%CountLabel") as Label
+	_check(row_label != null and row_label.text == "заполнено 2 из 33",
+			"список считает только полные записи (получено: %s)"
+			% ("<nil>" if row_label == null else row_label.text))
+
+	row.emit_signal("pressed")
+	await get_tree().process_frame
+	var editor := list.get_node_or_null("%SetEditor") as SetEditor
+	var editor_label: Label = null
+	if editor != null:
+		editor_label = editor.get_node_or_null("%ReadinessLabel") as Label
+	_check(editor != null and editor.visible, "строка открыла редактор набора")
+	_check(editor_label != null and row_label != null and editor_label.text == row_label.text,
+			"редактор и список показывают один счётчик (список: %s, редактор: %s)"
+			% ["<nil>" if row_label == null else row_label.text,
+			"<nil>" if editor_label == null else editor_label.text])
+
+	# Полный набор: обе подписи переходят в «набор готов к играм».
+	for entry: Dictionary in AlphabetData.get_letters():
+		var letter := str(entry.get("letter", ""))
+		CustomSetsStore.set_entry(set_id, letter, "Слово",
+				"custom_sets/%s/img_%s.webp" % [set_id, letter],
+				"custom_sets/%s/aud_%s.wav" % [set_id, letter])
+	(list as SetList).refresh()
+	if editor != null:
+		(editor as SetEditor).refresh()
+	await get_tree().process_frame
+	# refresh() пересобирает строки, поэтому старые ссылки на узлы уже мертвы.
+	var fresh_row := (list as SetList).get_row(0)
+	var fresh_row_label: Label = null
+	if fresh_row != null:
+		fresh_row_label = fresh_row.get_node_or_null("%CountLabel") as Label
+	var fresh_editor_label: Label = null
+	if editor != null:
+		fresh_editor_label = editor.get_node_or_null("%ReadinessLabel") as Label
+	_check(fresh_row_label != null and fresh_row_label.text == "набор готов к играм",
+			"полный набор: список пишет «набор готов к играм» (получено: %s)"
+			% ("<nil>" if fresh_row_label == null else fresh_row_label.text))
+	_check(fresh_editor_label != null and fresh_editor_label.text == "набор готов к играм",
+			"полный набор: редактор пишет «набор готов к играм» (получено: %s)"
+			% ("<nil>" if fresh_editor_label == null else fresh_editor_label.text))
+
+	CustomSetsStore.delete_set(set_id)
+	list.queue_free()
+	await get_tree().process_frame
+
+
+## Предпросмотр обязан играть файл набора тем же загрузчиком, что и игры.
+## Регрессия: SetEditor собирал AudioStreamWAV из сырых байтов файла, поэтому
+## ogg и mp3 молчали — WAV-контейнер получал чужие байты, а m4a выдавался за
+## рабочий звук. Наблюдаемое свидетельство — класс стрима в общем плеере
+## AudioManager после нажатия «Слушать».
+func _check_play_preview_uses_real_format() -> void:
+	if not SetRepository.has_method("load_audio_file"):
+		_fail("в SetRepository нет load_audio_file — предпросмотр грузит звук сам")
+		return
+	CustomSetsStore.clear_memory()
+	CustomSetsStore.save_sets()
+	var set_id := str(CustomSetsStore.create_set("Предпросмотр").get("id", ""))
+	var dir_path := ProjectSettings.globalize_path(CustomSetsStore.set_dir(set_id))
+	DirAccess.make_dir_recursive_absolute(dir_path)
+
+	var ogg_bytes := FileAccess.get_file_as_bytes("res://assets/audio/а_letter_new.ogg")
+	_check(ogg_bytes.size() > 0,
+			"подготовка предпросмотра: ogg-файл прочитан (%d байт)" % ogg_bytes.size())
+	var ogg_path := dir_path.path_join("aud_a.ogg")
+	var ogg_file := FileAccess.open(ogg_path, FileAccess.WRITE)
+	if ogg_file != null:
+		ogg_file.store_buffer(ogg_bytes)
+		ogg_file.close()
+	CustomSetsStore.set_entry(set_id, "А", "Слово", "",
+			"custom_sets/%s/aud_a.ogg" % set_id)
+
+	var scene: PackedScene = load("res://ui/constructor/set_editor/set_editor.tscn")
+	if scene == null:
+		_fail("set_editor.tscn не загружается — предпросмотр проверить нечем")
+		return
+	var editor: Node = scene.instantiate()
+	add_child(editor)
+	await get_tree().process_frame
+	(editor as SetEditor).open_set(set_id)
+	await get_tree().process_frame
+
+	var slot := (editor as SetEditor).get_slot("А")
+	_check(slot != null, "предпросмотр: слот буквы «А» есть")
+	if slot != null:
+		(slot.get_node("%PlayButton") as Button).emit_signal("pressed")
+		await get_tree().process_frame
+		var stream: AudioStream = AudioManager._player.stream
+		_check(stream is AudioStreamOggVorbis,
+				"предпросмотр играет ogg, а не WAV из чужих байтов (получено: %s)"
+				% ("<nil>" if stream == null else stream.get_class()))
+
+	# Неподдерживаемый m4a не должен подменяться тишиной в WAV-обёртке:
+	# плеер не получает новый стрим, прошлый звук остаётся как есть.
+	var m4a_path := dir_path.path_join("aud_b.m4a")
+	var m4a_file := FileAccess.open(m4a_path, FileAccess.WRITE)
+	if m4a_file != null:
+		m4a_file.store_buffer(PackedByteArray([0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70]))
+		m4a_file.close()
+	CustomSetsStore.set_entry(set_id, "Б", "Слово", "", "custom_sets/%s/aud_b.m4a" % set_id)
+	(editor as SetEditor).open_set(set_id)
+	await get_tree().process_frame
+	var slot_b := (editor as SetEditor).get_slot("Б")
+	_check(slot_b != null, "предпросмотр: слот буквы «Б» есть")
+	if slot_b != null:
+		(slot_b.get_node("%PlayButton") as Button).emit_signal("pressed")
+		await get_tree().process_frame
+		var stream_b: AudioStream = AudioManager._player.stream
+		_check(not (stream_b is AudioStreamWAV),
+				"m4a не подменяется WAV-обёрткой (получено: %s)"
+				% ("<nil>" if stream_b == null else stream_b.get_class()))
+
+	CustomSetsStore.delete_set(set_id)
+	editor.queue_free()
 	await get_tree().process_frame
 
 

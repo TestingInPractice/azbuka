@@ -229,12 +229,73 @@ func _ready() -> void:
 			"запись буквы пережила перечитывание JSON")
 	CustomSetsStore.delete_set(saved_id)
 
+	_check_audio_file_loader()
+
 	CustomSetsStore.save_path = _saved_store_path
 	ProgressManager.save_path = _saved_progress_path
 	_remove_test_file("user://set_repository_test_progress.json")
 	if FileAccess.file_exists(TEST_SET_PATH):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(TEST_SET_PATH))
 	_finish()
+
+
+## Предпросмотр в редакторе набора обязан идти тем же загрузчиком, что и игры.
+## Раньше SetEditor собирал AudioStreamWAV из сырых байтов файла: wav звучал,
+## а ogg/mp3 молчали, потому что WAV-контейнер получал чужие байты. Проверка
+## держит контракт load_audio_file по расширению, а не по конкретному файлу.
+func _check_audio_file_loader() -> void:
+	_check(SetRepository.load_audio_file("") == null, "пустой путь -> null")
+
+	var ogg := SetRepository.load_audio_file("res://assets/audio/а_letter_new.ogg")
+	_check(ogg is AudioStreamOggVorbis, "ogg -> AudioStreamOggVorbis (получено: %s)" % _class_of(ogg))
+	_check(ogg != null and ogg.get_length() > 0.0, "ogg читается целиком, длительность > 0")
+
+	var wav_path := "user://load_audio_test.wav"
+	_save_test_wav(wav_path)
+	var wav := SetRepository.load_audio_file(wav_path)
+	_check(wav is AudioStreamWAV, "wav из user:// -> AudioStreamWAV (получено: %s)" % _class_of(wav))
+	_check(wav != null and wav.get_length() > 0.0, "wav читается целиком, длительность > 0")
+	_remove_test_file(wav_path)
+
+	# Битый mp3 не должен выдаваться за WAV: именно это и прятал старый код.
+	var bad_mp3 := "user://load_audio_test.mp3"
+	_save_bytes(bad_mp3, PackedByteArray([0x49, 0x44, 0x33, 0x04, 0x00, 0x00]))
+	var junk := SetRepository.load_audio_file(bad_mp3)
+	_check(not (junk is AudioStreamWAV),
+			"битый mp3 не подменяется AudioStreamWAV (получено: %s)" % _class_of(junk))
+	_check(junk == null or junk.get_length() <= 0.0, "битый mp3 не даёт звука")
+	_remove_test_file(bad_mp3)
+
+	# m4a загрузчик не поддерживает и обязан честно вернуть null, а не тишину.
+	var m4a := "user://load_audio_test.m4a"
+	_save_bytes(m4a, PackedByteArray([0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70]))
+	_check(SetRepository.load_audio_file(m4a) == null,
+			"m4a -> null (формат не поддержан загрузчиком)")
+	_remove_test_file(m4a)
+
+
+func _class_of(stream: AudioStream) -> String:
+	return "null" if stream == null else stream.get_class()
+
+
+func _save_test_wav(path: String) -> void:
+	var wav := AudioStreamWAV.new()
+	wav.format = AudioStreamWAV.FORMAT_16_BITS
+	wav.mix_rate = 22050
+	wav.stereo = false
+	var samples := PackedByteArray()
+	samples.resize(2205 * 2)
+	for i in 1102:
+		samples[i * 2] = 0
+		samples[i * 2 + 1] = 0x20
+	wav.data = samples
+	wav.save_to_wav(ProjectSettings.globalize_path(path))
+
+
+func _save_bytes(path: String, bytes: PackedByteArray) -> void:
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	file.store_buffer(bytes)
+	file.close()
 
 
 ## Обход ВСЕХ 33 букв на частичном наборе. Не выборка: урок Task 1 — Е и Э
