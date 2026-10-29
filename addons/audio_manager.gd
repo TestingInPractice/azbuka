@@ -25,6 +25,10 @@ func _ready() -> void:
 	_music_player = AudioStreamPlayer.new()
 	_music_player.bus = &"Master"
 	add_child(_music_player)
+	# ProgressManager стоит в project.godot раньше AudioManager, поэтому к этому
+	# моменту сохранённый выбор звука уже прочитан из progress.json. Применяем его
+	# один раз при старте, чтобы выключенный звук не включился сам после перезапуска.
+	set_sound_enabled(ProgressManager.is_sound_enabled())
 
 
 func set_sound_enabled(enabled: bool) -> void:

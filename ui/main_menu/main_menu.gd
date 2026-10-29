@@ -40,6 +40,13 @@ const GAME_BUTTON_COLORS := {
 ## Цвет текста на кнопках игр (тёмный — читается на любом ярком фоне).
 const GAME_BUTTON_TEXT_COLOR := Color("#2D2D2D")
 
+## Надпись кнопки звука: громкоговоритель включён или перечёркнут.
+const SOUND_TEXT_ON := "🔊"
+const SOUND_TEXT_OFF := "🔇"
+## Имя кнопки звука для экранных дикторов.
+const SOUND_ACCESSIBLE_ON := "Звук включён"
+const SOUND_ACCESSIBLE_OFF := "Звук выключен"
+
 @onready var _background: ColorRect = %Background
 @onready var _title_label: Label = %TitleLabel
 @onready var _games_button_azbuka: Button = %GamesButtonAzbuka
@@ -47,6 +54,7 @@ const GAME_BUTTON_TEXT_COLOR := Color("#2D2D2D")
 @onready var _games_button_collect_word: Button = %GamesButtonCollectWord
 @onready var _games_button_guess_picture: Button = %GamesButtonGuessPicture
 @onready var _settings_button: Button = %SettingsButton
+@onready var _sound_button: Button = %SoundButton
 
 ## Кнопки игр по ключу игры.
 var _game_buttons: Dictionary = {}
@@ -60,6 +68,7 @@ func _ready() -> void:
 	_games_button_collect_word.pressed.connect(_on_game_button_pressed.bind("collect_word"))
 	_games_button_guess_picture.pressed.connect(_on_game_button_pressed.bind("guess_picture"))
 	_settings_button.pressed.connect(_on_settings_button_pressed)
+	_sound_button.pressed.connect(_on_sound_button_pressed)
 	_game_buttons = {
 		"azbuka": _games_button_azbuka,
 		"find_letter": _games_button_find_letter,
@@ -67,6 +76,7 @@ func _ready() -> void:
 		"guess_picture": _games_button_guess_picture,
 	}
 	_apply_theme()
+	_update_sound_button()
 	_update_game_buttons_visibility()
 	AudioManager.play_music(MENU_MUSIC)
 
@@ -90,6 +100,7 @@ func _apply_theme(_mode: int = 0) -> void:
 		var button: Button = _game_buttons[game_key]
 		ThemeManager.style_button(button, GAME_BUTTON_COLORS[game_key], GAME_BUTTON_TEXT_COLOR)
 	ThemeManager.style_button(_settings_button, button_bg, button_text)
+	ThemeManager.style_button(_sound_button, button_bg, button_text)
 	_settings_button.add_theme_color_override("icon_normal_color", button_text)
 	_settings_button.add_theme_color_override("icon_hover_color", button_text)
 	_settings_button.add_theme_color_override("icon_pressed_color", button_text)
@@ -118,3 +129,19 @@ func _on_settings_button_pressed() -> void:
 	ParentalGate.open(self, func() -> void:
 		get_tree().change_scene_to_file("res://ui/settings/settings.tscn")
 	)
+
+
+## Переключает звук и сразу сохраняет выбор, чтобы он пережил перезапуск.
+func _on_sound_button_pressed() -> void:
+	var enabled := not AudioManager.sound_enabled
+	AudioManager.set_sound_enabled(enabled)
+	ProgressManager.set_sound_enabled(enabled)
+	GameLogger.info("MainMenu", "sound_button_pressed", {"enabled": enabled})
+	_update_sound_button()
+
+
+## Показывает на кнопке текущее состояние звука: значок и имя для диктора.
+func _update_sound_button() -> void:
+	var enabled := AudioManager.sound_enabled
+	_sound_button.text = SOUND_TEXT_ON if enabled else SOUND_TEXT_OFF
+	_sound_button.accessibility_name = SOUND_ACCESSIBLE_ON if enabled else SOUND_ACCESSIBLE_OFF

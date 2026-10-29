@@ -59,6 +59,8 @@ var word_set_id: String = ""
 var save_path: String = SAVE_PATH
 ## Активный вариант озвучки ("old" или "new").
 var voice_variant: String = DEFAULT_VOICE_VARIANT
+## Включён ли звук. Хранится рядом с прогрессом, чтобы выбор пережил перезапуск.
+var sound_enabled: bool = true
 
 
 func _ready() -> void:
@@ -182,6 +184,19 @@ func get_voice_variant() -> String:
 	return voice_variant
 
 
+## Включён ли звук по сохранённому выбору пользователя.
+func is_sound_enabled() -> bool:
+	return sound_enabled
+
+
+## Запоминает выбор звука и сразу сохраняет его на диск.
+func set_sound_enabled(enabled: bool) -> void:
+	if sound_enabled == enabled:
+		return
+	sound_enabled = enabled
+	save_progress()
+
+
 ## Устанавливает вариант озвучки (только "old" или "new", иначе игнор).
 func set_voice_variant(value: String) -> void:
 	if value != VOICE_VARIANT_OLD and value != VOICE_VARIANT_NEW:
@@ -227,6 +242,12 @@ func load_progress() -> void:
 			voice_variant = saved_variant
 		else:
 			voice_variant = DEFAULT_VOICE_VARIANT
+	# Старые файлы ключа не имеют, поэтому звук включаем по умолчанию: молчание
+	# при первом запуске после обновления родитель воспринял бы как поломку.
+	if root.has("sound_enabled") and root["sound_enabled"] is bool:
+		sound_enabled = root["sound_enabled"]
+	else:
+		sound_enabled = true
 
 
 func save_progress() -> void:
@@ -238,6 +259,7 @@ func save_progress() -> void:
 		"word_set": word_set,
 		"word_set_id": word_set_id,
 		"voice_variant": voice_variant,
+		"sound_enabled": sound_enabled,
 	}
 	var file := FileAccess.open(save_path, FileAccess.WRITE)
 	if file == null:
