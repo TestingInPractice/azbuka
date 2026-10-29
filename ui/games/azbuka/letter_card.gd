@@ -100,6 +100,7 @@ var _prompt_player: AudioStreamPlayer = null
 @onready var _word_image: TextureRect = %WordImage
 @onready var _word_squares: HBoxContainer = %WordSquares
 @onready var _hint_label: Label = %HintLabel
+@onready var _set_label: Label = %SetLabel
 @onready var _prev_button: Button = %PrevLetterButton
 @onready var _next_button: Button = %NextLetterButton
 @onready var _button_letter: Button = %ButtonLetter
@@ -345,8 +346,21 @@ func _update_content() -> void:
 	else:
 		_word_image.texture = null
 		_word_image.visible = false
+	_update_set_label()
 	_reset_word_game()
 	_reset_idle_timer()
+
+
+## Подпись активного набора. Та же логика, что на экране «Азбука»: имя есть
+## только у пользовательского набора, а у встроенного и удалённого его нет.
+## Обновляется при каждой смене буквы, чтобы переименование набора было видно
+## без перезапуска игры. Цвет и обводка заданы в сцене: подпись стоит поверх
+## картинки слова, как и подсказка «Найди букву», и должна читаться в обеих
+## темах.
+func _update_set_label() -> void:
+	var set_name := SetRepository.get_active_set_name()
+	_set_label.visible = not set_name.is_empty()
+	_set_label.text = ("Набор: " + set_name) if not set_name.is_empty() else ""
 
 
 func _reset_word_game() -> void:

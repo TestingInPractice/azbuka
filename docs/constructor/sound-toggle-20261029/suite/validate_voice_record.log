@@ -1,0 +1,67 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[voice_record_validate] OK: пустые кадры -> пустой PCM
+[voice_record_validate] OK: один кадр -> 2 байта (получено: 2)
+[voice_record_validate] OK: усреднение стерео в моно (получено: 16383, ожидалось 16383)
+[voice_record_validate] OK: каналы +1/-1 усредняются в 0
+[voice_record_validate] OK: перегруз обрезан до 32767
+[voice_record_validate] OK: little-endian порядок байтов
+[voice_record_validate] OK: два кадра -> 4 байта (получено: 4)
+[voice_record_validate] OK: пустой PCM -> пустой WAV
+[voice_record_validate] OK: размер WAV = 44 + данные (получено: 444)
+[voice_record_validate] OK: сигнатура RIFF
+[voice_record_validate] OK: сигнатура WAVE
+[voice_record_validate] OK: чанк fmt
+[voice_record_validate] OK: размер чанка fmt = 16
+[voice_record_validate] OK: формат PCM (1)
+[voice_record_validate] OK: один моно-канал
+[voice_record_validate] OK: частота дискретизации
+[voice_record_validate] OK: байт в секунду = частота * 2
+[voice_record_validate] OK: выравнивание блока = 2
+[voice_record_validate] OK: 16 бит на сэмпл
+[voice_record_validate] OK: чанк data
+[voice_record_validate] OK: размер данных в заголовке
+[voice_record_validate] OK: размер файла в заголовке
+[voice_record_validate] OK: данные WAV совпадают с исходным PCM
+[voice_record_validate] OK: нормализация пустого PCM
+[voice_record_validate] OK: тихий сигнал выровнен до пика 26214 (получено: 26214)
+[voice_record_validate] OK: нормализация не меняет длину
+[voice_record_validate] OK: громкий сигнал не изменяется
+[voice_record_validate] OK: тишина не изменяется
+[voice_record_validate] OK: отрицательный сигнал выровнен до -26214 без переполнения
+[voice_record_validate] OK: нормализация отрицательного сигнала не даёт положительных пиков
+[voice_record_validate] OK: после clear() данных нет
+[voice_record_validate] OK: has_data() == false после clear()
+[voice_record_validate] OK: is_recording() == false в покое
+[voice_record_validate] OK: уровень в покое равен 0
+[INFO] VoiceRecord: mic_prepared  data={"ok":true}
+[INFO] VoiceRecord: record_start 
+[voice_record_validate] OK: start_recording() возвращает bool, а не падает
+WARNING: VoiceRecord: no frames captured - microphone may be silent or permissions denied
+     at: push_warning (core/variant/variant_utility.cpp:1034)
+     GDScript backtrace (most recent call first):
+         [0] stop_recording (res://systems/voice_record.gd:179)
+         [1] _check_no_microphone_is_safe (res://tests/validate_voice_record.gd:218)
+         [2] _ready (res://tests/validate_voice_record.gd:29)
+[INFO] VoiceRecord: record_stop  data={"bytes":0}
+[voice_record_validate] SKIP: микрофон доступен в headless, ветка отказа не проверена
+[voice_record_validate] OK: неудачная запись не оставила данных
+[voice_record_validate] OK: letter_card.tscn загружается
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[voice_record_validate] OK: letter_card: %-BackgroundOverlay на месте
+[voice_record_validate] OK: letter_card: %-ContentWrapper на месте
+[voice_record_validate] OK: letter_card: %-LetterLabel на месте
+[voice_record_validate] OK: letter_card: %-WordImage на месте
+[voice_record_validate] OK: letter_card: %-WordSquares на месте
+[voice_record_validate] OK: letter_card: %-HintLabel на месте
+[voice_record_validate] OK: letter_card: %-PrevLetterButton на месте
+[voice_record_validate] OK: letter_card: %-NextLetterButton на месте
+[voice_record_validate] OK: letter_card: %-ButtonLetter на месте
+[voice_record_validate] OK: letter_card: %-ButtonWord на месте
+[voice_record_validate] OK: letter_card: %-MicButton на месте
+[voice_record_validate] OK: letter_card: %-RecordPlaybackButton на месте
+[voice_record_validate] OK: letter_card: %-LetterBackButton на месте
+[voice_record_validate] OK: letter_card: %-HomeButton на месте
+[voice_record_validate] OK: новая карточка без записи
+[voice_record_validate] OK: новая карточка не записывает
+[voice_record_validate] PASSED: 53 проверок успешны

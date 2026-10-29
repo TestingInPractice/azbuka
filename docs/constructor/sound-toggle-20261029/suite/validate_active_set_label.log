@@ -1,0 +1,54 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[active_set_label_validate] OK: встроенный набор 1 не имеет имени
+[active_set_label_validate] OK: встроенный набор 2 не имеет имени
+[active_set_label_validate] OK: встроенный набор 3 не имеет имени
+[active_set_label_validate] OK: встроенный набор 4 не имеет имени
+[active_set_label_validate] OK: встроенный набор 5 не имеет имени
+[active_set_label_validate] OK: на экране «Азбука» есть узел SetLabel
+[active_set_label_validate] OK: подпись «Азбука» скрыта для встроенного набора
+[active_set_label_validate] OK: текст подписи «Азбука» пуст для встроенного набора
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[active_set_label_validate] OK: на карточке буквы есть узел SetLabel
+[active_set_label_validate] OK: подпись карточки скрыта для встроенного набора
+[active_set_label_validate] OK: текст подписи карточки пуст для встроенного набора
+[active_set_label_validate] OK: тестовый набор создан
+[active_set_label_validate] OK: пользовательский набор отдаёт своё имя
+[active_set_label_validate] OK: подпись «Азбука» видна для пользовательского набора
+[active_set_label_validate] OK: текст подписи «Азбука»: ожидали «Набор: Тестовый набор», получили «Набор: Тестовый набор»
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[active_set_label_validate] OK: подпись карточки видна для пользовательского набора
+[active_set_label_validate] OK: текст подписи карточки: ожидали «Набор: Тестовый набор», получили «Набор: Тестовый набор»
+[active_set_label_validate] OK: набор переименован
+[active_set_label_validate] OK: репозиторий отдаёт новое имя набора
+[active_set_label_validate] OK: подпись «Азбука» обновилась после переименования
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[active_set_label_validate] OK: подпись карточки обновилась после переименования
+[active_set_label_validate] OK: тестовый набор удалён
+[active_set_label_validate] OK: удалённый набор не отдаёт имя
+[active_set_label_validate] OK: подпись «Азбука» скрыта для удалённого набора
+[active_set_label_validate] OK: текст подписи «Азбука» пуст для удалённого набора
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[active_set_label_validate] OK: подпись карточки скрыта для удалённого набора
+[active_set_label_validate] OK: текст подписи карточки пуст для удалённого набора
+[active_set_label_validate] OK: первый экземпляр «Азбуки» содержит одну подпись
+[active_set_label_validate] OK: второй экземпляр «Азбуки» содержит одну подпись
+[active_set_label_validate] OK: после закрытия «Азбуки» подписи не остались в дереве
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[active_set_label_validate] OK: первый экземпляр карточки содержит одну подпись
+[active_set_label_validate] OK: второй экземпляр карточки содержит одну подпись
+[active_set_label_validate] OK: после закрытия карточек подписи не остались в дереве
+[active_set_label_validate] OK: набор для проверки темы создан
+[active_set_label_validate] OK: подпись видна в тёмной теме
+[active_set_label_validate] OK: цвет подписи совпадает с цветом текста тёмной темы
+[active_set_label_validate] OK: подпись пережила переключение темы
+[active_set_label_validate] OK: набор с длинным именем создан
+[active_set_label_validate] OK: подпись с длинным именем переносится по словам
+[active_set_label_validate] OK: змейка построила все 33 кружка
+[active_set_label_validate] OK: у области змейки осталась положительная высота
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[active_set_label_validate] OK: подпись карточки видна для длинного имени
+[active_set_label_validate] OK: подпись карточки содержит полное длинное имя
+[active_set_label_validate] OK: подпись карточки с длинным именем переносится
+[active_set_label_validate] PASSED: 44 проверок

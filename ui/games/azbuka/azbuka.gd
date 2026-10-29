@@ -44,6 +44,7 @@ const KISA_ANCHOR := Vector2.ZERO
 @onready var _back_button: Button = %BackButton
 @onready var _home_button: Button = %HomeButton
 @onready var _title_label: Label = %TitleLabel
+@onready var _set_label: Label = %SetLabel
 @onready var _snake_area: Control = %SnakeArea
 @onready var _snake_path: Line2D = %SnakePath
 @onready var _kisa: KisaCat = %KisaCat
@@ -65,6 +66,7 @@ func _ready() -> void:
 	_home_button.pressed.connect(_on_home_button_pressed)
 	_kisa.set_kisa_moving(false)
 	_apply_theme()
+	_update_set_label()
 	_snake_area.resized.connect(_on_snake_area_resized)
 	_setup_snake()
 
@@ -311,8 +313,19 @@ func _style_dot(btn: Button, state: int) -> void:
 func _apply_theme(_mode: int = 0) -> void:
 	_background_overlay.visible = ThemeManager.current_theme == ThemeManager.THEME_DARK
 	_title_label.add_theme_color_override("font_color", ThemeManager.get_text())
+	_set_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	ThemeManager.style_button(_back_button, Color("#E8A87C"), Color("#2D2D2D"))
 	ThemeManager.style_button(_home_button, Color("#E8A87C"), Color("#2D2D2D"))
+
+
+## Подпись активного набора. У встроенных набора 1..5 имени нет, и подпись
+## «Набор: 1» ничего не сообщает родителю, поэтому она скрыта и не занимает
+## места в VBox. Название берётся из репозитория на входе в экран: после смены
+## набора экран открывается заново, а удалённый набор даёт пустую строку.
+func _update_set_label() -> void:
+	var set_name := SetRepository.get_active_set_name()
+	_set_label.visible = not set_name.is_empty()
+	_set_label.text = ("Набор: " + set_name) if not set_name.is_empty() else ""
 
 
 func _on_back_button_pressed() -> void:
