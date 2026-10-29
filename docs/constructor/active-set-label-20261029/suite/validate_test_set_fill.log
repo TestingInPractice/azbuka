@@ -1,0 +1,82 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_d8bf21/img_a.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_d8bf21/img_b.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_d8bf21/img_v.webp","width":1024}
+[test_set_fill_validate] OK: первый прогон успешен (ошибки: нет)
+[test_set_fill_validate] OK: набор получил id вида c_ (получено: c_d8bf21)
+[test_set_fill_validate] OK: в тестовом хранилище ровно один набор (получено: 1)
+[test_set_fill_validate] OK: имя набора сохранено
+[test_set_fill_validate] OK: запрошены ровно три буквы (получено: ["А", "Б", "В"])
+[test_set_fill_validate] OK: все три буквы признаны заполненными
+[test_set_fill_validate] OK: ошибок по буквам нет (получено: нет)
+[test_set_fill_validate] OK: хранилище считает три полные буквы (получено: 3)
+[test_set_fill_validate] OK: слово буквы А взято из встроенного набора
+[test_set_fill_validate] OK: путь картинки буквы А относительный и в каталоге набора (получено: custom_sets/c_d8bf21/img_a.webp)
+[test_set_fill_validate] OK: путь звука буквы А относительный и в каталоге набора (получено: custom_sets/c_d8bf21/aud_a.wav)
+[test_set_fill_validate] OK: в метаданных буквы А нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы А нет абсолютного пути звука
+[test_set_fill_validate] OK: файл картинки буквы А существует
+[test_set_fill_validate] OK: файл звука буквы А существует
+[test_set_fill_validate] OK: файл картинки буквы А не пустой
+[test_set_fill_validate] OK: файл звука буквы А не пустой
+[test_set_fill_validate] OK: картинка буквы А декодируется
+[test_set_fill_validate] OK: звук буквы А декодируется как WAV
+[test_set_fill_validate] OK: запись буквы А полная по контракту хранилища
+[test_set_fill_validate] OK: слово буквы Б взято из встроенного набора
+[test_set_fill_validate] OK: путь картинки буквы Б относительный и в каталоге набора (получено: custom_sets/c_d8bf21/img_b.webp)
+[test_set_fill_validate] OK: путь звука буквы Б относительный и в каталоге набора (получено: custom_sets/c_d8bf21/aud_b.wav)
+[test_set_fill_validate] OK: в метаданных буквы Б нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Б нет абсолютного пути звука
+[test_set_fill_validate] OK: файл картинки буквы Б существует
+[test_set_fill_validate] OK: файл звука буквы Б существует
+[test_set_fill_validate] OK: файл картинки буквы Б не пустой
+[test_set_fill_validate] OK: файл звука буквы Б не пустой
+[test_set_fill_validate] OK: картинка буквы Б декодируется
+[test_set_fill_validate] OK: звук буквы Б декодируется как WAV
+[test_set_fill_validate] OK: запись буквы Б полная по контракту хранилища
+[test_set_fill_validate] OK: слово буквы В взято из встроенного набора
+[test_set_fill_validate] OK: путь картинки буквы В относительный и в каталоге набора (получено: custom_sets/c_d8bf21/img_v.webp)
+[test_set_fill_validate] OK: путь звука буквы В относительный и в каталоге набора (получено: custom_sets/c_d8bf21/aud_v.wav)
+[test_set_fill_validate] OK: в метаданных буквы В нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы В нет абсолютного пути звука
+[test_set_fill_validate] OK: файл картинки буквы В существует
+[test_set_fill_validate] OK: файл звука буквы В существует
+[test_set_fill_validate] OK: файл картинки буквы В не пустой
+[test_set_fill_validate] OK: файл звука буквы В не пустой
+[test_set_fill_validate] OK: картинка буквы В декодируется
+[test_set_fill_validate] OK: звук буквы В декодируется как WAV
+[test_set_fill_validate] OK: запись буквы В полная по контракту хранилища
+[test_set_fill_validate] OK: SetRepository помечает букву А пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт слово буквы А
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы А
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы А
+[test_set_fill_validate] OK: SetRepository загружает картинку буквы А
+[test_set_fill_validate] OK: SetRepository загружает звук буквы А
+[test_set_fill_validate] OK: SetRepository помечает букву Б пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт слово буквы Б
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Б
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Б
+[test_set_fill_validate] OK: SetRepository загружает картинку буквы Б
+[test_set_fill_validate] OK: SetRepository загружает звук буквы Б
+[test_set_fill_validate] OK: SetRepository помечает букву В пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт слово буквы В
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы В
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы В
+[test_set_fill_validate] OK: SetRepository загружает картинку буквы В
+[test_set_fill_validate] OK: SetRepository загружает звук буквы В
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_d8bf21/img_a.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_d8bf21/img_b.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_d8bf21/img_v.webp","width":1024}
+[test_set_fill_validate] OK: второй прогон успешен (ошибки: нет)
+[test_set_fill_validate] OK: второй прогон обновил тот же набор (получено: c_d8bf21, ждали c_d8bf21)
+[test_set_fill_validate] OK: после второго прогона набор по-прежнему один (получено: 1)
+[test_set_fill_validate] OK: пути буквы А после второго прогона не изменились
+[test_set_fill_validate] OK: пути буквы Б после второго прогона не изменились
+[test_set_fill_validate] OK: пути буквы В после второго прогона не изменились
+[test_set_fill_validate] OK: набор удалён
+[test_set_fill_validate] OK: набора больше нет в хранилище
+[test_set_fill_validate] OK: каталог набора удалён вместе с файлами
+[test_set_fill_validate] OK: тестовый JSON хранилища удалён
+[test_set_fill_validate] OK: тестовый JSON прогресса удалён
+[test_set_fill_validate] PASSED: 73 проверок

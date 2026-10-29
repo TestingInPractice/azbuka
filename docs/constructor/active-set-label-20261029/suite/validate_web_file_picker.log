@@ -1,0 +1,115 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[web_file_picker_validate] OK: image/png -> image
+[web_file_picker_validate] OK: image/jpeg -> image
+[web_file_picker_validate] OK: image/webp -> image
+[web_file_picker_validate] OK: audio/wav -> audio
+[web_file_picker_validate] OK: audio/mpeg -> audio
+[web_file_picker_validate] OK: audio/mp4 -> audio (iPhone)
+[web_file_picker_validate] OK: audio/vorbis -> audio (.ogg)
+[web_file_picker_validate] OK: audio/oga -> audio (.oga)
+[web_file_picker_validate] OK: audio/aac -> пусто (нет расширения)
+[web_file_picker_validate] OK: audio/webm -> пусто (нет расширения)
+[web_file_picker_validate] OK: application/pdf -> пусто
+[web_file_picker_validate] OK: пустой mime -> пусто
+[web_file_picker_validate] OK: верхний регистр mime
+[web_file_picker_validate] OK: mime с параметрами
+[web_file_picker_validate] OK: лимит картинки 5 МБ
+[web_file_picker_validate] OK: лимит звука 10 МБ
+[web_file_picker_validate] OK: неизвестный вид -> лимит 0
+[web_file_picker_validate] OK: в таблице картинок 3 типа
+[web_file_picker_validate] OK: в таблице звука 10 типов
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/png в нижнем регистре
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/png без параметров
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/png не повторяется
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/png достижим через kind_for_mime
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/jpeg в нижнем регистре
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/jpeg без параметров
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/jpeg не повторяется
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/jpeg достижим через kind_for_mime
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/webp в нижнем регистре
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/webp без параметров
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/webp не повторяется
+[web_file_picker_validate] OK: IMAGE_MIME_TYPES: image/webp достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/wav в нижнем регистре
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/wav без параметров
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/wav не повторяется
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/wav достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/x-wav в нижнем регистре
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/x-wav без параметров
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/x-wav не повторяется
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/x-wav достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/wave в нижнем регистре
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/wave без параметров
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/wave не повторяется
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/wave достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/ogg в нижнем регистре
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/ogg без параметров
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/ogg не повторяется
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/ogg достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/vorbis в нижнем регистре
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/vorbis без параметров
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/vorbis не повторяется
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/vorbis достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/oga в нижнем регистре
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/oga без параметров
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/oga не повторяется
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/oga достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mpeg в нижнем регистре
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mpeg без параметров
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mpeg не повторяется
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mpeg достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mp3 в нижнем регистре
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mp3 без параметров
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mp3 не повторяется
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mp3 достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mp4 в нижнем регистре
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mp4 без параметров
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mp4 не повторяется
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mp4 достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: нет пустых записей
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/x-m4a в нижнем регистре
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/x-m4a без параметров
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/x-m4a не повторяется
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/x-m4a достижим через kind_for_mime
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/wav даёт расширение для сохранения
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/x-wav даёт расширение для сохранения
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/wave даёт расширение для сохранения
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/ogg даёт расширение для сохранения
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/vorbis даёт расширение для сохранения
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/oga даёт расширение для сохранения
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mpeg даёт расширение для сохранения
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mp3 даёт расширение для сохранения
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/mp4 даёт расширение для сохранения
+[web_file_picker_validate] OK: AUDIO_MIME_TYPES: audio/x-m4a даёт расширение для сохранения
+[web_file_picker_validate] OK: набор расширений AUDIO_MIME_TYPES = ["m4a", "mp3", "ogg", "wav"], ожидалось ["m4a", "mp3", "ogg", "wav"]
+[web_file_picker_validate] OK: data URL распознан
+[web_file_picker_validate] OK: mime извлечён из data URL
+[web_file_picker_validate] OK: данные декодированы в непустой массив
+[web_file_picker_validate] OK: данные длиннее PNG-сигнатуры (8 байт)
+[web_file_picker_validate] OK: первые 8 байт — сигнатура PNG
+[web_file_picker_validate] OK: успешный результат без текста ошибки
+[web_file_picker_validate] OK: data URL без запятой отклонён
+[web_file_picker_validate] OK: у отклонения есть текст ошибки
+[web_file_picker_validate] OK: percent-encoded data URL отклонён
+[web_file_picker_validate] OK: пустая строка отклонена
+[web_file_picker_validate] OK: мусор отклонён
+[web_file_picker_validate] OK: data URL без ;base64 отклонён
+[web_file_picker_validate] OK: неизвестный вид файла отклонён
+[web_file_picker_validate] OK: у неизвестного вида есть текст ошибки
+[web_file_picker_validate] OK: pick() вне web возвращает ошибку
+[web_file_picker_validate] OK: код ошибки not_web
+[web_file_picker_validate] OK: вне web байтов нет
+[web_file_picker_validate] PASSED: все проверки успешны
