@@ -63,6 +63,7 @@ func _print_summary(result: Dictionary, options: Dictionary) -> void:
 	print("[fill_test_set] набор: %s" % str(result.get("set_name", "")))
 	print("[fill_test_set] id: %s (%s)" % [str(result.get("set_id", "")),
 			"создан" if bool(result.get("created", false)) else "обновлён"])
+	print("[fill_test_set] источник: встроенный тестовый датасет (33 своих слова, свои карточки и озвучка)")
 	print("[fill_test_set] запрошено букв: %d (%s)" % [requested.size(),
 			", ".join(requested)])
 	print("[fill_test_set] полностью заполнено: %d" % (result.get("complete", []) as Array).size())
