@@ -1,0 +1,1286 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[test_set_fill_validate] OK: алфавит валидатора содержит 33 буквы
+[test_set_fill_validate] OK: таблица ожидаемых слов содержит 33 записи
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы А (получено: Альбо́м)
+[test_set_fill_validate] OK: фикстура картинки буквы А существует
+[test_set_fill_validate] OK: фикстура звука буквы А существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Б (получено: Бу́блик)
+[test_set_fill_validate] OK: фикстура картинки буквы Б существует
+[test_set_fill_validate] OK: фикстура звука буквы Б существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы В (получено: Ви́шня)
+[test_set_fill_validate] OK: фикстура картинки буквы В существует
+[test_set_fill_validate] OK: фикстура звука буквы В существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Г (получено: Гнездо́)
+[test_set_fill_validate] OK: фикстура картинки буквы Г существует
+[test_set_fill_validate] OK: фикстура звука буквы Г существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Д (получено: Ды́ня)
+[test_set_fill_validate] OK: фикстура картинки буквы Д существует
+[test_set_fill_validate] OK: фикстура звука буквы Д существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Е (получено: Единоро́г)
+[test_set_fill_validate] OK: фикстура картинки буквы Е существует
+[test_set_fill_validate] OK: фикстура звука буквы Е существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Ё (получено: Ё́мкость)
+[test_set_fill_validate] OK: фикстура картинки буквы Ё существует
+[test_set_fill_validate] OK: фикстура звука буквы Ё существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Ж (получено: Жасми́н)
+[test_set_fill_validate] OK: фикстура картинки буквы Ж существует
+[test_set_fill_validate] OK: фикстура звука буквы Ж существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы З (получено: Зе́ркало)
+[test_set_fill_validate] OK: фикстура картинки буквы З существует
+[test_set_fill_validate] OK: фикстура звука буквы З существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы И (получено: Имби́рь)
+[test_set_fill_validate] OK: фикстура картинки буквы И существует
+[test_set_fill_validate] OK: фикстура звука буквы И существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Й (получено: Йо́га)
+[test_set_fill_validate] OK: фикстура картинки буквы Й существует
+[test_set_fill_validate] OK: фикстура звука буквы Й существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы К (получено: Коза́)
+[test_set_fill_validate] OK: фикстура картинки буквы К существует
+[test_set_fill_validate] OK: фикстура звука буквы К существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Л (получено: Ло́дка)
+[test_set_fill_validate] OK: фикстура картинки буквы Л существует
+[test_set_fill_validate] OK: фикстура звука буквы Л существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы М (получено: Моро́женое)
+[test_set_fill_validate] OK: фикстура картинки буквы М существует
+[test_set_fill_validate] OK: фикстура звука буквы М существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Н (получено: Но́ра)
+[test_set_fill_validate] OK: фикстура картинки буквы Н существует
+[test_set_fill_validate] OK: фикстура звука буквы Н существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы О (получено: О́блако)
+[test_set_fill_validate] OK: фикстура картинки буквы О существует
+[test_set_fill_validate] OK: фикстура звука буквы О существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы П (получено: Помидо́р)
+[test_set_fill_validate] OK: фикстура картинки буквы П существует
+[test_set_fill_validate] OK: фикстура звука буквы П существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Р (получено: Ре́па)
+[test_set_fill_validate] OK: фикстура картинки буквы Р существует
+[test_set_fill_validate] OK: фикстура звука буквы Р существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы С (получено: Су́мка)
+[test_set_fill_validate] OK: фикстура картинки буквы С существует
+[test_set_fill_validate] OK: фикстура звука буквы С существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Т (получено: Ту́ча)
+[test_set_fill_validate] OK: фикстура картинки буквы Т существует
+[test_set_fill_validate] OK: фикстура звука буквы Т существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы У (получено: Укро́п)
+[test_set_fill_validate] OK: фикстура картинки буквы У существует
+[test_set_fill_validate] OK: фикстура звука буквы У существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Ф (получено: Фона́рь)
+[test_set_fill_validate] OK: фикстура картинки буквы Ф существует
+[test_set_fill_validate] OK: фикстура звука буквы Ф существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Х (получено: Хо́бот)
+[test_set_fill_validate] OK: фикстура картинки буквы Х существует
+[test_set_fill_validate] OK: фикстура звука буквы Х существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Ц (получено: Ци́фра)
+[test_set_fill_validate] OK: фикстура картинки буквы Ц существует
+[test_set_fill_validate] OK: фикстура звука буквы Ц существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Ч (получено: Чесно́к)
+[test_set_fill_validate] OK: фикстура картинки буквы Ч существует
+[test_set_fill_validate] OK: фикстура звука буквы Ч существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Ш (получено: Шмель)
+[test_set_fill_validate] OK: фикстура картинки буквы Ш существует
+[test_set_fill_validate] OK: фикстура звука буквы Ш существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Щ (получено: Щаве́ль)
+[test_set_fill_validate] OK: фикстура картинки буквы Щ существует
+[test_set_fill_validate] OK: фикстура звука буквы Щ существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Ъ (получено: Разъе́зд)
+[test_set_fill_validate] OK: фикстура картинки буквы Ъ существует
+[test_set_fill_validate] OK: фикстура звука буквы Ъ существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Ы (получено: Бык)
+[test_set_fill_validate] OK: фикстура картинки буквы Ы существует
+[test_set_fill_validate] OK: фикстура звука буквы Ы существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Ь (получено: Лось)
+[test_set_fill_validate] OK: фикстура картинки буквы Ь существует
+[test_set_fill_validate] OK: фикстура звука буквы Ь существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Э (получено: Эта́ж)
+[test_set_fill_validate] OK: фикстура картинки буквы Э существует
+[test_set_fill_validate] OK: фикстура звука буквы Э существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Ю (получено: Ю́нга)
+[test_set_fill_validate] OK: фикстура картинки буквы Ю существует
+[test_set_fill_validate] OK: фикстура звука буквы Ю существует
+[test_set_fill_validate] OK: TestSetData отдаёт слово буквы Я (получено: Я́ма)
+[test_set_fill_validate] OK: фикстура картинки буквы Я существует
+[test_set_fill_validate] OK: фикстура звука буквы Я существует
+[test_set_fill_validate] OK: слово альбом буквы А не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово альбом буквы А уникально внутри набора
+[test_set_fill_validate] OK: слово бублик буквы Б не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово бублик буквы Б уникально внутри набора
+[test_set_fill_validate] OK: слово вишня буквы В не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово вишня буквы В уникально внутри набора
+[test_set_fill_validate] OK: слово гнездо буквы Г не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово гнездо буквы Г уникально внутри набора
+[test_set_fill_validate] OK: слово дыня буквы Д не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово дыня буквы Д уникально внутри набора
+[test_set_fill_validate] OK: слово единорог буквы Е не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово единорог буквы Е уникально внутри набора
+[test_set_fill_validate] OK: слово ёмкость буквы Ё не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово ёмкость буквы Ё уникально внутри набора
+[test_set_fill_validate] OK: слово жасмин буквы Ж не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово жасмин буквы Ж уникально внутри набора
+[test_set_fill_validate] OK: слово зеркало буквы З не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово зеркало буквы З уникально внутри набора
+[test_set_fill_validate] OK: слово имбирь буквы И не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово имбирь буквы И уникально внутри набора
+[test_set_fill_validate] OK: слово йога буквы Й не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово йога буквы Й уникально внутри набора
+[test_set_fill_validate] OK: слово коза буквы К не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово коза буквы К уникально внутри набора
+[test_set_fill_validate] OK: слово лодка буквы Л не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово лодка буквы Л уникально внутри набора
+[test_set_fill_validate] OK: слово мороженое буквы М не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово мороженое буквы М уникально внутри набора
+[test_set_fill_validate] OK: слово нора буквы Н не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово нора буквы Н уникально внутри набора
+[test_set_fill_validate] OK: слово облако буквы О не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово облако буквы О уникально внутри набора
+[test_set_fill_validate] OK: слово помидор буквы П не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово помидор буквы П уникально внутри набора
+[test_set_fill_validate] OK: слово репа буквы Р не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово репа буквы Р уникально внутри набора
+[test_set_fill_validate] OK: слово сумка буквы С не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово сумка буквы С уникально внутри набора
+[test_set_fill_validate] OK: слово туча буквы Т не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово туча буквы Т уникально внутри набора
+[test_set_fill_validate] OK: слово укроп буквы У не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово укроп буквы У уникально внутри набора
+[test_set_fill_validate] OK: слово фонарь буквы Ф не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово фонарь буквы Ф уникально внутри набора
+[test_set_fill_validate] OK: слово хобот буквы Х не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово хобот буквы Х уникально внутри набора
+[test_set_fill_validate] OK: слово цифра буквы Ц не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово цифра буквы Ц уникально внутри набора
+[test_set_fill_validate] OK: слово чеснок буквы Ч не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово чеснок буквы Ч уникально внутри набора
+[test_set_fill_validate] OK: слово шмель буквы Ш не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово шмель буквы Ш уникально внутри набора
+[test_set_fill_validate] OK: слово щавель буквы Щ не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово щавель буквы Щ уникально внутри набора
+[test_set_fill_validate] OK: слово разъезд буквы Ъ не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово разъезд буквы Ъ уникально внутри набора
+[test_set_fill_validate] OK: слово бык буквы Ы не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово бык буквы Ы уникально внутри набора
+[test_set_fill_validate] OK: слово лось буквы Ь не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово лось буквы Ь уникально внутри набора
+[test_set_fill_validate] OK: слово этаж буквы Э не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово этаж буквы Э уникально внутри набора
+[test_set_fill_validate] OK: слово юнга буквы Ю не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово юнга буквы Ю уникально внутри набора
+[test_set_fill_validate] OK: слово яма буквы Я не встречается во встроенных наборах
+[test_set_fill_validate] OK: слово яма буквы Я уникально внутри набора
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_a.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_b.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_v.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_g.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_d.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_e.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_yo.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_zh.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_z.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_i.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_j.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_k.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_l.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_m.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_n.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_o.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_p.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_r.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_s.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_t.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_u.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_f.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_h.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_ts.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_ch.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_sh.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_sch.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_q.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_y.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_soft.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_eh.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_yu.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_00a769/img_ya.webp","width":1024}
+[test_set_fill_validate] OK: первый прогон успешен (ошибки: нет)
+[test_set_fill_validate] OK: набор получил id вида c_ (получено: c_00a769)
+[test_set_fill_validate] OK: запрошены все 33 буквы (получено: 33)
+[test_set_fill_validate] OK: все 33 буквы заполнены
+[test_set_fill_validate] OK: ошибок по буквам нет
+[test_set_fill_validate] OK: хранилище считает 33 полные буквы (получено: 33)
+[test_set_fill_validate] OK: слово буквы А новое (получено: Альбо́м)
+[test_set_fill_validate] OK: запись буквы А полная
+[test_set_fill_validate] OK: путь картинки буквы А относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы А относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы А нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы А нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы А не пустая
+[test_set_fill_validate] OK: звук буквы А совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы А набора 1 читается
+[test_set_fill_validate] OK: картинка буквы А набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы А отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы А набора 2 читается
+[test_set_fill_validate] OK: картинка буквы А набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы А отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы А набора 3 читается
+[test_set_fill_validate] OK: картинка буквы А набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы А отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы А набора 4 читается
+[test_set_fill_validate] OK: картинка буквы А набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы А отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы А набора 5 читается
+[test_set_fill_validate] OK: картинка буквы А набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы А отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы А декодируется
+[test_set_fill_validate] OK: звук буквы А декодируется как WAV
+[test_set_fill_validate] OK: звук буквы А длиннее 0.2 с (получено: 0.51)
+[test_set_fill_validate] OK: слово буквы Б новое (получено: Бу́блик)
+[test_set_fill_validate] OK: запись буквы Б полная
+[test_set_fill_validate] OK: путь картинки буквы Б относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Б относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Б нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Б нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Б не пустая
+[test_set_fill_validate] OK: звук буквы Б совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Б набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Б набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Б отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Б набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Б набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Б отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Б набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Б набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Б отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Б набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Б набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Б отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Б набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Б набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Б отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Б декодируется
+[test_set_fill_validate] OK: звук буквы Б декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Б длиннее 0.2 с (получено: 0.54)
+[test_set_fill_validate] OK: слово буквы В новое (получено: Ви́шня)
+[test_set_fill_validate] OK: запись буквы В полная
+[test_set_fill_validate] OK: путь картинки буквы В относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы В относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы В нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы В нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы В не пустая
+[test_set_fill_validate] OK: звук буквы В совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы В набора 1 читается
+[test_set_fill_validate] OK: картинка буквы В набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы В отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы В набора 2 читается
+[test_set_fill_validate] OK: картинка буквы В набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы В отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы В набора 3 читается
+[test_set_fill_validate] OK: картинка буквы В набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы В отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы В набора 4 читается
+[test_set_fill_validate] OK: картинка буквы В набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы В отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы В набора 5 читается
+[test_set_fill_validate] OK: картинка буквы В набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы В отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы В декодируется
+[test_set_fill_validate] OK: звук буквы В декодируется как WAV
+[test_set_fill_validate] OK: звук буквы В длиннее 0.2 с (получено: 0.59)
+[test_set_fill_validate] OK: слово буквы Г новое (получено: Гнездо́)
+[test_set_fill_validate] OK: запись буквы Г полная
+[test_set_fill_validate] OK: путь картинки буквы Г относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Г относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Г нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Г нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Г не пустая
+[test_set_fill_validate] OK: звук буквы Г совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Г набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Г набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Г отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Г набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Г набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Г отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Г набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Г набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Г отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Г набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Г набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Г отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Г набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Г набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Г отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Г декодируется
+[test_set_fill_validate] OK: звук буквы Г декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Г длиннее 0.2 с (получено: 0.62)
+[test_set_fill_validate] OK: слово буквы Д новое (получено: Ды́ня)
+[test_set_fill_validate] OK: запись буквы Д полная
+[test_set_fill_validate] OK: путь картинки буквы Д относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Д относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Д нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Д нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Д не пустая
+[test_set_fill_validate] OK: звук буквы Д совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Д набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Д набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Д отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Д набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Д набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Д отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Д набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Д набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Д отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Д набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Д набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Д отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Д набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Д набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Д отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Д декодируется
+[test_set_fill_validate] OK: звук буквы Д декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Д длиннее 0.2 с (получено: 0.49)
+[test_set_fill_validate] OK: слово буквы Е новое (получено: Единоро́г)
+[test_set_fill_validate] OK: запись буквы Е полная
+[test_set_fill_validate] OK: путь картинки буквы Е относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Е относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Е нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Е нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Е не пустая
+[test_set_fill_validate] OK: звук буквы Е совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Е набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Е набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Е отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Е набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Е набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Е отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Е набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Е набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Е отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Е набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Е набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Е отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Е набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Е набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Е отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Е декодируется
+[test_set_fill_validate] OK: звук буквы Е декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Е длиннее 0.2 с (получено: 0.73)
+[test_set_fill_validate] OK: слово буквы Ё новое (получено: Ё́мкость)
+[test_set_fill_validate] OK: запись буквы Ё полная
+[test_set_fill_validate] OK: путь картинки буквы Ё относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Ё относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Ё нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Ё нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Ё не пустая
+[test_set_fill_validate] OK: звук буквы Ё совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Ё набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Ё набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Ё отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Ё набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Ё набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Ё отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Ё набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Ё набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Ё отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Ё набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Ё набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Ё отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Ё набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Ё набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Ё отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Ё декодируется
+[test_set_fill_validate] OK: звук буквы Ё декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Ё длиннее 0.2 с (получено: 0.69)
+[test_set_fill_validate] OK: слово буквы Ж новое (получено: Жасми́н)
+[test_set_fill_validate] OK: запись буквы Ж полная
+[test_set_fill_validate] OK: путь картинки буквы Ж относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Ж относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Ж нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Ж нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Ж не пустая
+[test_set_fill_validate] OK: звук буквы Ж совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Ж набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Ж набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Ж отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Ж набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Ж набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Ж отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Ж набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Ж набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Ж отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Ж набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Ж набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Ж отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Ж набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Ж набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Ж отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Ж декодируется
+[test_set_fill_validate] OK: звук буквы Ж декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Ж длиннее 0.2 с (получено: 0.63)
+[test_set_fill_validate] OK: слово буквы З новое (получено: Зе́ркало)
+[test_set_fill_validate] OK: запись буквы З полная
+[test_set_fill_validate] OK: путь картинки буквы З относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы З относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы З нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы З нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы З не пустая
+[test_set_fill_validate] OK: звук буквы З совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы З набора 1 читается
+[test_set_fill_validate] OK: картинка буквы З набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы З отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы З набора 2 читается
+[test_set_fill_validate] OK: картинка буквы З набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы З отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы З набора 3 читается
+[test_set_fill_validate] OK: картинка буквы З набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы З отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы З набора 4 читается
+[test_set_fill_validate] OK: картинка буквы З набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы З отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы З набора 5 читается
+[test_set_fill_validate] OK: картинка буквы З набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы З отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы З декодируется
+[test_set_fill_validate] OK: звук буквы З декодируется как WAV
+[test_set_fill_validate] OK: звук буквы З длиннее 0.2 с (получено: 0.66)
+[test_set_fill_validate] OK: слово буквы И новое (получено: Имби́рь)
+[test_set_fill_validate] OK: запись буквы И полная
+[test_set_fill_validate] OK: путь картинки буквы И относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы И относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы И нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы И нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы И не пустая
+[test_set_fill_validate] OK: звук буквы И совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы И набора 1 читается
+[test_set_fill_validate] OK: картинка буквы И набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы И отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы И набора 2 читается
+[test_set_fill_validate] OK: картинка буквы И набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы И отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы И набора 3 читается
+[test_set_fill_validate] OK: картинка буквы И набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы И отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы И набора 4 читается
+[test_set_fill_validate] OK: картинка буквы И набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы И отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы И набора 5 читается
+[test_set_fill_validate] OK: картинка буквы И набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы И отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы И декодируется
+[test_set_fill_validate] OK: звук буквы И декодируется как WAV
+[test_set_fill_validate] OK: звук буквы И длиннее 0.2 с (получено: 0.40)
+[test_set_fill_validate] OK: слово буквы Й новое (получено: Йо́га)
+[test_set_fill_validate] OK: запись буквы Й полная
+[test_set_fill_validate] OK: путь картинки буквы Й относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Й относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Й нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Й нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Й не пустая
+[test_set_fill_validate] OK: звук буквы Й совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Й набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Й набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Й отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Й набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Й набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Й отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Й набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Й набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Й отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Й набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Й набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Й отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Й набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Й набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Й отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Й декодируется
+[test_set_fill_validate] OK: звук буквы Й декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Й длиннее 0.2 с (получено: 0.46)
+[test_set_fill_validate] OK: слово буквы К новое (получено: Коза́)
+[test_set_fill_validate] OK: запись буквы К полная
+[test_set_fill_validate] OK: путь картинки буквы К относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы К относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы К нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы К нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы К не пустая
+[test_set_fill_validate] OK: звук буквы К совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы К набора 1 читается
+[test_set_fill_validate] OK: картинка буквы К набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы К отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы К набора 2 читается
+[test_set_fill_validate] OK: картинка буквы К набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы К отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы К набора 3 читается
+[test_set_fill_validate] OK: картинка буквы К набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы К отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы К набора 4 читается
+[test_set_fill_validate] OK: картинка буквы К набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы К отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы К набора 5 читается
+[test_set_fill_validate] OK: картинка буквы К набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы К отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы К декодируется
+[test_set_fill_validate] OK: звук буквы К декодируется как WAV
+[test_set_fill_validate] OK: звук буквы К длиннее 0.2 с (получено: 0.42)
+[test_set_fill_validate] OK: слово буквы Л новое (получено: Ло́дка)
+[test_set_fill_validate] OK: запись буквы Л полная
+[test_set_fill_validate] OK: путь картинки буквы Л относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Л относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Л нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Л нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Л не пустая
+[test_set_fill_validate] OK: звук буквы Л совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Л набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Л набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Л отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Л набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Л набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Л отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Л набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Л набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Л отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Л набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Л набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Л отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Л набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Л набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Л отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Л декодируется
+[test_set_fill_validate] OK: звук буквы Л декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Л длиннее 0.2 с (получено: 0.55)
+[test_set_fill_validate] OK: слово буквы М новое (получено: Моро́женое)
+[test_set_fill_validate] OK: запись буквы М полная
+[test_set_fill_validate] OK: путь картинки буквы М относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы М относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы М нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы М нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы М не пустая
+[test_set_fill_validate] OK: звук буквы М совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы М набора 1 читается
+[test_set_fill_validate] OK: картинка буквы М набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы М отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы М набора 2 читается
+[test_set_fill_validate] OK: картинка буквы М набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы М отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы М набора 3 читается
+[test_set_fill_validate] OK: картинка буквы М набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы М отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы М набора 4 читается
+[test_set_fill_validate] OK: картинка буквы М набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы М отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы М набора 5 читается
+[test_set_fill_validate] OK: картинка буквы М набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы М отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы М декодируется
+[test_set_fill_validate] OK: звук буквы М декодируется как WAV
+[test_set_fill_validate] OK: звук буквы М длиннее 0.2 с (получено: 0.73)
+[test_set_fill_validate] OK: слово буквы Н новое (получено: Но́ра)
+[test_set_fill_validate] OK: запись буквы Н полная
+[test_set_fill_validate] OK: путь картинки буквы Н относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Н относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Н нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Н нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Н не пустая
+[test_set_fill_validate] OK: звук буквы Н совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Н набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Н набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Н отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Н набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Н набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Н отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Н набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Н набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Н отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Н набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Н набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Н отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Н набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Н набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Н отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Н декодируется
+[test_set_fill_validate] OK: звук буквы Н декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Н длиннее 0.2 с (получено: 0.44)
+[test_set_fill_validate] OK: слово буквы О новое (получено: О́блако)
+[test_set_fill_validate] OK: запись буквы О полная
+[test_set_fill_validate] OK: путь картинки буквы О относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы О относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы О нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы О нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы О не пустая
+[test_set_fill_validate] OK: звук буквы О совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы О набора 1 читается
+[test_set_fill_validate] OK: картинка буквы О набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы О отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы О набора 2 читается
+[test_set_fill_validate] OK: картинка буквы О набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы О отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы О набора 3 читается
+[test_set_fill_validate] OK: картинка буквы О набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы О отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы О набора 4 читается
+[test_set_fill_validate] OK: картинка буквы О набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы О отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы О набора 5 читается
+[test_set_fill_validate] OK: картинка буквы О набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы О отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы О декодируется
+[test_set_fill_validate] OK: звук буквы О декодируется как WAV
+[test_set_fill_validate] OK: звук буквы О длиннее 0.2 с (получено: 0.57)
+[test_set_fill_validate] OK: слово буквы П новое (получено: Помидо́р)
+[test_set_fill_validate] OK: запись буквы П полная
+[test_set_fill_validate] OK: путь картинки буквы П относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы П относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы П нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы П нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы П не пустая
+[test_set_fill_validate] OK: звук буквы П совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы П набора 1 читается
+[test_set_fill_validate] OK: картинка буквы П набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы П отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы П набора 2 читается
+[test_set_fill_validate] OK: картинка буквы П набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы П отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы П набора 3 читается
+[test_set_fill_validate] OK: картинка буквы П набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы П отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы П набора 4 читается
+[test_set_fill_validate] OK: картинка буквы П набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы П отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы П набора 5 читается
+[test_set_fill_validate] OK: картинка буквы П набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы П отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы П декодируется
+[test_set_fill_validate] OK: звук буквы П декодируется как WAV
+[test_set_fill_validate] OK: звук буквы П длиннее 0.2 с (получено: 0.47)
+[test_set_fill_validate] OK: слово буквы Р новое (получено: Ре́па)
+[test_set_fill_validate] OK: запись буквы Р полная
+[test_set_fill_validate] OK: путь картинки буквы Р относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Р относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Р нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Р нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Р не пустая
+[test_set_fill_validate] OK: звук буквы Р совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Р набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Р набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Р отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Р набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Р набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Р отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Р набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Р набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Р отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Р набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Р набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Р отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Р набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Р набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Р отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Р декодируется
+[test_set_fill_validate] OK: звук буквы Р декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Р длиннее 0.2 с (получено: 0.44)
+[test_set_fill_validate] OK: слово буквы С новое (получено: Су́мка)
+[test_set_fill_validate] OK: запись буквы С полная
+[test_set_fill_validate] OK: путь картинки буквы С относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы С относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы С нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы С нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы С не пустая
+[test_set_fill_validate] OK: звук буквы С совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы С набора 1 читается
+[test_set_fill_validate] OK: картинка буквы С набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы С отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы С набора 2 читается
+[test_set_fill_validate] OK: картинка буквы С набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы С отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы С набора 3 читается
+[test_set_fill_validate] OK: картинка буквы С набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы С отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы С набора 4 читается
+[test_set_fill_validate] OK: картинка буквы С набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы С отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы С набора 5 читается
+[test_set_fill_validate] OK: картинка буквы С набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы С отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы С декодируется
+[test_set_fill_validate] OK: звук буквы С декодируется как WAV
+[test_set_fill_validate] OK: звук буквы С длиннее 0.2 с (получено: 0.60)
+[test_set_fill_validate] OK: слово буквы Т новое (получено: Ту́ча)
+[test_set_fill_validate] OK: запись буквы Т полная
+[test_set_fill_validate] OK: путь картинки буквы Т относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Т относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Т нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Т нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Т не пустая
+[test_set_fill_validate] OK: звук буквы Т совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Т набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Т набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Т отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Т набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Т набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Т отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Т набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Т набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Т отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Т набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Т набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Т отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Т набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Т набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Т отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Т декодируется
+[test_set_fill_validate] OK: звук буквы Т декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Т длиннее 0.2 с (получено: 0.46)
+[test_set_fill_validate] OK: слово буквы У новое (получено: Укро́п)
+[test_set_fill_validate] OK: запись буквы У полная
+[test_set_fill_validate] OK: путь картинки буквы У относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы У относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы У нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы У нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы У не пустая
+[test_set_fill_validate] OK: звук буквы У совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы У набора 1 читается
+[test_set_fill_validate] OK: картинка буквы У набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы У отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы У набора 2 читается
+[test_set_fill_validate] OK: картинка буквы У набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы У отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы У набора 3 читается
+[test_set_fill_validate] OK: картинка буквы У набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы У отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы У набора 4 читается
+[test_set_fill_validate] OK: картинка буквы У набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы У отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы У набора 5 читается
+[test_set_fill_validate] OK: картинка буквы У набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы У отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы У декодируется
+[test_set_fill_validate] OK: звук буквы У декодируется как WAV
+[test_set_fill_validate] OK: звук буквы У длиннее 0.2 с (получено: 0.51)
+[test_set_fill_validate] OK: слово буквы Ф новое (получено: Фона́рь)
+[test_set_fill_validate] OK: запись буквы Ф полная
+[test_set_fill_validate] OK: путь картинки буквы Ф относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Ф относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Ф нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Ф нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Ф не пустая
+[test_set_fill_validate] OK: звук буквы Ф совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Ф набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Ф набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Ф отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Ф набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Ф набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Ф отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Ф набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Ф набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Ф отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Ф набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Ф набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Ф отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Ф набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Ф набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Ф отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Ф декодируется
+[test_set_fill_validate] OK: звук буквы Ф декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Ф длиннее 0.2 с (получено: 0.44)
+[test_set_fill_validate] OK: слово буквы Х новое (получено: Хо́бот)
+[test_set_fill_validate] OK: запись буквы Х полная
+[test_set_fill_validate] OK: путь картинки буквы Х относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Х относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Х нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Х нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Х не пустая
+[test_set_fill_validate] OK: звук буквы Х совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Х набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Х набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Х отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Х набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Х набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Х отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Х набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Х набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Х отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Х набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Х набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Х отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Х набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Х набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Х отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Х декодируется
+[test_set_fill_validate] OK: звук буквы Х декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Х длиннее 0.2 с (получено: 0.58)
+[test_set_fill_validate] OK: слово буквы Ц новое (получено: Ци́фра)
+[test_set_fill_validate] OK: запись буквы Ц полная
+[test_set_fill_validate] OK: путь картинки буквы Ц относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Ц относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Ц нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Ц нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Ц не пустая
+[test_set_fill_validate] OK: звук буквы Ц совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Ц набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Ц набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Ц отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Ц набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Ц набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Ц отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Ц набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Ц набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Ц отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Ц набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Ц набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Ц отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Ц набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Ц набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Ц отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Ц декодируется
+[test_set_fill_validate] OK: звук буквы Ц декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Ц длиннее 0.2 с (получено: 0.53)
+[test_set_fill_validate] OK: слово буквы Ч новое (получено: Чесно́к)
+[test_set_fill_validate] OK: запись буквы Ч полная
+[test_set_fill_validate] OK: путь картинки буквы Ч относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Ч относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Ч нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Ч нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Ч не пустая
+[test_set_fill_validate] OK: звук буквы Ч совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Ч набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Ч набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Ч отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Ч набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Ч набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Ч отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Ч набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Ч набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Ч отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Ч набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Ч набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Ч отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Ч набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Ч набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Ч отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Ч декодируется
+[test_set_fill_validate] OK: звук буквы Ч декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Ч длиннее 0.2 с (получено: 0.62)
+[test_set_fill_validate] OK: слово буквы Ш новое (получено: Шмель)
+[test_set_fill_validate] OK: запись буквы Ш полная
+[test_set_fill_validate] OK: путь картинки буквы Ш относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Ш относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Ш нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Ш нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Ш не пустая
+[test_set_fill_validate] OK: звук буквы Ш совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Ш набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Ш набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Ш отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Ш набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Ш набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Ш отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Ш набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Ш набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Ш отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Ш набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Ш набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Ш отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Ш набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Ш набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Ш отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Ш декодируется
+[test_set_fill_validate] OK: звук буквы Ш декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Ш длиннее 0.2 с (получено: 0.46)
+[test_set_fill_validate] OK: слово буквы Щ новое (получено: Щаве́ль)
+[test_set_fill_validate] OK: запись буквы Щ полная
+[test_set_fill_validate] OK: путь картинки буквы Щ относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Щ относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Щ нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Щ нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Щ не пустая
+[test_set_fill_validate] OK: звук буквы Щ совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Щ набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Щ набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Щ отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Щ набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Щ набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Щ отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Щ набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Щ набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Щ отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Щ набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Щ набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Щ отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Щ набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Щ набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Щ отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Щ декодируется
+[test_set_fill_validate] OK: звук буквы Щ декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Щ длиннее 0.2 с (получено: 0.44)
+[test_set_fill_validate] OK: слово буквы Ъ новое (получено: Разъе́зд)
+[test_set_fill_validate] OK: запись буквы Ъ полная
+[test_set_fill_validate] OK: путь картинки буквы Ъ относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Ъ относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Ъ нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Ъ нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Ъ не пустая
+[test_set_fill_validate] OK: звук буквы Ъ совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Ъ набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Ъ набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Ъ отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Ъ набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Ъ набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Ъ отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Ъ набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Ъ набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Ъ отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Ъ набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Ъ набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Ъ отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Ъ набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Ъ набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Ъ отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Ъ декодируется
+[test_set_fill_validate] OK: звук буквы Ъ декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Ъ длиннее 0.2 с (получено: 0.62)
+[test_set_fill_validate] OK: слово буквы Ы новое (получено: Бык)
+[test_set_fill_validate] OK: запись буквы Ы полная
+[test_set_fill_validate] OK: путь картинки буквы Ы относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Ы относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Ы нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Ы нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Ы не пустая
+[test_set_fill_validate] OK: звук буквы Ы совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Ы набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Ы набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Ы отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Ы набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Ы набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Ы отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Ы набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Ы набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Ы отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Ы набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Ы набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Ы отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Ы набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Ы набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Ы отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Ы декодируется
+[test_set_fill_validate] OK: звук буквы Ы декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Ы длиннее 0.2 с (получено: 0.38)
+[test_set_fill_validate] OK: слово буквы Ь новое (получено: Лось)
+[test_set_fill_validate] OK: запись буквы Ь полная
+[test_set_fill_validate] OK: путь картинки буквы Ь относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Ь относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Ь нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Ь нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Ь не пустая
+[test_set_fill_validate] OK: звук буквы Ь совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Ь набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Ь набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Ь отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Ь набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Ь набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Ь отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Ь набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Ь набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Ь отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Ь набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Ь набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Ь отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Ь набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Ь набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Ь отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Ь декодируется
+[test_set_fill_validate] OK: звук буквы Ь декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Ь длиннее 0.2 с (получено: 0.43)
+[test_set_fill_validate] OK: слово буквы Э новое (получено: Эта́ж)
+[test_set_fill_validate] OK: запись буквы Э полная
+[test_set_fill_validate] OK: путь картинки буквы Э относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Э относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Э нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Э нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Э не пустая
+[test_set_fill_validate] OK: звук буквы Э совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Э набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Э набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Э отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Э набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Э набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Э отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Э набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Э набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Э отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Э набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Э набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Э отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Э набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Э набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Э отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Э декодируется
+[test_set_fill_validate] OK: звук буквы Э декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Э длиннее 0.2 с (получено: 0.51)
+[test_set_fill_validate] OK: слово буквы Ю новое (получено: Ю́нга)
+[test_set_fill_validate] OK: запись буквы Ю полная
+[test_set_fill_validate] OK: путь картинки буквы Ю относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Ю относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Ю нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Ю нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Ю не пустая
+[test_set_fill_validate] OK: звук буквы Ю совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Ю набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Ю набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Ю отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Ю набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Ю набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Ю отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Ю набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Ю набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Ю отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Ю набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Ю набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Ю отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Ю набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Ю набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Ю отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Ю декодируется
+[test_set_fill_validate] OK: звук буквы Ю декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Ю длиннее 0.2 с (получено: 0.54)
+[test_set_fill_validate] OK: слово буквы Я новое (получено: Я́ма)
+[test_set_fill_validate] OK: запись буквы Я полная
+[test_set_fill_validate] OK: путь картинки буквы Я относительный и в каталоге набора
+[test_set_fill_validate] OK: путь звука буквы Я относительный и в каталоге набора
+[test_set_fill_validate] OK: в метаданных буквы Я нет абсолютного пути картинки
+[test_set_fill_validate] OK: в метаданных буквы Я нет абсолютного пути звука
+[test_set_fill_validate] OK: картинка буквы Я не пустая
+[test_set_fill_validate] OK: звук буквы Я совпадает с фикстурой байт в байт
+[test_set_fill_validate] OK: встроенная картинка буквы Я набора 1 читается
+[test_set_fill_validate] OK: картинка буквы Я набора отличается от встроенного набора 1
+[test_set_fill_validate] OK: фикстура буквы Я отличается от встроенного набора 1
+[test_set_fill_validate] OK: встроенная картинка буквы Я набора 2 читается
+[test_set_fill_validate] OK: картинка буквы Я набора отличается от встроенного набора 2
+[test_set_fill_validate] OK: фикстура буквы Я отличается от встроенного набора 2
+[test_set_fill_validate] OK: встроенная картинка буквы Я набора 3 читается
+[test_set_fill_validate] OK: картинка буквы Я набора отличается от встроенного набора 3
+[test_set_fill_validate] OK: фикстура буквы Я отличается от встроенного набора 3
+[test_set_fill_validate] OK: встроенная картинка буквы Я набора 4 читается
+[test_set_fill_validate] OK: картинка буквы Я набора отличается от встроенного набора 4
+[test_set_fill_validate] OK: фикстура буквы Я отличается от встроенного набора 4
+[test_set_fill_validate] OK: встроенная картинка буквы Я набора 5 читается
+[test_set_fill_validate] OK: картинка буквы Я набора отличается от встроенного набора 5
+[test_set_fill_validate] OK: фикстура буквы Я отличается от встроенного набора 5
+[test_set_fill_validate] OK: картинка буквы Я декодируется
+[test_set_fill_validate] OK: звук буквы Я декодируется как WAV
+[test_set_fill_validate] OK: звук буквы Я длиннее 0.2 с (получено: 0.47)
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы А (получено: Альбо́м)
+[test_set_fill_validate] OK: SetRepository помечает букву А пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы А
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы А
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы А
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы А
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Б (получено: Бу́блик)
+[test_set_fill_validate] OK: SetRepository помечает букву Б пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Б
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Б
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Б
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Б
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы В (получено: Ви́шня)
+[test_set_fill_validate] OK: SetRepository помечает букву В пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы В
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы В
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы В
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы В
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Г (получено: Гнездо́)
+[test_set_fill_validate] OK: SetRepository помечает букву Г пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Г
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Г
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Г
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Г
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Д (получено: Ды́ня)
+[test_set_fill_validate] OK: SetRepository помечает букву Д пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Д
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Д
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Д
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Д
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Е (получено: Единоро́г)
+[test_set_fill_validate] OK: SetRepository помечает букву Е пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Е
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Е
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Е
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Е
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Ё (получено: Ё́мкость)
+[test_set_fill_validate] OK: SetRepository помечает букву Ё пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Ё
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Ё
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Ё
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Ё
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Ж (получено: Жасми́н)
+[test_set_fill_validate] OK: SetRepository помечает букву Ж пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Ж
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Ж
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Ж
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Ж
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы З (получено: Зе́ркало)
+[test_set_fill_validate] OK: SetRepository помечает букву З пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы З
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы З
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы З
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы З
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы И (получено: Имби́рь)
+[test_set_fill_validate] OK: SetRepository помечает букву И пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы И
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы И
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы И
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы И
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Й (получено: Йо́га)
+[test_set_fill_validate] OK: SetRepository помечает букву Й пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Й
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Й
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Й
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Й
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы К (получено: Коза́)
+[test_set_fill_validate] OK: SetRepository помечает букву К пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы К
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы К
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы К
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы К
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Л (получено: Ло́дка)
+[test_set_fill_validate] OK: SetRepository помечает букву Л пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Л
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Л
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Л
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Л
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы М (получено: Моро́женое)
+[test_set_fill_validate] OK: SetRepository помечает букву М пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы М
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы М
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы М
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы М
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Н (получено: Но́ра)
+[test_set_fill_validate] OK: SetRepository помечает букву Н пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Н
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Н
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Н
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Н
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы О (получено: О́блако)
+[test_set_fill_validate] OK: SetRepository помечает букву О пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы О
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы О
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы О
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы О
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы П (получено: Помидо́р)
+[test_set_fill_validate] OK: SetRepository помечает букву П пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы П
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы П
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы П
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы П
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Р (получено: Ре́па)
+[test_set_fill_validate] OK: SetRepository помечает букву Р пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Р
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Р
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Р
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Р
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы С (получено: Су́мка)
+[test_set_fill_validate] OK: SetRepository помечает букву С пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы С
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы С
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы С
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы С
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Т (получено: Ту́ча)
+[test_set_fill_validate] OK: SetRepository помечает букву Т пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Т
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Т
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Т
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Т
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы У (получено: Укро́п)
+[test_set_fill_validate] OK: SetRepository помечает букву У пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы У
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы У
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы У
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы У
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Ф (получено: Фона́рь)
+[test_set_fill_validate] OK: SetRepository помечает букву Ф пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Ф
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Ф
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Ф
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Ф
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Х (получено: Хо́бот)
+[test_set_fill_validate] OK: SetRepository помечает букву Х пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Х
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Х
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Х
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Х
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Ц (получено: Ци́фра)
+[test_set_fill_validate] OK: SetRepository помечает букву Ц пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Ц
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Ц
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Ц
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Ц
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Ч (получено: Чесно́к)
+[test_set_fill_validate] OK: SetRepository помечает букву Ч пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Ч
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Ч
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Ч
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Ч
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Ш (получено: Шмель)
+[test_set_fill_validate] OK: SetRepository помечает букву Ш пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Ш
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Ш
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Ш
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Ш
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Щ (получено: Щаве́ль)
+[test_set_fill_validate] OK: SetRepository помечает букву Щ пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Щ
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Щ
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Щ
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Щ
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Ъ (получено: Разъе́зд)
+[test_set_fill_validate] OK: SetRepository помечает букву Ъ пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Ъ
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Ъ
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Ъ
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Ъ
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Ы (получено: Бык)
+[test_set_fill_validate] OK: SetRepository помечает букву Ы пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Ы
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Ы
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Ы
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Ы
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Ь (получено: Лось)
+[test_set_fill_validate] OK: SetRepository помечает букву Ь пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Ь
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Ь
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Ь
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Ь
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Э (получено: Эта́ж)
+[test_set_fill_validate] OK: SetRepository помечает букву Э пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Э
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Э
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Э
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Э
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Ю (получено: Ю́нга)
+[test_set_fill_validate] OK: SetRepository помечает букву Ю пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Ю
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Ю
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Ю
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Ю
+[test_set_fill_validate] OK: SetRepository отдаёт новое слово буквы Я (получено: Я́ма)
+[test_set_fill_validate] OK: SetRepository помечает букву Я пользовательской
+[test_set_fill_validate] OK: SetRepository отдаёт путь картинки буквы Я
+[test_set_fill_validate] OK: SetRepository отдаёт путь звука буквы Я
+[test_set_fill_validate] OK: SetRepository загружает карточку буквы Я
+[test_set_fill_validate] OK: SetRepository загружает озвучку буквы Я
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_06a7ec/img_a.webp","width":1024}
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_06a7ec/img_b.webp","width":1024}
+[test_set_fill_validate] OK: прогон --letters=А,Б успешен
+[test_set_fill_validate] OK: запрошены ровно А и Б (получено: ["А", "Б"])
+[test_set_fill_validate] OK: в наборе только А и Б (получено: ["А", "Б"])
+[test_set_fill_validate] OK: полный и урезанный наборы сосуществуют
+[INFO] ImageSaver: image_saved  data={"height":1024,"path":"user://custom_sets/c_29ccbd/img_v.webp","width":1024}
+[test_set_fill_validate] OK: прогон --reset успешен
+[test_set_fill_validate] OK: старый набор удалён
+[test_set_fill_validate] OK: reset создал новый набор
+[test_set_fill_validate] OK: после reset в наборе только В (получено: ["В"])
+[test_set_fill_validate] OK: после reset наборов по-прежнему два
+[test_set_fill_validate] OK: известные флаги разбираются
+[test_set_fill_validate] OK: флаг --name доходит до options
+[test_set_fill_validate] OK: флаг --letters доходит до options
+[test_set_fill_validate] OK: флаг --reset доходит до options
+[test_set_fill_validate] OK: неизвестный флаг это ошибка аргументов
+[test_set_fill_validate] OK: флага --word-set нет и он отвергается
+[test_set_fill_validate] OK: тестовое хранилище пусто после уборки
+[test_set_fill_validate] OK: тестовый JSON хранилища удалён
+[test_set_fill_validate] OK: тестовый JSON прогресса удалён
+[test_set_fill_validate] PASSED: 1247 проверок

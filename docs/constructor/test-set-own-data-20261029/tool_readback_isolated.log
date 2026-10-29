@@ -1,0 +1,7 @@
+[probe] name=Тестовый набор ownset set_id=c_b2352b
+[probe] А | word=Альбо́м | image=user://custom_sets/c_b2352b/img_a.webp | audio=user://custom_sets/c_b2352b/aud_a.wav | texture=true | length=0.51
+[probe] Б | word=Бу́блик | image=user://custom_sets/c_b2352b/img_b.webp | audio=user://custom_sets/c_b2352b/aud_b.wav | texture=true | length=0.54
+[probe] Ё | word=Ё́мкость | image=user://custom_sets/c_b2352b/img_yo.webp | audio=user://custom_sets/c_b2352b/aud_yo.wav | texture=true | length=0.69
+[probe] Ъ | word=Разъе́зд | image=user://custom_sets/c_b2352b/img_q.webp | audio=user://custom_sets/c_b2352b/aud_q.wav | texture=true | length=0.62
+[probe] Ь | word=Лось | image=user://custom_sets/c_b2352b/img_soft.webp | audio=user://custom_sets/c_b2352b/aud_soft.wav | texture=true | length=0.43
+[probe] Я | word=Я́ма | image=user://custom_sets/c_b2352b/img_ya.webp | audio=user://custom_sets/c_b2352b/aud_ya.wav | texture=true | length=0.47
