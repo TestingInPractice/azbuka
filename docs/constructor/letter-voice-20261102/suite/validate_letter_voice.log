@@ -1,0 +1,22 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[INFO] letter_card: letter_sound  data={"letter":"А"}
+[letter_voice_validate] OK: вариант new: играет название буквы (получено: res://assets/audio/а_letter_new.ogg)
+[letter_voice_validate] OK: вариант new: фонема не подмешивается
+[letter_voice_validate] OK: вариант new: после нажатия не играет второй голос
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[INFO] letter_card: letter_sound  data={"letter":"А"}
+[letter_voice_validate] OK: вариант old: играет название старой озвучки (получено: res://assets/audio/а_letter_tts.wav)
+[letter_voice_validate] OK: варианты озвучки различаются на слух
+[INFO] letter_card: ready  data={"index":27,"letter":"Ъ"}
+[INFO] letter_card: letter_sound  data={"letter":"Ъ"}
+[letter_voice_validate] OK: у Ъ кнопка буквы звучит
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[INFO] letter_card: letter_sound  data={"letter":"А"}
+[letter_voice_validate] OK: выключенный звук: кнопка буквы молчит
+[letter_voice_validate] PASSED: 7 проверок
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2663)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)
