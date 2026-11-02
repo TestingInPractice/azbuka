@@ -139,6 +139,21 @@ func delete_set(set_id: String) -> bool:
 	return false
 
 
+## Очищает буквы набора, сохраняя id и имя. Нужно повторному наполнению:
+## delete_set() выдал бы новый id, а прогресс ребёнка хранит именно id набора,
+## и после очистки он указывал бы на несуществующий набор.
+func clear_set_letters(set_id: String) -> bool:
+	for entry in _sets:
+		if str(entry.get("id", "")) != set_id:
+			continue
+		var letters: Dictionary = entry["letters"] as Dictionary
+		for key: String in letters.keys():
+			clear_entry_files(set_id, key)
+		letters.clear()
+		return save_sets()
+	return false
+
+
 ## Запись буквы: {word, image, audio}. Пути хранятся относительно корня
 ## user:// (без префикса "user://"), и лишний префикс срезается на входе —
 ## иначе вызывающий, сложивший путь через set_dir(), получил бы в метаданных

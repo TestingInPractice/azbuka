@@ -1,0 +1,26 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[progress_set_id_validate] OK: старый word_set=3 прочитан
+[progress_set_id_validate] OK: миграция вывела word_set_id из word_set (получено: "3")
+[progress_set_id_validate] OK: изученные буквы не потеряны при миграции
+[progress_set_id_validate] OK: series_length не потеряна при миграции
+[progress_set_id_validate] OK: вариант озвучки не потерян при миграции
+[progress_set_id_validate] OK: выключенный режим не потерян
+[progress_set_id_validate] OK: set_word_set(2) -> word_set=2
+[progress_set_id_validate] OK: set_word_set синхронизировал word_set_id
+[progress_set_id_validate] OK: пользовательский id принят
+[progress_set_id_validate] OK: int-поле вернулось к DEFAULT_WORD_SET при выборе пользовательского набора
+[progress_set_id_validate] OK: цифровой id принят как '4'
+[progress_set_id_validate] OK: цифровой id выставил word_set=4
+[progress_set_id_validate] OK: пустой id очистил word_set_id
+[progress_set_id_validate] OK: после очистки getter вернул номер word_set
+[progress_set_id_validate] OK: reset_progress очистил изученные буквы
+[progress_set_id_validate] OK: reset_progress НЕ сбросил word_set_id
+[progress_set_id_validate] OK: reset_progress НЕ оставил word_set=5 в неконсистентном состоянии
+[progress_set_id_validate] OK: save_progress успешен
+[progress_set_id_validate] OK: word_set_id сохранён на диск
+[progress_set_id_validate] OK: word_set сохранён на диск
+[progress_set_id_validate] OK: в файле сохранения есть оба ключа выбора набора
+[progress_set_id_validate] OK: оба ключа файла согласованы между собой
+[progress_set_id_validate] OK: отсутствие файла не ломает загрузку
+[progress_set_id_validate] PASSED: все проверки успешны

@@ -1,0 +1,12 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[word_sets_validate] OK: get_word_data("А", 1)["word"] == "Автобус" (получено: Авто́бус)
+[word_sets_validate] OK: get_word_data("А", 2)["word"] == "Арбуз" (получено: Арбу́з)
+[word_sets_validate] OK: get_word_data("А", 2)["image"] == "generated/Watermelon" (получено: generated/Watermelon)
+[word_sets_validate] OK: у набора 2 есть озвучка слова
+[word_sets_validate] OK: набор 2 озвучен своим файлом, а не заглушкой набора 1 (получено: res://assets/audio/арбуз_tts.wav)
+[word_sets_validate] OK: get_word_audio_path("А") (получено: res://assets/audio/автобус_tts.wav)
+[word_sets_validate] OK: get_letter_data("А")["word"] == "Автобус" (получено: Авто́бус)
+[word_sets_validate] OK: get_letter_data("А") не содержит вложенный sets
+[word_sets_validate] OK: get_word_data("А", 1)["image"] == "Bus" (получено: Bus)
+[word_sets_validate] PASSED: все проверки успешны

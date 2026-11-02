@@ -294,25 +294,11 @@ func _connect_signals() -> void:
 func _on_letter_sound_pressed() -> void:
 	GameLogger.info("letter_card", "letter_sound", {"letter": letter})
 	AudioManager.stop_all()
-	# Данные буквы — только через SetRepository. У Ъ/Ь своего фонемного звука
-	# нет, и get_letter_sound() возвращает название буквы; репозиторий кэширует
-	# по пути, поэтому это тот же самый объект. Сравнение по идентичности вместо
-	# дублирования: играть «ы-ы-...» и сразу «эр» — это повтор, а не два звука.
-	var name_stream := SetRepository.get_letter_audio(letter)
-	var sound_stream := SetRepository.get_letter_sound(letter)
-	if name_stream == null:
-		_reset_idle_timer()
-		return
-	if sound_stream == null or sound_stream == name_stream:
-		AudioManager.play_stream(name_stream)
-		_reset_idle_timer()
-		return
-	# Сначала звук буквы (фонема), по окончании — название буквы.
-	_play_prompt_stream(sound_stream)
-	await _await_prompt_finished()
-	if not is_inside_tree():
-		return
-	AudioManager.play_stream(name_stream)
+	# Один голос на нажатие: фонема шла из набора RU-alfavit (мужской голос), а
+	# следом название из Silero (женский), и переключатель озвучки в настройках
+	# на фонему не влиял. Название берём по выбранному варианту — что включено в
+	# настройках, то ребёнок и слышит.
+	AudioManager.play_stream(SetRepository.get_letter_audio(letter))
 	_reset_idle_timer()
 
 

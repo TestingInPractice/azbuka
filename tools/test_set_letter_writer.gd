@@ -6,9 +6,13 @@ extends RefCounted
 ## Здесь живут только операции над буквой, поэтому правила хранения медиа
 ## (WebP через ImageSaver, звук байт в байт, относительные пути) читаются в
 ## одном месте и не размазаны по разбору аргументов и поиску набора.
+##
+## Источник медиа — собственный датасет tools/test_set_data.gd, а не встроенные
+## наборы. Копия набора 1 делала тестовый набор неотличимым от встроенного, и
+## родитель не понимал, применился ли его набор.
 
 const Files := preload("res://tools/test_set_files.gd")
-const WORD_SET := 1
+const Data := preload("res://tools/test_set_data.gd")
 
 
 ## Пишет картинку и звук буквы. Возвращает {error, exported}: пустой error
@@ -16,20 +20,15 @@ const WORD_SET := 1
 ## PNG-байты под именем .webp недопустимы, поэтому картинка идёт через
 ## ImageSaver, который декодирует и записывает настоящий WebP.
 func write(set_id: String, letter: String, export_dir: String) -> Dictionary:
-	var data := AlphabetData.get_word_data(letter, WORD_SET)
-	var word := str(data.get("word", ""))
+	var key := letter.to_upper()
+	var word := Data.get_word(key)
 	if word.is_empty():
-		return _error("нет слова в данных буквы")
-	var image_name := str(data.get("image", ""))
-	if image_name.is_empty():
-		image_name = AlphabetData.get_fallback_image(letter)
-	if image_name.is_empty():
-		return _error("нет имени картинки")
-	var image_src := SetRepository.BUILTIN_IMAGE_DIR + image_name + ".png"
+		return _error("нет слова для буквы: " + key)
+	var image_src := Data.image_path(key)
 	if not FileAccess.file_exists(image_src):
 		return _error("нет картинки: " + image_src)
-	var audio_src := AlphabetData.get_word_audio_path(letter, WORD_SET)
-	if audio_src.is_empty() or not FileAccess.file_exists(audio_src):
+	var audio_src := Data.audio_path(key)
+	if not FileAccess.file_exists(audio_src):
 		return _error("нет звука: " + audio_src)
 
 	var image_bytes := FileAccess.get_file_as_bytes(image_src)
@@ -39,21 +38,21 @@ func write(set_id: String, letter: String, export_dir: String) -> Dictionary:
 	if audio_bytes.is_empty():
 		return _error("звук не читается: " + audio_src)
 
-	var image_target := CustomSetsStore.set_dir(set_id) + CustomSetsStore.image_file_name(letter)
+	var image_target := CustomSetsStore.set_dir(set_id) + CustomSetsStore.image_file_name(key)
 	var saved := ImageSaver.save_image(image_bytes, image_target)
 	if not bool(saved.get("ok", false)):
 		return _error("картинка не сохранилась: " + str(saved.get("error", "")))
 	var extension := audio_src.get_extension()
 	var audio_target := CustomSetsStore.set_dir(set_id) \
-			+ CustomSetsStore.audio_file_name(letter, extension)
+			+ CustomSetsStore.audio_file_name(key, extension)
 	if not Files.write_bytes(audio_target, audio_bytes):
 		return _error("звук не записался: " + audio_target)
 
 	var rel_image := Files.relative_user_path(image_target)
 	var rel_audio := Files.relative_user_path(audio_target)
-	if not CustomSetsStore.set_entry(set_id, letter, word, rel_image, rel_audio):
+	if not CustomSetsStore.set_entry(set_id, key, word, rel_image, rel_audio):
 		return _error("set_entry отклонил запись")
-	return _export_originals(export_dir, letter, word, extension, image_bytes, audio_bytes)
+	return _export_originals(export_dir, key, word, extension, image_bytes, audio_bytes)
 
 
 ## Копирует исходные PNG и звук под человеческими именами, чтобы родитель мог

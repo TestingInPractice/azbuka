@@ -1,0 +1,44 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[sound_toggle_validate] OK: новый ProgressManager: sound_enabled по умолчанию true
+[sound_toggle_validate] OK: set_sound_enabled(false) выключил звук в прогрессе
+[sound_toggle_validate] OK: AudioManager выключил звук
+[sound_toggle_validate] OK: при выключенном звуке play_stream не назначает поток
+[sound_toggle_validate] OK: при выключенном звуке play_stream не запускает плеер
+[sound_toggle_validate] OK: progress.json хранит sound_enabled=false
+[sound_toggle_validate] OK: load_progress восстановил выключенный звук
+[sound_toggle_validate] OK: после загрузки выключенный звук не назначает поток
+[sound_toggle_validate] OK: set_sound_enabled(true) включил звук в прогрессе
+[sound_toggle_validate] OK: AudioManager включил звук
+[sound_toggle_validate] OK: при включённом звуке play_stream назначает поток
+[sound_toggle_validate] OK: при включённом звуке play_stream запускает плеер
+[sound_toggle_validate] OK: в главном меню есть SoundButton
+[sound_toggle_validate] OK: SoundButton лежит в корне сцены, а не в MainLayout
+[sound_toggle_validate] OK: SoundButton стоит по координатам 16/170/206/360
+[sound_toggle_validate] OK: SoundButton не меньше 190x190 и шрифт 40
+[sound_toggle_validate] OK: при включённом звуке кнопка показывает 🔊
+[sound_toggle_validate] OK: имя кнопки при включённом звуке
+[sound_toggle_validate] OK: после перезапуска с выключенным звуком кнопка показывает 🔇
+[sound_toggle_validate] OK: после перезапуска имя кнопки «Звук выключен»
+[sound_toggle_validate] OK: кнопка звука доступна для нажатия
+[INFO] MainMenu: sound_button_pressed  data={"enabled":false}
+[sound_toggle_validate] OK: первое нажатие выключило AudioManager
+[sound_toggle_validate] OK: первое нажатие выключило прогресс
+[sound_toggle_validate] OK: после первого нажатия кнопка показывает 🔇
+[sound_toggle_validate] OK: после первого нажатия имя «Звук выключен»
+[sound_toggle_validate] OK: первое нажатие записало false в progress.json
+[INFO] MainMenu: sound_button_pressed  data={"enabled":true}
+[sound_toggle_validate] OK: второе нажатие включило AudioManager
+[sound_toggle_validate] OK: второе нажатие включило прогресс
+[sound_toggle_validate] OK: после второго нажатия кнопка показывает 🔊
+[sound_toggle_validate] OK: после второго нажатия имя «Звук включён»
+[sound_toggle_validate] OK: второе нажатие записало true в progress.json
+[sound_toggle_validate] OK: файл без sound_enabled загружается со звуком
+[sound_toggle_validate] OK: остальной прогресс из старого файла прочитан
+[sound_toggle_validate] OK: строковое sound_enabled даёт включённый звук
+[sound_toggle_validate] OK: числовое sound_enabled даёт включённый звук
+[sound_toggle_validate] PASSED: 35 проверок
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2663)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)
