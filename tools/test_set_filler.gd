@@ -48,9 +48,11 @@ func fill(options: Dictionary) -> Dictionary:
 
 	if reset and not target.get("record", {}).is_empty():
 		var old_id := str(target["record"].get("id", ""))
-		if not CustomSetsStore.delete_set(old_id):
-			return _error("не удалось удалить набор: " + old_id)
-		target["record"] = {}
+		# id и имя сохраняем: прогресс ребёнка хранит id набора, и новый id
+		# отвязал бы его от уже пройденных букв этого набора.
+		if not CustomSetsStore.clear_set_letters(old_id):
+			return _error("не удалось очистить набор: " + old_id)
+		target["record"] = CustomSetsStore.get_set_by_id(old_id)
 	if target.get("record", {}).is_empty():
 		target["record"] = CustomSetsStore.create_set(set_name)
 		if target["record"].is_empty():

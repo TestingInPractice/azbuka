@@ -132,14 +132,18 @@ func _ready() -> void:
 	})
 	var reset_id := str(reset.get("set_id", ""))
 
-	# then: старый набор удалён вместе с буквами, новый содержит только В
+	# then: буквы заменены, а id и имя набора сохранены — на id ссылается прогресс
 	_check(bool(reset.get("ok", false)), "прогон --reset успешен")
-	_check(CustomSetsStore.get_set_by_id(scoped_id).is_empty(), "старый набор удалён")
-	_check(reset_id != scoped_id, "reset создал новый набор")
+	_check(reset_id == scoped_id, "reset сохранил id набора (было %s, стало %s)"
+			% [scoped_id, reset_id])
+	_check(not CustomSetsStore.get_set_by_id(scoped_id).is_empty(), "набор после reset на месте")
+	_check(str(CustomSetsStore.get_set_by_id(scoped_id).get("name", "")) == SCOPED_SET_NAME,
+			"reset сохранил имя набора")
 	_check(CustomSetsStore.get_set_letters(reset_id) == _letters(["В"]),
 			"после reset в наборе только В (получено: %s)"
 			% str(CustomSetsStore.get_set_letters(reset_id)))
 	_check(CustomSetsStore.get_sets().size() == 2, "после reset наборов по-прежнему два")
+	_check(_letter_files_gone(scoped_id, ["А", "Б"]), "reset удалил файлы прежних букв")
 
 	# then: разбор аргументов не ослаблен
 	var valid := FillScript.parse_args(PackedStringArray([
@@ -301,6 +305,19 @@ func _remove_empty_sets_dir() -> void:
 		return
 	if dir.get_files().is_empty() and dir.get_directories().is_empty():
 		DirAccess.remove_absolute(abs_path)
+
+
+## После очистки файлы прежних букв не остаются: иначе папка набора копит мусор.
+func _letter_files_gone(set_id: String, letters: Array) -> bool:
+	for letter: String in letters:
+		var dir := CustomSetsStore.set_dir(set_id)
+		var image_path := ProjectSettings.globalize_path(
+				dir + CustomSetsStore.image_file_name(letter))
+		var audio_path := ProjectSettings.globalize_path(
+				dir + CustomSetsStore.audio_file_name(letter))
+		if FileAccess.file_exists(image_path) or FileAccess.file_exists(audio_path):
+			return false
+	return true
 
 
 func _remove_file(path: String) -> void:
