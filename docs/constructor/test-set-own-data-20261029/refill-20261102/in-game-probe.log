@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[text] active set: Тестовый набор
+[text] word А: Альбо́м
+[text] texture: 1024x1024
+[INFO] letter_card: ready  data={"index":0,"letter":"А"}
+[text] squares: 6
+[text] set label: Набор: Тестовый набор visible=true
+[text] image size: 1024
