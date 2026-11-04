@@ -4,13 +4,17 @@ extends Node
 ## Запуск: godot --headless --path . res://tests/validate_custom_sets_store.tscn
 
 const TEST_PATH := "user://custom_sets_test.json"
+const TEST_SETS_DIR := "user://custom_sets_store_test_sets"
+const SetsDirIsolation := preload("res://tests/test_sets_dir.gd")
 
 var failures := 0
+var _saved_sets_dir := ""
 
 
 func _ready() -> void:
 	await get_tree().process_frame
 
+	_saved_sets_dir = SetsDirIsolation.begin(TEST_SETS_DIR)
 	CustomSetsStore.save_path = TEST_PATH
 	# Чистый старт: файл теста мог остаться от прошлого прогона.
 	if FileAccess.file_exists(TEST_PATH):
@@ -95,7 +99,7 @@ func _ready() -> void:
 	# 6. Имена файлов — ASCII.
 	_check(CustomSetsStore.image_file_name("Я") == "img_ya.webp", "image_file_name(Я)")
 	_check(CustomSetsStore.audio_file_name("Ъ") == "aud_q.wav", "audio_file_name(Ъ)")
-	_check(CustomSetsStore.set_dir(set_id) == "user://custom_sets/%s/" % set_id,
+	_check(CustomSetsStore.set_dir(set_id) == "%s/%s/" % [CustomSetsStore.sets_dir, set_id],
 			"set_dir для набора")
 
 	# 6a. Расширение аудио. Загруженный mp3 обязан остаться mp3: Godot выбирает
@@ -146,6 +150,7 @@ func _ready() -> void:
 
 	# Уборка.
 	CustomSetsStore.save_path = CustomSetsStore.DEFAULT_SAVE_PATH
+	SetsDirIsolation.end(_saved_sets_dir, TEST_SETS_DIR)
 	if FileAccess.file_exists(TEST_PATH):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(TEST_PATH))
 

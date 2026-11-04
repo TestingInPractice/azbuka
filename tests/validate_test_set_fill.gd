@@ -17,6 +17,8 @@ const Files := preload("res://tools/test_set_files.gd")
 
 const TEST_STORE_PATH := "user://custom_sets_fill_test.json"
 const TEST_PROGRESS_PATH := "user://progress_fill_test.json"
+const TEST_SETS_DIR := "user://custom_sets_fill_test_sets"
+const SetsDirIsolation := preload("res://tests/test_sets_dir.gd")
 const TEST_SET_NAME := "Набор валидатора наполнения"
 const SCOPED_SET_NAME := "Набор валидатора: две буквы"
 
@@ -42,6 +44,7 @@ const EXPECTED := {
 var checks := 0
 var failures := 0
 var _saved_store_path := ""
+var _saved_sets_dir := ""
 var _saved_progress_path := ""
 var _saved_word_set_id := ""
 
@@ -51,6 +54,7 @@ func _ready() -> void:
 
 	_saved_store_path = CustomSetsStore.save_path
 	_saved_progress_path = ProgressManager.save_path
+	_saved_sets_dir = SetsDirIsolation.begin(TEST_SETS_DIR)
 	_saved_word_set_id = ProgressManager.get_word_set_id()
 	CustomSetsStore.save_path = TEST_STORE_PATH
 	ProgressManager.save_path = TEST_PROGRESS_PATH
@@ -172,10 +176,10 @@ func _check_letter(set_id: String, letter: String) -> void:
 
 	var image_rel := str(entry.get("image", ""))
 	var audio_rel := str(entry.get("audio", ""))
-	_check(image_rel == "custom_sets/%s/%s" % [set_id, CustomSetsStore.image_file_name(letter)],
+	var set_prefix := Files.relative_user_path(CustomSetsStore.set_dir(set_id))
+	_check(image_rel == set_prefix + CustomSetsStore.image_file_name(letter),
 			"путь картинки буквы %s относительный и в каталоге набора" % letter)
-	_check(audio_rel == "custom_sets/%s/%s" % [set_id,
-			CustomSetsStore.audio_file_name(letter, "wav")],
+	_check(audio_rel == set_prefix + CustomSetsStore.audio_file_name(letter, "wav"),
 			"путь звука буквы %s относительный и в каталоге набора" % letter)
 	_check(not image_rel.begins_with("user://") and not image_rel.begins_with("/"),
 			"в метаданных буквы %s нет абсолютного пути картинки" % letter)
@@ -287,6 +291,7 @@ func _cleanup() -> void:
 	CustomSetsStore.clear_memory()
 	CustomSetsStore.save_path = _saved_store_path
 	ProgressManager.save_path = _saved_progress_path
+	SetsDirIsolation.end(_saved_sets_dir, TEST_SETS_DIR)
 	_remove_file(TEST_STORE_PATH)
 	_remove_file(TEST_PROGRESS_PATH)
 	_check(CustomSetsStore.get_sets().is_empty(), "тестовое хранилище пусто после уборки")

@@ -21,6 +21,10 @@ signal sets_changed
 
 ## Путь к JSON с метаданными. Тесты переопределяют, чтобы не трогать данные ребёнка.
 var save_path: String = DEFAULT_SAVE_PATH
+## Папка файлов наборов. Тесты переопределяют её ВМЕСТЕ с save_path: одного
+## save_path мало, потому что удаление набора стирает его папку по set_dir(),
+## и тест с реальными наборами в памяти снёс бы картинки и звуки ребёнка.
+var sets_dir: String = SETS_DIR
 
 var _sets: Array[Dictionary] = []
 
@@ -302,7 +306,7 @@ func make_set_id() -> String:
 
 ## Папка набора с файлами букв.
 func set_dir(set_id: String) -> String:
-	return "%s/%s/" % [SETS_DIR, set_id]
+	return "%s/%s/" % [sets_dir, set_id]
 
 
 ## Имя файла картинки буквы: "img_<ascii>.webp".
@@ -344,7 +348,7 @@ func _sort_letters(a: String, b: String) -> bool:
 
 ## Удаляет папку набора и её содержимое. Отсутствие — не ошибка.
 func _remove_set_dir(set_id: String) -> void:
-	var base := ProjectSettings.globalize_path(SETS_DIR)
+	var base := ProjectSettings.globalize_path(sets_dir)
 	var abs_path := base.path_join(set_id)
 	if not DirAccess.dir_exists_absolute(abs_path):
 		return

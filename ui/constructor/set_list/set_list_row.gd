@@ -11,6 +11,7 @@ signal delete_requested
 @onready var _count_label: Label = %CountLabel
 @onready var _open_button: Button = %OpenButton
 @onready var _delete_button: Button = %DeleteButton
+@onready var _delete_confirm: ConfirmationDialog = %DeleteConfirm
 
 
 ## Заполняет строку данными набора. is_complete меняет подпись счётчика.
@@ -22,9 +23,29 @@ func setup(name: String, letter_count: int, is_complete: bool) -> void:
 
 func _ready() -> void:
 	_open_button.pressed.connect(func() -> void: pressed.emit())
-	_delete_button.pressed.connect(func() -> void: delete_requested.emit())
+	# Удаление спрашивает подтверждение: набор — это вечер заполнения 33 букв,
+	# и одна случайная кнопка не должна стирать его без вопроса. Сам сигнал
+	# delete_requested остаётся прежним, поэтому список и тесты работают
+	# с ним напрямую.
+	_delete_button.pressed.connect(_on_delete_pressed)
+	_delete_confirm.confirmed.connect(func() -> void: delete_requested.emit())
+	# Тап по имени и пустому месту строки открывает набор, а не только
+	# половина строки с кнопкой «Открыть». Подписи пропускают событие к
+	# карточке (mouse_filter = IGNORE), поэтому двойного открытия нет.
+	gui_input.connect(_on_row_gui_input)
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_apply_theme()
+
+
+func _on_delete_pressed() -> void:
+	_delete_confirm.popup_centered()
+
+
+func _on_row_gui_input(event: InputEvent) -> void:
+	var click := event as InputEventMouseButton
+	if click != null and click.button_index == MOUSE_BUTTON_LEFT \
+			and click.pressed:
+		pressed.emit()
 
 
 func _apply_theme(_mode: int = 0) -> void:

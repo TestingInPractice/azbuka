@@ -40,6 +40,7 @@ signal close_requested()
 @onready var _readiness_label: Label = %ReadinessLabel
 @onready var _slots: GridContainer = %Slots
 @onready var _back_button: Button = %BackButton
+@onready var _scroll: ScrollContainer = $Margin/Layout/ScrollArea
 
 var _set_id := ""
 var _slots_by_letter: Dictionary = {}
@@ -101,6 +102,11 @@ static func readiness_label(filled: int, total: int) -> String:
 ## Открывает набор на редактирование. Пустой или неизвестный id очищает экран.
 func open_set(set_id: String) -> void:
 	_set_id = set_id
+	# Новый набор всегда открывается с первой буквы: иначе редактор
+	# унаследовал бы прокрутку предыдущего набора и родитель искал бы,
+	# откуда начать заполнение.
+	if is_instance_valid(_scroll):
+		_scroll.scroll_vertical = 0
 	var record := CustomSetsStore.get_set_by_id(_set_id)
 	_updating = true
 	_name_edit.text = str(record.get("name", ""))
@@ -485,6 +491,12 @@ func _on_save_pressed() -> void:
 ## не эмитился нигде, и список звал _show_list() напрямую — объявленный API
 ## был мёртвым, а путь назад был неявным.
 func _on_back_pressed() -> void:
+	# Имя сохраняется и при выходе «Назад», а не только по Enter и «Готово»:
+	# иначе родитель печатал название, закрывал редактор и терял правку без
+	# единого сообщения. Пустое имя save_name() отвергает, и в хранилище
+	# остаётся прежнее.
+	if not _set_id.is_empty():
+		save_name(_name_edit.text)
 	close_requested.emit()
 	GameLogger.info("SetEditor", "close_requested", {"set_id": _set_id})
 

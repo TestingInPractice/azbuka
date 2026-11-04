@@ -64,6 +64,19 @@ const CHECKBOX_ICON_RADIUS := 18
 @onready var _voice_card: PanelContainer = %VoiceCard
 @onready var _voice_button_old: Button = %VoiceButtonOld
 @onready var _voice_button_new: Button = %VoiceButtonNew
+@onready var _progress_card: PanelContainer = %ProgressCard
+@onready var _progress_label: Label = %ProgressLabel
+## Заголовки секций: одинаковый приглушённый цвет, чтобы список читался
+## группами, а не одной длинной лентой.
+@onready var _section_labels: Array[Label] = [
+	%GamesSectionLabel,
+	%ProgressSectionLabel,
+	%DifficultySectionLabel,
+	%SetsSectionLabel,
+	%VoiceSectionLabel,
+	%AppearanceSectionLabel,
+	%MoreSectionLabel,
+]
 
 var _checkboxes: Dictionary = {}
 ## Кнопки наборов слов в порядке номеров (1-5).
@@ -215,8 +228,8 @@ func _make_custom_set_button(set_data: Dictionary) -> Button:
 	button.text = str(set_data.get("name", ""))
 	button.toggle_mode = true
 	button.button_group = _set_button_group
-	button.custom_minimum_size = Vector2(0, 190)
-	button.add_theme_font_size_override("font_size", 40)
+	button.custom_minimum_size = Vector2(0, 110)
+	button.add_theme_font_size_override("font_size", 36)
 	button.accessibility_name = "Свой набор %s" % button.text
 	button.set_meta("set_id", str(set_data.get("id", "")))
 	button.toggled.connect(_on_custom_set_toggled.bind(str(set_data.get("id", ""))))
@@ -387,6 +400,11 @@ func _apply_theme(_mode: int = 0) -> void:
 		checkbox.add_theme_color_override("font_hover_pressed_color", ThemeManager.get_text())
 	_series_length_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	_series_length_spinbox.add_theme_color_override("font_color", ThemeManager.get_text())
+	_progress_label.add_theme_color_override("font_color", ThemeManager.get_text())
+	var section_color := ThemeManager.get_text()
+	section_color.a = 0.6
+	for section_label: Label in _section_labels:
+		section_label.add_theme_color_override("font_color", section_color)
 	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
 	var button_bg := colors["button_bg"] as Color
 	var button_text := colors["button_text"] as Color
@@ -427,6 +445,7 @@ func _apply_theme(_mode: int = 0) -> void:
 	_style_card(_series_card)
 	_style_card(_word_set_card)
 	_style_card(_voice_card)
+	_style_card(_progress_card)
 	_style_toggle_buttons()
 	# Свои наборы создаются в коду, поэтому перекрашиваются здесь, а не в
 	# _style_toggle_buttons(): без этого смена темы оставила бы кнопки

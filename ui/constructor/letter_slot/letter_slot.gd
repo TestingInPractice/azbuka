@@ -49,6 +49,7 @@ func _ready() -> void:
 	_clear_button.pressed.connect(_on_clear_pressed)
 	_word_edit.text_changed.connect(_on_word_text_changed)
 	_word_edit.text_submitted.connect(_on_word_text_changed)
+	_word_edit.focus_exited.connect(_on_word_focus_exited)
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_apply_theme()
 	_refresh()
@@ -218,6 +219,16 @@ func _edit_box(alpha: float) -> StyleBoxFlat:
 	box.content_margin_top = 10
 	box.content_margin_bottom = 10
 	return box
+
+
+## Если родитель стёр слово целиком и ушёл из поля, возвращаем сохранённое:
+## пустое слово не сохраняется, и без этого на экране осталось бы пустое поле,
+## а игра читала бы старое слово: поле и данные разъехались бы.
+func _on_word_focus_exited() -> void:
+	if _word_edit.text.strip_edges().is_empty():
+		_updating = true
+		_word_edit.text = _word
+		_updating = false
 
 
 ## Родитель изменил слово в поле. Пустое слово не отправляем: буква без слова

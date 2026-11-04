@@ -13,6 +13,9 @@ extends RefCounted
 
 const Files := preload("res://tools/test_set_files.gd")
 const Data := preload("res://tools/test_set_data.gd")
+## Байты набора — обычная зависимость скрипта, поэтому попадают в веб-PCK.
+## Исходные .png/.wav экспорт в PCK не кладёт, и сидер в браузере их не видел.
+const Bundle := preload("res://tools/test_set_bundle.res")
 
 
 ## Пишет картинку и звук буквы. Возвращает {error, exported}: пустой error
@@ -21,28 +24,42 @@ const Data := preload("res://tools/test_set_data.gd")
 ## ImageSaver, который декодирует и записывает настоящий WebP.
 func write(set_id: String, letter: String, export_dir: String) -> Dictionary:
 	var key := letter.to_upper()
-	var word := Data.get_word(key)
+	var word := str(Bundle.words.get(key, Data.get_word(key)))
 	if word.is_empty():
 		return _error("нет слова для буквы: " + key)
-	var image_src := Data.image_path(key)
-	if not FileAccess.file_exists(image_src):
-		return _error("нет картинки: " + image_src)
-	var audio_src := Data.audio_path(key)
-	if not FileAccess.file_exists(audio_src):
-		return _error("нет звука: " + audio_src)
-
-	var image_bytes := FileAccess.get_file_as_bytes(image_src)
-	var audio_bytes := FileAccess.get_file_as_bytes(audio_src)
+	var image_bytes := PackedByteArray()
+	var audio_bytes := PackedByteArray()
+	var extension := "wav"
+	if Bundle.images.has(key) and Bundle.audios.has(key):
+		image_bytes = Bundle.images[key]
+		audio_bytes = Bundle.audios[key]
+		extension = str(Bundle.audio_extensions.get(key, "wav"))
+	else:
+		# Резерв для правки ассетов без пересборки ресурса.
+		var image_src := Data.image_path(key)
+		var audio_src := Data.audio_path(key)
+		if not FileAccess.file_exists(image_src):
+			return _error("нет картинки: " + image_src)
+		if not FileAccess.file_exists(audio_src):
+			return _error("нет звука: " + audio_src)
+		image_bytes = FileAccess.get_file_as_bytes(image_src)
+		audio_bytes = FileAccess.get_file_as_bytes(audio_src)
+		extension = audio_src.get_extension()
 	if image_bytes.is_empty():
-		return _error("картинка не читается: " + image_src)
+		return _error("картинка не читается: " + key)
 	if audio_bytes.is_empty():
-		return _error("звук не читается: " + audio_src)
+		return _error("звук не читается: " + key)
 
 	var image_target := CustomSetsStore.set_dir(set_id) + CustomSetsStore.image_file_name(key)
-	var saved := ImageSaver.save_image(image_bytes, image_target)
-	if not bool(saved.get("ok", false)):
-		return _error("картинка не сохранилась: " + str(saved.get("error", "")))
-	var extension := audio_src.get_extension()
+	if Bundle.images.has(key):
+		# В ресурсе уже готовый WebP: декодировать и перекодировать его в
+		# браузере незачем, а на WASM это ещё и минуты блокировки.
+		if not Files.write_bytes(image_target, image_bytes):
+			return _error("картинка не записалась: " + image_target)
+	else:
+		var saved := ImageSaver.save_image(image_bytes, image_target)
+		if not bool(saved.get("ok", false)):
+			return _error("картинка не сохранилась: " + str(saved.get("error", "")))
 	var audio_target := CustomSetsStore.set_dir(set_id) \
 			+ CustomSetsStore.audio_file_name(key, extension)
 	if not Files.write_bytes(audio_target, audio_bytes):

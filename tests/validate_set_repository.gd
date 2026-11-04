@@ -5,6 +5,8 @@ extends Node
 ## Запуск: godot --headless --path . res://tests/validate_set_repository.tscn
 
 const TEST_SET_PATH := "user://custom_sets_test.json"
+const TEST_SETS_DIR := "user://set_repository_test_sets"
+const SetsDirIsolation := preload("res://tests/test_sets_dir.gd")
 const TEST_LETTER := "А"
 const TEST_WORD := "Аист"
 
@@ -22,6 +24,7 @@ var failures := 0
 ## — валидатор печатал PASSED при нуле выполненных assert'ов).
 var checks := 0
 var _saved_store_path := ""
+var _saved_sets_dir := ""
 var _saved_progress_path := ""
 var _set_id := ""
 
@@ -37,6 +40,7 @@ func _ready() -> void:
 
 	_saved_store_path = CustomSetsStore.save_path
 	_saved_progress_path = ProgressManager.save_path
+	_saved_sets_dir = SetsDirIsolation.begin(TEST_SETS_DIR)
 	CustomSetsStore.save_path = TEST_SET_PATH
 	ProgressManager.save_path = "user://set_repository_test_progress.json"
 	_remove_test_file("user://set_repository_test_progress.json")
@@ -88,9 +92,9 @@ func _ready() -> void:
 	var custom := SetRepository.get_word_data(TEST_LETTER)
 	_check(str(custom.get("word", "")) == TEST_WORD, "пользовательское слово прочитано")
 	_check(bool(custom.get("is_custom", false)) == true, "данные помечены как пользовательские")
-	_check(str(custom.get("image_path", "")).begins_with("user://custom_sets/"),
+	_check(str(custom.get("image_path", "")).begins_with(CustomSetsStore.sets_dir + "/"),
 			"путь картинки ведёт в user://")
-	_check(str(custom.get("audio_path", "")).begins_with("user://custom_sets/"),
+	_check(str(custom.get("audio_path", "")).begins_with(CustomSetsStore.sets_dir + "/"),
 			"путь звука ведёт в user://")
 
 	var tex := SetRepository.get_word_texture(TEST_LETTER)
@@ -168,7 +172,7 @@ func _ready() -> void:
 			"полная пользовательская запись помечена is_custom=true")
 	_check(str(custom_a.get("word", "")) == "Аист",
 			"полная пользовательская запись отдаёт слово родителя")
-	_check(str(custom_a.get("image_path", "")).begins_with("user://custom_sets/"),
+	_check(str(custom_a.get("image_path", "")).begins_with(CustomSetsStore.sets_dir + "/"),
 			"полная пользовательская запись отдаёт путь из user://")
 
 	# Неполная запись уходит на встроенные данные ЦЕЛИКОМ.
@@ -233,6 +237,7 @@ func _ready() -> void:
 
 	CustomSetsStore.save_path = _saved_store_path
 	ProgressManager.save_path = _saved_progress_path
+	SetsDirIsolation.end(_saved_sets_dir, TEST_SETS_DIR)
 	_remove_test_file("user://set_repository_test_progress.json")
 	if FileAccess.file_exists(TEST_SET_PATH):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(TEST_SET_PATH))

@@ -42,6 +42,9 @@ extends Node
 ##   - проигрывание в колонки (проверяется лишь то, что поток не null).
 
 ## Игры, которые обязаны ходить в данные набора только через SetRepository.
+const TEST_SETS_DIR := "user://custom_sets_integration_test_sets"
+const SetsDirIsolation := preload("res://tests/test_sets_dir.gd")
+
 const GAME_SCRIPTS := [
 	"res://ui/games/azbuka/letter_card.gd",
 	"res://ui/games/collect_word/collect_word.gd",
@@ -63,6 +66,7 @@ var checks := 0
 var failures := 0
 ## Боевые пути хранилища и прогресса: восстанавливаются в _finish-цепочке.
 var _saved_store_path: String = ""
+var _saved_sets_dir: String = ""
 var _saved_progress_path: String = ""
 
 
@@ -82,6 +86,7 @@ func _ready() -> void:
 	# validate_set_repository.gd и validate_constructor_ui.gd.
 	_saved_store_path = CustomSetsStore.save_path
 	_saved_progress_path = ProgressManager.save_path
+	_saved_sets_dir = SetsDirIsolation.begin(TEST_SETS_DIR)
 	CustomSetsStore.save_path = TEST_STORE_PATH
 	ProgressManager.save_path = TEST_PROGRESS_PATH
 	CustomSetsStore.clear_memory()
@@ -102,6 +107,7 @@ func _ready() -> void:
 
 	CustomSetsStore.save_path = _saved_store_path
 	ProgressManager.save_path = _saved_progress_path
+	SetsDirIsolation.end(_saved_sets_dir, TEST_SETS_DIR)
 	_cleanup()
 	_finish()
 

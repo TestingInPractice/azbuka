@@ -9,6 +9,8 @@ extends Node
 
 const TEST_STORE_PATH := "user://custom_sets_active_label_test.json"
 const TEST_PROGRESS_PATH := "user://progress_active_label_test.json"
+const TEST_SETS_DIR := "user://custom_sets_active_label_test_sets"
+const SetsDirIsolation := preload("res://tests/test_sets_dir.gd")
 const AZBUKA_SCENE := "res://ui/games/azbuka/azbuka.tscn"
 const LETTER_CARD_SCENE := "res://ui/games/azbuka/letter_card.tscn"
 const SET_NAME := "Тестовый набор"
@@ -19,6 +21,7 @@ const EXPECTED_TEXT := "Набор: Тестовый набор"
 var checks := 0
 var failures := 0
 var _saved_store_path := ""
+var _saved_sets_dir := ""
 var _saved_progress_path := ""
 var _saved_word_set_id := ""
 
@@ -28,6 +31,7 @@ func _ready() -> void:
 
 	_saved_store_path = CustomSetsStore.save_path
 	_saved_progress_path = ProgressManager.save_path
+	_saved_sets_dir = SetsDirIsolation.begin(TEST_SETS_DIR)
 	_saved_word_set_id = ProgressManager.get_word_set_id()
 	CustomSetsStore.save_path = TEST_STORE_PATH
 	ProgressManager.save_path = TEST_PROGRESS_PATH
@@ -54,6 +58,7 @@ func _ready() -> void:
 	CustomSetsStore.clear_memory()
 	CustomSetsStore.save_path = _saved_store_path
 	ProgressManager.save_path = _saved_progress_path
+	SetsDirIsolation.end(_saved_sets_dir, TEST_SETS_DIR)
 	_remove_file(TEST_STORE_PATH)
 	_remove_file(TEST_PROGRESS_PATH)
 	_remove_empty_sets_dir()

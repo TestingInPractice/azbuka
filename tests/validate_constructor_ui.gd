@@ -48,10 +48,11 @@ extends Node
 ## Каталог для настоящей миниатюры. В user://, а не в репозитории: ImageSaver
 ## сам каталоги не создаёт, и тест не должен оставлять мусор в assets/.
 const TEST_DIR := "user://constructor_ui_test"
-## Тестовый файл метаданных. Каталоги наборов (user://custom_sets/<id>/) при
-## этом остаются боевыми — но id генерируются случайно и набор удаляется в
-## конце, так что данные ребёнка не затрагиваются.
+## Тестовый файл метаданных и тестовый каталог наборов. Одного save_path
+## мало: удаление набора стирает его папку, а в памяти на старте уже лежат
+## боевые наборы. Без изоляции прогон сносил картинки и звуки ребёнка.
 const TEST_STORE_PATH := "user://constructor_ui_test_sets.json"
+const TEST_SETS_DIR := "user://constructor_ui_test_sets"
 
 ## Сколько проверок выполнял валидатор до Task 9 (LetterSlot). Считается при
 ## зелёном прогоне Task 8 и служит опорой: Task 9 обязан добавить проверки, а
@@ -83,8 +84,9 @@ const SPY_SCRIPT_PATH := "res://tests/settings_constructor_spy.gd"
 ## должна валить прогон так же надёжно, как неверный результат.
 const MIN_GATE_CHECKS := 55
 
-## Сохранённый боевой путь хранилища: восстанавливается в _finish-цепочке.
+## Сохранённые боевые пути хранилища: восстанавливаются в _finish-цепочке.
 var _saved_store_path: String = ""
+var _saved_sets_dir: String = ""
 
 var failures := 0
 ## Счётчик выполненных проверок: страховка от ложного «всё прошло» (урок Task 5 —
@@ -107,7 +109,13 @@ func _ready() -> void:
 	# user://custom_sets.json, то есть в данные ребёнка. Конвенция уже есть в
 	# validate_custom_sets_store.gd и validate_set_repository.gd.
 	_saved_store_path = CustomSetsStore.save_path
+	_saved_sets_dir = CustomSetsStore.sets_dir
 	CustomSetsStore.save_path = TEST_STORE_PATH
+	CustomSetsStore.sets_dir = TEST_SETS_DIR
+	# Автолоад уже загрузил боевые наборы в память. Без сброса тест создавал
+	# бы свои поверх них, а удаление в конце сносило бы боевые папки.
+	CustomSetsStore.clear_memory()
+	CustomSetsStore.load_sets()
 
 	await _check_letter_slot()
 	await _check_letter_slot_ready_ran()
@@ -125,6 +133,9 @@ func _ready() -> void:
 	await _check_parental_gate()
 
 	CustomSetsStore.save_path = _saved_store_path
+	CustomSetsStore.sets_dir = _saved_sets_dir
+	CustomSetsStore.clear_memory()
+	CustomSetsStore.load_sets()
 	_finish()
 
 
@@ -467,7 +478,10 @@ func _check_letter_slot_media_paths() -> void:
 			"у %d букв %d разных файлов (получено %d)"
 			% [letters.size(), letters.size(), paths.size()])
 	# Путь из плана в _check_letter_slot() обязан совпадать с этой конвенцией.
-	_check("user://custom_sets/c_1/img_b.webp" == set_dir + CustomSetsStore.image_file_name("Б"),
+	# Сравниваем с действующим sets_dir, а не с литералом: валидатор уводит
+	# каталог в тестовый, и литерал "custom_sets" проверял бы не то дерево.
+	_check(set_dir == "%s/c_1/" % CustomSetsStore.sets_dir
+			and (set_dir + CustomSetsStore.image_file_name("Б")).ends_with("/img_b.webp"),
 			"путь в проверках плана — это set_dir + image_file_name, а не ручная строка")
 	_print("letter_slot media paths: OK")
 
@@ -1668,6 +1682,16 @@ func _connected_to(editor: Node, slot: Node, signal_name: String) -> bool:
 	return false
 
 
+## Путь медиафайла относительно user:// в ИЗОЛИРОВАННОМ каталоге теста.
+## Литеральный "custom_sets/<id>/..." указывал бы в боевую папку, и предпросмотр
+## не нашёл бы файл, записанный в тестовую.
+func _media_rel(set_id: String, file_name: String) -> String:
+	var dir := CustomSetsStore.sets_dir
+	if dir.begins_with("user://"):
+		dir = dir.trim_prefix("user://")
+	return dir.path_join(set_id).path_join(file_name)
+
+
 ## Рекурсивное удаление каталога набора вместе с содержимым.
 func _remove_dir_recursive(user_path: String) -> void:
 	var base := ProjectSettings.globalize_path(user_path)
@@ -1752,8 +1776,8 @@ func _check_readiness_counts_agree() -> void:
 	var set_id := str(created.get("id", ""))
 	for letter: String in ["А", "Б"]:
 		CustomSetsStore.set_entry(set_id, letter, "Слово",
-				"custom_sets/%s/img_%s.webp" % [set_id, letter],
-				"custom_sets/%s/aud_%s.wav" % [set_id, letter])
+				_media_rel(set_id, CustomSetsStore.image_file_name(letter)),
+				_media_rel(set_id, CustomSetsStore.audio_file_name(letter)))
 	CustomSetsStore.set_entry(set_id, "В", "Слово", "", "")
 	_check(CustomSetsStore.get_set_complete_count(set_id) == 2,
 			"подготовка счётчиков: две полные записи из трёх (получено: %d)"
@@ -1795,8 +1819,8 @@ func _check_readiness_counts_agree() -> void:
 	for entry: Dictionary in AlphabetData.get_letters():
 		var letter := str(entry.get("letter", ""))
 		CustomSetsStore.set_entry(set_id, letter, "Слово",
-				"custom_sets/%s/img_%s.webp" % [set_id, letter],
-				"custom_sets/%s/aud_%s.wav" % [set_id, letter])
+				_media_rel(set_id, CustomSetsStore.image_file_name(letter)),
+				_media_rel(set_id, CustomSetsStore.audio_file_name(letter)))
 	(list as SetList).refresh()
 	if editor != null:
 		(editor as SetEditor).refresh()
@@ -1845,7 +1869,7 @@ func _check_play_preview_uses_real_format() -> void:
 		ogg_file.store_buffer(ogg_bytes)
 		ogg_file.close()
 	CustomSetsStore.set_entry(set_id, "А", "Слово", "",
-			"custom_sets/%s/aud_a.ogg" % set_id)
+			_media_rel(set_id, "aud_a.ogg"))
 
 	var scene: PackedScene = load("res://ui/constructor/set_editor/set_editor.tscn")
 	if scene == null:
@@ -1874,7 +1898,7 @@ func _check_play_preview_uses_real_format() -> void:
 	if m4a_file != null:
 		m4a_file.store_buffer(PackedByteArray([0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70]))
 		m4a_file.close()
-	CustomSetsStore.set_entry(set_id, "Б", "Слово", "", "custom_sets/%s/aud_b.m4a" % set_id)
+	CustomSetsStore.set_entry(set_id, "Б", "Слово", "", _media_rel(set_id, "aud_b.m4a"))
 	(editor as SetEditor).open_set(set_id)
 	await get_tree().process_frame
 	var slot_b := (editor as SetEditor).get_slot("Б")
@@ -1896,6 +1920,7 @@ func _cleanup() -> void:
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("%s/thumb.png" % TEST_DIR))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(TEST_DIR))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(TEST_STORE_PATH))
+	_remove_dir_recursive(TEST_SETS_DIR)
 
 
 func _check(ok: bool, msg: String) -> void:

@@ -36,6 +36,7 @@ CustomSetsStore="*res://systems/custom_sets_store.gd"
 AudioManager="*res://addons/audio_manager.gd"
 VoiceRecord="*res://systems/voice_record.gd"
 SetRepository="*res://systems/set_repository.gd"
+TestSetSeeder="*res://systems/test_set_seeder.gd"
 
 [display]
 

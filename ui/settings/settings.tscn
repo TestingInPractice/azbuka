@@ -30,9 +30,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 90.0
-offset_top = 380.0
-offset_right = -90.0
+offset_left = 60.0
+offset_top = 300.0
+offset_right = -60.0
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -42,91 +42,135 @@ horizontal_scroll_mode = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 18
 alignment = 0
-theme_override_constants/separation = 24
 
 [node name="TitleLabel" type="Label" parent="ScrollContainer/MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 96
+theme_override_font_sizes/font_size = 72
 text = "Настройки"
-horizontal_alignment = 1
+horizontal_alignment = 0
 
 [node name="WarningLabel" type="Label" parent="ScrollContainer/MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 visible = false
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 32
 text = "Должен быть включён хотя бы 1 режим игры"
-horizontal_alignment = 1
+horizontal_alignment = 0
 
-[node name="ModeCardAzbuka" type="PanelContainer" parent="ScrollContainer/MainLayout"]
+[node name="GamesSectionLabel" type="Label" parent="ScrollContainer/MainLayout"]
 unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Игры"
+
+[node name="ModesCard" type="PanelContainer" parent="ScrollContainer/MainLayout"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AzbukaRow" type="HBoxContainer" parent="ScrollContainer/MainLayout/ModeCardAzbuka"]
+[node name="ModesLayout" type="VBoxContainer" parent="ScrollContainer/MainLayout/ModesCard"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 2
 
-[node name="ModeCheckboxAzbuka" type="CheckBox" parent="ScrollContainer/MainLayout/ModeCardAzbuka/AzbukaRow"]
+[node name="ModeCardAzbuka" type="PanelContainer" parent="ScrollContainer/MainLayout/ModesCard/ModesLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 190)
+theme_override_styles/panel = null
+
+[node name="ModeCheckboxAzbuka" type="CheckBox" parent="ScrollContainer/MainLayout/ModesCard/ModesLayout/ModeCardAzbuka"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 110)
 theme_override_font_sizes/font_size = 44
 text = "Азбука"
 accessibility_name = "Азбука"
 
-[node name="ResetButton" type="Button" parent="ScrollContainer/MainLayout/ModeCardAzbuka/AzbukaRow"]
-unique_name_in_owner = true
-layout_mode = 2
-custom_minimum_size = Vector2(0, 190)
-theme_override_font_sizes/font_size = 32
-text = "Сбросить"
-accessibility_name = "Сбросить прогресс"
-
-[node name="ModeCardFindLetter" type="PanelContainer" parent="ScrollContainer/MainLayout"]
+[node name="ModeCardFindLetter" type="PanelContainer" parent="ScrollContainer/MainLayout/ModesCard/ModesLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = null
 
-[node name="ModeCheckboxFindLetter" type="CheckBox" parent="ScrollContainer/MainLayout/ModeCardFindLetter"]
+[node name="ModeCheckboxFindLetter" type="CheckBox" parent="ScrollContainer/MainLayout/ModesCard/ModesLayout/ModeCardFindLetter"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 190)
+custom_minimum_size = Vector2(0, 110)
 theme_override_font_sizes/font_size = 44
 text = "Найди букву"
 accessibility_name = "Найди букву"
 
-[node name="ModeCardCollectWord" type="PanelContainer" parent="ScrollContainer/MainLayout"]
+[node name="ModeCardCollectWord" type="PanelContainer" parent="ScrollContainer/MainLayout/ModesCard/ModesLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = null
 
-[node name="ModeCheckboxCollectWord" type="CheckBox" parent="ScrollContainer/MainLayout/ModeCardCollectWord"]
+[node name="ModeCheckboxCollectWord" type="CheckBox" parent="ScrollContainer/MainLayout/ModesCard/ModesLayout/ModeCardCollectWord"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 190)
+custom_minimum_size = Vector2(0, 110)
 theme_override_font_sizes/font_size = 44
 text = "Собери слово"
 accessibility_name = "Собери слово"
 
-[node name="ModeCardGuessPicture" type="PanelContainer" parent="ScrollContainer/MainLayout"]
+[node name="ModeCardGuessPicture" type="PanelContainer" parent="ScrollContainer/MainLayout/ModesCard/ModesLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = null
+
+[node name="ModeCheckboxGuessPicture" type="CheckBox" parent="ScrollContainer/MainLayout/ModesCard/ModesLayout/ModeCardGuessPicture"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 110)
+theme_override_font_sizes/font_size = 44
+text = "Угадай букву"
+accessibility_name = "Угадай букву"
+
+[node name="ProgressSectionLabel" type="Label" parent="ScrollContainer/MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Прогресс"
+
+[node name="ProgressCard" type="PanelContainer" parent="ScrollContainer/MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ModeCheckboxGuessPicture" type="CheckBox" parent="ScrollContainer/MainLayout/ModeCardGuessPicture"]
+[node name="ProgressRow" type="HBoxContainer" parent="ScrollContainer/MainLayout/ProgressCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ProgressLabel" type="Label" parent="ScrollContainer/MainLayout/ProgressCard/ProgressRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 190)
-theme_override_font_sizes/font_size = 44
-text = "Угадай букву"
-accessibility_name = "Угадай букву"
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 36
+text = "Сбросить успехи ребёнка"
+vertical_alignment = 1
+
+[node name="ResetButton" type="Button" parent="ScrollContainer/MainLayout/ProgressCard/ProgressRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 110)
+theme_override_font_sizes/font_size = 34
+text = "Сбросить"
+accessibility_name = "Сбросить прогресс"
+
+[node name="DifficultySectionLabel" type="Label" parent="ScrollContainer/MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Сложность"
 
 [node name="SeriesCard" type="PanelContainer" parent="ScrollContainer/MainLayout"]
 unique_name_in_owner = true
@@ -141,21 +185,27 @@ theme_override_constants/separation = 16
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 40
-text = "Карточек в серии:"
+theme_override_font_sizes/font_size = 36
+text = "Карточек в серии"
 vertical_alignment = 1
 
 [node name="SeriesLengthSpinBox" type="SpinBox" parent="ScrollContainer/MainLayout/SeriesCard/SeriesLengthRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(220, 190)
-theme_override_font_sizes/font_size = 40
+custom_minimum_size = Vector2(220, 110)
+theme_override_font_sizes/font_size = 36
 min_value = 5.0
 max_value = 30.0
 step = 1.0
 value = 10.0
 accessibility_name = "Карточек в серии"
+
+[node name="SetsSectionLabel" type="Label" parent="ScrollContainer/MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Набор слов"
 
 [node name="WordSetCard" type="PanelContainer" parent="ScrollContainer/MainLayout"]
 unique_name_in_owner = true
@@ -169,20 +219,20 @@ theme_override_constants/separation = 12
 [node name="WordSetLabel" type="Label" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 40
-text = "Набор слов:"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 32
+text = "Встроенные наборы"
+horizontal_alignment = 0
 vertical_alignment = 1
 
 [node name="WordSetRow1" type="HBoxContainer" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout"]
 layout_mode = 2
-theme_override_constants/separation = 12
-alignment = 1
+theme_override_constants/separation = 10
 
 [node name="WordSetButton1" type="Button" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout/WordSetRow1"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(190, 190)
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 110)
 theme_override_font_sizes/font_size = 44
 text = "1"
 toggle_mode = true
@@ -192,7 +242,8 @@ accessibility_name = "Набор слов 1"
 [node name="WordSetButton2" type="Button" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout/WordSetRow1"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(190, 190)
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 110)
 theme_override_font_sizes/font_size = 44
 text = "2"
 toggle_mode = true
@@ -201,30 +252,28 @@ accessibility_name = "Набор слов 2"
 [node name="WordSetButton3" type="Button" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout/WordSetRow1"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(190, 190)
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 110)
 theme_override_font_sizes/font_size = 44
 text = "3"
 toggle_mode = true
 accessibility_name = "Набор слов 3"
 
-[node name="WordSetRow2" type="HBoxContainer" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout"]
-layout_mode = 2
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="WordSetButton4" type="Button" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout/WordSetRow2"]
+[node name="WordSetButton4" type="Button" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout/WordSetRow1"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(190, 190)
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 110)
 theme_override_font_sizes/font_size = 44
 text = "4"
 toggle_mode = true
 accessibility_name = "Набор слов 4"
 
-[node name="WordSetButton5" type="Button" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout/WordSetRow2"]
+[node name="WordSetButton5" type="Button" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout/WordSetRow1"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(190, 190)
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 110)
 theme_override_font_sizes/font_size = 44
 text = "5"
 toggle_mode = true
@@ -233,15 +282,21 @@ accessibility_name = "Набор слов 5"
 [node name="MySetsButton" type="Button" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(0, 190)
-theme_override_font_sizes/font_size = 40
+custom_minimum_size = Vector2(0, 110)
+theme_override_font_sizes/font_size = 36
 text = "Свои наборы"
 accessibility_name = "Свои наборы букв"
 
 [node name="CustomSets" type="VBoxContainer" parent="ScrollContainer/MainLayout/WordSetCard/WordSetLayout"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 10
+
+[node name="VoiceSectionLabel" type="Label" parent="ScrollContainer/MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Озвучка"
 
 [node name="VoiceCard" type="PanelContainer" parent="ScrollContainer/MainLayout"]
 unique_name_in_owner = true
@@ -255,16 +310,16 @@ theme_override_constants/separation = 12
 [node name="VoiceLabel" type="Label" parent="ScrollContainer/MainLayout/VoiceCard/VoiceRow"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 40
-text = "Озвучка:"
+theme_override_font_sizes/font_size = 36
+text = "Голос"
 vertical_alignment = 1
 
 [node name="VoiceButtonOld" type="Button" parent="ScrollContainer/MainLayout/VoiceCard/VoiceRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 190)
-theme_override_font_sizes/font_size = 40
+custom_minimum_size = Vector2(0, 110)
+theme_override_font_sizes/font_size = 36
 text = "Старая"
 toggle_mode = true
 button_pressed = true
@@ -274,36 +329,52 @@ accessibility_name = "Старая озвучка"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 190)
-theme_override_font_sizes/font_size = 40
+custom_minimum_size = Vector2(0, 110)
+theme_override_font_sizes/font_size = 36
 text = "Новая"
 toggle_mode = true
 accessibility_name = "Новая озвучка"
+
+[node name="AppearanceSectionLabel" type="Label" parent="ScrollContainer/MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Оформление"
 
 [node name="ThemeToggleButton" type="Button" parent="ScrollContainer/MainLayout"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 190)
-theme_override_font_sizes/font_size = 44
+custom_minimum_size = Vector2(0, 110)
+theme_override_font_sizes/font_size = 36
 text = "Тема: светлая"
 accessibility_name = "Переключить тему"
 
-[node name="DonateButton" type="Button" parent="ScrollContainer/MainLayout"]
+[node name="MoreSectionLabel" type="Label" parent="ScrollContainer/MainLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Ещё"
+
+[node name="ActionsRow" type="HBoxContainer" parent="ScrollContainer/MainLayout"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DonateButton" type="Button" parent="ScrollContainer/MainLayout/ActionsRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 190)
-theme_override_font_sizes/font_size = 44
-text = "Поддержать проект"
+custom_minimum_size = Vector2(0, 110)
+theme_override_font_sizes/font_size = 32
+text = "Поддержать"
 accessibility_name = "Поддержать проект"
 
-[node name="FeedbackButton" type="Button" parent="ScrollContainer/MainLayout"]
+[node name="FeedbackButton" type="Button" parent="ScrollContainer/MainLayout/ActionsRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 190)
-theme_override_font_sizes/font_size = 44
+custom_minimum_size = Vector2(0, 110)
+theme_override_font_sizes/font_size = 32
 text = "Отзыв"
 accessibility_name = "Отзыв"
 
