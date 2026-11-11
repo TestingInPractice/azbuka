@@ -3,7 +3,8 @@ class_name AzbukaGame
 ## Экран «Азбука»: змейка из 33 букв, по которой бежит Киса.
 ##
 ## Буквы разложены серпантином. По нажатию на кружок Киса пробегает по
-## маршруту до выбранной буквы и открывает карточку буквы.
+## маршруту до выбранной буквы и открывает карточку буквы. Геометрия змейки
+## живёт в AzbukaSnakeView, а бег кисы - в AzbukaKisaRunner.
 
 const MAIN_MENU_SCENE := "res://ui/main_menu/main_menu.tscn"
 const LETTER_CARD_SCENE := "res://ui/games/azbuka/letter_card.tscn"
@@ -14,49 +15,41 @@ const LETTERS := [
 	"Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я",
 ]
 
-const DOTS_PER_LINE := 4
-## Максимальный межстрочный шаг: на очень высоких экранах строки не разъезжаются.
-const LINE_HEIGHT_MAX := 240.0
-## Радиус кружка-буквы. Диаметр 190px — детская норма тап-таргета (≥10–12 мм:
-## база 1080×2340 ≈ 0.052 мм/px → 190px ≈ 9.9 мм). Нижняя граница clamp в
-## _build_path поднята до 95, чтобы на телефоне точки были ≥190px; на планшете
-## (шире) радиус остаётся 95 — змейка не ломается, точки крупнее нормы.
-const DOT_RADIUS := 95.0
-const LINE_WIDTH := 6.0
-const VBOX_TOP := 60.0
-## Минимальная полоса сверху SnakeArea под кнопки BackButton/HomeButton.
-## Реальная полоса вычисляется в _build_path из геометрии кнопок (низ HomeButton
-## минус верх SnakeArea + запас 12px): увеличенные кнопки (190px, фаза 2 #18)
-## не должны перекрывать первый ряд кружков. Эта константа — страховка на случай,
-## если кнопки ещё не разложены (get_global_rect вернёт нули).
-const BUTTON_BAND_MIN := 150.0
-const RUN_SPEED := 420.0
-
-const PATH_COLOR := Color("#5B8C5A")
-const DOT_NORMAL := Color("#6B9B6A")
-const DOT_COMPLETED := Color("#FFD700")
-const DOT_CURRENT := Color("#F4D03F")
-
-## Смещение Киски внутри её Control: лапы стоят в точке маршрута.
-const KISA_ANCHOR := Vector2.ZERO
+## Буквы делятся на уровни, чтобы на экране не было всех 33 кружков сразу.
+const LEVEL_SIZE := 11
+const LEVEL_COUNT := 3
 
 @onready var _background_overlay: ColorRect = %BackgroundOverlay
 @onready var _back_button: Button = %BackButton
 @onready var _home_button: Button = %HomeButton
 @onready var _title_label: Label = %TitleLabel
 @onready var _set_label: Label = %SetLabel
+@onready var _level_button_1: Button = %LevelButton1
+@onready var _level_button_2: Button = %LevelButton2
+@onready var _level_button_3: Button = %LevelButton3
+@onready var _prev_level_button: Button = %PrevLevelButton
+@onready var _next_level_button: Button = %NextLevelButton
 @onready var _snake_area: Control = %SnakeArea
 @onready var _snake_path: Line2D = %SnakePath
 @onready var _kisa: KisaCat = %KisaCat
 
-var dot_buttons: Array[Button] = []
-var dot_positions: Array[Vector2] = []
 var current_letter_idx := 0
-var is_animating := false
-var _dot_r: float = DOT_RADIUS
-var _dot_styles: Dictionary = {}
+var _level := 0
+var _level_buttons: Array[Button] = []
 var _building := false
 var _navigating := false
+var _snake: AzbukaSnakeView
+var _runner: AzbukaKisaRunner
+
+var dot_buttons: Array[Button]:
+	get:
+		return _snake.dot_buttons
+var dot_positions: Array[Vector2]:
+	get:
+		return _snake.dot_positions
+var is_animating: bool:
+	get:
+		return _runner.is_animating
 
 
 func _ready() -> void:
@@ -64,6 +57,28 @@ func _ready() -> void:
 	ThemeManager.theme_changed.connect(_apply_theme)
 	_back_button.pressed.connect(_on_back_button_pressed)
 	_home_button.pressed.connect(_on_home_button_pressed)
+	_level_buttons = [_level_button_1, _level_button_2, _level_button_3]
+	for i in _level_buttons.size():
+		_level_buttons[i].pressed.connect(_on_level_pressed.bind(i))
+	_prev_level_button.pressed.connect(_on_level_arrow_pressed.bind(-1))
+	_next_level_button.pressed.connect(_on_level_arrow_pressed.bind(1))
+
+	_snake = AzbukaSnakeView.new()
+	_snake.name = "SnakeView"
+	add_child(_snake)
+	_snake.setup(
+		self, _snake_area, _snake_path, _kisa, _home_button,
+		_on_dot_pressed, _on_dot_mouse_entered, _on_dot_mouse_exited
+	)
+
+	_runner = AzbukaKisaRunner.new()
+	_runner.name = "KisaRunner"
+	add_child(_runner)
+
+	var start_idx := LETTERS.find(LetterCard.from_letter)
+	if start_idx >= 0:
+		_level = int(start_idx / LEVEL_SIZE)
+	GameLogger.analytics("game_start", {"game": "azbuka", "level": _level + 1})
 	_kisa.set_kisa_moving(false)
 	_apply_theme()
 	_update_set_label()
@@ -71,251 +86,155 @@ func _ready() -> void:
 	_setup_snake()
 
 
-## Перестраивает змейку при изменении размера области: межстрочный шаг и радиус
-## кружков пересчитываются под новую ширину/высоту, поэтому змейка занимает всю
-## доступную область и остаётся вертикально отцентрирована при расширении/сжатии.
+## Тап по пустому месту во время бега ускоряет оставшийся путь, а не ждёт.
+func _unhandled_input(event: InputEvent) -> void:
+	if not is_animating:
+		return
+	if event is InputEventMouseButton:
+		var mouse_button := event as InputEventMouseButton
+		if mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_LEFT:
+			_runner.request_skip()
+	elif event is InputEventScreenTouch:
+		var touch := event as InputEventScreenTouch
+		if touch.pressed:
+			_runner.request_skip()
+
+
+## Перестраивает змейку при изменении размера области.
 func _on_snake_area_resized() -> void:
 	if not is_node_ready() or is_animating or _building:
 		return
-	for btn in dot_buttons:
-		_snake_area.remove_child(btn)
-		btn.queue_free()
-	dot_buttons.clear()
-	dot_positions.clear()
+	_snake.clear()
 	_setup_snake()
 
 
 func _setup_snake() -> void:
 	_building = true
 	await get_tree().process_frame
-	_build_path()
-	_place_kisa_at_start()
-	_update_dot_states()
+	var letters: Array[String] = _letters_for_level(_level)
+	_snake.build(letters)
+	current_letter_idx = _snake.place_kisa_at_start(LetterCard.from_letter)
+	_snake.update_states(letters, current_letter_idx)
 	_building = false
 
 
-func _build_path() -> void:
-	var area_size: Vector2 = _snake_area.size
-	var spacing: float = (area_size.x - 2.0 * maxf(60.0, area_size.x * 0.06)) / float(DOTS_PER_LINE - 1)
-	var total_snake_width: float = spacing * float(DOTS_PER_LINE - 1)
-	var margin_x: float = (area_size.x - total_snake_width) / 2.0
-	_dot_r = clampf(spacing * 0.38, 95.0, DOT_RADIUS)
-	_make_dot_styles()
-
-	var total_lines: int = int(ceil(LETTERS.size() / float(DOTS_PER_LINE)))
-	# Полоса сверху под кнопки BackButton/HomeButton: реально низ HomeButton
-	# (глобально) минус верх SnakeArea + запас 12px, чтобы увеличенные кнопки
-	# (190px, фаза 2 #18) не перекрывали первый ряд кружков. BUTTON_BAND_MIN —
-	# страховка, если кнопки ещё не разложены (get_global_rect вернёт нули).
-	var band: float = maxf(
-		BUTTON_BAND_MIN,
-		_home_button.get_global_rect().end.y - _snake_area.get_global_rect().position.y + 12.0
-	)
-	# Доступная высота — минус верхняя полоса под кнопки (band) и отступ
-	# VBOX_TOP. maxf защищает от отрицательной высоты на очень маленьких экранах.
-	var available_height: float = maxf(0.0, area_size.y - VBOX_TOP - band)
-	# Межстрочный шаг подбирается так, чтобы все 9 строк (33 буквы / 4 в строке)
-	# влезали в доступную высоту: не больше LINE_HEIGHT_MAX, не меньше _dot_r * 1.8.
-	var line_height: float = clampf(
-		(available_height - _dot_r * 2.0) / float(total_lines - 1),
-		_dot_r * 1.8,
-		LINE_HEIGHT_MAX
-	)
-	var snake_content_height: float = float(total_lines - 1) * line_height + _dot_r * 2.0
-	# y_start — центр первого кружка. Змейка центрируется по вертикали в области
-	# ниже band; слагаемое _dot_r держит верхний край первого ряда внутри
-	# области (не обрезается) и ниже кнопок.
-	var y_start: float = band + (available_height - snake_content_height) / 2.0 + _dot_r
-	if snake_content_height >= available_height:
-		y_start = band + _dot_r
-
-	for i in LETTERS.size():
-		var line: int = i / DOTS_PER_LINE
-		var pos_in_line: int = i % DOTS_PER_LINE
-		var col: int = pos_in_line if line % 2 == 0 else (DOTS_PER_LINE - 1 - pos_in_line)
-		var x: float = margin_x + float(col) * spacing
-		var y: float = y_start + float(line) * line_height
-		dot_positions.append(Vector2(x, y))
-
-	_snake_path.points = dot_positions
-	_snake_path.default_color = PATH_COLOR
-	_snake_path.width = LINE_WIDTH
-
-	for i in LETTERS.size():
-		var btn := Button.new()
-		btn.name = "SnakeCircle_" + LETTERS[i]
-		btn.accessibility_name = "SnakeCircle " + LETTERS[i]
-		btn.unique_name_in_owner = true
-		btn.text = LETTERS[i]
-		btn.size = Vector2(_dot_r * 2.0, _dot_r * 2.0)
-		btn.position = dot_positions[i] - Vector2(_dot_r, _dot_r)
-		btn.pivot_offset = Vector2(_dot_r, _dot_r)
-		btn.add_theme_font_size_override("font_size", maxi(16, int(_dot_r * 0.85)))
-		btn.add_theme_constant_override("separation", 0)
-		btn.mouse_entered.connect(_on_dot_mouse_entered.bind(i))
-		btn.mouse_exited.connect(_on_dot_mouse_exited.bind(i))
-		btn.pressed.connect(_on_dot_pressed.bind(i))
-		_style_dot(btn, 0)
-		_snake_area.add_child(btn)
-		btn.owner = self
-		dot_buttons.append(btn)
-
-	# Киса бежит поверх кружков.
-	_snake_area.move_child(_kisa, -1)
-
-
-func _place_kisa_at_start() -> void:
-	var start_letter: String = LetterCard.from_letter
-	if start_letter.is_empty() or not start_letter in LETTERS:
-		start_letter = LETTERS[0]
-	current_letter_idx = LETTERS.find(start_letter)
-	if current_letter_idx < 0:
-		current_letter_idx = 0
-	_kisa.position = dot_positions[current_letter_idx] - KISA_ANCHOR
-	_kisa.set_facing(true)
-
-
 func _on_dot_pressed(index: int) -> void:
-	if is_animating or _navigating:
+	if _navigating or _building:
 		return
-	GameLogger.info("AzbukaGame", "letter_pressed", {"letter": LETTERS[index]})
+	if is_animating:
+		_runner.request_skip()
+		return
+	var letters: Array[String] = _letters_for_level(_level)
+	if index < 0 or index >= letters.size():
+		return
+	GameLogger.info("AzbukaGame", "letter_pressed",
+		{"letter": letters[index], "level": _level + 1})
 	if index == current_letter_idx:
 		_open_letter_card(index)
 		return
 	_animate_kisa_to(index)
 
 
+## Ведёт Кису по маршруту змейки до выбранной буквы и открывает карточку.
 func _animate_kisa_to(target_idx: int) -> void:
-	is_animating = true
-	_kisa.set_kisa_moving(true)
-	var positions: Array[Vector2] = _get_path_positions(current_letter_idx, target_idx)
+	var letters: Array[String] = _letters_for_level(_level)
+	if target_idx < 0 or target_idx >= letters.size():
+		return
+	if target_idx == current_letter_idx:
+		_open_letter_card(target_idx)
+		return
+	var positions: Array[Vector2] = _snake.get_path_positions(current_letter_idx, target_idx)
+	_runner.run(_kisa, positions, target_idx, letters[target_idx], _level, _on_kisa_run_finished)
 
-	var tw := create_tween()
-	for i in range(1, positions.size()):
-		# Змейка на каждом ряду идёт в противоположном направлении: поворачиваем
-		# кису по ходу движения — callback срабатывает ПЕРЕД каждым сегментом,
-		# а не мгновенно при создании tween (иначе киса смотрит в сторону
-		# последнего сегмента весь маршрут).
-		var seg_dx: float = positions[i].x - positions[i - 1].x
-		if not is_equal_approx(seg_dx, 0.0):
-			tw.tween_callback(_kisa.set_facing.bind(seg_dx > 0.0))
-			GameLogger.info("AzbukaGame", "kisa_turn",
-				{"to": LETTERS[i], "seg_dx": seg_dx, "facing_right": seg_dx > 0.0})
-		var dist: float = positions[i - 1].distance_to(positions[i])
-		var seg_time: float = maxf(0.05, dist / RUN_SPEED)
-		tw.tween_property(_kisa, "position", positions[i] - KISA_ANCHOR, seg_time)
-	await tw.finished
 
-	var final_pos: Vector2 = positions[positions.size() - 1] - KISA_ANCHOR
-	var bounce := create_tween()
-	bounce.tween_property(_kisa, "position:y", final_pos.y - 10.0, 0.08).set_ease(Tween.EASE_OUT)
-	bounce.tween_property(_kisa, "position:y", final_pos.y, 0.12).set_ease(Tween.EASE_IN)
-	await bounce.finished
-
+func _on_kisa_run_finished(target_idx: int) -> void:
 	current_letter_idx = target_idx
-	_update_dot_states()
-	_kisa.set_kisa_moving(false)
-	is_animating = false
+	_snake.update_states(_letters_for_level(_level), current_letter_idx)
 	_open_letter_card(target_idx)
 
 
+## Возвращает точки змейки от текущей буквы до целевой включительно.
 func _get_path_positions(from_idx: int, to_idx: int) -> Array[Vector2]:
-	var result: Array[Vector2] = [dot_positions[from_idx]]
-	var step: int = 1 if to_idx >= from_idx else -1
-	var i: int = from_idx + step
-	while i != to_idx:
-		result.append(dot_positions[i])
-		i += step
-	result.append(dot_positions[to_idx])
-	return result
+	return _snake.get_path_positions(from_idx, to_idx)
+
+
+func _on_level_pressed(level: int) -> void:
+	if level == _level or is_animating or _navigating or _building:
+		return
+	_level = clampi(level, 0, LEVEL_COUNT - 1)
+	GameLogger.info("AzbukaGame", "level_changed", {"level": _level + 1})
+	_snake.clear()
+	_update_level_buttons()
+	_setup_snake()
+
+
+## Крупные нижние стрелки дублируют верхние кнопки уровней: взрослый
+## выбирает номер, ребёнок листает понятными стрелками.
+func _on_level_arrow_pressed(direction: int) -> void:
+	var target := _level + direction
+	if target < 0 or target >= LEVEL_COUNT:
+		return
+	if is_animating or _navigating or _building:
+		return
+	GameLogger.info("AzbukaGame", "level_arrow_pressed",
+		{"direction": direction, "from": _level + 1, "to": target + 1})
+	_on_level_pressed(target)
+
+
+func _letters_for_level(level: int) -> Array[String]:
+	var start := level * LEVEL_SIZE
+	var end := mini(start + LEVEL_SIZE, LETTERS.size())
+	var letters: Array[String] = []
+	for i in range(start, end):
+		letters.append(LETTERS[i])
+	return letters
+
+
+func _update_level_buttons() -> void:
+	for i in _level_buttons.size():
+		var active := i == _level
+		var color := ThemeManager.DOT_ACTIVE_GOLD if active else ThemeManager.DOT_GREEN
+		var text_color := ThemeManager.INK if active else ThemeManager.WHITE
+		ThemeManager.style_button(_level_buttons[i], color, text_color)
+	for arrow: Button in [_prev_level_button, _next_level_button]:
+		ThemeManager.style_button(arrow, ThemeManager.ACCENT_ORANGE, ThemeManager.INK)
+	_prev_level_button.disabled = _level <= 0
+	_next_level_button.disabled = _level >= LEVEL_COUNT - 1
+	_prev_level_button.modulate.a = 0.35 if _prev_level_button.disabled else 1.0
+	_next_level_button.modulate.a = 0.35 if _next_level_button.disabled else 1.0
 
 
 func _open_letter_card(index: int) -> void:
 	if _navigating:
 		return
+	var letters: Array[String] = _letters_for_level(_level)
+	if index < 0 or index >= letters.size():
+		return
 	_navigating = true
-	LetterCard.from_letter = LETTERS[index]
-	GameLogger.info("nav", "to_letter_card", {"from": "azbuka", "letter": LETTERS[index]})
+	LetterCard.from_letter = letters[index]
+	GameLogger.analytics("letter_open",
+		{"game": "azbuka", "letter": letters[index], "level": _level + 1})
+	GameLogger.info("nav", "to_letter_card",
+		{"from": "azbuka", "letter": letters[index], "level": _level + 1})
 	AudioManager.stop_all()
 	get_tree().change_scene_to_file(LETTER_CARD_SCENE)
 
 
 func _on_dot_mouse_entered(index: int) -> void:
-	dot_buttons[index].scale = Vector2(1.12, 1.12)
+	_snake.dot_buttons[index].scale = Vector2(1.12, 1.12)
 
 
 func _on_dot_mouse_exited(index: int) -> void:
-	dot_buttons[index].scale = Vector2.ONE
-
-
-func _update_dot_states() -> void:
-	for i in LETTERS.size():
-		var is_completed: bool = ProgressManager.is_letter_completed(LETTERS[i])
-		if i == current_letter_idx:
-			_style_dot(dot_buttons[i], 2)
-		elif is_completed:
-			_style_dot(dot_buttons[i], 1)
-		else:
-			_style_dot(dot_buttons[i], 0)
-
-
-func _make_dot_styles() -> void:
-	_dot_styles.clear()
-	var colors: Array[Color] = [DOT_NORMAL, DOT_COMPLETED, DOT_CURRENT]
-	for state in colors.size():
-		var color: Color = colors[state]
-		var styles: Dictionary = {}
-
-		var normal := StyleBoxFlat.new()
-		normal.bg_color = color
-		normal.set_corner_radius_all(int(_dot_r))
-		normal.content_margin_left = 0
-		normal.content_margin_right = 0
-		normal.content_margin_top = 0
-		normal.content_margin_bottom = 0
-		if state == 2:
-			normal.shadow_size = 12
-			normal.shadow_color = Color(1, 0.84, 0, 0.5)
-		styles["normal"] = normal
-
-		var hover := StyleBoxFlat.new()
-		hover.bg_color = color.lightened(0.15)
-		hover.set_corner_radius_all(int(_dot_r))
-		hover.content_margin_left = 0
-		hover.content_margin_right = 0
-		hover.content_margin_top = 0
-		hover.content_margin_bottom = 0
-		styles["hover"] = hover
-
-		var pressed := StyleBoxFlat.new()
-		pressed.bg_color = color.darkened(0.15)
-		pressed.set_corner_radius_all(int(_dot_r))
-		pressed.content_margin_left = 0
-		pressed.content_margin_right = 0
-		pressed.content_margin_top = 0
-		pressed.content_margin_bottom = 0
-		styles["pressed"] = pressed
-
-		_dot_styles[state] = styles
-
-
-func _style_dot(btn: Button, state: int) -> void:
-	var font_colors: Array[Color] = [Color.WHITE, Color("#444444"), Color("#2D2D2D")]
-	var fg: Color = font_colors[state]
-	var styles: Dictionary = _dot_styles.get(state, {})
-	if not styles.is_empty():
-		btn.add_theme_stylebox_override("normal", styles["normal"])
-		btn.add_theme_stylebox_override("hover", styles["hover"])
-		btn.add_theme_stylebox_override("pressed", styles["pressed"])
-	btn.add_theme_color_override("font_color", fg)
+	_snake.dot_buttons[index].scale = Vector2.ONE
 
 
 func _apply_theme(_mode: int = 0) -> void:
-	_background_overlay.visible = ThemeManager.current_theme == ThemeManager.THEME_DARK
+	ThemeManager.style_screen_overlay(_background_overlay)
 	_title_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	_set_label.add_theme_color_override("font_color", ThemeManager.get_text())
-	ThemeManager.style_button(_back_button, Color("#E8A87C"), Color("#2D2D2D"))
-	ThemeManager.style_button(_home_button, Color("#E8A87C"), Color("#2D2D2D"))
+	ThemeManager.style_button(_back_button, ThemeManager.ACCENT_ORANGE, ThemeManager.INK)
+	ThemeManager.style_button(_home_button, ThemeManager.ACCENT_ORANGE, ThemeManager.INK)
+	_update_level_buttons()
 
 
 ## Подпись активного набора. У встроенных набора 1..5 имени нет, и подпись
@@ -329,7 +248,7 @@ func _update_set_label() -> void:
 
 
 func _on_back_button_pressed() -> void:
-	if _navigating or is_animating or _building:
+	if is_animating or _navigating or _building:
 		return
 	_navigating = true
 	GameLogger.info("nav", "to_main_menu", {"from": "azbuka"})
@@ -338,7 +257,7 @@ func _on_back_button_pressed() -> void:
 
 
 func _on_home_button_pressed() -> void:
-	if _navigating or is_animating or _building:
+	if is_animating or _navigating or _building:
 		return
 	_navigating = true
 	GameLogger.info("nav", "to_main_menu", {"from": "azbuka_home"})

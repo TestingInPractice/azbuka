@@ -248,5 +248,5 @@ func _on_word_text_changed(new_text: String) -> void:
 ## Не красный: незаполненная буква — обычное состояние набора, а не ошибка.
 func _status_color() -> Color:
 	if _has_image and _has_audio:
-		return Color("#43A047")
+		return ThemeManager.SUCCESS
 	return ThemeManager.get_text()

@@ -514,9 +514,18 @@ func _check_set_editor() -> void:
 	add_child(editor)
 	await get_tree().process_frame
 	_check(editor is SetEditor, "set_editor.tscn привязан к классу SetEditor")
-	for node_name: String in ["NameEdit", "SaveButton", "ReadinessLabel", "Slots"]:
+	for node_name: String in ["NameEdit", "SaveButton", "ReadinessLabel", "Slots", "ImageHintLabel"]:
 		if editor.get_node_or_null("%" + node_name) == null:
 			_fail("set_editor: узел %s отсутствует" % node_name)
+	var image_hint := editor.get_node_or_null("%ImageHintLabel") as Label
+	_check(image_hint != null, "set_editor: подсказка о картинке есть")
+	if image_hint != null:
+		_check("PNG" in image_hint.text and "WebP" in image_hint.text,
+				"set_editor: подсказка называет PNG и WebP")
+		_check("1024" in image_hint.text,
+				"set_editor: подсказка называет максимальный размер 1024 px")
+		_check("прозрачным фоном" in image_hint.text,
+				"set_editor: подсказка требует прозрачный фон")
 	for letter: String in ["А", "Ъ", "Ы", "Ь", "Я"]:
 		_check((editor as SetEditor).get_slot(letter) != null,
 				"слот для буквы %s создан" % letter)
@@ -1881,6 +1890,12 @@ func _check_play_preview_uses_real_format() -> void:
 	(editor as SetEditor).open_set(set_id)
 	await get_tree().process_frame
 
+	# Headless: AudioManager._ready() читает sound_enabled из progress.json,
+	# которого нет, поэтому звук выключен и play_stream() не заполняет
+	# _player.stream. Сохраняем и принудительно включаем на время проверки.
+	var _saved_sound: bool = AudioManager.sound_enabled
+	AudioManager.set_sound_enabled(true)
+
 	var slot := (editor as SetEditor).get_slot("А")
 	_check(slot != null, "предпросмотр: слот буквы «А» есть")
 	if slot != null:
@@ -1914,6 +1929,7 @@ func _check_play_preview_uses_real_format() -> void:
 	CustomSetsStore.delete_set(set_id)
 	editor.queue_free()
 	await get_tree().process_frame
+	AudioManager.set_sound_enabled(_saved_sound)
 
 
 func _cleanup() -> void:

@@ -129,14 +129,15 @@ func get_letter_audio_path(letter: String, voice_variant: String = "") -> String
 
 ## Возвращает путь к звуку буквы (фонеме). Если у буквы нет отдельного
 ## звука (например, Ъ/Ь — поле letter_sound отсутствует или пустое) —
-## фолбэк на путь к названию буквы (старое поведение).
-func get_letter_sound_path(letter: String) -> String:
+## фолбэк на путь к названию буквы. voice_variant влияет только на фолбэк:
+## сама фонема от выбранной озвучки названия не зависит.
+func get_letter_sound_path(letter: String, voice_variant: String = "") -> String:
 	var entry := get_letter_data(letter)
 	var path := ""
 	if entry.has("letter_sound"):
 		path = str(entry["letter_sound"])
 	if path.is_empty():
-		return get_letter_audio_path(letter)
+		return get_letter_audio_path(letter, voice_variant)
 	return path
 
 

@@ -30,9 +30,9 @@ const IDLE_HINT_DELAY := 6.0
 const WORD_VOICE_DELAY := 2.0
 
 ## Цвет подсветки правильного квадрата.
-const COLOR_CORRECT := Color(0.2, 0.7, 0.2)
+const COLOR_CORRECT := ThemeManager.SUCCESS
 ## Цвет подсветки ошибочного квадрата.
-const COLOR_WRONG := Color(0.7, 0.2, 0.2)
+const COLOR_WRONG := ThemeManager.ERROR
 
 ## Путь к сцене главного меню.
 const MAIN_MENU_SCENE := "res://ui/main_menu/main_menu.tscn"
@@ -74,6 +74,8 @@ var _navigating: bool = false
 
 var _error_beep: AudioStreamWAV
 var _idle_timer: Timer = null
+var _game_started_at_ms: int = 0
+var _card_started_at_ms: int = 0
 
 
 func _ready() -> void:
@@ -96,6 +98,7 @@ func _ready() -> void:
 	_completion_no_button.pressed.connect(_on_completion_no_pressed)
 	_error_beep = _build_error_beep()
 	_setup_idle_timer()
+	GameLogger.analytics("game_start", {"game": "find_letter"})
 	_show_ready()
 	_apply_theme()
 
@@ -153,6 +156,7 @@ func _start_series() -> void:
 		_solved[index] = false
 	_card_index = 0
 	ProgressManager.mark_game_played()
+	_game_started_at_ms = Time.get_ticks_msec()
 	GameLogger.info("FindLetterGame", "series_started", {"length": _series.size()})
 	_show_card(_card_index)
 
@@ -163,6 +167,7 @@ func _show_card(index: int) -> void:
 	_card_index = clampi(index, 0, _series.size() - 1)
 	_input_blocked = false
 	_correct_letter = _series[_card_index]
+	_card_started_at_ms = Time.get_ticks_msec()
 	_card_number_label.text = "Карточка %d из %d" % [_card_index + 1, _series.size()]
 	_build_answers()
 	_update_squares()
@@ -254,7 +259,7 @@ func _update_squares() -> void:
 		button.disabled = solved
 		button.rotation_degrees = 0.0
 		button.scale = Vector2.ONE
-		button.modulate = Color.WHITE
+		button.modulate = ThemeManager.WHITE
 		button.accessibility_name = "Буква " + _answers[index]
 		if solved:
 			var is_correct := _answers[index] == _correct_letter
@@ -267,15 +272,7 @@ func _update_squares() -> void:
 ## после правильного ответа кнопка disable'ится, иначе вместо цвета показался
 ## серый stylebox темы.
 func _set_square_color(button: Button, bg_color: Color) -> void:
-	var style := StyleBoxFlat.new()
-	style.bg_color = bg_color
-	style.set_corner_radius_all(24)
-	button.add_theme_stylebox_override("normal", style)
-	button.add_theme_stylebox_override("hover", style)
-	button.add_theme_stylebox_override("pressed", style)
-	button.add_theme_stylebox_override("disabled", style)
-	button.add_theme_color_override("font_disabled_color", Color.WHITE)
-	button.add_theme_color_override("font_focus_color", Color.WHITE)
+	ThemeManager.style_flat_button(button, bg_color, ThemeManager.WHITE)
 
 
 ## Анимация правильного ответа: зелёная подсветка + подпрыгивание (как в азбуке).
@@ -294,7 +291,7 @@ func _play_square_correct_anim(button: Button) -> void:
 ## Анимация ошибочного ответа: красная подсветка + тряска, затем возврат
 ## (как в азбуке). Квадрат снова доступен для выбора.
 func _play_square_wrong_anim(button: Button) -> void:
-	button.modulate = Color.RED
+	button.modulate = ThemeManager.ERROR_MODULATE
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -305,7 +302,7 @@ func _play_square_wrong_anim(button: Button) -> void:
 	tween.tween_property(button, "rotation_degrees", orig, 0.04)
 	var reset := create_tween()
 	reset.tween_interval(0.3)
-	reset.tween_property(button, "modulate", Color.WHITE, 0.2)
+	reset.tween_property(button, "modulate", ThemeManager.WHITE, 0.2)
 
 
 ## Обновляет картинку слова текущей карточки. Если файл не найден, показывает
@@ -342,7 +339,7 @@ func _on_word_image_input(event: InputEvent) -> void:
 	if _state != STATE_PLAYING:
 		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		AudioManager.play_stream(SetRepository.get_letter_audio(_correct_letter))
+		AudioManager.play_stream(SetRepository.get_letter_sound(_correct_letter))
 		GameLogger.info("FindLetterGame", "word_image_pressed", {"letter": _correct_letter})
 		_reset_idle_timer()
 
@@ -356,10 +353,17 @@ func _on_square_pressed(index: int) -> void:
 	if selected == _correct_letter:
 		_input_blocked = true
 		_solved[_card_index] = true
+		GameLogger.analytics("round_complete", {
+			"game": "find_letter",
+			"round": _card_index + 1,
+			"total": _series.size(),
+			"letter": _correct_letter,
+			"duration_ms": maxi(0, Time.get_ticks_msec() - _card_started_at_ms),
+		})
 		button.disabled = true
 		_set_square_color(button, COLOR_CORRECT)
 		_play_square_correct_anim(button)
-		AudioManager.play_audio(PROMPT_CORRECT_PATH)
+		AudioManager.play_tech_phrase(PROMPT_CORRECT_PATH)
 		_hint_label.text = "Молодец!"
 		GameLogger.info("FindLetterGame", "answer_correct", {"letter": selected})
 		await get_tree().create_timer(FEEDBACK_DELAY).timeout
@@ -401,6 +405,13 @@ func _show_completion() -> void:
 	_next_card_button.visible = false
 	_completion_panel.visible = true
 	GameLogger.info("FindLetterGame", "series_completed", {"length": _series.size()})
+	GameLogger.analytics("game_complete", {
+		"game": "find_letter",
+		"completed": _series.size(),
+		"total": _series.size(),
+		"duration_ms": maxi(0, Time.get_ticks_msec() - _game_started_at_ms),
+	})
+	_game_started_at_ms = 0
 
 
 func _on_completion_yes_pressed() -> void:
@@ -424,6 +435,7 @@ func _on_back_button_pressed() -> void:
 		return
 	_navigating = true
 	_stop_idle_timer()
+	_log_abandon("back")
 	GameLogger.info("FindLetterGame", "back_button_pressed", {})
 	_go_to_main_menu()
 
@@ -433,8 +445,27 @@ func _on_home_button_pressed() -> void:
 		return
 	_navigating = true
 	_stop_idle_timer()
+	_log_abandon("home")
 	GameLogger.info("FindLetterGame", "home_button_pressed", {})
 	_go_to_main_menu()
+
+
+## Фиксирует выход из серии до её завершения.
+func _log_abandon(reason: String) -> void:
+	if _game_started_at_ms == 0 or _state == STATE_COMPLETED:
+		return
+	var completed := 0
+	for solved in _solved:
+		if solved:
+			completed += 1
+	GameLogger.analytics("game_abandon", {
+		"game": "find_letter",
+		"reason": reason,
+		"completed": completed,
+		"total": _series.size(),
+		"duration_ms": maxi(0, Time.get_ticks_msec() - _game_started_at_ms),
+	})
+	_game_started_at_ms = 0
 
 
 ## Возвращает в главное меню.
@@ -455,8 +486,8 @@ func _apply_theme(_mode: int = 0) -> void:
 	ThemeManager.style_button(_back_button, button_bg, button_text)
 	ThemeManager.style_button(_home_button, button_bg, button_text)
 	ThemeManager.style_button(_ready_start_button, button_bg, button_text)
-	_style_nav_button(_prev_card_button)
-	_style_nav_button(_next_card_button)
+	ThemeManager.style_round_nav_button(_prev_card_button)
+	ThemeManager.style_round_nav_button(_next_card_button)
 	ThemeManager.style_button(_completion_yes_button, button_bg, button_text)
 	ThemeManager.style_button(_completion_no_button, button_bg, button_text)
 	if _state == STATE_PLAYING:
@@ -501,60 +532,9 @@ func _stop_idle_timer() -> void:
 func _on_idle_timeout() -> void:
 	if _navigating or not AudioManager.sound_enabled or _solved[_card_index] or _input_blocked or _state != STATE_PLAYING:
 		return
-	AudioManager.play_stream(SetRepository.get_letter_audio(_correct_letter))
+	AudioManager.play_stream(SetRepository.get_letter_sound(_correct_letter))
 	GameLogger.info("FindLetterGame", "idle_hint", {"letter": _correct_letter})
 	_reset_idle_timer()
-
-
-## Применяет стиль круглых навигационных кнопок «‹»/«›» (как в азбуке):
-## полупрозрачный фон, радиус 180, мягкая тень, без отступов контента.
-func _style_nav_button(btn: Button) -> void:
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(ThemeManager.get_card_bg(), 0.7)
-	normal.set_corner_radius_all(180)
-	normal.shadow_size = 4
-	normal.shadow_color = Color(0, 0, 0, 0.25)
-	normal.content_margin_left = 0
-	normal.content_margin_right = 0
-	normal.content_margin_top = 0
-	normal.content_margin_bottom = 0
-	btn.add_theme_stylebox_override("normal", normal)
-
-	var hover := StyleBoxFlat.new()
-	hover.bg_color = Color(ThemeManager.get_card_bg(), 0.85)
-	hover.set_corner_radius_all(180)
-	hover.shadow_size = 6
-	hover.shadow_color = Color(0, 0, 0, 0.3)
-	hover.content_margin_left = 0
-	hover.content_margin_right = 0
-	hover.content_margin_top = 0
-	hover.content_margin_bottom = 0
-	btn.add_theme_stylebox_override("hover", hover)
-
-	var pressed := StyleBoxFlat.new()
-	pressed.bg_color = Color(ThemeManager.get_card_bg(), 0.9)
-	pressed.set_corner_radius_all(180)
-	pressed.shadow_size = 2
-	pressed.shadow_color = Color(0, 0, 0, 0.2)
-	pressed.content_margin_left = 0
-	pressed.content_margin_right = 0
-	pressed.content_margin_top = 0
-	pressed.content_margin_bottom = 0
-	btn.add_theme_stylebox_override("pressed", pressed)
-
-	var disabled := StyleBoxFlat.new()
-	disabled.bg_color = Color(0.5, 0.5, 0.5, 0.3)
-	disabled.set_corner_radius_all(180)
-	disabled.content_margin_left = 0
-	disabled.content_margin_right = 0
-	disabled.content_margin_top = 0
-	disabled.content_margin_bottom = 0
-	btn.add_theme_stylebox_override("disabled", disabled)
-
-	var text: Color = ThemeManager.get_text()
-	btn.add_theme_color_override("font_color", text)
-	btn.add_theme_color_override("font_hover_color", text)
-	btn.add_theme_color_override("font_pressed_color", text)
 
 
 ## Создаёт короткий звуковой сигнал ошибки.

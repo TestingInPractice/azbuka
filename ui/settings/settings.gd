@@ -13,7 +13,7 @@ const SET_LIST_SCENE := "res://ui/constructor/set_list/set_list.tscn"
 ## Минимальное число включённых режимов игр.
 const MIN_ENABLED_MODES := 1
 ## Цвет текста предупреждения.
-const WARNING_COLOR := Color("#E53935")
+const WARNING_COLOR := ThemeManager.WARNING
 ## Ключи режимов игр в порядке чекбоксов.
 const MODE_KEYS := ["azbuka", "find_letter", "collect_word", "guess_picture"]
 ## Названия режимов игр.
@@ -21,8 +21,10 @@ const MODE_TITLES := {
 	"azbuka": "Азбука",
 	"find_letter": "Найди букву",
 	"collect_word": "Собери слово",
-	"guess_picture": "Угадай букву",
+	"guess_picture": "Подбери слово",
 }
+## Заголовки вкладок в порядке сцены: игры, контент, приложение.
+const TAB_TITLES := ["Игры", "Контент", "Приложение"]
 
 ## Размер квадратного индикатора чекбокса в пикселях.
 const CHECKBOX_ICON_SIZE := 64
@@ -32,6 +34,7 @@ const CHECKBOX_ICON_RADIUS := 18
 @onready var _background: ColorRect = %Background
 @onready var _title_label: Label = %TitleLabel
 @onready var _warning_label: Label = %WarningLabel
+@onready var _settings_tabs: TabContainer = %SettingsTabs
 @onready var _mode_checkbox_azbuka: CheckBox = %ModeCheckboxAzbuka
 @onready var _mode_checkbox_find_letter: CheckBox = %ModeCheckboxFindLetter
 @onready var _mode_checkbox_collect_word: CheckBox = %ModeCheckboxCollectWord
@@ -64,6 +67,8 @@ const CHECKBOX_ICON_RADIUS := 18
 @onready var _voice_card: PanelContainer = %VoiceCard
 @onready var _voice_button_old: Button = %VoiceButtonOld
 @onready var _voice_button_new: Button = %VoiceButtonNew
+@onready var _tech_phrases_checkbox: CheckBox = %TechPhrasesCheckBox
+@onready var _tech_phrases_hint: Label = %TechPhrasesHint
 @onready var _progress_card: PanelContainer = %ProgressCard
 @onready var _progress_label: Label = %ProgressLabel
 ## Заголовки секций: одинаковый приглушённый цвет, чтобы список читался
@@ -147,9 +152,20 @@ func _ready() -> void:
 	_voice_button_old.toggled.connect(_on_voice_button_toggled.bind(ProgressManager.VOICE_VARIANT_OLD))
 	_voice_button_new.toggled.connect(_on_voice_button_toggled.bind(ProgressManager.VOICE_VARIANT_NEW))
 	_sync_voice_buttons()
+	_tech_phrases_checkbox.button_pressed = ProgressManager.are_tech_phrases_enabled()
+	_tech_phrases_checkbox.toggled.connect(_on_tech_phrases_toggled)
+	_apply_tab_titles()
 	_sync_checkboxes()
 	_update_theme_button_text()
 	_apply_theme()
+
+
+## Задаёт заголовки вкладок. Имена узлов в сцене технические (GamesTab и
+## другие), а родитель видит русские подписи; так сцена остаётся стабильной
+## для тестов, а текст можно менять без переименования узлов.
+func _apply_tab_titles() -> void:
+	for index in range(mini(_settings_tabs.get_tab_count(), TAB_TITLES.size())):
+		_settings_tabs.set_tab_title(index, TAB_TITLES[index])
 
 
 ## Синхронизирует состояние чекбоксов с включёнными режимами.
@@ -333,6 +349,14 @@ func _on_voice_button_toggled(toggled_on: bool, variant: String) -> void:
 	GameLogger.info("Settings", "voice_variant_changed", {"variant": variant})
 
 
+## Переключает служебные фразы. Слова и звуки карточек не затрагиваются.
+func _on_tech_phrases_toggled(toggled_on: bool) -> void:
+	if _updating:
+		return
+	ProgressManager.set_tech_phrases_enabled(toggled_on)
+	GameLogger.info("Settings", "tech_phrases_toggled", {"enabled": toggled_on})
+
+
 ## Обрабатывает изменение длины серии карточек игры «Найди букву».
 func _on_series_length_value_changed(value: float) -> void:
 	var int_value := int(value)
@@ -386,13 +410,22 @@ func _update_theme_button_text() -> void:
 	_theme_toggle_button.text = "Тема: " + theme_name
 
 
+## Все чекбоксы экрана: игровые режимы и технические фразы. Нужен для общих
+## стилей, чтобы новый переключатель не остался системным и не выпал из темы.
+func _all_checkboxes() -> Array[CheckBox]:
+	var boxes: Array[CheckBox] = []
+	for key: String in _checkboxes:
+		boxes.append(_checkboxes[key] as CheckBox)
+	boxes.append(_tech_phrases_checkbox)
+	return boxes
+
+
 ## Применяет цвета текущей темы.
 func _apply_theme(_mode: int = 0) -> void:
 	_background.color = ThemeManager.get_bg()
 	_title_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	_warning_label.add_theme_color_override("font_color", WARNING_COLOR)
-	for key: String in _checkboxes:
-		var checkbox := _checkboxes[key] as CheckBox
+	for checkbox: CheckBox in _all_checkboxes():
 		checkbox.add_theme_color_override("font_color", ThemeManager.get_text())
 		checkbox.add_theme_color_override("font_hover_color", ThemeManager.get_text())
 		checkbox.add_theme_color_override("font_pressed_color", ThemeManager.get_text())
@@ -405,14 +438,16 @@ func _apply_theme(_mode: int = 0) -> void:
 	section_color.a = 0.6
 	for section_label: Label in _section_labels:
 		section_label.add_theme_color_override("font_color", section_color)
+	var hint_color := ThemeManager.get_text()
+	hint_color.a = 0.65
+	_tech_phrases_hint.add_theme_color_override("font_color", hint_color)
 	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
 	var button_bg := colors["button_bg"] as Color
 	var button_text := colors["button_text"] as Color
 	# Видимые hover/focus-стили чекбоксов: белое выделение на белой
 	# карточке в светлой теме не читается, поэтому добавляем подложку
 	# и рамку акцентного цвета.
-	for key: String in _checkboxes:
-		var checkbox := _checkboxes[key] as CheckBox
+	for checkbox: CheckBox in _all_checkboxes():
 		var hover_box := StyleBoxFlat.new()
 		hover_box.bg_color = button_bg
 		hover_box.bg_color.a = 0.15
@@ -451,8 +486,71 @@ func _apply_theme(_mode: int = 0) -> void:
 	# _style_toggle_buttons(): без этого смена темы оставила бы кнопки
 	# родителя в старых цветах.
 	_style_custom_set_buttons()
+	_style_tabs()
 	_apply_checkbox_icons()
 	_update_theme_button_text()
+
+
+## Окрашивает вкладки под текущую тему. Отдельный метод нужен и при первом
+## открытии, и после переключения темы: TabContainer не наследует цвета
+## кнопок автоматически, а его панель должна совпадать с карточками.
+func _style_tabs() -> void:
+	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
+	var button_bg := colors["button_bg"] as Color
+	var button_text := colors["button_text"] as Color
+	var text_color := colors["text"] as Color
+	var card_bg := ThemeManager.get_card_bg()
+	var transparent := Color(0, 0, 0, 0)
+	var tabbar_bg := StyleBoxFlat.new()
+	tabbar_bg.bg_color = transparent
+	_settings_tabs.add_theme_stylebox_override("tabbar_background", tabbar_bg)
+	var unselected_border := text_color
+	unselected_border.a = 0.2
+	var selected := _make_tab_style(button_bg, transparent)
+	var unselected := _make_tab_style(card_bg, unselected_border)
+	var hovered := _make_tab_style(button_bg.lightened(0.08), transparent)
+	var disabled := _make_tab_style(card_bg, unselected_border)
+	_settings_tabs.add_theme_stylebox_override("tab_selected", selected)
+	_settings_tabs.add_theme_stylebox_override("tab_unselected", unselected)
+	_settings_tabs.add_theme_stylebox_override("tab_hovered", hovered)
+	_settings_tabs.add_theme_stylebox_override("tab_disabled", disabled)
+	_settings_tabs.add_theme_stylebox_override("tab_focus", selected)
+	var panel := StyleBoxFlat.new()
+	panel.bg_color = card_bg
+	panel.corner_radius_top_left = 0
+	panel.corner_radius_top_right = 0
+	panel.corner_radius_bottom_left = 24
+	panel.corner_radius_bottom_right = 24
+	panel.content_margin_left = 24
+	panel.content_margin_right = 24
+	panel.content_margin_top = 24
+	panel.content_margin_bottom = 24
+	_settings_tabs.add_theme_stylebox_override("panel", panel)
+	_settings_tabs.add_theme_font_size_override("font_size", 36)
+	_settings_tabs.add_theme_color_override("font_selected_color", button_text)
+	_settings_tabs.add_theme_color_override("font_unselected_color", text_color)
+	_settings_tabs.add_theme_color_override("font_hovered_color", button_text)
+	var disabled_text := text_color
+	disabled_text.a = 0.4
+	_settings_tabs.add_theme_color_override("font_disabled_color", disabled_text)
+
+
+## Стиль одной вкладки: скруглённые верхние углы и тонкая нижняя граница,
+## чтобы невыбранные вкладки читались как отдельные кнопки над панелью.
+func _make_tab_style(bg_color: Color, border_color: Color) -> StyleBoxFlat:
+	var box := StyleBoxFlat.new()
+	box.bg_color = bg_color
+	box.corner_radius_top_left = 18
+	box.corner_radius_top_right = 18
+	box.corner_radius_bottom_left = 0
+	box.corner_radius_bottom_right = 0
+	box.content_margin_left = 24
+	box.content_margin_right = 24
+	box.content_margin_top = 14
+	box.content_margin_bottom = 14
+	box.border_width_bottom = 3
+	box.border_color = border_color
+	return box
 
 
 func _on_back_button_pressed() -> void:
@@ -480,9 +578,7 @@ func _on_feedback_button_pressed() -> void:
 
 ## Окрашивает карточку PanelContainer цветом фона карточек текущей темы.
 func _style_card(panel: PanelContainer) -> void:
-	var box := StyleBoxFlat.new()
-	box.bg_color = ThemeManager.get_card_bg()
-	box.set_corner_radius_all(24)
+	var box := ThemeManager.make_card_stylebox()
 	box.content_margin_left = 20
 	box.content_margin_right = 20
 	box.content_margin_top = 10
@@ -492,11 +588,9 @@ func _style_card(panel: PanelContainer) -> void:
 	# читалось даже на белой карточке в светлой теме.
 	var colors: Dictionary = ThemeManager.COLORS[ThemeManager.current_theme]
 	var accent := colors["button_bg"] as Color
-	var box_focus := StyleBoxFlat.new()
-	box_focus.bg_color = ThemeManager.get_card_bg()
+	var box_focus := ThemeManager.make_card_stylebox()
 	box_focus.set_border_width_all(4)
 	box_focus.set_border_color(accent)
-	box_focus.set_corner_radius_all(24)
 	panel.add_theme_stylebox_override("focus", box_focus)
 
 
@@ -552,8 +646,7 @@ func _style_custom_set_buttons() -> void:
 func _apply_checkbox_icons() -> void:
 	var checked_tex := _make_checkbox_icon(true)
 	var unchecked_tex := _make_checkbox_icon(false)
-	for key: String in _checkboxes:
-		var checkbox := _checkboxes[key] as CheckBox
+	for checkbox: CheckBox in _all_checkboxes():
 		checkbox.add_theme_icon_override("checked", checked_tex)
 		checkbox.add_theme_icon_override("unchecked", unchecked_tex)
 

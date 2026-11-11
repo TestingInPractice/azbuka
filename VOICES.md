@@ -326,7 +326,7 @@ _`ui/games/find_letter/find_letter.tscn`, `find_letter.gd`_
 | ‹ / › | `find_letter.tscn:192/206` | предыдущая / следующая карточка | только текст |
 | 🏠 | `find_letter.tscn:224` | кнопка «Домой» | — |
 
-### Игра «Угадай букву»
+### Игра «Подбери слово»
 
 _`ui/games/guess_picture/guess_picture.tscn`, `guess_picture.gd`_
 

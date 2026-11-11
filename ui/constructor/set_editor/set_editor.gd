@@ -37,9 +37,11 @@ signal close_requested()
 
 @onready var _name_edit: LineEdit = %NameEdit
 @onready var _save_button: Button = %SaveButton
+@onready var _export_button: Button = %ExportButton
 @onready var _readiness_label: Label = %ReadinessLabel
 @onready var _slots: GridContainer = %Slots
 @onready var _back_button: Button = %BackButton
+@onready var _message_dialog: AcceptDialog = %MessageDialog
 @onready var _scroll: ScrollContainer = $Margin/Layout/ScrollArea
 
 var _set_id := ""
@@ -63,6 +65,7 @@ var _updating := false
 func _ready() -> void:
 	_build_slots()
 	_save_button.pressed.connect(_on_save_pressed)
+	_export_button.pressed.connect(_on_export_pressed)
 	_back_button.pressed.connect(_on_back_pressed)
 	_name_edit.text_submitted.connect(_on_name_submitted)
 	ThemeManager.theme_changed.connect(_apply_theme)
@@ -485,6 +488,39 @@ func _on_save_pressed() -> void:
 	GameLogger.info("SetEditor", "set_saved", {"set_id": _set_id})
 
 
+## Экспорт набора в файл .azset. На web файл скачивается, на desktop
+## открывается диалог сохранения. Отмена диалога не считается ошибкой.
+func _on_export_pressed() -> void:
+	if _set_id.is_empty():
+		_show_message("Сначала откройте набор.")
+		return
+	_export_button.disabled = true
+	var result := await SetPackageExporter.export_set(_set_id)
+	if not is_instance_valid(self):
+		return
+	_export_button.disabled = false
+	if not bool(result.get("ok", false)):
+		var code := str(result.get("error", ""))
+		if code == "cancelled":
+			return
+		GameLogger.warning("SetEditor", "package_export_failed",
+				{"set_id": _set_id, "error": code})
+		_show_message(SetPackageFormat.user_message(code))
+		return
+	var skipped := int(result.get("skipped", 0))
+	if skipped > 0:
+		GameLogger.warning("SetEditor", "package_export_skipped",
+				{"set_id": _set_id, "skipped": skipped})
+	_show_message("Набор экспортирован: %s" % str(result.get("name", "файл")))
+	GameLogger.info("SetEditor", "package_exported",
+			{"set_id": _set_id, "name": str(result.get("name", ""))})
+
+
+func _show_message(text: String) -> void:
+	_message_dialog.dialog_text = text
+	_message_dialog.popup_centered()
+
+
 ## Родитель нажал «Назад»: единственный путь выхода из редактора. Редактор
 ## сам не знает, куда возвращать, поэтому объявляет намерение сигналом, а
 ## навигацией занимается SetList. Раньше сигнал был объявлен и подключён, но
@@ -507,6 +543,8 @@ func _apply_theme(_mode: int = 0) -> void:
 	_name_edit.add_theme_color_override("font_color", ThemeManager.get_text())
 	_readiness_label.add_theme_color_override("font_color", ThemeManager.get_text())
 	ThemeManager.style_button(_save_button, colors["button_bg"] as Color,
+			colors["button_text"] as Color)
+	ThemeManager.style_button(_export_button, colors["button_bg"] as Color,
 			colors["button_text"] as Color)
 	ThemeManager.style_button(_back_button, colors["button_bg"] as Color,
 			colors["button_text"] as Color)

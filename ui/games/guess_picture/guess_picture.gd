@@ -1,8 +1,8 @@
 extends Control
-## Игра «Угадай букву»: подбор слова к показанной букве.
+## Игра «Подбери слово»: подбор слова к показанной букве.
 ##
 ## Игра состоит из 10 раундов. В каждом раунде по центру показывается буква,
-## звучит её название, а ниже четыре большие кнопки со словами: три случайных
+## звучит её фонема, а ниже четыре большие кнопки со словами: три случайных
 ## слова и одно правильное (слово текущей буквы из активного набора через
 ## SetRepository). За
 ## правильный ответ начисляется очко, звучит «Молодец!», кнопка подсвечивается
@@ -15,9 +15,9 @@ const TOTAL_ROUNDS := 10
 ## Путь к фразе «Молодец!».
 const PROMPT_CORRECT_PATH := "res://assets/audio/prompt_correct.wav"
 ## Цвет подсветки правильного ответа.
-const CORRECT_COLOR := Color("#43A047")
+const CORRECT_COLOR := ThemeManager.SUCCESS
 ## Цвет подсветки неправильного ответа.
-const WRONG_COLOR := Color("#E53935")
+const WRONG_COLOR := ThemeManager.ERROR
 ## Текст подсказки при правильном ответе.
 const HINT_CORRECT := "Молодец!"
 ## Текст подсказки при неправильном ответе.
@@ -68,6 +68,8 @@ var _navigating := false
 ## генерируем короткий тон 300 Гц (как задумано в SPEC-REWRITE, error_beep).
 var _error_beep: AudioStreamWAV
 var _idle_timer: Timer = null
+var _game_started_at_ms: int = 0
+var _round_started_at_ms: int = 0
 
 
 func _ready() -> void:
@@ -81,6 +83,7 @@ func _ready() -> void:
 	_error_beep = _make_error_beep()
 	_setup_idle_timer()
 	ProgressManager.mark_game_played()
+	GameLogger.analytics("game_start", {"game": "guess_picture"})
 	GameLogger.info("GuessPictureGame", "game_entered", {"games_played": ProgressManager.games_played_count})
 	_apply_theme()
 	_start_new_game()
@@ -90,6 +93,7 @@ func _ready() -> void:
 func _start_new_game() -> void:
 	_score = 0
 	_rounds_played = 0
+	_game_started_at_ms = Time.get_ticks_msec()
 	_finale_panel.visible = false
 	_main_layout.visible = true
 	GameLogger.info("GuessPictureGame", "game_start", {"total_rounds": TOTAL_ROUNDS})
@@ -143,8 +147,9 @@ func _start_round() -> void:
 	_letter_label.text = _current_letter
 	_status_label.text = ""
 	_apply_theme()
+	_round_started_at_ms = Time.get_ticks_msec()
 	# Звук буквы звучит в начале раунда, пока буква перед глазами.
-	AudioManager.play_stream(SetRepository.get_letter_audio(_current_letter))
+	AudioManager.play_stream(SetRepository.get_letter_sound(_current_letter))
 	GameLogger.info("GuessPictureGame", "round_start", {
 		"round": _rounds_played + 1,
 		"letter": _current_letter,
@@ -239,11 +244,20 @@ func _handle_correct_answer(button: Button, word: String) -> void:
 		"word": word,
 		"score": _score,
 	})
-	AudioManager.play_audio(PROMPT_CORRECT_PATH)
+	AudioManager.play_tech_phrase(PROMPT_CORRECT_PATH)
 	await get_tree().create_timer(0.7).timeout
 	if not is_inside_tree():
 		return
 	_rounds_played += 1
+	GameLogger.analytics("round_complete", {
+		"game": "guess_picture",
+		"round": _rounds_played,
+		"total": TOTAL_ROUNDS,
+		"letter": _current_letter,
+		"word": word,
+		"score": _score,
+		"duration_ms": maxi(0, Time.get_ticks_msec() - _round_started_at_ms),
+	})
 	if _rounds_played >= TOTAL_ROUNDS:
 		_show_finale()
 	else:
@@ -272,6 +286,14 @@ func _show_finale() -> void:
 	_finale_label.text = "Игра окончена!"
 	_finale_score_label.text = "Ваш счёт: %d / %d" % [_score, TOTAL_ROUNDS]
 	GameLogger.info("GuessPictureGame", "game_over", {"score": _score, "total": TOTAL_ROUNDS})
+	GameLogger.analytics("game_complete", {
+		"game": "guess_picture",
+		"score": _score,
+		"completed": _rounds_played,
+		"total": TOTAL_ROUNDS,
+		"duration_ms": maxi(0, Time.get_ticks_msec() - _game_started_at_ms),
+	})
+	_game_started_at_ms = 0
 
 
 func _on_play_again_button_pressed() -> void:
@@ -286,6 +308,7 @@ func _on_back_button_pressed() -> void:
 		return
 	_navigating = true
 	_stop_idle_timer()
+	_log_abandon("back")
 	GameLogger.info("GuessPictureGame", "back_button_pressed", {})
 	AudioManager.stop_all()
 	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
@@ -296,9 +319,25 @@ func _on_home_button_pressed() -> void:
 		return
 	_navigating = true
 	_stop_idle_timer()
+	_log_abandon("home")
 	GameLogger.info("GuessPictureGame", "home_button_pressed", {})
 	AudioManager.stop_all()
 	get_tree().change_scene_to_file("res://ui/main_menu/main_menu.tscn")
+
+
+## Фиксирует выход до финала, чтобы отвал не терялся между game_start и game_complete.
+func _log_abandon(reason: String) -> void:
+	if _game_started_at_ms == 0 or _rounds_played >= TOTAL_ROUNDS:
+		return
+	GameLogger.analytics("game_abandon", {
+		"game": "guess_picture",
+		"reason": reason,
+		"completed": _rounds_played,
+		"total": TOTAL_ROUNDS,
+		"score": _score,
+		"duration_ms": maxi(0, Time.get_ticks_msec() - _game_started_at_ms),
+	})
+	_game_started_at_ms = 0
 
 
 ## Применяет цвета текущей темы ко всем элементам экрана.
@@ -334,9 +373,8 @@ func _apply_theme(_mode: int = 0) -> void:
 
 ## Создаёт скруглённый стиль карточки буквы.
 func _make_card_stylebox(color: Color) -> StyleBoxFlat:
-	var box := StyleBoxFlat.new()
+	var box := ThemeManager.make_card_stylebox(36)
 	box.bg_color = color
-	box.set_corner_radius_all(36)
 	box.content_margin_left = 48
 	box.content_margin_right = 48
 	box.content_margin_top = 40
@@ -347,21 +385,7 @@ func _make_card_stylebox(color: Color) -> StyleBoxFlat:
 ## Раскрашивает кнопку целиком одним цветом с белым текстом (normal, hover,
 ## pressed и disabled).
 func _style_button_flat(button: Button, color: Color) -> void:
-	var box := StyleBoxFlat.new()
-	box.bg_color = color
-	box.set_corner_radius_all(24)
-	box.content_margin_left = 32
-	box.content_margin_right = 32
-	box.content_margin_top = 24
-	box.content_margin_bottom = 24
-	button.add_theme_stylebox_override("normal", box)
-	button.add_theme_stylebox_override("hover", box)
-	button.add_theme_stylebox_override("pressed", box)
-	button.add_theme_stylebox_override("disabled", box)
-	button.add_theme_color_override("font_color", Color.WHITE)
-	button.add_theme_color_override("font_hover_color", Color.WHITE)
-	button.add_theme_color_override("font_pressed_color", Color.WHITE)
-	button.add_theme_color_override("font_disabled_color", Color.WHITE)
+	ThemeManager.style_flat_button(button, color, ThemeManager.WHITE)
 
 
 func _setup_idle_timer() -> void:
@@ -390,7 +414,7 @@ func _stop_idle_timer() -> void:
 func _on_idle_timeout() -> void:
 	if _navigating or not AudioManager.sound_enabled or not _round_active:
 		return
-	AudioManager.play_stream(SetRepository.get_letter_audio(_current_letter))
+	AudioManager.play_stream(SetRepository.get_letter_sound(_current_letter))
 	GameLogger.info("GuessPictureGame", "idle_hint", {"letter": _current_letter})
 	_reset_idle_timer()
 

@@ -14,6 +14,13 @@ signal message_logged(source: String, event: String, data: Dictionary, level: Le
 ## Минимальный уровень, который попадает в лог.
 var min_level: Level = Level.DEBUG
 
+## Локальный журнал событий. Путь можно переопределить в тестах.
+const ANALYTICS_FILE := "user://analytics/events.jsonl"
+var analytics_path := ANALYTICS_FILE
+## В headless-прогонах журнал по умолчанию выключен, чтобы валидаторы не
+## дописывали события в данные ребёнка. Валидатор аналитики включает его явно.
+var analytics_enabled := DisplayServer.get_name() != "headless"
+
 
 func debug(source: String, event: String, data: Dictionary = {}) -> void:
 	_log(Level.DEBUG, source, event, data)
@@ -29,6 +36,31 @@ func warning(source: String, event: String, data: Dictionary = {}) -> void:
 
 func error(source: String, event: String, data: Dictionary = {}) -> void:
 	_log(Level.ERROR, source, event, data)
+
+
+## Записывает продуктовое событие в локальный JSONL-журнал. Это не отладочный
+## лог: сюда попадают только осмысленные шаги воронки (открытие приложения,
+## старт игры, открытие буквы), чтобы потом можно было посчитать прохождение.
+func analytics(event: String, data: Dictionary = {}) -> void:
+	if not analytics_enabled or event.is_empty():
+		return
+	var dir := analytics_path.get_base_dir()
+	if not dir.is_empty():
+		DirAccess.make_dir_recursive_absolute(dir)
+	var file: FileAccess
+	if FileAccess.file_exists(analytics_path):
+		file = FileAccess.open(analytics_path, FileAccess.READ_WRITE)
+	else:
+		file = FileAccess.open(analytics_path, FileAccess.WRITE)
+	if file == null:
+		return
+	file.seek_end()
+	file.store_line(JSON.stringify({
+		"ts": Time.get_datetime_string_from_system(true),
+		"event": event,
+		"data": data,
+	}))
+	file.flush()
 
 
 func _log(level: Level, source: String, event: String, data: Dictionary) -> void:

@@ -1,8 +1,8 @@
 extends Node
 ## Валидатор звука кнопки буквы: на одно нажатие играет ровно один файл, и это
-## название буквы из выбранного в настройках варианта озвучки. Фонема из набора
-## RU-alfavit больше не подмешивается, иначе ребёнок слышал мужской голос, а
-## сразу за ним женский, и переключатель озвучки на этот звук не влиял.
+## фонема буквы. Название буквы в обучении не звучит. У Ъ/Ь отдельной фонемы
+## нет, поэтому get_letter_sound_path() отдаёт название как осознанный фолбэк.
+## Вариант озвучки относится только к названию и на фонему не влияет.
 ## Путь прогресса уводится на тестовый файл: данные ребёнка не читаются.
 ## Запуск: godot --headless --path . res://tests/validate_letter_voice.tscn
 
@@ -27,8 +27,8 @@ func _ready() -> void:
 	ProgressManager.set_voice_variant(ProgressManager.VOICE_VARIANT_NEW)
 	AudioManager.set_sound_enabled(true)
 
-	await _check_variant_new()
-	await _check_variant_old()
+	await _check_phoneme_new()
+	await _check_phoneme_old()
 	await _check_soft_sign_fallback()
 	await _check_sound_off()
 
@@ -39,8 +39,8 @@ func _ready() -> void:
 	_finish()
 
 
-## Вариант "new": одно нажатие — один файл Silero, без фонемы.
-func _check_variant_new() -> void:
+## Вариант "new": кнопка буквы играет фонему, а не название.
+func _check_phoneme_new() -> void:
 	# given: в настройках выбрана новая озвучка
 	ProgressManager.set_voice_variant(ProgressManager.VOICE_VARIANT_NEW)
 	var card := await _spawn_card("А")
@@ -49,24 +49,24 @@ func _check_variant_new() -> void:
 	_press_letter(card)
 	var played := _played_path()
 
-	# then: играет название из нового набора, а не фонема
-	var expected := AlphabetData.get_letter_audio_path("А", ProgressManager.VOICE_VARIANT_NEW)
-	_check(played == expected, "вариант new: играет название буквы (получено: %s)" % played)
-	_check(not played.contains("_sound.") and not played.contains("_sound_"),
-			"вариант new: фонема не подмешивается")
+	# then: играет фонема, а не название
+	var expected := AlphabetData.get_letter_sound_path("А")
+	_check(played == expected, "вариант new: играет фонема (получено: %s)" % played)
+	_check(played != AlphabetData.get_letter_audio_path("А", ProgressManager.VOICE_VARIANT_NEW),
+			"вариант new: название буквы не звучит")
 
 	# when: фонема успела бы закончиться
 	await get_tree().create_timer(WAIT_AFTER_PHONEME).timeout
 
-	# then: второй звук не запускался — трек тот же
+	# then: второй звук не запускался, трек тот же
 	_check(_played_path() == expected or not _player_playing(),
 			"вариант new: после нажатия не играет второй голос")
 
 	await _free(card)
 
 
-## Вариант "old": переключатель в настройках слышен.
-func _check_variant_old() -> void:
+## Вариант "old": переключатель озвучки названия не меняет фонему.
+func _check_phoneme_old() -> void:
 	# given: в настройках выбрана старая озвучка
 	ProgressManager.set_voice_variant(ProgressManager.VOICE_VARIANT_OLD)
 	var card := await _spawn_card("А")
@@ -75,15 +75,15 @@ func _check_variant_old() -> void:
 	_press_letter(card)
 	var played := _played_path()
 
-	# then: играет файл старой озвучки, отличный от нового
-	var expected := AlphabetData.get_letter_audio_path("А", ProgressManager.VOICE_VARIANT_OLD)
-	_check(played == expected, "вариант old: играет название старой озвучки (получено: %s)" % played)
-	_check(played != AlphabetData.get_letter_audio_path("А", ProgressManager.VOICE_VARIANT_NEW),
-			"варианты озвучки различаются на слух")
+	# then: играет та же фонема, а не название старой озвучки
+	var expected := AlphabetData.get_letter_sound_path("А")
+	_check(played == expected, "вариант old: играет фонема (получено: %s)" % played)
+	_check(played != AlphabetData.get_letter_audio_path("А", ProgressManager.VOICE_VARIANT_OLD),
+			"вариант old: название старой озвучки не звучит")
 	await _free(card)
 
 
-## У Ъ/Ь нет фонемы — звук всё равно должен быть.
+## У Ъ/Ь нет фонемы, поэтому звучит название как фолбэк.
 func _check_soft_sign_fallback() -> void:
 	# given: вариант new и открыта карточка Ъ
 	ProgressManager.set_voice_variant(ProgressManager.VOICE_VARIANT_NEW)
@@ -91,9 +91,13 @@ func _check_soft_sign_fallback() -> void:
 
 	# when: ребёнок жмёт кнопку буквы
 	_press_letter(card)
+	var played := _played_path()
 
 	# then: звук есть и это название буквы
-	_check(not _played_path().is_empty(), "у Ъ кнопка буквы звучит")
+	var expected := AlphabetData.get_letter_audio_path("Ъ", ProgressManager.VOICE_VARIANT_NEW)
+	_check(played == expected, "у Ъ звучит название как фолбэк (получено: %s)" % played)
+	_check(played == AlphabetData.get_letter_sound_path("Ъ", ProgressManager.VOICE_VARIANT_NEW),
+			"get_letter_sound_path у Ъ совпадает с названием")
 	await _free(card)
 
 

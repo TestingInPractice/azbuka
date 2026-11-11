@@ -61,6 +61,9 @@ var save_path: String = SAVE_PATH
 var voice_variant: String = DEFAULT_VOICE_VARIANT
 ## Включён ли звук. Хранится рядом с прогрессом, чтобы выбор пережил перезапуск.
 var sound_enabled: bool = true
+## Включены ли технические фразы: подсказки и похвала. Слова и звуки карточек
+## от этого переключателя не зависят и играют всегда.
+var tech_phrases_enabled: bool = true
 
 
 func _ready() -> void:
@@ -197,6 +200,19 @@ func set_sound_enabled(enabled: bool) -> void:
 	save_progress()
 
 
+## Включены ли технические фразы (подсказки и похвала).
+func are_tech_phrases_enabled() -> bool:
+	return tech_phrases_enabled
+
+
+## Запоминает выбор технических фраз и сразу сохраняет его на диск.
+func set_tech_phrases_enabled(enabled: bool) -> void:
+	if tech_phrases_enabled == enabled:
+		return
+	tech_phrases_enabled = enabled
+	save_progress()
+
+
 ## Устанавливает вариант озвучки (только "old" или "new", иначе игнор).
 func set_voice_variant(value: String) -> void:
 	if value != VOICE_VARIANT_OLD and value != VOICE_VARIANT_NEW:
@@ -248,6 +264,11 @@ func load_progress() -> void:
 		sound_enabled = root["sound_enabled"]
 	else:
 		sound_enabled = true
+	# Технические фразы по умолчанию включены: старый файл их не выключает.
+	if root.has("tech_phrases_enabled") and root["tech_phrases_enabled"] is bool:
+		tech_phrases_enabled = root["tech_phrases_enabled"]
+	else:
+		tech_phrases_enabled = true
 
 
 func save_progress() -> void:
@@ -260,6 +281,7 @@ func save_progress() -> void:
 		"word_set_id": word_set_id,
 		"voice_variant": voice_variant,
 		"sound_enabled": sound_enabled,
+		"tech_phrases_enabled": tech_phrases_enabled,
 	}
 	var file := FileAccess.open(save_path, FileAccess.WRITE)
 	if file == null:

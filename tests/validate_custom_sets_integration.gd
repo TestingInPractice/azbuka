@@ -47,6 +47,13 @@ const SetsDirIsolation := preload("res://tests/test_sets_dir.gd")
 
 const GAME_SCRIPTS := [
 	"res://ui/games/azbuka/letter_card.gd",
+	"res://ui/games/azbuka/letter_card_actions.gd",
+	"res://ui/games/azbuka/letter_card_content.gd",
+	"res://ui/games/azbuka/letter_card_idle_hint.gd",
+	"res://ui/games/azbuka/letter_card_navigation.gd",
+	"res://ui/games/azbuka/letter_card_recording.gd",
+	"res://ui/games/azbuka/letter_card_theme.gd",
+	"res://ui/games/azbuka/letter_card_word_game.gd",
 	"res://ui/games/collect_word/collect_word.gd",
 	"res://ui/games/find_letter/find_letter.gd",
 	"res://ui/games/guess_picture/guess_picture.gd",
@@ -270,11 +277,18 @@ func _check_repository_follows_selection() -> void:
 ## и для файла, который читает что угодно другое напрямую. Здесь перечислено
 ## ровно то, что допустимо, и всё остальное — ошибка.
 ##
-## Дистракторы в играх «найди букву» и «угадай букву» — шум, а не данные набора:
+## Дистракторы в играх «Найди букву» и «Подбери слово» — шум, а не данные набора:
 ## варианты ответа должны включать буквы, которых в выбранном наборе нет, иначе
 ## задача неразрешима. Поэтому AlphabetData.get_letters() там и остался.
 const DIRECT_READ_ALLOWLIST := {
 	"res://ui/games/azbuka/letter_card.gd": [],
+	"res://ui/games/azbuka/letter_card_actions.gd": [],
+	"res://ui/games/azbuka/letter_card_content.gd": [],
+	"res://ui/games/azbuka/letter_card_idle_hint.gd": [],
+	"res://ui/games/azbuka/letter_card_navigation.gd": [],
+	"res://ui/games/azbuka/letter_card_recording.gd": [],
+	"res://ui/games/azbuka/letter_card_theme.gd": [],
+	"res://ui/games/azbuka/letter_card_word_game.gd": [],
 	"res://ui/games/collect_word/collect_word.gd": [],
 	"res://ui/games/find_letter/find_letter.gd": ["AlphabetData.get_letters("],
 	"res://ui/games/guess_picture/guess_picture.gd": [

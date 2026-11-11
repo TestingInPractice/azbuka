@@ -145,10 +145,10 @@ func _check_menu_reflects_state() -> void:
 	_check(button.offset_left == 16.0 and button.offset_top == 170.0
 			and button.offset_right == 206.0 and button.offset_bottom == 360.0,
 			"SoundButton стоит по координатам 16/170/206/360")
-	_check(button.custom_minimum_size == Vector2(190, 190)
-			and button.get_theme_font_size("font_size") == 40,
-			"SoundButton не меньше 190x190 и шрифт 40")
-	_check(button.text == "🔊", "при включённом звуке кнопка показывает 🔊")
+	_check(button.custom_minimum_size == Vector2(190, 190) and button.expand_icon,
+			"SoundButton не меньше 190x190 и растягивает иконку")
+	_check(button.icon != null and button.icon.resource_path.ends_with("sound_on.svg"),
+			"при включённом звуке кнопка показывает иконку sound_on")
 	_check(button.accessibility_name == "Звук включён", "имя кнопки при включённом звуке")
 	await _free(menu)
 
@@ -162,9 +162,10 @@ func _check_menu_reflects_state() -> void:
 	var restarted := await _spawn(MAIN_MENU_SCENE)
 	var restarted_button := restarted.get_node_or_null("%SoundButton") as Button
 
-	# then: надпись и имя говорят о выключенном звуке
-	_check(restarted_button != null and restarted_button.text == "🔇",
-			"после перезапуска с выключенным звуком кнопка показывает 🔇")
+	# then: иконка и имя говорят о выключенном звуке
+	_check(restarted_button != null and restarted_button.icon != null
+			and restarted_button.icon.resource_path.ends_with("sound_off.svg"),
+			"после перезапуска с выключенным звуком кнопка показывает иконку sound_off")
 	_check(restarted_button != null and restarted_button.accessibility_name == "Звук выключен",
 			"после перезапуска имя кнопки «Звук выключен»")
 	await _free(restarted)
@@ -186,10 +187,12 @@ func _check_press_twice() -> void:
 	button.pressed.emit()
 	await get_tree().process_frame
 
-	# then: звук выключен, надпись, имя и файл обновились
+	# then: звук выключен, иконка, имя и файл обновились
 	_check(not AudioManager.sound_enabled, "первое нажатие выключило AudioManager")
 	_check(not ProgressManager.is_sound_enabled(), "первое нажатие выключило прогресс")
-	_check(button.text == "🔇", "после первого нажатия кнопка показывает 🔇")
+	_check(not AudioManager._music_player.playing, "первое нажатие остановило музыку меню")
+	_check(button.icon != null and button.icon.resource_path.ends_with("sound_off.svg"),
+			"после первого нажатия кнопка показывает иконку sound_off")
 	_check(button.accessibility_name == "Звук выключен", "после первого нажатия имя «Звук выключен»")
 	_check(_read_file().get("sound_enabled") == false, "первое нажатие записало false в progress.json")
 
@@ -197,12 +200,18 @@ func _check_press_twice() -> void:
 	button.pressed.emit()
 	await get_tree().process_frame
 
-	# then: звук вернулся, надпись, имя и файл тоже
+	# then: звук вернулся, музыка играет, иконка, имя и файл тоже
 	_check(AudioManager.sound_enabled, "второе нажатие включило AudioManager")
 	_check(ProgressManager.is_sound_enabled(), "второе нажатие включило прогресс")
-	_check(button.text == "🔊", "после второго нажатия кнопка показывает 🔊")
+	_check(AudioManager._music_player.playing, "второе нажатие вернуло музыку меню")
+	_check(button.icon != null and button.icon.resource_path.ends_with("sound_on.svg"),
+			"после второго нажатия кнопка показывает иконку sound_on")
 	_check(button.accessibility_name == "Звук включён", "после второго нажатия имя «Звук включён»")
 	_check(_read_file().get("sound_enabled") == true, "второе нажатие записало true в progress.json")
+	# Не оставляем музыку играть после теста: иначе поток остаётся в ресурсах.
+	AudioManager.stop_music()
+	AudioManager._music_player.stream = null
+	await get_tree().process_frame
 	await _free(menu)
 
 

@@ -11,6 +11,9 @@ class_name ParentalGate
 const SCENE_PATH := "res://ui/parental_gate/parental_gate.tscn"
 const MIN_OPERAND := 2
 const MAX_OPERAND := 9
+## Текст поверх затемнения всегда светлый: тёмный текст светлой темы на
+## чёрном оверлее почти не читается.
+const OVERLAY_TEXT := Color("#FFFFFF")
 
 @onready var _title_label: Label = %TitleLabel
 @onready var _question_label: Label = %QuestionLabel
@@ -131,7 +134,7 @@ func _on_answer_pressed(button_index: int) -> void:
 func _show_success() -> void:
 	_result_card.visible = true
 	_result_label.text = "Верно!"
-	_result_label.add_theme_color_override("font_color", Color("#4CAF50"))
+	_result_label.add_theme_color_override("font_color", ThemeManager.SUCCESS)
 
 
 ## Удаляет gate из дерева.
@@ -149,8 +152,8 @@ func _on_cancel_button_pressed() -> void:
 func _apply_theme(_mode: int = 0) -> void:
 	if not is_inside_tree():
 		return
-	_title_label.add_theme_color_override("font_color", ThemeManager.get_text())
-	_question_label.add_theme_color_override("font_color", ThemeManager.get_text())
+	_title_label.add_theme_color_override("font_color", OVERLAY_TEXT)
+	_question_label.add_theme_color_override("font_color", OVERLAY_TEXT)
 	# ResultCard.
 	var result_box := StyleBoxFlat.new()
 	result_box.bg_color = ThemeManager.get_card_bg()

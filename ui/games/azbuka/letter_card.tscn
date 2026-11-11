@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://ui/games/azbuka/letter_card.gd" id="1_script"]
 [ext_resource type="Theme" path="res://ui/app_theme.tres" id="2_theme"]
 [ext_resource type="Texture2D" path="res://assets/images/fone4.jpg" id="3_bg"]
 [ext_resource type="PackedScene" path="res://ui/common/back_button.tscn" id="4_back"]
+[ext_resource type="Texture2D" path="res://assets/icons/home.svg" id="5_home"]
 
 [node name="LetterCard" type="Control"]
 layout_mode = 3
@@ -58,8 +59,8 @@ vertical_alignment = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 792.0
-offset_bottom = 1523.0
+offset_top = 760.0
+offset_bottom = 1490.0
 mouse_filter = 2
 
 [node name="WordImage" type="TextureRect" parent="ContentWrapper/ImageCenter"]
@@ -73,8 +74,8 @@ unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 1560.0
-offset_bottom = 1750.0
+offset_top = 1500.0
+offset_bottom = 1690.0
 alignment = 1
 theme_override_constants/separation = 24
 
@@ -83,8 +84,8 @@ unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 1780.0
-offset_bottom = 1877.0
+offset_top = 1700.0
+offset_bottom = 1748.0
 horizontal_alignment = 1
 vertical_alignment = 1
 theme_override_font_sizes/font_size = 34
@@ -96,9 +97,9 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 230.0
-offset_top = 1884.0
+offset_top = 1354.0
 offset_right = -230.0
-offset_bottom = 1968.0
+offset_bottom = 1474.0
 horizontal_alignment = 1
 vertical_alignment = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -113,10 +114,10 @@ layout_mode = 1
 anchors_preset = 0
 offset_left = 30.0
 offset_top = 1896.0
-offset_right = 230.0
+offset_right = 1050.0
 offset_bottom = 2086.0
-text = "Буква"
-theme_override_font_sizes/font_size = 26
+text = "Слушать букву"
+theme_override_font_sizes/font_size = 42
 accessibility_name = "Прослушать букву"
 
 [node name="ButtonWord" type="Button" parent="."]
@@ -125,39 +126,35 @@ layout_mode = 1
 anchors_preset = 0
 offset_left = 30.0
 offset_top = 2110.0
-offset_right = 230.0
+offset_right = 360.0
 offset_bottom = 2300.0
 text = "Слово"
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 28
 accessibility_name = "Прослушать слово"
 
 [node name="MicButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -230.0
-offset_top = 1896.0
-offset_right = -30.0
-offset_bottom = 2086.0
+anchors_preset = 0
+offset_left = 375.0
+offset_top = 2110.0
+offset_right = 705.0
+offset_bottom = 2300.0
 text = "Микрофон"
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 28
 accessibility_name = "Записать голос"
 
 [node name="RecordPlaybackButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -230.0
+anchors_preset = 0
+offset_left = 720.0
 offset_top = 2110.0
-offset_right = -30.0
+offset_right = 1050.0
 offset_bottom = 2300.0
 disabled = true
 text = "Слушать"
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 28
 accessibility_name = "Прослушать запись"
 
 [node name="PrevLetterButton" type="Button" parent="."]
@@ -201,6 +198,6 @@ offset_top = 170.0
 offset_right = -20.0
 offset_bottom = 360.0
 custom_minimum_size = Vector2(200, 190)
-text = "🏠"
-theme_override_font_sizes/font_size = 40
+icon = ExtResource("5_home")
+expand_icon = true
 accessibility_name = "Домой"

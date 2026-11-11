@@ -21,10 +21,12 @@ const ROW_SCENE := preload("res://ui/constructor/set_list/set_list_row.tscn")
 const SETTINGS_SCENE := "res://ui/settings/settings.tscn"
 
 @onready var _new_button: Button = %NewButton
+@onready var _import_button: Button = %ImportButton
 @onready var _scroll: VBoxContainer = %Scroll
 @onready var _empty_label: Label = %EmptyLabel
 @onready var _editor: SetEditor = %SetEditor
 @onready var _back_button: Button = %BackButton
+@onready var _message_dialog: AcceptDialog = %MessageDialog
 @onready var _layout: VBoxContainer = $Layout
 
 var _rows: Array[SetListRow] = []
@@ -36,6 +38,7 @@ var _editor_open: bool = false
 
 func _ready() -> void:
 	_new_button.pressed.connect(_on_new_pressed)
+	_import_button.pressed.connect(_on_import_pressed)
 	_back_button.pressed.connect(_on_back_pressed)
 	# Редактор встроен в сцену, поэтому его сигналы доступны сразу. set_saved
 	# закрывает редактор и перечитывает список: имя набора могло измениться,
@@ -98,6 +101,41 @@ func _on_new_pressed() -> void:
 	sets_changed.emit()
 	open_editor.emit(set_id)
 	_show_editor(set_id)
+
+
+## Импорт набора из файла .azset. Импорт всегда создаёт новый набор, поэтому
+## активным он становится только после успешной записи всех букв.
+func _on_import_pressed() -> void:
+	_import_button.disabled = true
+	var picked := await FilePicker.pick("package")
+	if not is_instance_valid(self):
+		return
+	_import_button.disabled = false
+	if not bool(picked.get("ok", false)):
+		var pick_error := str(picked.get("error", ""))
+		GameLogger.info("SetList", "package_pick_failed", {"error": pick_error})
+		if pick_error != "cancelled":
+			_show_message("Не удалось выбрать файл набора.")
+		return
+	var result := SetPackageImporter.import_from_picker(picked)
+	if not bool(result.get("ok", false)):
+		var import_error := str(result.get("error", ""))
+		GameLogger.warning("SetList", "package_import_failed",
+				{"error": import_error})
+		_show_message(SetPackageFormat.user_message(import_error))
+		return
+	var set_id := str(result.get("set_id", ""))
+	ProgressManager.set_word_set_id(set_id)
+	refresh()
+	_show_message("Набор «%s» импортирован: букв %d." % [
+		str(result.get("name", "")), int(result.get("letters", 0))])
+	GameLogger.info("SetList", "package_imported",
+			{"set_id": set_id, "letters": int(result.get("letters", 0))})
+
+
+func _show_message(text: String) -> void:
+	_message_dialog.dialog_text = text
+	_message_dialog.popup_centered()
 
 
 func _on_row_pressed(set_id: String) -> void:
@@ -169,5 +207,6 @@ func _apply_theme(_mode: int = 0) -> void:
 	var button_bg := colors["button_bg"] as Color
 	var button_text := colors["button_text"] as Color
 	ThemeManager.style_button(_new_button, button_bg, button_text)
+	ThemeManager.style_button(_import_button, button_bg, button_text)
 	ThemeManager.style_button(_back_button, button_bg, button_text)
 	_empty_label.add_theme_color_override("font_color", ThemeManager.get_text())

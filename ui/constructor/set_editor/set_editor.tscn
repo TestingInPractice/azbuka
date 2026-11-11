@@ -59,6 +59,24 @@ theme_override_font_sizes/font_size = 40
 text = "Готово"
 accessibility_name = "Готово"
 
+[node name="ExportButton" type="Button" parent="Margin/Layout/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+text = "Экспорт"
+accessibility_name = "Экспортировать набор в файл .azset"
+
+[node name="ImageHintLabel" type="Label" parent="Margin/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+modulate = Color(1, 1, 1, 0.72)
+theme_override_font_sizes/font_size = 30
+text = "Картинка: PNG или WebP с прозрачным фоном (не белым), до 1024 px по длинной стороне, лучше квадратная. JPG прозрачность не сохраняет."
+autowrap_mode = 2
+
 [node name="ScrollArea" type="ScrollContainer" parent="Margin/Layout"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -84,3 +102,8 @@ offset_right = 260.0
 offset_bottom = -40.0
 grow_horizontal = 2
 accessibility_name = "Назад к списку наборов"
+
+[node name="MessageDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Набор"
+ok_button_text = "Понятно"

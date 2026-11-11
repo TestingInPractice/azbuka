@@ -61,6 +61,9 @@ var _completion_pending: bool = false
 var _navigating: bool = false
 var _error_stream: AudioStreamWAV = null
 var _idle_timer: Timer = null
+var _game_started_at_ms: int = 0
+var _word_started_at_ms: int = 0
+var _completed_words: int = 0
 
 @onready var _background: ColorRect = %Background
 @onready var _header_label: Label = %HeaderLabel
@@ -85,7 +88,9 @@ func _ready() -> void:
 	_apply_theme()
 	_setup_idle_timer()
 	ProgressManager.mark_game_played()
+	GameLogger.analytics("game_start", {"game": "collect_word"})
 	GameLogger.info("CollectWordGame", "game_entered", {"games_played": ProgressManager.games_played_count})
+	_game_started_at_ms = Time.get_ticks_msec()
 	_show_random_word()
 
 
@@ -119,6 +124,7 @@ func _build_puzzle(letter: String) -> void:
 	current_word = str(data.get("word", ""))
 	if current_word.is_empty():
 		return
+	_word_started_at_ms = Time.get_ticks_msec()
 	_update_word_image()
 	word_letters = _split_word(current_word)
 	pool_letters = word_letters.duplicate()
@@ -271,7 +277,7 @@ func try_place_letter(letter: String, source_button: Button = null) -> bool:
 	_flash_correct(slot)
 	GameLogger.info("CollectWordGame", "letter_tap_correct", {"letter": letter, "slot": slot_index, "word": current_word})
 	AudioManager.stop_all()
-	AudioManager.play_stream(SetRepository.get_letter_audio(letter))
+	AudioManager.play_stream(SetRepository.get_letter_sound(letter))
 	if slot_index >= word_letters.size():
 		_on_word_completed()
 	return true
@@ -279,18 +285,18 @@ func try_place_letter(letter: String, source_button: Button = null) -> bool:
 
 ## Короткая зелёная вспышка слота при правильной букве.
 func _flash_correct(slot: Button) -> void:
-	slot.self_modulate = Color(0.6, 1.0, 0.7)
+	slot.self_modulate = ThemeManager.SUCCESS_FLASH
 	var tween := create_tween()
-	tween.tween_property(slot, "self_modulate", Color.WHITE, 0.35)
+	tween.tween_property(slot, "self_modulate", ThemeManager.WHITE, 0.35)
 
 
 ## Короткая красная вспышка кнопки пула при неверной букве.
 func _flash_wrong(button: Button) -> void:
 	if button == null:
 		return
-	button.self_modulate = Color(1.0, 0.55, 0.55)
+	button.self_modulate = ThemeManager.ERROR_FLASH
 	var tween := create_tween()
-	tween.tween_property(button, "self_modulate", Color.WHITE, 0.5)
+	tween.tween_property(button, "self_modulate", ThemeManager.WHITE, 0.5)
 
 
 ## Слово собрано: статус остаётся словом, затем слово повторяется
@@ -298,7 +304,15 @@ func _flash_wrong(button: Button) -> void:
 func _on_word_completed() -> void:
 	is_word_complete = true
 	_completion_pending = true
+	_completed_words += 1
 	GameLogger.info("CollectWordGame", "word_completed", {"word": current_word, "letter": current_letter})
+	GameLogger.analytics("round_complete", {
+		"game": "collect_word",
+		"round": _completed_words,
+		"letter": current_letter,
+		"word": current_word,
+		"duration_ms": maxi(0, Time.get_ticks_msec() - _word_started_at_ms),
+	})
 	var id := _puzzle_id
 	get_tree().create_timer(WORD_REPLAY_DELAY).timeout.connect(func() -> void:
 		if id != _puzzle_id:
@@ -347,6 +361,7 @@ func _on_back_button_pressed() -> void:
 	_stop_idle_timer()
 	_puzzle_id += 1
 	_completion_pending = false
+	_log_abandon("back")
 	AudioManager.stop_all()
 	GameLogger.info("CollectWordGame", "back_button_pressed", {"word": current_word})
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
@@ -359,9 +374,23 @@ func _on_home_button_pressed() -> void:
 	_stop_idle_timer()
 	_puzzle_id += 1
 	_completion_pending = false
+	_log_abandon("home")
 	AudioManager.stop_all()
 	GameLogger.info("CollectWordGame", "home_button_pressed", {"word": current_word})
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
+
+
+## Фиксирует выход из бесконечной игры: завершённые слова и общее время.
+func _log_abandon(reason: String) -> void:
+	if _game_started_at_ms == 0:
+		return
+	GameLogger.analytics("game_abandon", {
+		"game": "collect_word",
+		"reason": reason,
+		"completed": _completed_words,
+		"duration_ms": maxi(0, Time.get_ticks_msec() - _game_started_at_ms),
+	})
+	_game_started_at_ms = 0
 
 
 ## Обновляет картинку слова текущей буквы. Если файла нет, показывает цветной
@@ -503,10 +532,7 @@ func _style_pool_button(button: Button, bg: Color, fg: Color) -> void:
 
 ## Создаёт скруглённый стиль квадратной кнопки.
 func _square_stylebox(color: Color) -> StyleBoxFlat:
-	var box := StyleBoxFlat.new()
-	box.bg_color = color
-	box.set_corner_radius_all(12)
-	return box
+	return ThemeManager.make_flat_stylebox(color, 12)
 
 
 ## Возвращает букву в слоте по индексу (начиная с 0). Пусто, если слот пуст.

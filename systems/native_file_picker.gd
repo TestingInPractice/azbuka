@@ -12,6 +12,8 @@ static func filters_for(kind: String) -> PackedStringArray:
 			return PackedStringArray(["*.png", "*.jpg", "*.jpeg", "*.webp"])
 		"audio":
 			return PackedStringArray(["*.wav", "*.ogg", "*.mp3"])
+		"package":
+			return PackedStringArray(["*.azset", "*.zip"])
 		_:
 			return PackedStringArray()
 
@@ -32,6 +34,8 @@ static func mime_for_extension(extension: String) -> String:
 			return "audio/ogg"
 		"mp3":
 			return "audio/mpeg"
+		"azset", "zip":
+			return "application/zip"
 		_:
 			return ""
 
@@ -43,7 +47,7 @@ static func read_file(path: String, kind: String) -> Dictionary:
 
 ## Читает файл с проверками по виду и явным лимитом.
 static func read_file_with_limit(path: String, kind: String, limit_bytes: int) -> Dictionary:
-	if kind != "image" and kind != "audio":
+	if kind != "image" and kind != "audio" and kind != "package":
 		return _read_error("bad_kind")
 	var filters := filters_for(kind)
 	if filters.is_empty():
@@ -89,7 +93,7 @@ static func read_file_with_limit(path: String, kind: String, limit_bytes: int) -
 
 ## Открывает нативный диалог выбора файла.
 static func pick(kind: String) -> Dictionary:
-	if kind != "image" and kind != "audio":
+	if kind != "image" and kind != "audio" and kind != "package":
 		return _read_error("bad_kind")
 	var tree := Engine.get_main_loop() as SceneTree
 	if tree == null:
@@ -103,6 +107,8 @@ static func pick(kind: String) -> Dictionary:
 		dialog.filters = PackedStringArray([",".join(filters)])
 	if kind == "image":
 		dialog.title = "Выберите картинку"
+	elif kind == "package":
+		dialog.title = "Выберите набор .azset"
 	else:
 		dialog.title = "Выберите звук"
 	# Результат складываем в Dictionary: GDScript захватывает локальные

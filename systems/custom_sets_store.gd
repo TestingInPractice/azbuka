@@ -191,6 +191,37 @@ func set_entry(set_id: String, letter: String, word: String, image: String, audi
 	return false
 
 
+## Заменяет все буквы набора одним сохранением. Нужно импорту пакета:
+## set_entry() сохраняет JSON на каждую букву, а пакет из 33 букв дал бы
+## 33 записи на диск и 33 сигнала sets_changed.
+func set_entries(set_id: String, entries: Dictionary) -> bool:
+	for entry in _sets:
+		if str(entry.get("id", "")) != set_id:
+			continue
+		var letters := {}
+		for raw_letter in entries.keys():
+			var key := str(raw_letter).to_upper().strip_edges()
+			if key.is_empty():
+				continue
+			var raw_entry: Variant = entries[raw_letter]
+			if not (raw_entry is Dictionary):
+				continue
+			var source: Dictionary = raw_entry
+			var clean_word := str(source.get("word", "")).strip_edges()
+			var clean_image := _relative_to_user_root(str(source.get("image", "")))
+			var clean_audio := _relative_to_user_root(str(source.get("audio", "")))
+			if clean_word.is_empty() and clean_image.is_empty() and clean_audio.is_empty():
+				continue
+			letters[key] = {
+				"word": clean_word,
+				"image": clean_image,
+				"audio": clean_audio,
+			}
+		(entry as Dictionary)["letters"] = letters
+		return save_sets()
+	return false
+
+
 ## Убирает префикс "user://" из пути: в метаданных пути хранятся
 ## относительно корня user://, а вызывающий может передать как относительный
 ## путь, так и уже готовый абсолютный.
@@ -309,9 +340,13 @@ func set_dir(set_id: String) -> String:
 	return "%s/%s/" % [sets_dir, set_id]
 
 
-## Имя файла картинки буквы: "img_<ascii>.webp".
-func image_file_name(letter: String) -> String:
-	return "img_%s.webp" % LetterTranslit.to_ascii(letter)
+## Имя файла картинки буквы: "img_<ascii>.<extension>". По умолчанию webp.
+## Импорт пакета передаёт настоящее расширение файла из архива.
+func image_file_name(letter: String, extension: String = "webp") -> String:
+	var ext := extension.strip_edges().to_lower().trim_prefix(".")
+	if ext.is_empty() or not ext.is_valid_filename():
+		ext = "webp"
+	return "img_%s.%s" % [LetterTranslit.to_ascii(letter), ext]
 
 
 ## Имя файла озвучки буквы: "aud_<ascii>.<extension>". Расширение приходит

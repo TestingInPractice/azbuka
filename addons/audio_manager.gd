@@ -59,6 +59,14 @@ func play_stream(stream: AudioStream) -> void:
 	_player.play()
 
 
+## Проигрывает техническую фразу: подсказку или похвалу. Слова и звуки
+## карточек идут мимо этого метода и играют даже при выключенных фразах.
+func play_tech_phrase(path: String) -> void:
+	if not ProgressManager.are_tech_phrases_enabled():
+		return
+	play_audio(path)
+
+
 func stop_all() -> void:
 	if _player != null:
 		_player.stop()

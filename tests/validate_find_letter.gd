@@ -64,11 +64,11 @@ func _check_image(word_image: TextureRect, letter: String, label: String) -> voi
 		_fail("%s (%s): текстура не установлена" % [label, letter])
 		return
 	var is_placeholder := tex.get_width() == 64 and tex.get_height() == 64
-	var image_name: String = LetterCard.WORD_IMAGE.get(letter, "")
+	var image_name: String = AlphabetData.get_fallback_image(letter)
 	_print("%s (%s): текстура %dx%d, файл=%s.png, placeholder=%s" % [
 		label, letter, tex.get_width(), tex.get_height(), image_name, is_placeholder])
 	if image_name.is_empty():
-		_fail("%s (%s): буквы нет в LetterCard.WORD_IMAGE" % [label, letter])
+		_fail("%s (%s): нет запасной картинки в AlphabetData" % [label, letter])
 	elif is_placeholder:
 		_fail("%s (%s): показан placeholder вместо картинки %s.png" % [label, letter, image_name])
 

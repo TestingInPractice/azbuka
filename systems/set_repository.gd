@@ -103,8 +103,9 @@ func get_letter_audio(letter: String) -> AudioStream:
 
 
 ## Фонема буквы с фолбэком на название (у Ъ/Ь своего звука нет).
+## Для фолбэка учитываем выбранный вариант озвучки названия.
 func get_letter_sound(letter: String) -> AudioStream:
-	return _cached_audio(AlphabetData.get_letter_sound_path(letter))
+	return _cached_audio(AlphabetData.get_letter_sound_path(letter, ProgressManager.get_voice_variant()))
 
 
 ## Звук из произвольного файла набора, без привязки к букве и без кэша.

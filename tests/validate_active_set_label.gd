@@ -267,15 +267,28 @@ func _check_long_name_layout() -> void:
 	ProgressManager.set_word_set_id(set_id)
 
 	# when: экран «Азбука» открыт в портретном проекте
+	LetterCard.from_letter = "А"
 	var azbuka := await _spawn(AZBUKA_SCENE)
 	var label: Label = azbuka.get_node_or_null("%SetLabel") as Label
 	var snake: Control = azbuka.get_node_or_null("%SnakeArea") as Control
 	# then: подпись переносится по словам, а змейка построена и имеет высоту
 	_check(label != null and label.autowrap_mode != TextServer.AUTOWRAP_OFF,
 			"подпись с длинным именем переносится по словам")
-	_check(azbuka.dot_buttons.size() == 33, "змейка построила все 33 кружка")
+	_check(azbuka.dot_buttons.size() == 11, "змейка построила 11 кружков первого уровня")
 	_check(snake != null and snake.size.y > 0.0,
 			"у области змейки осталась положительная высота")
+
+	# when: нажат второй уровень
+	var level_button: Button = azbuka.get_node_or_null("%LevelButton2") as Button
+	_check(level_button != null, "есть кнопка второго уровня")
+	if level_button != null:
+		level_button.pressed.emit()
+		await get_tree().process_frame
+		await get_tree().process_frame
+		# then: змейка перестроена на 11 букв второго уровня
+		_check(azbuka.dot_buttons.size() == 11, "второй уровень тоже содержит 11 кружков")
+		_check(not azbuka.dot_buttons.is_empty() and azbuka.dot_buttons[0].text == "К",
+				"второй уровень начинается с буквы К")
 	await _free(azbuka)
 
 	# when: карточка буквы открыта с тем же длинным именем

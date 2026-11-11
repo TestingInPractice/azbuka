@@ -56,10 +56,22 @@ const AUDIO_MIME_TYPES := [
 	"audio/x-m4a",
 ]
 
+## MIME-типы ZIP-пакета набора. Браузер может отдать пустой type для
+## незнакомого .azset, поэтому пустой MIME разрешён только когда запрошен
+## именно package.
+const PACKAGE_MIME_TYPES := [
+	"application/zip",
+	"application/x-zip-compressed",
+	"application/x-zip",
+	"application/octet-stream",
+]
+
 ## Предельный размер картинки: 5 МБ.
 const MAX_IMAGE_BYTES := 5 * 1024 * 1024
 ## Предельный размер звукового файла: 10 МБ.
 const MAX_AUDIO_BYTES := 10 * 1024 * 1024
+## Предельный размер пакета набора: 25 МБ.
+const MAX_PACKAGE_BYTES := 25 * 1024 * 1024
 ## Сколько ждём ответа файлового диалога, пока пользователь не выбрал файл.
 ## Событие change не приходит при отмене, поэтому без таймаута метод бы завис.
 const PICK_TIMEOUT_SECONDS := 120.0
@@ -82,6 +94,9 @@ static var _reader_callback_ref: JavaScriptObject = null
 ## Созданный на время чтения FileReader. Держится по той же причине, что и
 ## колбэки: без ссылки JS-объект соберётся до конца async-чтения.
 static var _reader_ref: JavaScriptObject = null
+## Какой вид файла запросил текущий pick(). Нужен, чтобы пустой MIME и
+## application/octet-stream принимались только для пакета набора.
+static var _requested_kind: String = ""
 
 
 ## Вид файла по MIME-типу: "image", "audio" или "" для неподдерживаемого.
@@ -95,6 +110,8 @@ static func kind_for_mime(mime: String) -> String:
 		return "image"
 	if AUDIO_MIME_TYPES.has(clean):
 		return "audio"
+	if PACKAGE_MIME_TYPES.has(clean):
+		return "package"
 	return ""
 
 
@@ -105,6 +122,8 @@ static func max_bytes_for_kind(kind: String) -> int:
 			return MAX_IMAGE_BYTES
 		"audio":
 			return MAX_AUDIO_BYTES
+		"package":
+			return MAX_PACKAGE_BYTES
 		_:
 			return 0
 
@@ -112,7 +131,9 @@ static func max_bytes_for_kind(kind: String) -> int:
 ## Декодирует "data:<mime>;base64,<данные>" в байты.
 ## Возвращает {ok, bytes, mime, error}. Percent-encoded (без ";base64")
 ## отклоняется: браузер отдаёт так только при сбое FileReader.
-static func decode_data_url(data_url: String) -> Dictionary:
+## allow_empty_mime нужен пакету .azset: браузер не знает этот формат и
+## отдаёт data:;base64,...
+static func decode_data_url(data_url: String, allow_empty_mime: bool = false) -> Dictionary:
 	var separator := data_url.find(",")
 	if separator < 0:
 		return _decode_error("bad_data_url")
@@ -121,7 +142,7 @@ static func decode_data_url(data_url: String) -> Dictionary:
 		return _decode_error("bad_data_url")
 	var mime := header.substr(5, header.length() - 5 - ";base64".length())
 	var payload := data_url.substr(separator + 1)
-	if mime.is_empty() or payload.is_empty():
+	if (mime.is_empty() and not allow_empty_mime) or payload.is_empty():
 		return _decode_error("bad_data_url")
 	var bytes := Marshalls.base64_to_raw(payload)
 	if bytes.is_empty():
@@ -151,6 +172,7 @@ static func pick(kind: String) -> Dictionary:
 		return _pick_error(kind, "not_web")
 	_pending_result = {}
 	_awaiting = true
+	_requested_kind = kind
 	if not _open_input(kind):
 		_awaiting = false
 		_cleanup_input()
@@ -208,6 +230,7 @@ static func _cleanup_input() -> void:
 	_callback_ref = null
 	_reader_callback_ref = null
 	_reader_ref = null
+	_requested_kind = ""
 
 
 ## Приём файлов для accept-атрибута. Для неизвестного вида пустая строка:
@@ -218,6 +241,8 @@ static func _accept_attribute(kind: String) -> String:
 			return ",".join(PackedStringArray(IMAGE_MIME_TYPES))
 		"audio":
 			return ",".join(PackedStringArray(AUDIO_MIME_TYPES))
+		"package":
+			return ".azset,.zip,application/zip,application/x-zip-compressed,application/octet-stream"
 		_:
 			return ""
 
@@ -273,12 +298,19 @@ static func _on_file_read(args: Array) -> void:
 	if file_name.is_empty() or data_url.is_empty():
 		_finish_with_error("cancelled")
 		return
-	var decoded := decode_data_url(data_url)
+	var decoded := decode_data_url(data_url, _requested_kind == "package")
 	if not bool(decoded.get("ok", false)):
 		_finish_with_error(str(decoded.get("error", "bad_data_url")))
 		return
 	var mime := str(decoded.get("mime", ""))
 	var kind := kind_for_mime(mime)
+	if kind.is_empty() and _requested_kind == "package":
+		kind = "package"
+	if not _requested_kind.is_empty() and kind != _requested_kind:
+		_finish_with_error("unsupported_type")
+		return
+	if kind == "package" and mime.is_empty():
+		mime = "application/zip"
 	var bytes: PackedByteArray = decoded.get("bytes", PackedByteArray())
 	if kind.is_empty():
 		_finish_with_error("unsupported_type")
@@ -286,7 +318,7 @@ static func _on_file_read(args: Array) -> void:
 	# m4a Godot не читает: браузер декодирует AAC и отдаёт WAV. Конвертация идёт
 	# здесь, а не в редакторе, чтобы apply_audio() всегда получал проигрываемый
 	# формат и расширение совпадало с содержимым файла.
-	if AudioTranscoder.is_convertible(mime):
+	if kind == "audio" and AudioTranscoder.is_convertible(mime):
 		var converted := await AudioTranscoder.convert()
 		if not bool(converted.get("ok", false)):
 			_finish_with_error("convert_failed")
