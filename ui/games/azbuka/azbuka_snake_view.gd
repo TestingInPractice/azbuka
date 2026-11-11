@@ -12,10 +12,20 @@ const LINE_WIDTH := 6.0
 const VBOX_TOP := 60.0
 const BUTTON_BAND_MIN := 150.0
 const KISA_ANCHOR := Vector2.ZERO
+const ARROW_SIZE := 128.0
+const ARROW_GAP := 12.0
+const ARROW_EDGE_MARGIN := 8.0
 
 var dot_buttons: Array[Button] = []
 var dot_positions: Array[Vector2] = []
 var dot_radius: float = DOT_RADIUS
+var prev_arrow_position := Vector2.ZERO
+var next_arrow_position := Vector2.ZERO
+
+var _spacing := 0.0
+var _margin_x := 0.0
+var _y_start := 0.0
+var _line_height := 0.0
 
 var _dot_styles: Dictionary = {}
 var _owner: Control
@@ -54,14 +64,16 @@ func clear() -> void:
 		btn.queue_free()
 	dot_buttons.clear()
 	dot_positions.clear()
+	prev_arrow_position = Vector2.ZERO
+	next_arrow_position = Vector2.ZERO
 
 
 func build(letters: Array[String]) -> void:
 	var area_size: Vector2 = _snake_area.size
-	var spacing: float = (area_size.x - 2.0 * maxf(60.0, area_size.x * 0.06)) / float(DOTS_PER_LINE - 1)
-	var total_snake_width: float = spacing * float(DOTS_PER_LINE - 1)
-	var margin_x: float = (area_size.x - total_snake_width) / 2.0
-	dot_radius = clampf(spacing * 0.38, 95.0, DOT_RADIUS)
+	_spacing = (area_size.x - 2.0 * maxf(60.0, area_size.x * 0.06)) / float(DOTS_PER_LINE - 1)
+	var total_snake_width: float = _spacing * float(DOTS_PER_LINE - 1)
+	_margin_x = (area_size.x - total_snake_width) / 2.0
+	dot_radius = clampf(_spacing * 0.38, 95.0, DOT_RADIUS)
 	_make_dot_styles()
 
 	var total_lines: int = int(ceil(letters.size() / float(DOTS_PER_LINE)))
@@ -70,25 +82,40 @@ func build(letters: Array[String]) -> void:
 		_home_button.get_global_rect().end.y - _snake_area.get_global_rect().position.y + 12.0
 	)
 	var available_height: float = maxf(0.0, area_size.y - VBOX_TOP - band)
-	var line_height: float = clampf(
+	_line_height = clampf(
 		(available_height - dot_radius * 2.0) / float(total_lines - 1),
 		dot_radius * 1.8,
 		LINE_HEIGHT_MAX
 	)
-	var snake_content_height: float = float(total_lines - 1) * line_height + dot_radius * 2.0
-	var y_start: float = band + (available_height - snake_content_height) / 2.0 + dot_radius
+	var snake_content_height: float = float(total_lines - 1) * _line_height + dot_radius * 2.0
+	_y_start = band + (available_height - snake_content_height) / 2.0 + dot_radius
 	if snake_content_height >= available_height:
-		y_start = band + dot_radius
+		_y_start = band + dot_radius
 
 	for i in letters.size():
 		var line: int = i / DOTS_PER_LINE
 		var pos_in_line: int = i % DOTS_PER_LINE
 		var col: int = pos_in_line if line % 2 == 0 else (DOTS_PER_LINE - 1 - pos_in_line)
-		var x: float = margin_x + float(col) * spacing
-		var y: float = y_start + float(line) * line_height
+		var x: float = _margin_x + float(col) * _spacing
+		var y: float = _y_start + float(line) * _line_height
 		dot_positions.append(Vector2(x, y))
 
-	_snake_path.points = dot_positions
+	if dot_positions.is_empty():
+		return
+	var next_slot := _slot_center(letters.size())
+	next_arrow_position = _clamp_arrow_center(next_slot, area_size)
+	prev_arrow_position = _clamp_arrow_center(
+		Vector2(
+			dot_positions[0].x,
+			dot_positions[0].y - dot_radius - ARROW_GAP - ARROW_SIZE * 0.5
+		),
+		area_size
+	)
+
+	# Линия змейки ведёт к месту следующего кружка, где стоит правая стрелка.
+	var path_points: Array[Vector2] = dot_positions.duplicate()
+	path_points.append(next_arrow_position)
+	_snake_path.points = path_points
 	_snake_path.default_color = ThemeManager.PATH_GREEN
 	_snake_path.width = LINE_WIDTH
 
@@ -156,6 +183,22 @@ func style_dot(btn: Button, state: int) -> void:
 		btn.add_theme_stylebox_override("hover", styles["hover"])
 		btn.add_theme_stylebox_override("pressed", styles["pressed"])
 	btn.add_theme_color_override("font_color", fg)
+
+
+func _slot_center(index: int) -> Vector2:
+	var line: int = index / DOTS_PER_LINE
+	var pos_in_line: int = index % DOTS_PER_LINE
+	var col: int = pos_in_line if line % 2 == 0 else (DOTS_PER_LINE - 1 - pos_in_line)
+	return Vector2(_margin_x + float(col) * _spacing, _y_start + float(line) * _line_height)
+
+
+func _clamp_arrow_center(pos: Vector2, area_size: Vector2) -> Vector2:
+	var min_xy := Vector2.ONE * (ARROW_SIZE * 0.5 + ARROW_EDGE_MARGIN)
+	var max_xy := area_size - min_xy
+	return Vector2(
+		clampf(pos.x, min_xy.x, max_xy.x),
+		clampf(pos.y, min_xy.y, max_xy.y)
+	)
 
 
 func _letter_position(start_letter: String) -> Vector2:

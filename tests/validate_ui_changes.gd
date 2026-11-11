@@ -203,12 +203,35 @@ func _check_level_arrows() -> void:
 		game.queue_free()
 		await get_tree().process_frame
 		return
-	if prev.size.x < 180.0 or prev.size.y < 180.0:
+	if prev.size.x < 120.0 or prev.size.y < 120.0:
 		_fail("azbuka: левая стрелка должна быть крупной, сейчас %.0fx%.0f"
 				% [prev.size.x, prev.size.y])
-	if next.size.x < 180.0 or next.size.y < 180.0:
+	if next.size.x < 120.0 or next.size.y < 120.0:
 		_fail("azbuka: правая стрелка должна быть крупной, сейчас %.0fx%.0f"
 				% [next.size.x, next.size.y])
+	var area_rect := game._snake_area.get_global_rect().grow(1.0)
+	if not area_rect.encloses(prev.get_global_rect()):
+		_fail("azbuka: левая стрелка должна быть внутри области змейки")
+	if not area_rect.encloses(next.get_global_rect()):
+		_fail("azbuka: правая стрелка должна быть внутри области змейки")
+	var first_dot := game.dot_buttons[0]
+	var last_dot := game.dot_buttons[game.dot_buttons.size() - 1]
+	if prev.get_global_rect().intersects(first_dot.get_global_rect()):
+		_fail("azbuka: левая стрелка не должна перекрывать первый кружок")
+	if next.get_global_rect().intersects(last_dot.get_global_rect()):
+		_fail("azbuka: правая стрелка не должна перекрывать последний кружок")
+	var prev_center := prev.get_global_rect().get_center() - game._snake_area.global_position
+	if prev_center.distance_to(game._snake.prev_arrow_position) > 0.5:
+		_fail("azbuka: левая стрелка должна стоять над первым кружком")
+	var next_center := next.get_global_rect().get_center() - game._snake_area.global_position
+	if next_center.distance_to(game._snake.next_arrow_position) > 0.5:
+		_fail("azbuka: правая стрелка должна стоять на месте следующего кружка")
+	if prev.get_global_rect().end.y > first_dot.get_global_rect().position.y + 1.0:
+		_fail("azbuka: левая стрелка должна быть над первым кружком, а не сбоку")
+	if game._snake_path.points.size() != game.dot_positions.size() + 1:
+		_fail("azbuka: линия змейки должна вести к правой стрелке")
+	elif not game._snake_path.points[game._snake_path.points.size() - 1].is_equal_approx(game._snake.next_arrow_position):
+		_fail("azbuka: линия змейки должна заканчиваться на месте следующего кружка")
 	if not prev.disabled:
 		_fail("azbuka: на первом уровне левая стрелка должна быть неактивна")
 	if next.disabled:

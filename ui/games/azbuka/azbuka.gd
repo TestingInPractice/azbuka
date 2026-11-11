@@ -113,6 +113,7 @@ func _setup_snake() -> void:
 	await get_tree().process_frame
 	var letters: Array[String] = _letters_for_level(_level)
 	_snake.build(letters)
+	_position_level_arrows()
 	current_letter_idx = _snake.place_kisa_at_start(LetterCard.from_letter)
 	_snake.update_states(letters, current_letter_idx)
 	_building = false
@@ -202,6 +203,29 @@ func _update_level_buttons() -> void:
 	_next_level_button.disabled = _level >= LEVEL_COUNT - 1
 	_prev_level_button.modulate.a = 0.35 if _prev_level_button.disabled else 1.0
 	_next_level_button.modulate.a = 0.35 if _next_level_button.disabled else 1.0
+	_position_level_arrows()
+
+
+## Стрелки стоят на краях змейки: правая там, где был бы следующий кружок,
+## левая над первым кружком. Так ребёнок видит продолжение маршрута, а не
+## отдельную панель управления внизу экрана.
+func _position_level_arrows() -> void:
+	if _snake == null or _snake.dot_positions.is_empty():
+		return
+	var arrow_size := Vector2(AzbukaSnakeView.ARROW_SIZE, AzbukaSnakeView.ARROW_SIZE)
+	var origin := _snake_area.global_position
+	for arrow: Button in [_prev_level_button, _next_level_button]:
+		var min_size := arrow.get_combined_minimum_size()
+		var actual_size := Vector2(
+			maxf(arrow_size.x, min_size.x),
+			maxf(arrow_size.y, min_size.y)
+		)
+		arrow.size = actual_size
+		arrow.pivot_offset = actual_size * 0.5
+	var prev_center := origin + _snake.prev_arrow_position
+	var next_center := origin + _snake.next_arrow_position
+	_prev_level_button.global_position = prev_center - _prev_level_button.size * 0.5
+	_next_level_button.global_position = next_center - _next_level_button.size * 0.5
 
 
 func _open_letter_card(index: int) -> void:
